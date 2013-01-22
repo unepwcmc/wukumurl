@@ -1,4 +1,4 @@
-class ShortUrlController < ApplicationController
+class ShortUrlsController < ApplicationController
   def create
     puts params
     if params[:url].present?
@@ -19,11 +19,13 @@ class ShortUrlController < ApplicationController
   def visit
     short_url = ShortUrl.find_by_short_name(params[:short_name])
     if short_url
+      visit = Visit.create(short_url_id: short_url.id)
       redirect_to short_url.url
-    else
     end
   end
 
   def show
+    @short_url = ShortUrl.find_by_short_name(params[:id])
+    @visits = Visit.where(short_url_id: @short_url.id).count
   end
 end
