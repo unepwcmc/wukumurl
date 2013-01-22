@@ -1,7 +1,7 @@
 Wukumurl::Application.routes.draw do
   match '/' => 'short_url#create', :controller => 'short_url', :via => :post
 
-  match "/:shortName", :controller => 'short_url', :action => :visit
+  match "/:short_name", :controller => 'short_url', :action => :visit
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

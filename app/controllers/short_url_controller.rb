@@ -17,6 +17,11 @@ class ShortUrlController < ApplicationController
   end
 
   def visit
+    short_url = ShortUrl.find_by_short_name(params[:short_name])
+    if short_url
+      redirect_to short_url.url
+    else
+    end
   end
 
   def show
