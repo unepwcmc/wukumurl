@@ -1,5 +1,5 @@
 Wukumurl::Application.routes.draw do
-  match '/' => 'short_url#create', :controller => 'short_urls', :via => :post
+  match '/' => 'short_urls#create', :controller => 'short_urls', :via => :post
 
   match "/:short_name", :controller => 'short_urls', :action => :visit
 
