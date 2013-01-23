@@ -11,13 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130122162422) do
+ActiveRecord::Schema.define(:version => 20130122165900) do
 
   create_table "short_urls", :force => true do |t|
     t.string   "short_name"
     t.text     "url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "visits", :force => true do |t|
+    t.string   "ip_address"
+    t.integer  "short_url_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
 end

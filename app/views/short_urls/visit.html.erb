@@ -4,8 +4,8 @@
   <h1>wcmc.io<span>shorten // share // track</span></h1>
   <div class="form-container">
     <form>
-      <input type="text" placeholder="Paste a link to shorten">
-      <button class="btn" type="submit" >Shorten</button>
+      <input id="url-to-shorten" type="text" placeholder="Paste a link to shorten">
+      <button id="shorten-link-btn" class="btn" type="submit" >Shorten</button>
     </form>
   </div>
 
@@ -13,22 +13,17 @@
 
   <section>
 
-  <ul>
-    <li>
-    <p>www.mylink.co.uk
-    <a href="#">wcmc.io/wucbs<span>27,678 clicks</span></a></p>
-    <button class="btn">copy</button>
-    </li>
-    <li>
-    <p>www.myotherlink.co.uk
-    <a href="#">wcmc.io/wucbs<span>27,678 clicks</span></a></p>
-    <button class="btn">copy</button>
-    </li>
-    <li>
-    <p>www.myotherlink.co.uk
-    <a href="#">wcmc.io/wucbs<span>27,678 clicks</span></a></p>
-    <button class="btn">copy</button>
-    </li>
+  <ul id="short-url-list">
+    <% @short_urls.each do |short_url| %>
+      <li>
+        <p><%= short_url.url %>
+          <%= link_to(visit_short_url_path(short_name: short_url.short_name)) do %>
+            wcmc.io/<%= short_url.short_name %><span><%= short_url.visit_count %> clicks</span>
+          <% end %>
+        </p>
+        <button class="btn">copy</button>
+      </li>
+    <% end %>
   </ul>
 
   </section>
