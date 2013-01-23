@@ -56,9 +56,6 @@ a {
   color: #87b94d;
   text-decoration: none;
 }
-a span{
-  margin: 0 0 0 50px;
-}
 
 h1{
   font-family: 'Raleway', sans-serif;
@@ -143,36 +140,42 @@ section{
 
 /* list */
 
-li{
-  float: left;
-  width: 100%;
-border-bottom: 1px dotted #cccccc;
-}
+#short-url-list {
+  li{
+    float: left;
+    width: 100%;
+    border-bottom: 1px dotted #cccccc;
 
-li:nth-child(odd) { background: #eee; }
+    .details {
+      float: left;
+      color: #666666;
+      margin: 10px;
+      line-height: 1.3em;
+    }
 
-li p{
-  float: left;
-  color: #666666;
-  margin: 10px;
-  line-height: 1.3em;
-}
+    .btn {
+       float: right;
+       margin: 10px;
+       background: #474a5c;
+       -webkit-box-shadow:  3px 3px 0px 0px rgba(211, 212, 209, 1);
+       box-shadow:  3px 3px 0px 0px rgba(211, 212, 209, 1);
+    }
 
-li .btn{
-  float: right;
-  margin: 10px;
-  background: #474a5c;
-  -webkit-box-shadow:  3px 3px 0px 0px rgba(211, 212, 209, 1);
-  box-shadow:  3px 3px 0px 0px rgba(211, 212, 209, 1);
-}
+    a {
+      display: block;
+      font-weight: bold;
+      float:left;
+    }
 
+    span.stats {
+      font-weight: normal;
+      font-style: italic;
+      float:right;
 
-li a{
-  display: block;
-  font-weight: bold;
-}
-
-li a span{
-  font-weight: normal;
-  font-style: italic;
+      a {
+        font-weight:normal;
+      }
+    }
+  }
+  li:nth-child(odd) { background: #eee; }
 }
