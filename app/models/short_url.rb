@@ -4,7 +4,7 @@ class ShortUrl < ActiveRecord::Base
   validates_uniqueness_of :short_name
   before_validation :create_short_name_if_blank
 
-  has_many :visits
+  has_many :visits, :dependent => :destroy  
 
   def create_short_name_if_blank
     unless self.short_name?
