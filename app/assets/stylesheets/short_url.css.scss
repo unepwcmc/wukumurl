@@ -1,3 +1,176 @@
 // Place all the styles related to the ShortUrl controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+v2.0 | 20110126
+License: none (public domain)
+ */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-family: 'helvetica', sans-serif;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+  background: url(background.gif) top left repeat-x;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  color: #87b94d;
+  text-decoration: none;
+}
+a span{
+  margin: 0 0 0 50px;
+}
+
+h1{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 100;
+  color: #fff;
+  font-size: 400%;
+  width: 260px;
+  margin: 40px auto;
+}
+
+h1 span{
+  font-family: 'Raleway', sans-serif;
+
+  display: block;
+  font-size: 35%;
+}
+
+button{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 100;
+}
+
+/* structure */
+
+.container{
+  width: 600px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+header{
+  width: 100%;
+  height: 295px;
+}
+
+
+section{
+  margin: 20px 0 0 0;
+  border-top: 1px solid #474a5c;
+}
+
+/* form */
+.form-container{
+  width: 100%;
+  background: #474a5c;
+  margin: 20px 0 ;
+  -webkit-box-shadow:  3px 3px 0px 0px rgba(96, 138, 48, 1);
+  box-shadow:  3px 3px 0px 0px rgba(96, 138, 48, 1);
+
+}
+
+.form-container form input{
+  margin: 12px 0 12px 12px;
+  width: 470px;
+  padding: 10px;
+  border: 0;
+  background: #eeeeee;
+  font-size: 105%;
+  -webkit-box-shadow: inset 0px 3px 1px 0px rgba(80, 95, 180, 0.2);
+  box-shadow: inset 0px 3px 1px 0px rgba(80, 95, 180, 0.2);
+}
+
+
+.btn{
+  width: 80px;
+  border: 0;
+  width: 80px;
+  background: #272728;
+  color: #fff;
+  padding: 10px 0;
+  font-weight: normal;
+  font-size: 102%;
+  -webkit-box-shadow:  3px 3px 0px 0px rgba(61, 64, 79, 1);
+  box-shadow:  3px 3px 0px 0px rgba(61, 64, 79, 1);
+}
+
+.btn:hover{
+  color: #666;
+}
+
+
+/* list */
+
+li{
+  float: left;
+  width: 100%;
+}
+
+li:nth-child(odd) { background: #eee; }
+
+li p{
+  float: left;
+  color: #666666;
+  margin: 10px;
+  line-height: 1.3em;
+}
+
+li .btn{
+  float: right;
+  margin: 10px;
+  background: #474a5c;
+  -webkit-box-shadow:  3px 3px 0px 0px rgba(211, 212, 209, 1);
+  box-shadow:  3px 3px 0px 0px rgba(211, 212, 209, 1);
+}
+
+
+li a{
+  display: block;
+  font-weight: bold;
+}
+
+li a span{
+  font-weight: normal;
+  font-style: italic;
+}
