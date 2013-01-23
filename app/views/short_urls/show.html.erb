@@ -1,2 +1,14 @@
 <h1>ShortUrl: <%= @short_url.short_name %></h1>
-<p>Visits: <%= @visits %></p>
+
+
+<ul id="stat-group-list">
+  <li>
+    <h3>Overall Clicks <span class="stat"><%= @visits %></span></h3>
+    <ul class="stat-group">
+      <li>
+        Today
+        <span class="stat"><%= '12' %></span>
+      </li>
+    </ul>
+  </li>
+</ul>

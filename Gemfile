@@ -8,6 +8,10 @@ gem 'rails', '3.2.11'
 gem 'sqlite3'
 gem 'rack-cors', :require => 'rack/cors'
 
+group :development, :test do
+  gem 'debugger'
+end
+
 group :development do
   # Deploy with Capistrano
   gem 'capistrano'
@@ -27,10 +31,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :production do
-  # Deploy with Capistrano
-  gem 'pg'
-end
+gem 'pg'
 
 gem 'jquery-rails'
 
@@ -47,4 +48,4 @@ gem 'jquery-rails'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+

@@ -1,9 +1,12 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+hn:
+  short_name: HN
+  url: http://news.ycombinator.com
 
-one:
-  shortName: MyString
-  url: MyText
-
+wcmc:
+  short_name: wcmc
+  url: http://unep-wcmc.org
+  
 two:
-  shortName: MyString
-  url: MyText
+  short_name: test2
+  url: http://test2.com
+  
