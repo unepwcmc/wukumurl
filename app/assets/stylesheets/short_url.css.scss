@@ -64,16 +64,17 @@ h1{
   font-family: 'Raleway', sans-serif;
   font-weight: 100;
   color: #fff;
-  font-size: 400%;
+  font-size: 4.3em;
   width: 260px;
   margin: 40px auto;
 }
 
 h1 span{
   font-family: 'Raleway', sans-serif;
-
   display: block;
-  font-size: 35%;
+  font-size: 0.3em;
+  width: 260px;
+	text-align: center;
 }
 
 button{
@@ -116,7 +117,7 @@ section{
   padding: 10px;
   border: 0;
   background: #eeeeee;
-  font-size: 105%;
+  font-size: 1em;
   -webkit-box-shadow: inset 0px 3px 1px 0px rgba(80, 95, 180, 0.2);
   box-shadow: inset 0px 3px 1px 0px rgba(80, 95, 180, 0.2);
 }
@@ -130,7 +131,7 @@ section{
   color: #fff;
   padding: 10px 0;
   font-weight: normal;
-  font-size: 102%;
+  font-size: 1em;
   -webkit-box-shadow:  3px 3px 0px 0px rgba(61, 64, 79, 1);
   box-shadow:  3px 3px 0px 0px rgba(61, 64, 79, 1);
 }
@@ -145,6 +146,7 @@ section{
 li{
   float: left;
   width: 100%;
+border-bottom: 1px dotted #cccccc;
 }
 
 li:nth-child(odd) { background: #eee; }
