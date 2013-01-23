@@ -19,4 +19,16 @@ class ShortUrl < ActiveRecord::Base
   def visit_count
     Visit.where(short_url_id: self.id).count
   end
+
+  def visits_today
+    self.visits.where(['created_at > ?', Date.today])
+  end
+
+  def visits_this_week
+    self.visits.where(['created_at > ?', 1.week.ago])
+  end
+
+  def visits_this_month
+    self.visits.where(['created_at > ?', 1.month.ago])
+  end
 end
