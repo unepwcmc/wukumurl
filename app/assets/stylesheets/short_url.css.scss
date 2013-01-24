@@ -63,7 +63,8 @@ h1{
   color: #fff;
   font-size: 4.3em;
   width: 260px;
-  margin: 40px auto;
+  margin: 50px auto;
+
 }
 
 h1 span{
@@ -72,6 +73,40 @@ h1 span{
   font-size: 0.3em;
   width: 260px;
 	text-align: center;
+	
+}
+
+h2{
+	font-size: 1.4em;
+	width: 100%;
+	letter-spacing: 0.05em;
+	text-align:center;
+	color: #474a5c;
+	 -webkit-text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
+	 text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
+
+}
+
+
+.details{
+	width: 580px;
+	margin: 0 10px;
+}
+
+.stat-groups .details{
+	color: #474a5c;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+span.stat{
+	float: right;
+}
+
+a.link{
+	background: url(icon_link.png)  left no-repeat;
+	padding: 10px;
+	margin: 0 0 0 20px;
 }
 
 button{
@@ -95,7 +130,6 @@ header{
 
 section{
   margin: 20px 0 0 0;
-  border-top: 1px solid #474a5c;
 }
 
 /* form */
@@ -138,19 +172,38 @@ section{
 }
 
 
-/* list */
+/* lists */
 
-#short-url-list {
-  li{
-    float: left;
-    width: 100%;
-    border-bottom: 1px dotted #cccccc;
+ul.stat-groups li{
+	float:left;
+	width: 100%;
+	margin: 30px 0;
+}
+
+
+ul.lists {
+	border-top: 1px solid #474a5c;
+	margin: 20px 0 0 0;
+	
+	
+  	li{
+    	float: left;
+		width: 100%;
+		margin: 0;
+		border: 0;
+    	border-bottom: 1px dotted #cccccc;
 
     .details {
       float: left;
       color: #666666;
-      margin: 10px;
-      line-height: 1.3em;
+      line-height: 3em;
+	  font-weight: normal;
+	
+		div{
+			float: left;
+			line-height: 1.3em;
+		}
+		
     }
 
     .btn {
@@ -164,13 +217,11 @@ section{
     a {
       display: block;
       font-weight: bold;
-      float:left;
     }
 
     span.stats {
       font-weight: normal;
       font-style: italic;
-      float:right;
 
       a {
         font-weight:normal;
