@@ -6,35 +6,52 @@
  </header>
 
   <section>
-<ul class="stat-groups">
-  <li>
-	<div class="details">
-	 Overall Clicks 
-	 <span class="stat"><%= @visits %></span>
-	</div>
-    <ul class="lists">
+    <ul class="stat-groups">
       <li>
-		<div class="details">
-        Today
-		<span class="stat"><%= @short_url.visits_today.count %></span>
-		</div>
+        <div class="details">
+          Overall Clicks 
+          <span class="stat"><%= @visits %></span>
+        </div>
+        <ul class="lists">
+          <li>
+          <div class="details">
+            Today
+            <span class="stat"><%= @short_url.visits_today.count %></span>
+          </div>
+          </li>
+          <li>
+          <div class="details">
+            This Week
+            <span class="stat"><%= @short_url.visits_this_week.count %></span>
+          </div>
+          </li>
+          <li>
+          <div class="details">
+            This Month
+            <span class="stat"><%= @short_url.visits_this_month.count %></span>
+          </div>
+          </li>
+        </ul>
       </li>
-      <li>
-		<div class="details">
-        This Week
-        <span class="stat"><%= @short_url.visits_this_week.count %></span>
-      	</div>
-	</li>
-      <li>
-		<div class="details">
-        This Month
-        <span class="stat"><%= @short_url.visits_this_month.count %></span>
-		</div>
-      </li>
-    </ul>
-  </li>
 
-</ul>
+      <li>
+        <div class="details">
+          By Country
+          <span class="stat"><%= @visits %></span>
+        </div>
+        <ul class="lists">
+          <% @visits_by_country.each do |country| %>
+            <li>
+              <div class="details">
+                <%= country.name %>
+                <span class="stat"><%= country.visit_count %></span>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+
+    </ul>
   </section>
 
 </div>

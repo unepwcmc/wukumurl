@@ -28,5 +28,6 @@ class ShortUrlsController < ApplicationController
   def show
     @short_url = ShortUrl.find(params[:id])
     @visits = @short_url.visit_count
+    @visits_by_country = @short_url.visits_by_country
   end
 end
