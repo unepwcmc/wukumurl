@@ -7,4 +7,9 @@ class VisitTest < ActiveSupport::TestCase
     wcmc_visit.geo_locate
     assert_equal "GB", wcmc_visit.country.iso
   end
+
+  test "Visit.un_geolocated should return only visits which have no country set" do
+    assert Visit.un_geolocated.to_a.include?(visits(:wcmc_visit_hn_today))
+    assert !Visit.un_geolocated.to_a.include?(visits(:old_canadian_geolocated))
+  end
 end

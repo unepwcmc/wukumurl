@@ -1,11 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  iso: MyString
-  iso3: MyString
-  name: MyString
-
-two:
-  iso: MyString
-  iso3: MyString
-  name: MyString
+canada:
+  iso: CA
+  iso3: CAN
+  name: Canada
