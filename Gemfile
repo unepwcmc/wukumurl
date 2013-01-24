@@ -7,6 +7,7 @@ gem 'rails', '3.2.11'
 
 gem 'sqlite3'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'geoip-c'
 
 group :development, :test do
   gem 'debugger'

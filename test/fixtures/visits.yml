@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-visit_hn_today:
-  ip_address: "10.2.32.12"
+wcmc_visit_hn_today:
+  ip_address: "194.59.188.126"
   short_url: hn
 
 visit_hn_2_days_ago:
