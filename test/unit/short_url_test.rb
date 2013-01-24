@@ -20,4 +20,18 @@ class ShortUrlTest < ActiveSupport::TestCase
     assert visits_this_month.to_a.include?(visits(:visit_hn_2_weeks_ago))
     assert !visits_this_month.to_a.include?(visits(:old_canadian_geolocated))
   end
+
+  test "visits_by_country should return stats correctly" do
+    country_stats = short_urls(:wcmc).visits_by_country
+    country_stats.each do |country|
+      if country.name == "Canada"
+        assert_equal 1, country.visit_count.to_i
+      elsif country.name == "United States of America"
+        assert_equal 2, country.visit_count.to_i
+      else
+        # Shouldn't happen
+        assert ['United States of America', 'Canada'].include?(country.name)
+      end
+    end
+  end
 end

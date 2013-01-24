@@ -31,4 +31,12 @@ class ShortUrl < ActiveRecord::Base
   def visits_this_month
     self.visits.where(['created_at > ?', 1.month.ago])
   end
+
+  # Returns a list of countries with a 'visit_count' attribute
+  def visits_by_country
+    Country.select("countries.id, countries.name, COUNT(visits.id) as visit_count")
+            .group("countries.id, countries.name")
+            .joins(:visits)
+            .where(visits: {short_url_id: self.id})
+  end
 end

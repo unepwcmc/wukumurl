@@ -4,3 +4,8 @@ canada:
   iso: CA
   iso3: CAN
   name: Canada
+
+usa:
+  iso: US
+  iso3: USA
+  name: United States of America

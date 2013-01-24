@@ -22,3 +22,18 @@ old_canadian_geolocated:
 ungeolocatable_visit:
   ip_address: "127.0.0.1"
   short_url: hn
+
+canadian_wcmc_visit:
+  ip_address: "10.2.32.12"
+  short_url: wcmc
+  country: canada
+
+usa_wcmc_visit:
+  ip_address: "10.2.32.12"
+  short_url: wcmc
+  country: usa
+
+usa_wcmc_visit_2:
+  ip_address: "10.2.32.12"
+  short_url: wcmc
+  country: usa
