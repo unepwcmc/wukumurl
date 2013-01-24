@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130122165900) do
+ActiveRecord::Schema.define(:version => 20130124115708) do
+
+  create_table "countries", :force => true do |t|
+    t.string   "iso"
+    t.string   "iso3"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "short_urls", :force => true do |t|
     t.string   "short_name"
@@ -25,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20130122165900) do
     t.integer  "short_url_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "country_id"
   end
 
 end

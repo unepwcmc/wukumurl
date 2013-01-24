@@ -58,6 +58,7 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    geoip-c (0.8.1)
     highline (1.6.15)
     hike (1.2.1)
     i18n (0.6.1)
@@ -138,6 +139,7 @@ DEPENDENCIES
   capistrano-ext
   coffee-rails (~> 3.2.1)
   debugger
+  geoip-c
   jquery-rails
   pg
   rack-cors
