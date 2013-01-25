@@ -37,3 +37,16 @@ usa_wcmc_visit_2:
   ip_address: "10.2.32.12"
   short_url: wcmc
   country: usa
+
+wcmc_hn_visit:
+  short_url: hn
+  organization: wcmc
+
+apple_hn_visit:
+  short_url: hn
+  organization: apple
+
+apple_hn_visit2:
+  short_url: hn
+  organization: apple
+

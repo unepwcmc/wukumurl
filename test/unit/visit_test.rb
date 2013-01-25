@@ -1,11 +1,12 @@
 require 'test_helper'
 
 class VisitTest < ActiveSupport::TestCase
-  test "Geolocate on a wcmc IP visit should set country and city correctly" do
+  test "Geolocate on a wcmc IP visit should set country and organization correctly" do
     wcmc_visit = visits(:wcmc_visit_hn_today)
     assert_nil wcmc_visit.country
     wcmc_visit.geo_locate
     assert_equal "GB", wcmc_visit.country.iso
+    assert_equal "World Conservation Monitoring Centre", wcmc_visit.organization.name
   end
 
   test "Visit.un_geolocated should return only visits which have no country set" do

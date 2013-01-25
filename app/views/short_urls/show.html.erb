@@ -38,7 +38,6 @@
       <li>
         <div class="details">
           By Country
-          <span class="stat"><%= @visits %></span>
         </div>
         <ul class="lists">
           <% @visits_by_country.each do |country| %>
@@ -46,6 +45,22 @@
               <div class="details">
                 <%= country.name %>
                 <span class="stat"><%= country.visit_count %></span>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+
+      <li>
+        <div class="details">
+          By Organisation
+        </div>
+        <ul class="lists">
+          <% @visits_by_organization.each do |organization| %>
+            <li>
+              <div class="details">
+                <%= organization.name %>
+                <span class="stat"><%= organization.visit_count %></span>
               </div>
             </li>
           <% end %>

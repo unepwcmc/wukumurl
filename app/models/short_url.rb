@@ -43,6 +43,14 @@ class ShortUrl < ActiveRecord::Base
             .where(visits: {short_url_id: self.id})
   end
 
+  # Returns a list of countries with a 'visit_count' attribute
+  def visits_by_organization
+    Organization.select("organizations.id, organizations.name, COUNT(visits.id) as visit_count")
+            .group("organizations.id, organizations.name")
+            .joins(:visits)
+            .where(visits: {short_url_id: self.id})
+  end
+
   def ensure_http_prepend
     unless /https{0,1}:\/\/.*/.match self.url
       self.url = "http://#{self.url}"

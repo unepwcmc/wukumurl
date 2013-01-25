@@ -35,6 +35,20 @@ class ShortUrlTest < ActiveSupport::TestCase
     end
   end
 
+  test "visits_by_organization should return stats correctly" do
+    organization_stats = short_urls(:hn).visits_by_organization
+    organization_stats.each do |organization|
+      if organization.name == "Apple"
+        assert_equal 2, organization.visit_count.to_i
+      elsif organization.name == "World Conservation Monitoring Centre"
+        assert_equal 1, organization.visit_count.to_i
+      else
+        # Shouldn't happen
+        assert ['Apple', 'World Conservation Monitoring Center'].include?(organization.name)
+      end
+    end
+  end
+
   test "saving a link with no http:// in front should have it inserted" do
     no_http = ShortUrl.create(url: "bbc.co.uk")
     assert_equal "http://bbc.co.uk", no_http.url

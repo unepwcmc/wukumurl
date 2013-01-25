@@ -29,5 +29,6 @@ class ShortUrlsController < ApplicationController
     @short_url = ShortUrl.find(params[:id])
     @visits = @short_url.visit_count
     @visits_by_country = @short_url.visits_by_country
+    @visits_by_organization = @short_url.visits_by_organization
   end
 end
