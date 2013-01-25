@@ -3,6 +3,9 @@ require 'capistrano/ext/multistage'
 require 'brightbox/recipes'
 require 'brightbox/passenger'
 
+load "deploy/assets"
+set :rake, 'bundle exec rake'
+
 # The name of your application.  Used for deployment directory and filenames
 # and Apache configs. Should be unique on the Brightbox
 set :application, "wukumurl"
@@ -144,6 +147,7 @@ default_run_options[:pty] = true
 # :soft uses the standard touch tmp/restart.txt which leaves database connections
 # lingering until the workers time out
 # set :passenger_restart_strategy, :hard
+set :local_shared_files, %w(config/database.yml config/max_mind.yml)
 
 task :setup_production_database_configuration do
   the_host = Capistrano::CLI.ui.ask("Database IP address: ")
@@ -168,10 +172,7 @@ task :setup_production_database_configuration do
 end
 after "deploy:setup", :setup_production_database_configuration
 
-namespace :rake do  
-  desc "Run a task on a remote server."  
-  # run like: cap staging rake:invoke task=a_certain_task  
-  task :invoke do  
-    run("cd #{deploy_to}/current; bundle exec /usr/bin/env rake #{ENV['task']} RAILS_ENV=#{rails_env}")  
-  end  
-end
+# run like: cap staging rake_invoke task=a_certain_task  
+task :rake_invoke do  
+  run("cd #{deploy_to}/current; bundle exec /usr/bin/env rake #{ENV['task']} RAILS_ENV=#{rails_env}")  
+end  

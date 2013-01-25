@@ -32,7 +32,7 @@ Geolocate your visits with:
 
     rake geo_locate:visits
 
-You can use the cap rake:invoke task=<task_name> to invoke this task on the server:
+You can use the cap rake_invoke task=<task_name> to invoke this task on the server:
 
-    cap rake:invoke task=geo_locate:visits
+    cap rake_invoke task=geo_locate:visits
 
