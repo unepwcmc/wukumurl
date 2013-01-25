@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 2.minutes do
+every 30.minutes do
   rake "geo_locate:visits"
 end

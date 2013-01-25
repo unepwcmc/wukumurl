@@ -15,14 +15,14 @@ $(($)->
       $('#short-url-list').prepend("""
          <li>
            <div class="details">
+             <a href="/#{shortUrl.short_name}">
+               wcmc.io/#{shortUrl.short_name}
+             </a>
              <div>
-               #{shortUrl.url}
-                 <a href="/#{shortUrl.short_name}">
-                   wcmc.io/#{shortUrl.short_name}
-                 </a>
                <span class='stats'><a href="/short_urls/#{shortUrl.id}">0 visits</span></span>
+               <a href="/short_urls/#{shortUrl.id}">view stats</a>
              </div>
-             <button class="btn">copy</button>
+             <p>#{shortUrl.url}</p>
            </div>
          </li>
        """)
