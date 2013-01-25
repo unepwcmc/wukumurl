@@ -2,6 +2,8 @@ class ShortUrl < ActiveRecord::Base
   require 'securerandom'
   attr_accessible :short_name, :url
   validates_uniqueness_of :short_name
+  validate :validate_url
+  
   before_validation :create_short_name_if_blank
   before_validation :ensure_http_prepend
 
@@ -44,6 +46,17 @@ class ShortUrl < ActiveRecord::Base
   def ensure_http_prepend
     unless /https{0,1}:\/\/.*/.match self.url
       self.url = "http://#{self.url}"
+    end
+  end
+
+  require 'uri'
+
+  def validate_url
+    begin
+      uri = URI.parse(self.url)
+      uri.kind_of?(URI::HTTP)
+    rescue URI::InvalidURIError
+      self.errors.add(:url, "does not appear to be valid")
     end
   end
 end

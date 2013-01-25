@@ -7,7 +7,11 @@ $(($)->
     e.preventDefault()
     url = $('#url-to-shorten').val()
 
-    $.post('/', {url:url}, (shortUrl)->
+    $.ajax(
+      url: '/'
+      type: 'POST'
+      data: {url:url}
+    ).done((shortUrl)->
       $('#short-url-list').prepend("""
          <li>
            <div class="details">
@@ -22,6 +26,11 @@ $(($)->
            </div>
          </li>
        """)
+    ).fail((response) ->
+      errorMsg = ""
+      for field, error of $.parseJSON(response.responseText)
+        errorMsg += "#{field} #{error}\n"
+      alert(errorMsg)
     )
     return false
   )

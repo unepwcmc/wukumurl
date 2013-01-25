@@ -49,4 +49,10 @@ class ShortUrlTest < ActiveSupport::TestCase
     http = ShortUrl.create(url: "https://bbc.co.uk")
     assert_equal "https://bbc.co.uk", http.url
   end
+
+  test "should not be able to save a link with a badly formatted URL" do
+    not_a_website = ShortUrl.create(url: "not a website address")
+    assert_equal ["Url does not appear to be valid"], not_a_website.errors.to_a
+    assert_nil not_a_website.id
+  end
 end
