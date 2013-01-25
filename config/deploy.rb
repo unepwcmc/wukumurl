@@ -167,3 +167,11 @@ task :setup_production_database_configuration do
   put(spec.to_yaml, "#{shared_path}/config/database.yml")
 end
 after "deploy:setup", :setup_production_database_configuration
+
+namespace :rake do  
+  desc "Run a task on a remote server."  
+  # run like: cap staging rake:invoke task=a_certain_task  
+  task :invoke do  
+    run("cd #{deploy_to}/current; bundle exec /usr/bin/env rake #{ENV['task']} RAILS_ENV=#{rails_env}")  
+  end  
+end
