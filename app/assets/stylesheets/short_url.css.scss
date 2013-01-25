@@ -87,6 +87,10 @@ h2{
 
 }
 
+h4{
+	display: block;
+}
+
 
 .details{
 	width: 580px;
@@ -180,6 +184,9 @@ ul.stat-groups li{
 	margin: 30px 0;
 }
 
+.stat-groups .lists .details{
+	line-height: 3em;
+}
 
 ul.lists {
 	border-top: 1px solid #474a5c;
@@ -196,37 +203,35 @@ ul.lists {
     .details {
       float: left;
       color: #666666;
-      line-height: 3em;
-	  font-weight: normal;
+	  font-weight: normal;	
+	  line-height: 1.5em;
+	  margin-top: 5px;
+	 margin-bottom: 5px;
 	
 		div{
-			float: left;
-			line-height: 1.3em;
+		float: right;
 		}
 		
     }
 
-    .btn {
-       float: right;
-       margin: 10px;
-       background: #474a5c;
-       -webkit-box-shadow:  3px 3px 0px 0px rgba(211, 212, 209, 1);
-       box-shadow:  3px 3px 0px 0px rgba(211, 212, 209, 1);
-    }
+
+	p{
+		display: block;
+	}
 
     a {
-      display: block;
       font-weight: bold;
     }
 
     span.stats {
-      font-weight: normal;
       font-style: italic;
+	  margin-right: 50px;
 
       a {
         font-weight:normal;
       }
     }
+
   }
   li:nth-child(odd) { background: #eee; }
 }
