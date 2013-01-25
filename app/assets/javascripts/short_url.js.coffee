@@ -10,12 +10,16 @@ $(($)->
     $.post('/', {url:url}, (shortUrl)->
       $('#short-url-list').prepend("""
          <li>
-           <p>#{shortUrl.url}
-             <a href="/#{shortUrl.short_name}">
-               wcmc.io/#{shortUrl.short_name}<span>0 clicks</span>
-             </a>
-           </p>
-           <button class="btn">copy</button>
+           <div class="details">
+             <div>
+               #{shortUrl.url}
+                 <a href="/#{shortUrl.short_name}">
+                   wcmc.io/#{shortUrl.short_name}
+                 </a>
+               <span class='stats'><a href="/short_urls/#{shortUrl.id}">0 visits</span></span>
+             </div>
+             <button class="btn">copy</button>
+           </div>
          </li>
        """)
     )
