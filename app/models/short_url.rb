@@ -3,6 +3,7 @@ class ShortUrl < ActiveRecord::Base
   attr_accessible :short_name, :url
   validates_uniqueness_of :short_name
   before_validation :create_short_name_if_blank
+  before_validation :ensure_http_prepend
 
   has_many :visits, :dependent => :destroy  
 
@@ -38,5 +39,11 @@ class ShortUrl < ActiveRecord::Base
             .group("countries.id, countries.name")
             .joins(:visits)
             .where(visits: {short_url_id: self.id})
+  end
+
+  def ensure_http_prepend
+    unless /https{0,1}:\/\/.*/.match self.url
+      self.url = "http://#{self.url}"
+    end
   end
 end

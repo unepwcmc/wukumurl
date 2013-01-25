@@ -34,4 +34,19 @@ class ShortUrlTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test "saving a link with no http:// in front should have it inserted" do
+    no_http = ShortUrl.create(url: "bbc.co.uk")
+    assert_equal "http://bbc.co.uk", no_http.url
+  end
+
+  test "saving a link with http:// in front should not modify the url" do
+    http = ShortUrl.create(url: "http://bbc.co.uk")
+    assert_equal "http://bbc.co.uk", http.url
+  end
+
+  test "saving a link with https:// in front should not modify the url" do
+    http = ShortUrl.create(url: "https://bbc.co.uk")
+    assert_equal "https://bbc.co.uk", http.url
+  end
 end
