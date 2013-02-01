@@ -6,7 +6,9 @@ hn:
 wcmc:
   short_name: wcmc
   url: "http://unep-wcmc.org"
+  deleted: false
   
-two:
+deleted:
   short_name: test2
   url: "http://test2.com"
+  deleted: true

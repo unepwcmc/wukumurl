@@ -69,4 +69,11 @@ class ShortUrlTest < ActiveSupport::TestCase
     assert_equal ["Url does not appear to be valid"], not_a_website.errors.to_a
     assert_nil not_a_website.id
   end
+
+  test "not_deleted scope should only return short_urls where deleted isn't true " do
+    not_deleted = ShortUrl.not_deleted.to_a
+    assert not_deleted.include?(short_urls(:wcmc))
+    assert not_deleted.include?(short_urls(:hn))
+    assert !not_deleted.include?(short_urls(:deleted))
+  end
 end

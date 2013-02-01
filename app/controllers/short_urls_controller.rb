@@ -21,7 +21,7 @@ class ShortUrlsController < ApplicationController
       visit = Visit.create(short_url_id: short_url.id, ip_address: request.remote_ip)
       redirect_to short_url.url
     else
-      @short_urls = ShortUrl.order("created_at DESC")
+      @short_urls = ShortUrl.not_deleted.order("created_at DESC")
     end
   end
 
@@ -30,5 +30,12 @@ class ShortUrlsController < ApplicationController
     @visits = @short_url.visit_count
     @visits_by_country = @short_url.visits_by_country
     @visits_by_organization = @short_url.visits_by_organization
+  end
+
+  def destroy
+    @short_url = ShortUrl.find(params[:id])
+    @short_url.deleted = true
+    @short_url.save
+    redirect_to :action => "visit"
   end
 end

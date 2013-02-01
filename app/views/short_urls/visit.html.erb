@@ -17,13 +17,15 @@
     <% @short_urls.each do |short_url| %>
       <li>
         <div class="details ">
-            <%= link_to("wcmc.io/#{short_url.short_name}", visit_short_url_path(short_name: short_url.short_name)) %>
-			<div>
-			<span class='stats'><%= link_to("#{short_url.visit_count} visits", short_url) %></span>
-			<%= link_to("view stats", short_url) %>
-			</div>
-<p><%= short_url.url %></p>
-    
+          <%= link_to("wcmc.io/#{short_url.short_name}", visit_short_url_path(short_name: short_url.short_name)) %>
+          <div>
+            <span class='stats'><%= link_to("#{short_url.visit_count} visits", short_url) %></span>
+            <%= link_to("view stats", short_url) %>
+          </div>
+          <p><%= short_url.url %></p>
+        </div>
+        <div class='side-hover-action'>
+          <%= link_to 'Delete', short_url, :method => :delete, :confirm => "You sure?" %>
         </div>
       </li>
     <% end %>

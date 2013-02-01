@@ -67,4 +67,8 @@ class ShortUrl < ActiveRecord::Base
       self.errors.add(:url, "does not appear to be valid")
     end
   end
+
+  def self.not_deleted
+    where("deleted = false OR deleted IS NULL")
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130125161221) do
+ActiveRecord::Schema.define(:version => 20130201144241) do
 
   create_table "countries", :force => true do |t|
     t.string   "iso"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20130125161221) do
     t.text     "url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.boolean  "deleted"
   end
 
   create_table "visits", :force => true do |t|

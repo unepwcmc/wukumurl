@@ -72,45 +72,45 @@ h1 span{
   display: block;
   font-size: 0.3em;
   width: 260px;
-	text-align: center;
-	
+  text-align: center;
+
 }
 
 h2{
-	font-size: 1.4em;
-	width: 100%;
-	letter-spacing: 0.05em;
-	text-align:center;
-	color: #474a5c;
-	 -webkit-text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
-	 text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
+  font-size: 1.4em;
+  width: 100%;
+  letter-spacing: 0.05em;
+  text-align:center;
+  color: #474a5c;
+  -webkit-text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
+  text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
 
 }
 
 h4{
-	display: block;
+  display: block;
 }
 
 
 .details{
-	width: 580px;
-	margin: 0 10px;
+  width: 580px;
+  margin: 0 10px;
 }
 
 .stat-groups .details{
-	color: #474a5c;
-	font-size: 1.3em;
-	font-weight: bold;
+  color: #474a5c;
+  font-size: 1.3em;
+  font-weight: bold;
 }
 
 span.stat{
-	float: right;
+  float: right;
 }
 
 a.link{
-	background: url(icon_link.png)  left no-repeat;
-	padding: 10px;
-	margin: 0 0 0 20px;
+  background: url(icon_link.png)  left no-repeat;
+  padding: 10px;
+  margin: 0 0 0 20px;
 }
 
 button{
@@ -179,45 +179,43 @@ section{
 /* lists */
 
 ul.stat-groups li{
-	float:left;
-	width: 100%;
-	margin: 30px 0;
+  float:left;
+  width: 100%;
+  margin: 30px 0;
 }
 
 .stat-groups .lists .details{
-	line-height: 3em;
+  line-height: 3em;
 }
 
 ul.lists {
-	border-top: 1px solid #474a5c;
-	margin: 20px 0 0 0;
-	
-	
-  	li{
-    	float: left;
-		width: 100%;
-		margin: 0;
-		border: 0;
-    	border-bottom: 1px dotted #cccccc;
+  border-top: 1px solid #474a5c;
+  margin: 20px 0 0 0;
+
+  li {
+    float: left;
+    width: 100%;
+    margin: 0;
+    border: 0;
+    border-bottom: 1px dotted #cccccc;
+    position:relative;
 
     .details {
       float: left;
       color: #666666;
-	  font-weight: normal;	
-	  line-height: 1.5em;
-	  margin-top: 5px;
-	 margin-bottom: 5px;
-	
-		div{
-		float: right;
-		}
-		
+      font-weight: normal;	
+      line-height: 1.5em;
+      margin-top: 5px;
+      margin-bottom: 5px;
+
+      div{
+        float: right;
+      }
     }
 
-
-	p{
-		display: block;
-	}
+    p {
+      display: block;
+    }
 
     a {
       font-weight: bold;
@@ -225,13 +223,29 @@ ul.lists {
 
     span.stats {
       font-style: italic;
-	  margin-right: 50px;
+      margin-right: 50px;
 
       a {
         font-weight:normal;
       }
     }
+    .side-hover-action {
+      display:none;
+      position: absolute;
+      right: -65px;
+      width: 50px;
+      line-height: 44px;
+      padding: 7px;
 
+      a {
+        
+      }
+    }
   }
   li:nth-child(odd) { background: #eee; }
+  li:hover { 
+    .side-hover-action {
+      display:block;
+    }
+  }
 }
