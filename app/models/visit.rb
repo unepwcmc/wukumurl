@@ -15,7 +15,8 @@ class Visit < ActiveRecord::Base
     cdb = GeoIP::Country.new(GEO_IP_CONFIG['country_db'])
     country_attributes = cdb.look_up self.ip_address
     if country_attributes.nil?
-      puts "Unable to geolocate country of visit #{self.id}"
+      # Too noisy for now
+      #puts "Unable to geolocate country of visit #{self.id}"
     else
       self.country = Country.find_or_create_by_max_mind_attributes country_attributes
     end
@@ -25,7 +26,8 @@ class Visit < ActiveRecord::Base
     cdb = GeoIP::Organization.new(GEO_IP_CONFIG['org_db'])
     organization_attributes = cdb.look_up self.ip_address
     if organization_attributes.nil?
-      puts "Unable to geolocate organisation of visit #{self.id}"
+      # Too noisy for now
+      #puts "Unable to geolocate organisation of visit #{self.id}"
     else
       self.organization = Organization.find_or_create_by_max_mind_attributes organization_attributes
     end
