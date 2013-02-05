@@ -16,7 +16,7 @@ class ShortUrl < ActiveRecord::Base
   end
 
   def self.generate_short_name
-    SecureRandom.hex(6)
+    SecureRandom.hex(2)
   end
 
   def visit_count
