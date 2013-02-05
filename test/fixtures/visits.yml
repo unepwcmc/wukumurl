@@ -50,3 +50,6 @@ apple_hn_visit2:
   short_url: hn
   organization: apple
 
+bt_hn_visit:
+  short_url: hn
+  organization: bt

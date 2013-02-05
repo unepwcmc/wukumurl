@@ -5,6 +5,8 @@ Wukumurl::Application.routes.draw do
 
   resources :short_urls
 
+  resources :organizations, only: [:destroy]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

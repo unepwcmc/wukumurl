@@ -5,3 +5,8 @@ wcmc:
 
 apple:
   name: Apple
+
+bt:
+  name: British Telecom
+  disregard: true
+

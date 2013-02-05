@@ -44,11 +44,13 @@ class ShortUrl < ActiveRecord::Base
   end
 
   # Returns a list of countries with a 'visit_count' attribute
-  def visits_by_organization
-    Organization.select("organizations.id, organizations.name, COUNT(visits.id) as visit_count")
+  def visits_by_organization include_disregarded = false
+    orgs = Organization.select("organizations.id, organizations.name, COUNT(visits.id) as visit_count")
             .group("organizations.id, organizations.name")
             .joins(:visits)
             .where(visits: {short_url_id: self.id})
+    orgs = orgs.where("disregard = false OR disregard IS NULL") unless include_disregarded
+    orgs
   end
 
   def ensure_http_prepend

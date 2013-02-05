@@ -35,18 +35,26 @@ class ShortUrlTest < ActiveSupport::TestCase
     end
   end
 
-  test "visits_by_organization should return stats correctly" do
+  test "visits_by_organization should return stats correctly, excluding disregarded organisations" do
     organization_stats = short_urls(:hn).visits_by_organization
+    counts = {}
     organization_stats.each do |organization|
-      if organization.name == "Apple"
-        assert_equal 2, organization.visit_count.to_i
-      elsif organization.name == "World Conservation Monitoring Centre"
-        assert_equal 1, organization.visit_count.to_i
-      else
-        # Shouldn't happen
-        assert ['Apple', 'World Conservation Monitoring Center'].include?(organization.name)
-      end
+      counts[organization.name] = organization.visit_count.to_i
     end
+    assert_equal 2, counts["Apple"]
+    assert_equal 1, counts["World Conservation Monitoring Centre"]
+    assert_nil counts["British Telecom"]
+  end
+
+  test "visits_by_organization with include_disregarded set to true should include disregarded orgs" do
+    organization_stats = short_urls(:hn).visits_by_organization(true)
+    counts = {}
+    organization_stats.each do |organization|
+      counts[organization.name] = organization.visit_count.to_i
+    end
+    assert_equal 2, counts["Apple"]
+    assert_equal 1, counts["World Conservation Monitoring Centre"]
+    assert_equal 1, counts["British Telecom"]
   end
 
   test "saving a link with no http:// in front should have it inserted" do
