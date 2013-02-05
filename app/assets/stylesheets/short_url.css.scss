@@ -231,35 +231,36 @@ ul.lists {
       }
     }
     .side-hover-action {
-      display:none;
-      position: absolute;
-      right: -65px;
-	  top: 10px;
-      width: 50px;
-      line-height: 20px;
-      padding: 7px;
-	  background: #eee;
-	border-top: 1px solid #ddd;
-	border-right: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-	-webkit-border-top-right-radius: 7px;
-	-webkit-border-bottom-right-radius: 7px;
-	-moz-border-radius-topright: 7px;
-	-moz-border-radius-bottomright: 7px;
-	border-top-right-radius: 7px;
-	border-bottom-right-radius: 7px;
+	      display:none;
+		  position: absolute;
+	      right: -82px;
+		  top: 21%;
+		width: 68px;
+	      line-height: 20px;
+	      padding: 7px;
+		  background: #eee;
+		border-top: 1px solid #ddd;
+		border-right: 1px solid #ddd;
+		border-bottom: 1px solid #ddd;
+		-webkit-border-top-right-radius: 7px;
+		-webkit-border-bottom-right-radius: 7px;
+		-moz-border-radius-topright: 7px;
+		-moz-border-radius-bottomright: 7px;
+		border-top-right-radius: 7px;
+		border-bottom-right-radius: 7px;
 	 
 
       a {
 		color: #999;
 		font-weight: normal;
 		font-size: 0.8em; 
+      
       }
 
 	 a:hover{
 		color: #696969;
 		background: url(remove.png) right no-repeat;
-		padding: 0 12px 0 0;
+      padding: 0px 12px 0px 0px;
 	}
 	
     }
@@ -268,7 +269,7 @@ ul.lists {
   li:hover { 
 	
     .side-hover-action {
-      display:block;
+      display:inline;
     }
 	
   }
