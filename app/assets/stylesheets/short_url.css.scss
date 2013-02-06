@@ -64,6 +64,9 @@ h1{
   font-size: 4.3em;
   width: 260px;
   margin: 50px auto;
+webkit-text-shadow: 0px 2px 1px rgba(96, 138, 48, 1);
+text-shadow: 0px 2px 1px rgba(96, 138, 48, 1);
+
 
 }
 
@@ -73,6 +76,8 @@ h1 span{
   font-size: 0.3em;
   width: 260px;
   text-align: center;
+webkit-text-shadow: 0px 2px 1px rgba(96, 138, 48, 1);
+text-shadow: 0px 2px 1px rgba(96, 138, 48, 1);
 
 }
 
@@ -82,6 +87,7 @@ h2{
   letter-spacing: 0.05em;
   text-align:center;
   color: #474a5c;
+  margin: 0 0 10px 0;
   -webkit-text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
   text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
 
@@ -89,6 +95,12 @@ h2{
 
 h4{
   display: block;
+}
+
+p{
+	color: #dae9c8;
+	text-align:center;
+	font-family: 'Raleway', sans-serif;
 }
 
 
@@ -135,6 +147,13 @@ header{
 section{
   margin: 20px 0 0 0;
 }
+
+
+footer{
+	float: left;
+	width: 100%;
+	margin: 40px 0 0 0;
+	}
 
 /* form */
 .form-container{
@@ -197,7 +216,7 @@ ul.lists {
     width: 100%;
     margin: 0;
     border: 0;
-    border-bottom: 1px dotted #cccccc;
+    border-bottom: 1px solid #cccccc;
     position:relative;
 
 
@@ -211,11 +230,25 @@ ul.lists {
 
       div{
         float: right;
+
+		a{
+			font-weight: normal;
+			padding: 0 30px 0 0;
+			color: #475933;
+			background: url(icon_charts.png) right no-repeat;
+		}
+       
       }
     }
 
     p {
       display: block;
+	font-size: 0.8em;
+	margin: 5px 0 0 0;
+	padding: 4px 0 0 0;
+	color: #999;
+	border-top: 1px dotted #ccc;
+	text-align:left;	
     }
 
     a {
@@ -223,11 +256,19 @@ ul.lists {
     }
 
     span.stats {
-      font-style: italic;
       margin-right: 50px;
+		background: #f38417;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
 
       a {
         font-weight:normal;
+		margin: 5px;
+		font-size: 0.9em;
+		color: #fff;
+		background: none;
+		padding: 0;
       }
     }
     .side-hover-action {
@@ -248,22 +289,28 @@ ul.lists {
 		-moz-border-radius-bottomright: 7px;
 		border-top-right-radius: 7px;
 		border-bottom-right-radius: 7px;
-	 
 
       a {
 		color: #999;
 		font-weight: normal;
 		font-size: 0.8em; 
-      
+ 		background: url(remove-0.png) right no-repeat;
+      padding: 0px 12px 0px 0px;     
       }
 
 	 a:hover{
-		color: #696969;
+		color: #ff7f7f;
 		background: url(remove.png) right no-repeat;
       padding: 0px 12px 0px 0px;
 	}
 	
     }
+
+		.side-hover-action:hover{
+		background: #ffcccc;
+		border-color: #ff7f7f; 
+		}
+
   }
   li:nth-child(odd) { background: #eee; }
   li:hover { 
