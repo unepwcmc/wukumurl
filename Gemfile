@@ -37,6 +37,8 @@ gem 'pg'
 
 gem 'jquery-rails'
 
+gem "auto_strip_attributes", "~> 1.0"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

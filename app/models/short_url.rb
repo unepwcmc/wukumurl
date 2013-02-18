@@ -7,6 +7,8 @@ class ShortUrl < ActiveRecord::Base
   before_validation :create_short_name_if_blank
   before_validation :ensure_http_prepend
 
+  auto_strip_attributes :url
+
   has_many :visits, :dependent => :destroy  
 
   def create_short_name_if_blank
