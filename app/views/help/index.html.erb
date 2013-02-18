@@ -9,49 +9,49 @@
   </header>
 
   <section>
-	<h2>Help</h2>
-<h3>So what’s this all about?</h3>
-<p>wcmc.io is a simple tool to help you track the links you share. Specifically, how many people use the link, which country they’re from, and which organisations they’re from.
-</p><p>
-	It works by creating a unique version of the original link you wanted to share. If you then share this new link (starting “wcmc.io/”), we can track it and see how many times it gets used. 
-</p>
-<h3>What do I do?</h3>
-<ol>
-	<li>Paste the link to the website you want to share in the box above or on the <%= link_to 'homepage','/' %>.</li>
-	<li>Click “shorten”, and your link will appear at the top of the list with the new unique version in bold green above it.</li>
-	<li>Copy this unique link and send it to all the people you want to share it with.</li>
-	<li>Check back to the site to see how many times people have used the link! </li>
-	<li>Click on “view statistics” next to your link in the list to see more detailed information such as the countries and organisations the visitors were from.</li>
-	</ol>
-	
-<h3>The wcmc.io Widget</h3>
-<p>Now you can embed the power of wcmc.io in your own webpage. Just include these lines of code in the <code>&lt;head&gt;&lt;/head&gt;</code> of your html document.</p>
+    <h2>Help</h2>
+    <h3>So what’s this all about?</h3>
+    <p>wcmc.io is a simple tool to help you track the links you share. Specifically, how many people use the link, which country they’re from, and which organisations they’re from.
+    </p><p>
+    It works by creating a unique version of the original link you wanted to share. If you then share this new link (starting “wcmc.io/”), we can track it and see how many times it gets used. 
+    </p>
+    <h3>What do I do?</h3>
+    <ol>
+      <li>Paste the link to the website you want to share in the box above or on the <%= link_to 'homepage','/' %>.</li>
+      <li>Click “shorten”, and your link will appear at the top of the list with the new unique version in bold green above it.</li>
+      <li>Copy this unique link and send it to all the people you want to share it with.</li>
+      <li>Check back to the site to see how many times people have used the link! </li>
+      <li>Click on “view statistics” next to your link in the list to see more detailed information such as the countries and organisations the visitors were from.</li>
+    </ol>
 
-<p>
-	<code class="with_bg">
-		&lt;link rel=&quot;stylesheet&quot; media=&quot;screen&quot; href=&quot;default_style.css&quot; /&gt;<br/>
-	    &lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;<br/>
-	    &lt;script type=&quot;text/javascript&quot; src=&quot;wcmc_io_widget.js&quot;&gt;&lt;/script&gt;<br/>
-		&lt;script type=&quot;text/javascript&quot;&gt;<br/>
-	      $(document).ready(function(){<br/>
-	        var widget = new WcmcIoWidget(‘<span>.test</span>’);<br/>
-	      });<br/>
-	    &lt;/script&gt;
-</code>
-</p>
-<p>
-	Change ‘<span>.test</span>’ to the class name of the element (likely to be a ‘div’), you want the widget to appear in. e.g:
-	</p>
-	
-	<p><code class="with_bg">
-		&lt;div class=”test”&gt;&lt;/div&gt;
-	</code></p>
-	<p>Then sit back and watch the magic happen!</p>
-	
-	<h3>Who’s behind wcmc.io ?</h3>
-	<p>Wcmc.io was created by the Informatics program at <a href="http://informatics.unep-wcmc.org/">UNEP-WCMC</a> in Cambridge to help teams here track the dissemination of our work around the world.</p>
-	<p>
-		Like almost all our projects it’s open source and available through our github page <a href="https://github.com/unepwcmc/wukumurl">https://github.com/unepwcmc/wukumurl</a>
-	</p>
+    <h3>The wcmc.io Widget</h3>
+    <p>Now you can embed the power of wcmc.io in your own webpage. Just include these lines of code in the <code>&lt;head&gt;&lt;/head&gt;</code> of your html document.</p>
+
+    <p>
+    <code class="with_bg">
+            &lt;link rel=&quot;stylesheet&quot; media=&quot;screen&quot; href=&quot;default_style.css&quot; /&gt;<br/>
+        &lt;script src=&quot;jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;<br/>
+        &lt;script type=&quot;text/javascript&quot; src=&quot;<%= link_to "wcmc_io_widget.js", "/wcmc_io_widget.js" %>&quot;&gt;&lt;/script&gt;<br/>
+        &lt;script type=&quot;text/javascript&quot;&gt;<br/>
+        &nbsp;&nbsp;$(document).ready(function(){<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;var widget = new WcmcIoWidget(‘<span>.test</span>’);<br/>
+        &nbsp;&nbsp;});<br/>
+        &lt;/script&gt;
+    </code>
+    </p>
+    <p>
+    Change ‘<span>.test</span>’ to the class name of the element (likely to be a ‘div’), you want the widget to appear in. e.g:
+    </p>
+
+    <p><code class="with_bg">
+      &lt;div class=”test”&gt;&lt;/div&gt;
+    </code></p>
+    <p>Then sit back and watch the magic happen!</p>
+
+    <h3>Who’s behind wcmc.io ?</h3>
+    <p>Wcmc.io was created by the Informatics program at <a href="http://informatics.unep-wcmc.org/">UNEP-WCMC</a> in Cambridge to help teams here track the dissemination of our work around the world.</p>
+    <p>
+    Like almost all our projects it’s open source and available through our github page <a href="https://github.com/unepwcmc/wukumurl">https://github.com/unepwcmc/wukumurl</a>
+    </p>
 
   </section>
