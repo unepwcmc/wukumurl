@@ -11,9 +11,19 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+  
+  <script type="text/javascript" src="/wcmc_io_widget.js"></script>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <%= link_to '', '/help', :class=>"nav", :id=>"help" %>  
+      <%= link_to '', '/', :class=>"nav", :id=>"home" %>
+
+      <%= yield %>
+
+      <footer>
+      </footer>
+    </div>
   </body>
 </html>
