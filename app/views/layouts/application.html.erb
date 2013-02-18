@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>wcmc.io shorten // share // track</title>
-  <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+  <head>
+    <title>wcmc.io shorten // share // track</title>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
 
-    <!-- enable HTML5 elements in IE7+8 -->
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+      <!-- enable HTML5 elements in IE7+8 -->
+      <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+    
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <%= link_to '', '/help', :class=>"nav", :id=>"help" %>  
+      <%= link_to '', '/', :class=>"nav", :id=>"home" %>
+
+      <%= yield %>
+
+      <footer>
+      </footer>
+    </div>
   </body>
 </html>
