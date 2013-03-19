@@ -53,3 +53,4 @@ gem "auto_strip_attributes", "~> 1.0"
 
 # To use debugger
 
+gem 'rake', '>=10.0.3'
