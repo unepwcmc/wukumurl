@@ -8,6 +8,8 @@ set :rake, 'bundle exec rake'
 
 set :whenever_command, "bundle exec whenever"
 require "whenever/capistrano"
+# so unfortunately the whenever task is fired before bundling takes place
+# because of this commit: https://github.com/javan/whenever/commit/7ae1009c31deb03c5db4a68f5fc99ea099ce5655
 
 # The name of your application.  Used for deployment directory and filenames
 # and Apache configs. Should be unique on the Brightbox
