@@ -6,8 +6,8 @@ require 'brightbox/passenger'
 load "deploy/assets"
 set :rake, 'bundle exec rake'
 
-require "whenever/capistrano"
 set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"
 
 # The name of your application.  Used for deployment directory and filenames
 # and Apache configs. Should be unique on the Brightbox
@@ -174,7 +174,6 @@ task :setup_production_database_configuration do
   put(spec.to_yaml, "#{shared_path}/config/database.yml")
 end
 after "deploy:setup", :setup_production_database_configuration
-after 'deploy:update_code', 'whenever:update_crontab'
 
 # run like: cap staging rake_invoke task=a_certain_task  
 task :rake_invoke do  
