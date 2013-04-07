@@ -36,3 +36,7 @@ You can use the cap rake_invoke task=<task_name> to invoke this task on the serv
 
     cap rake_invoke task=geo_locate:visits
 
+## Creating with short names
+If you need a short name for a link, you can create it with curl:
+
+    curl --data "url=http://url.to/shorten&short_name=myUrl" wcmc.io/
