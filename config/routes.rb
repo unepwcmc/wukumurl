@@ -1,4 +1,6 @@
 Wukumurl::Application.routes.draw do
+  get "compare/index"
+
   match '/help' => 'help#index'
 
   match '/' => 'short_urls#create', :controller => 'short_urls', :via => :post
