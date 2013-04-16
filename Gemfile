@@ -36,6 +36,7 @@ end
 gem 'pg'
 
 gem 'jquery-rails'
+gem 'eco'
 
 gem "auto_strip_attributes", "~> 1.0"
 
