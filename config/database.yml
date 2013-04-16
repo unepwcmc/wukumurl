@@ -4,7 +4,8 @@ development:
   database: wukumurl_development
   pool: 5
   username: postgres
-  password:
+  password: postgres
+  host: localhost
 
 test:
   adapter: postgresql
@@ -12,4 +13,5 @@ test:
   database: wukumurl_test
   pool: 5
   username: postgres
-  password:
+  password: postgres
+  host: localhost
