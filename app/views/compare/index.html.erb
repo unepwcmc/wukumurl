@@ -1,2 +1,17 @@
-<h1>Compare#index</h1>
-<p>Find me in app/views/compare/index.html.erb</p>
+<h1>Compare Stats</h1>
+
+<section>
+  
+  <div class="chart">Hello!</div>
+
+</section>
+
+
+<script type="text/javascript">
+  $(document).ready(
+    function() {
+      window.WukumUrl = {};
+      window.WukumUrl.data = JSON.parse(<%= @urls.to_json.html_safe %>);
+      console.log(WukumUrl.data);
+  });
+</script>

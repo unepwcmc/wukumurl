@@ -12,10 +12,13 @@
 
   <section>
 
+  <a href="" class="compare_urls" style="display: none;">Compare urls!</a>
+
   <ul id="short-url-list" class="lists">
     <% @short_urls.each do |short_url| %>
       <li>
         <div class="details ">
+          <input type="checkbox" value="<%= short_url.id %>" class="compare_urls">
           <%= link_to("wcmc.io/#{short_url.short_name}", visit_short_url_path(short_name: short_url.short_name)) %>
           <div>
             <span class='stats'><%= link_to("#{short_url.visit_count} visits", short_url) %></span>
@@ -34,4 +37,44 @@
 
 <footer>
 </footer>
+
+<script type="text/javascript">
+  $(document).ready(
+    function() {
+      var ids = [];
+      var link = $("a.compare_urls");
+      function updateUrl (ids) {
+        var url = "/compare/";
+        _.each(ids, function(id) {url += id + '/'});
+        return url;
+      }
+      function setUrlVisibility (ids) {
+        if (ids.length > 0) {
+          link.show();
+        } else {
+          link.hide();
+        }
+      }
+      $('input:checkbox.compare_urls').on("click", function(evt) {
+
+        $('input:checkbox.compare_urls:checked').each(function() {
+          var val = $(this).val();
+          updated_ids = [];
+          // if ids.length == 0 this will not run...
+          _.each(ids, function(id, i) {
+            if (val !== id) {
+              updated_ids.push(val);
+            }
+          });
+          ids = updated_ids;
+          if (ids.length === 0) {
+            ids.push(val);
+          }
+        });
+        link.attr( "href", updateUrl(ids) );
+        console.log(ids);
+        setUrlVisibility(ids);
+      });
+  });
+</script>
 
