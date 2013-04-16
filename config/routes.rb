@@ -7,6 +7,9 @@ Wukumurl::Application.routes.draw do
 
   match "/:short_name", :controller => 'short_urls', :action => :visit, :as => 'visit_short_url'
 
+  #match '/compare/urls/:link1/:link2', :controller => 'compare', :action => :show_urls, :via => :get
+  match '/compare/*tags' => "compare#index"
+
   resources :short_urls
 
   resources :organizations, only: [:destroy]
