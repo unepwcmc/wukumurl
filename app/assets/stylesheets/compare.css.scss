@@ -6,3 +6,18 @@
   width: 700;
   height: 600;
 }
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+section.chart{
+  margin: 130px 0 0 0;
+}
