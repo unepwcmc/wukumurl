@@ -1,4 +1,6 @@
-[
+window.spec_data ||= {}
+
+spec_data.compare_short_urls = [
   {
     "id": 108,
     "short_name": "soerprojectteam",
