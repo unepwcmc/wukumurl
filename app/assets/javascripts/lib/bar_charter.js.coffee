@@ -73,6 +73,12 @@ WukumUrl.Charters.barChart = ->
   yScale = d3.scale.linear()
   xAxis = d3.svg.axis().scale(x0Scale).orient("bottom")
   yAxis = d3.svg.axis().scale(yScale).orient("left").tickFormat(format)
+  #colours = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]
+
+  color = d3.scale.linear()
+    .domain([0, 1])
+    .range(["#060F00", "#E3F5D7"]);
+
 
   _outerWidth = ->
     width + margin.left + margin.right
@@ -186,7 +192,10 @@ WukumUrl.Charters.barChart = ->
           .attr("x", (d) -> x1Scale d.name)
           .attr("width", 0)
           .attr("y", (d) -> _innerHeight() )
-          .attr "height", (d) -> 0
+          .attr("height", (d) -> 0)
+          .style "fill", (d, i) -> 
+            console.log (i+1)/inner_data.values.length
+            color( (i+1)/inner_data.values.length ) 
         bar.exit().remove()
         bar.transition()
           .duration(500)
