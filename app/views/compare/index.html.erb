@@ -1,13 +1,14 @@
+<%= javascript_include_tag params[:controller] %>
 <h1>Compare Stats</h1>
 
 <section>
   
-  <div class="chart">Hello!</div>
+  <div id="chart_one" class="chart">Hello!</div>
 
 </section>
 
 
 <script type="text/javascript">
-      window.WukumUrl = {};
+      window.WukumUrl = WukumUrl || {};
       window.WukumUrl.data = JSON.parse(<%= @urls.to_json.html_safe %>);
 </script>
