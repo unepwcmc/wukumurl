@@ -142,9 +142,9 @@ WukumUrl.Charters.barChart = ->
 
     # Scale ranges need to be called here and not outside of the chart 
     # function, because they need to be updated on every new selection.
-    # !! padding does not seem to take effect!
-    # X0 refees to the outer group.
-    x0Scale.rangeRoundBands([0, _innerWidth()], .05) # args: [min, max], padding
+    # !! Why using ouerWidth() ??
+    # X0 refers to the outer group.
+    x0Scale.rangeRoundBands([0, _outerWidth()], .2) # args: [min, max], padding
     yScale.range([_innerHeight(), 0])
 
     # On the first `each` we are in the outside group.
@@ -159,21 +159,25 @@ WukumUrl.Charters.barChart = ->
       svg.attr("width", _outerWidth()).attr("height", _outerHeight())
       # Append a g element exclusively for the bars.
       chart_container = svg.append("g")
-        .attr("width", _innerWidth()).attr("height", _innerHeight())
+        # And lets translate it right (in order to leave space for the axis).
+        #.attr("transform", (d) -> "translate(" + margin.left + ",0)")
 
+      # Select all the chart groups, if existent.
       chart_group = chart_container.selectAll("g.chart_group").data(data)
+      # Otherwise, create the skeletal chart groups.
       chart_group.enter()
         .append("g")
         .attr("class", "chart_group")
         .attr("transform", (d) -> 
           console.log _innerWidth(), x0Scale(d.name)
           "translate(" + x0Scale(d.name) + ",0)")
-        .attr("width", (d) -> x0Scale(d.name) )
+        #.attr("width", (d) -> x0Scale(d.name) )
 
-      values = data.values
-      chart_group.each (data, i) ->
-        x1Scale.rangeRoundBands([0, _innerWidth() / data.values.length], .1)
-        x1Scale.domain data.values.map (d) -> d.name
+      # iterating over every chart group, in order to draw the single bars.
+      chart_group.each (inner_data, i) ->
+        # X1 refers to the inner group.
+        x1Scale.rangeRoundBands([0, _innerWidth() / data.length], .1)
+        x1Scale.domain inner_data.values.map (d) -> d.name
         bar = d3.select(@).selectAll('.bar')
           .data (d) -> d.values
         bar.enter()
@@ -193,32 +197,10 @@ WukumUrl.Charters.barChart = ->
             #console.log 'sssssssssss', d
             _innerHeight() - yScale(d.val)
 
-
-
       chart_group.exit().remove()  
-        #.each (data, i) ->
-        #  console.log @, data, i
-        #  g = d3.select(@).attr "class", "chart_group"
-
-      ## Otherwise, create the skeletal chart.
-      #gEnter = _createSkeletalChart svg
-      #
-      ## Update the outer dimensions.
-      #svg.attr("width", _outerWidth()).attr("height", _outerHeight)
-      #
-      ## Update the inner dimensions.
-      #g = _updateInnerDimensions svg.select("g")
-      #
-      ## Update the barchart.
-      #gBar = _updateBarchart g.select(".barchart")
-      #
-      ## Update the x-axis.
-      #gX = _updateXAxis g.select(".x.axis")
-      #  
-      ## Update the y-axis.
-      #gY = _updateYAxis g.select(".y.axis")
-
+        
          
+
   # IMPORTANT: when customizing the chart, margin MUST be called before
   # height, because height depends on the margin being set.
   chart.margin = (_) ->
