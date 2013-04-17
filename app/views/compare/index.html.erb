@@ -8,10 +8,6 @@
 
 
 <script type="text/javascript">
-  $(document).ready(
-    function() {
       window.WukumUrl = {};
       window.WukumUrl.data = JSON.parse(<%= @urls.to_json.html_safe %>);
-      console.log(WukumUrl.data);
-  });
 </script>
