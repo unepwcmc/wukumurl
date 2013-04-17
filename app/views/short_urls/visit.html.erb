@@ -38,43 +38,4 @@
 <footer>
 </footer>
 
-<script type="text/javascript">
-  $(document).ready(
-    function() {
-      var ids = [];
-      var link = $("a.compare_urls");
-      function updateUrl (ids) {
-        var url = "/compare/";
-        _.each(ids, function(id) {url += id + '/'});
-        return url;
-      }
-      function setUrlVisibility (ids) {
-        if (ids.length > 0) {
-          link.show();
-        } else {
-          link.hide();
-        }
-      }
-      $('input:checkbox.compare_urls').on("click", function(evt) {
-
-        $('input:checkbox.compare_urls:checked').each(function() {
-          var val = $(this).val();
-          updated_ids = [];
-          // if ids.length == 0 this will not run...
-          _.each(ids, function(id, i) {
-            if (val !== id) {
-              updated_ids.push(val);
-            }
-          });
-          ids = updated_ids;
-          if (ids.length === 0) {
-            ids.push(val);
-          }
-        });
-        link.attr( "href", updateUrl(ids) );
-        console.log(ids);
-        setUrlVisibility(ids);
-      });
-  });
-</script>
 
