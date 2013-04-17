@@ -18,7 +18,7 @@ window.WukumUrl.Charters ||= {}
   # Select the parent element where to render the chart
   selection = d3.select("#chart")
   # Attach to the selection the data
-  data = [{"id":"a43d","val":"3.83"},{"id":"4e9a","val":"2.67"}] 
+  data = [...] 
   selection.data([data])
   # Render the chart!
   selection.call barchart
@@ -61,7 +61,7 @@ window.WukumUrl.Charters ||= {}
 WukumUrl.Charters.barChart = ->
 
   margin =
-   top: 10
+   top: 20
    right: 20
    bottom: 20
    left: 30
@@ -73,12 +73,10 @@ WukumUrl.Charters.barChart = ->
   yScale = d3.scale.linear()
   xAxis = d3.svg.axis().scale(x0Scale).orient("bottom")
   yAxis = d3.svg.axis().scale(yScale).orient("left").tickFormat(format)
-  #colours = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]
-
+  # TODO: handle colours better.
   color = d3.scale.linear()
-    .domain([0, 1])
-    .range(["#060F00", "#E3F5D7"]);
-
+    .range(["#15534C", "#E2E062"])
+  
 
   _outerWidth = ->
     width + margin.left + margin.right
@@ -91,53 +89,6 @@ WukumUrl.Charters.barChart = ->
 
   _innerHeight = ->
     height - margin.left - margin.right
-
-  _createSkeletalChart = (svg) ->
-    gEnter = svg.enter().append("svg").append("g")
-    gEnter.append("g").attr "class", "barchart"
-    gEnter.append("g").attr "class", "x axis"
-    gEnter.append("g").attr "class", "y axis"
-    gEnter
-
-  _updateXAxis = (selection) ->
-    selection.attr("transform", "translate(0," + _innerHeight() + ")")
-      .call xAxis
-
-  _updateYAxis = (selection) ->
-    selection.call(yAxis)
-      #.append("text")
-      #.attr("transform", "rotate(-90)").attr("y", 12)
-      #.attr("dy", ".71em").style("text-anchor", "end")
-      #.text "Ratio"
-
-  # Translates the chart g container to leave space to the axis.
-  # Note: the axis dimensions are being added to the outer_width, they are
-  # not contained within, that is why we need to move the g container. 
-  _updateInnerDimensions = (selection) ->
-    selection
-      # translate(x, y) -> move right x pixels, move down y pixels.
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-
-  # For understanding enter-exit:
-  # http://mbostock.github.io/d3/tutorial/circle.html
-  _updateBarchart = (selection) ->
-    selection.each (d, i) ->
-      bar = d3.select(@).selectAll(".bar").data(d)
-      bar.enter()
-        .append("rect")
-        .attr("class", "bar")
-        .attr("x", (d) -> x0Scale d.id)
-        .attr("width", 0)
-        .attr("y", (d) -> _innerHeight() )
-        .attr "height", (d) -> 0
-      bar.exit().remove()
-      bar.transition()
-        .duration(500)
-        .attr("x", (d) -> x0Scale d.id)
-        .attr("width", x0Scale.rangeBand())
-        .attr("y", (d) -> yScale(d.val) )
-        .attr "height", (d) -> _innerHeight() - yScale(d.val)
-    selection
 
 
   ###
@@ -153,20 +104,34 @@ WukumUrl.Charters.barChart = ->
     x0Scale.rangeRoundBands([0, _outerWidth()], .2) # args: [min, max], padding
     yScale.range([_innerHeight(), 0])
 
-    # On the first `each` we are in the outside group.
+    # This is the first outer selection.
+    # Usually the 'selection` length will be equal to one.
     selection.each (data, i) ->
 
       # Data input domains
       x0Scale.domain data.map (d) -> d.name
       yScale.domain [ 0, d3.max data, (d) -> d.max ]
+      color.domain([0, data[0].values.length])
   
       svg = d3.select(this)
       # Set the outer dimensions.
       svg.attr("width", _outerWidth()).attr("height", _outerHeight())
-      # Append a g element exclusively for the bars.
+
       chart_container = svg.append("g")
-        # And lets translate it right (in order to leave space for the axis).
-        #.attr("transform", (d) -> "translate(" + margin.left + ",0)")
+        .attr("transform", "translate(0," + margin.top + ")")
+
+      # TODO! Need to solve entry-exit data points.
+      # Append the x axis
+      chart_container.append("g")
+        .attr("class", "x axis")
+        .attr("transform", 
+          "translate(0," + (_innerHeight() + margin.bottom) + ")")
+        .call(xAxis);
+      # Append the y axis
+      chart_container.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+        .attr("transform", (d) -> "translate(" + margin.left + ",0)")
 
       # Select all the chart groups, if existent.
       chart_group = chart_container.selectAll("g.chart_group").data(data)
@@ -194,22 +159,18 @@ WukumUrl.Charters.barChart = ->
           .attr("y", (d) -> _innerHeight() )
           .attr("height", (d) -> 0)
           .style "fill", (d, i) -> 
-            console.log (i+1)/inner_data.values.length
-            color( (i+1)/inner_data.values.length ) 
+            color(i+1)
         bar.exit().remove()
         bar.transition()
           .duration(500)
           .attr("x", (d) -> x1Scale d.name)
           .attr("width", x1Scale.rangeBand())
           .attr("y", (d) -> yScale(d.val) )
-          .attr "height", (d) -> 
-            #console.log 'sssssssssss', d
-            _innerHeight() - yScale(d.val)
+          .attr "height", (d) -> _innerHeight() - yScale(d.val)
 
       chart_group.exit().remove()  
         
          
-
   # IMPORTANT: when customizing the chart, margin MUST be called before
   # height, because height depends on the margin being set.
   chart.margin = (_) ->
