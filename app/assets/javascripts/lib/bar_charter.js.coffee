@@ -1,6 +1,6 @@
 window.WukumUrl ||= {}
 window.WukumUrl.Charters ||= {}
-window.WukumUrl.Charters.barChart ||= {}
+#window.WukumUrl.Charters.barChart ||= {}
 
 
 ###
@@ -25,9 +25,38 @@ window.WukumUrl.Charters.barChart ||= {}
  
  About the data:
   It expects a data structure in the form:
-  [ [{id:, val:}, {id:, val:}], ...]
- This is a nested array. The outer array is a list of chart groups.
- Note: chart groups with length > 1 have not yet been tested.
+  [
+    [
+      {
+        "max":88,
+        "values":[
+          {
+            "name":"entry count",
+            "val":88
+          },
+          {
+            "name":"exit count",
+            "val":23
+          }
+        ],
+        "name":"a43d"
+      },
+      {
+        "max":16,
+        "values":[
+          {
+            "name":"entry count",
+            "val":16
+          },
+          {
+            "name":"exit count",
+            "val":6
+          }
+        ],
+        "name":"4e9a"
+      }
+    ]
+  ]
 ###
 WukumUrl.Charters.barChart = ->
 
@@ -113,9 +142,12 @@ WukumUrl.Charters.barChart = ->
 
     # Scale ranges need to be called here and not outside of the chart 
     # function, because they need to be updated on every new selection.
-    x0Scale.rangeRoundBands([0, _innerWidth()], .2) # args: [min, max], padding
+    # !! padding does not seem to take effect!
+    # X0 refees to the outer group.
+    x0Scale.rangeRoundBands([0, _innerWidth()], .05) # args: [min, max], padding
     yScale.range([_innerHeight(), 0])
 
+    # On the first `each` we are in the outside group.
     selection.each (data, i) ->
 
       # Data input domains
@@ -123,15 +155,19 @@ WukumUrl.Charters.barChart = ->
       yScale.domain [ 0, d3.max data, (d) -> d.max ]
   
       svg = d3.select(this)
-      # Update the outer dimensions.
+      # Set the outer dimensions.
       svg.attr("width", _outerWidth()).attr("height", _outerHeight())
+      # Append a g element exclusively for the bars.
+      chart_container = svg.append("g")
+        .attr("width", _innerWidth()).attr("height", _innerHeight())
 
-      chart_group = svg.selectAll("g.chart_group").data(data)
+      chart_group = chart_container.selectAll("g.chart_group").data(data)
       chart_group.enter()
         .append("g")
         .attr("class", "chart_group")
-        #.attr("x", (d) -> x0Scale d.name)
-        .attr("transform", (d) -> "translate(" + x0Scale(d.name) + ",0)")
+        .attr("transform", (d) -> 
+          console.log _innerWidth(), x0Scale(d.name)
+          "translate(" + x0Scale(d.name) + ",0)")
         .attr("width", (d) -> x0Scale(d.name) )
 
       values = data.values
@@ -154,7 +190,7 @@ WukumUrl.Charters.barChart = ->
           .attr("width", x1Scale.rangeBand())
           .attr("y", (d) -> yScale(d.val) )
           .attr "height", (d) -> 
-            console.log 'sssssssssss', d
+            #console.log 'sssssssssss', d
             _innerHeight() - yScale(d.val)
 
 

@@ -56,6 +56,7 @@ $(($)->
     
   ids = []
   link = $("a.compare_urls")
+  # Resetting all .compare_urls checkboxes first.
   $('input:checkbox.compare_urls').removeAttr('checked')
 
   $("input:checkbox.compare_urls").on "click", (evt) ->
