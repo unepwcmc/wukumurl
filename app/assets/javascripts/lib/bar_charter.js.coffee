@@ -95,6 +95,7 @@ WukumUrl.Charters.barChart = ->
    Public Interface
   ###
 
+  #TODO: this big chart function needs some careful refactoring.
   chart = (selection) ->
 
     # Scale ranges need to be called here and not outside of the chart 
@@ -112,37 +113,41 @@ WukumUrl.Charters.barChart = ->
       x0Scale.domain data.map (d) -> d.name
       yScale.domain [ 0, d3.max data, (d) -> d.max ]
       color.domain([0, data[0].values.length])
-  
-      svg = d3.select(this)
+
+      # Select the svg element, if it exists.
+      svg = d3.select(this).selectAll("svg").data([data])
+
+      # Otherwise, create the skeletal chart.
+      gEnter = svg.enter().append("svg").append("g")
+      gEnter.append("g").attr "class", "barchart"
+      gEnter.append("g").attr "class", "x axis"
+      gEnter.append("g").attr "class", "y axis"
+
       # Set the outer dimensions.
       svg.attr("width", _outerWidth()).attr("height", _outerHeight())
 
-      chart_container = svg.append("g")
-        .attr("transform", "translate(0," + margin.top + ")")
+      # translate(x, y) -> move right x pixels, move down y pixels.
+      g = svg.select("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-      # TODO! Need to solve entry-exit data points.
-      # Append the x axis
-      chart_container.append("g")
-        .attr("class", "x axis")
+      # Update the x-axis.
+      g.select(".x.axis")
         .attr("transform", 
           "translate(0," + (_innerHeight() + margin.bottom) + ")")
-        .call(xAxis);
-      # Append the y axis
-      chart_container.append("g")
-        .attr("class", "y axis")
+        .call(xAxis)
+
+      # Update the y-axis.
+      g.select(".y.axis")
         .call(yAxis)
         .attr("transform", (d) -> "translate(" + margin.left + ",0)")
 
       # Select all the chart groups, if existent.
-      chart_group = chart_container.selectAll("g.chart_group").data(data)
+      chart_group = g.selectAll("g.chart_group").data(data)
       # Otherwise, create the skeletal chart groups.
       chart_group.enter()
         .append("g")
         .attr("class", "chart_group")
-        .attr("transform", (d) -> 
-          console.log _innerWidth(), x0Scale(d.name)
-          "translate(" + x0Scale(d.name) + ",0)")
-        #.attr("width", (d) -> x0Scale(d.name) )
+        .attr("transform", (d) -> "translate(" + x0Scale(d.name) + ",0)")
 
       # iterating over every chart group, in order to draw the single bars.
       chart_group.each (inner_data, i) ->
@@ -170,7 +175,7 @@ WukumUrl.Charters.barChart = ->
 
       chart_group.exit().remove()  
         
-         
+                 
   # IMPORTANT: when customizing the chart, margin MUST be called before
   # height, because height depends on the margin being set.
   chart.margin = (_) ->
