@@ -7,6 +7,8 @@
 //  height: 600;
 //}
 
+$highlighted_colour: #A98339;
+
 .axis path,
 .axis line {
   fill: none;
@@ -33,13 +35,37 @@ g.legend text.selected {
 }
 
 rect.selected {
-  stroke: #BF5408;
+  stroke: $highlighted_colour;
   stroke-width: 3;
   shape-rendering: crispEdges;
 }
 
-span.results {
-  font-size: 2em;
+
+//span {
+//
+//  font-size: 1.6em;
+//
+//  .results_title {
+//    color: #9C9C9C;
+//  }
+//
+//  .results {
+//    color: $highlighted_colour;
+//  }
+//
+//}
+
+#results_one {
+  margin-bottom: 2em;
+}
+
+span.results_title {
   color: #9C9C9C;
+  font-size: 1.6em;
+}
+
+span.results {
+  color: $highlighted_colour;
+  font-size: 1.6em;
 }
 

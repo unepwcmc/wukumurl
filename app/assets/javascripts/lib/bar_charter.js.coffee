@@ -77,7 +77,8 @@ WukumUrl.Charters.barChart = ->
   color = d3.scale.linear()
     .range(["#15534C", "#E2E062"])
 
-  dispatch = d3.dispatch "in", "out"
+  # Making this global for now, in order to easily use it outside, but... FIXME!
+  window.dispatch = d3.dispatch "in", "out"
   
 
   _outerWidth = ->
@@ -162,8 +163,8 @@ WukumUrl.Charters.barChart = ->
 
   dispatch.on "in.legend", updateLegend
   dispatch.on "in.bar", updateBars
-  dispatch.on "in.result", updateResults
-  dispatch.on "out.result", updateResults
+  #dispatch.on "in.result", updateResults
+  #dispatch.on "out.result", updateResults
   dispatch.on "out.legend", updateLegend
   dispatch.on "out.bar", updateBars
 
