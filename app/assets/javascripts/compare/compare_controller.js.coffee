@@ -66,7 +66,7 @@ $ ($) ->
   barchart.width 500
   barchart.height 600
   # Draw the chart:
-  selection = d3.select("#chart_one").append "svg"
+  selection = d3.select("#chart_one")#.append "svg"
   selection.data [buildCounts(WukumUrl.data)]
   selection.call barchart
 
