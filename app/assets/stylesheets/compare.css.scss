@@ -2,10 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.chart {
-  width: 700;
-  height: 600;
-}
+//.chart {
+//  width: 700;
+//  height: 600;
+//}
 
 .axis path,
 .axis line {
@@ -18,6 +18,28 @@
   display: none;
 }
 
-section.chart{
+section.chart {
   margin: 130px 0 0 0;
 }
+
+g.legend text {
+  fill: #9C9C9C;
+  shape-rendering: crispEdges;
+}
+
+g.legend text.selected {
+  fill: #BF5408;
+  font-weight: bold;
+}
+
+rect.selected {
+  stroke: #BF5408;
+  stroke-width: 3;
+  shape-rendering: crispEdges;
+}
+
+span.results {
+  font-size: 2em;
+  color: #9C9C9C;
+}
+
