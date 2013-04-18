@@ -101,7 +101,7 @@ WukumUrl.Charters.barChart = ->
       .attr("transform", 
         "translate(" + (margin.left + margin.right) + "," + margin.top + ")")
     legend = outer_legend.selectAll("g.legend")
-        .data(data.slice().reverse())
+        .data(data.slice())
       .enter().append("g")
         .attr("class", "legend")
         .attr("transform", (d, i) -> "translate(0," + i * 20 + ")")
