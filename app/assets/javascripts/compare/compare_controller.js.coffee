@@ -57,20 +57,15 @@ $ ($) ->
       #month.max = if month.max < m_count then m_count
     [total, month]
 
-
-  #console.log '@', buildCounts(WukumUrl.data)
-
   # Returns the chart function:
   barchart = WukumUrl.Charters.barChart()
   # Customize the chart:
   barchart.width 500
   barchart.height 600
   # Draw the chart:
-  selection = d3.select("#chart_one")#.append "svg"
+  selection = d3.select("#chart_one")
   selection.data [buildCounts(WukumUrl.data)]
   selection.call barchart
-
-  #console.log JSON.stringify WukumUrl.data
 
 
 
