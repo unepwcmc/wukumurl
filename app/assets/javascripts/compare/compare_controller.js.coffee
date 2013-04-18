@@ -51,10 +51,8 @@ $ ($) ->
     _.each data, (d, i) ->
       t_count = d.visit_count
       total.values.push {name: d.short_name, val: t_count}
-      #total.max = if total.max < t_count then t_count
       m_count = d.visits_this_month.length
       month.values.push {name: d.short_name, val: m_count}
-      #month.max = if month.max < m_count then m_count
     [total, month]
 
   # Returns the chart function:
@@ -66,6 +64,8 @@ $ ($) ->
   selection = d3.select("#chart_one")
   selection.data [buildCounts(WukumUrl.data)]
   selection.call barchart
+
+  #console.log [buildCounts(WukumUrl.data)]
 
 
 

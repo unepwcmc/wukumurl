@@ -62,7 +62,7 @@ WukumUrl.Charters.barChart = ->
 
   margin =
    top: 20
-   right: 20
+   right: 120
    bottom: 20
    left: 30
   width = 560
@@ -76,6 +76,8 @@ WukumUrl.Charters.barChart = ->
   # TODO: handle colours better.
   color = d3.scale.linear()
     .range(["#15534C", "#E2E062"])
+
+  dispatch = d3.dispatch "in", "out"
   
 
   _outerWidth = ->
@@ -90,6 +92,81 @@ WukumUrl.Charters.barChart = ->
   _innerHeight = ->
     height - margin.left - margin.right
 
+  # TODO: need to hook in the exits!
+  _drawLegend = (selection, data) ->
+    outer_legend = selection.selectAll("g.outer_legend")
+      .data([data])
+    .enter().append("g")
+      .attr("class", "outer_legend")
+      .attr("transform", 
+        "translate(" + (margin.left + margin.right) + "," + margin.top + ")")
+    legend = outer_legend.selectAll("g.legend")
+        .data(data.slice().reverse())
+      .enter().append("g")
+        .attr("class", "legend")
+        .attr("transform", (d, i) -> "translate(0," + i * 20 + ")")
+    legend.append("rect")
+        .attr("x", width - 18)
+        .attr("width", 18)
+        .attr("height", 18)
+        .style("fill", (d, i) -> color(i+1) )
+    legend.append("text")
+        .attr("x", width - 24)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "end")
+        .text((d) -> d)
+        # Used for future selection and interaction:
+        .attr("id", (d) -> "l_#{d}" )
+
+
+  ###
+    User interactions section
+    See: https://github.com/mbostock/d3/wiki/Internals#wiki-d3_dispatch
+  ###
+
+  # Highlights the selected item in the legend
+  updateLegend = (evt, entering) ->
+    item = d3.select("#l_#{evt.name}")
+    if entering
+      item.attr("class", "selected")
+    else
+      item.attr("class", "")
+
+  # Highlights the selected bars
+  updateBars = (evt, entering) ->
+    items = d3.selectAll(".b_#{evt.name}")
+    original_class_values = items.attr("class").replace /selected/, ""
+    if entering
+      items.attr("class", "#{original_class_values} selected")
+    else
+      items.attr("class", original_class_values)
+
+  # TODO: this should be passed and setup from configuration
+  # TODO: show results from all bars! (use d3.select ?)
+  # Note: it uses jQuery and laconic.js -- we are outside the svg!
+  updateResults = (evt, entering) ->
+    root = $("#results_one")
+    if entering
+      el = $.el.span {'class' : 'results'}, 
+        "Value: #{evt.val}"
+    else
+      el = ""
+    root.html el
+
+  onBarIn = (evt) ->
+    dispatch.in(evt, yes)
+
+  onBarOut = (evt) ->
+    dispatch.out(evt)
+
+  dispatch.on "in.legend", updateLegend
+  dispatch.on "in.bar", updateBars
+  dispatch.on "in.result", updateResults
+  dispatch.on "out.result", updateResults
+  dispatch.on "out.legend", updateLegend
+  dispatch.on "out.bar", updateBars
+
 
   ###
    Public Interface
@@ -102,12 +179,14 @@ WukumUrl.Charters.barChart = ->
     # function, because they need to be updated on every new selection.
     # !! Why using ouerWidth() ??
     # X0 refers to the outer group.
-    x0Scale.rangeRoundBands([0, _outerWidth()], .2) # args: [min, max], padding
+    x0Scale.rangeRoundBands([0, _outerWidth() - margin.right], .2) # args: [min, max], padding
     yScale.range([_innerHeight(), 0])
 
     # This is the first outer selection.
     # Usually the 'selection` length will be equal to one.
     selection.each (data, i) ->
+
+      bar_names = _.map data[0].values, (d) -> d.name
 
       # Data input domains
       x0Scale.domain data.map (d) -> d.name
@@ -119,12 +198,12 @@ WukumUrl.Charters.barChart = ->
 
       # Otherwise, create the skeletal chart.
       gEnter = svg.enter().append("svg").append("g")
-      gEnter.append("g").attr "class", "barchart"
+      #gEnter.append("g").attr "class", "chart_group"
       gEnter.append("g").attr "class", "x axis"
       gEnter.append("g").attr "class", "y axis"
 
       # Set the outer dimensions.
-      svg.attr("width", _outerWidth()).attr("height", _outerHeight())
+      svg.attr("width", _outerWidth()).attr("height", height)
 
       # translate(x, y) -> move right x pixels, move down y pixels.
       g = svg.select("g")
@@ -158,7 +237,7 @@ WukumUrl.Charters.barChart = ->
           .data (d) -> d.values
         bar.enter()
           .append("rect")
-          .attr("class", "bar")
+          .attr("class", (d) -> "bar b_#{d.name}")
           .attr("x", (d) -> x1Scale d.name)
           .attr("width", 0)
           .attr("y", (d) -> _innerHeight() )
@@ -172,10 +251,17 @@ WukumUrl.Charters.barChart = ->
           .attr("width", x1Scale.rangeBand())
           .attr("y", (d) -> yScale(d.val) )
           .attr "height", (d) -> _innerHeight() - yScale(d.val)
+        bar.on "mouseover", onBarIn
+        bar.on "mouseout", onBarOut
 
-      chart_group.exit().remove()  
+      chart_group.exit().remove()
+
+      _drawLegend svg, bar_names
+
+      
+
         
-                 
+
   # IMPORTANT: when customizing the chart, margin MUST be called before
   # height, because height depends on the margin being set.
   chart.margin = (_) ->
