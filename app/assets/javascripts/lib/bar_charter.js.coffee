@@ -144,18 +144,6 @@ WukumUrl.Charters.barChart = ->
     else
       items.attr("class", original_class_values)
 
-  # TODO: this should be passed and setup from configuration
-  # TODO: show results from all bars! (use d3.select ?)
-  # Note: it uses jQuery and laconic.js -- we are outside the svg!
-  updateResults = (evt, entering) ->
-    root = $("#results_one")
-    if entering
-      el = $.el.span {'class' : 'results'}, 
-        "Value: #{evt.val}"
-    else
-      el = ""
-    root.html el
-
   onBarIn = (evt) ->
     dispatch.in(evt, yes)
 
