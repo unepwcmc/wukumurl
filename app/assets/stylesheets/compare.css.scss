@@ -9,6 +9,7 @@
 
 $highlighted_colour: #A98339;
 $orange: #f38417;
+$grey: #9C9C9C;
 
 .axis path,
 .axis line {
@@ -22,7 +23,7 @@ $orange: #f38417;
 }
 
 text {
-  fill: #9C9C9C;
+  fill: $grey;
 }
 
 section.chart {
@@ -30,13 +31,13 @@ section.chart {
 }
 
 g.legend text {
-  fill: #9C9C9C;
+  fill: $grey;
   shape-rendering: crispEdges;
   font-family: 'Raleway', sans-serif;
 }
 
 g.legend text.selected {
-  fill: #BF5408;
+  fill: $orange;
   font-weight: bold;
 }
 
@@ -70,7 +71,7 @@ rect.selected {
 }
 
 span.results_title {
-  color: #9C9C9C;
+  color: $grey;
   font-size: 1.6em;
 }
 
