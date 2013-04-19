@@ -40,7 +40,9 @@ $ ($) ->
 
 
   shorten = (str) ->
-    str.substring(0, 45) + "..."
+    if str.length > 44
+      return str.substring(0, 45) + "..."
+    str
 
   # TODO: need to refactor and generalize this function,
   # its logic should only depend on the arguments passed in.

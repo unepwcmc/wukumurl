@@ -8,16 +8,21 @@
 //}
 
 $highlighted_colour: #A98339;
+$orange: #f38417;
 
 .axis path,
 .axis line {
   fill: none;
-  stroke: #000;
+  stroke: #9C9C9C;
   shape-rendering: crispEdges;
 }
 
 .x.axis path {
   display: none;
+}
+
+text {
+  fill: #9C9C9C;
 }
 
 section.chart {
@@ -27,6 +32,7 @@ section.chart {
 g.legend text {
   fill: #9C9C9C;
   shape-rendering: crispEdges;
+  font-family: 'Raleway', sans-serif;
 }
 
 g.legend text.selected {
@@ -35,7 +41,7 @@ g.legend text.selected {
 }
 
 rect.selected {
-  stroke: $highlighted_colour;
+  stroke: $orange;
   stroke-width: 3;
   shape-rendering: crispEdges;
 }
@@ -59,9 +65,9 @@ rect.selected {
   margin-bottom: 2em;
 }
 
-//#results_one_url {
-//  height: 6em;
-//}
+#results_one span {
+  font-family: 'Raleway', sans-serif;
+}
 
 span.results_title {
   color: #9C9C9C;
@@ -69,12 +75,12 @@ span.results_title {
 }
 
 span.results {
-  color: $highlighted_colour;
+  color: $orange;
   font-size: 1.6em;
 }
 
 span.url {
-  color: $highlighted_colour;
+  color: $orange;
   font-size: 1.3em;
 }
 
