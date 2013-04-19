@@ -21,7 +21,7 @@ $highlighted_colour: #A98339;
 }
 
 section.chart {
-  margin: 130px 0 0 0;
+  margin: 150px 0 0 0;
 }
 
 g.legend text {
@@ -59,6 +59,10 @@ rect.selected {
   margin-bottom: 2em;
 }
 
+//#results_one_url {
+//  height: 6em;
+//}
+
 span.results_title {
   color: #9C9C9C;
   font-size: 1.6em;
@@ -67,5 +71,23 @@ span.results_title {
 span.results {
   color: $highlighted_colour;
   font-size: 1.6em;
+}
+
+span.url {
+  color: $highlighted_colour;
+  font-size: 1.3em;
+}
+
+
+#compare_title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 100;
+  color: #fff;
+  font-size: 4.3em;
+  width: 600px;
+  margin: 100px auto;
+  webkit-text-shadow: 0px 2px 1px rgba(96, 138, 48, 1);
+  text-shadow: 0px 2px 1px rgba(96, 138, 48, 1);
+  text-align: center;
 }
 

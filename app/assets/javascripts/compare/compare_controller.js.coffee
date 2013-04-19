@@ -39,6 +39,9 @@ $ ($) ->
   ###
 
 
+  shorten = (str) ->
+    str.substring(0, 45) + "..."
+
   # TODO: need to refactor and generalize this function,
   # its logic should only depend on the arguments passed in.
   updateResults = (data, evt, entering) ->
@@ -48,7 +51,7 @@ $ ($) ->
     total_count_el = $("#results_one_tot_res span.results")
     month_count_el = $("#results_one_mon_res span.results")
     if entering
-      url_el.html "wcmc.io/#{evt.name}"
+      url_el.html shorten(evt.url)
       total_count_el.html (_.find d[0].values, (el, idx) -> el.name == n).val
       month_count_el.html (_.find d[1].values, (el, idx) -> el.name == n).val
     else
@@ -60,26 +63,26 @@ $ ($) ->
     total = 
       max: _.max(data, (d, i) -> d.visit_count)
         .visit_count
-      name: "Total counts"
+      name: "Total clicks"
       values: []
     month = 
       max: _.max(data, (d, i) -> d.visits_this_month.length)
         .visits_this_month.length
-      name: "This month counts"
+      name: "This month clicks"
       values: []
     _.each data, (d, i) ->
       t_count = d.visit_count
-      total.values.push {name: d.short_name, val: t_count}
+      total.values.push {name: d.short_name, val: t_count, url: d.url}
       m_count = d.visits_this_month.length
-      month.values.push {name: d.short_name, val: m_count}
+      month.values.push {name: d.short_name, val: m_count, url: d.url}
     [total, month]
 
   chart_data = buildCounts(WukumUrl.data)
   # Returns the chart function:
   barchart = WukumUrl.Charters.barChart()
   # Customize the chart:
-  barchart.width 500
-  barchart.height 600
+  barchart.width 400
+  barchart.height 500
   # Draw the chart:
   selection = d3.select("#chart_one")
   selection.data [chart_data]
@@ -88,6 +91,7 @@ $ ($) ->
   updateResultsPartial = _.partial updateResults, chart_data
   dispatch.on "in.result", updateResultsPartial
   dispatch.on "out.result", updateResultsPartial
+
 
 
 
