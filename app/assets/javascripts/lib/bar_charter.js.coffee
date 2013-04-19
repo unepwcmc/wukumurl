@@ -1,7 +1,5 @@
 window.WukumUrl ||= {}
 window.WukumUrl.Charters ||= {}
-#window.WukumUrl.Charters.barChart ||= {}
-
 
 ###
  Easy to use barchart generator.
@@ -15,11 +13,12 @@ window.WukumUrl.Charters ||= {}
   # Customize the chart:
   chart.width 500
   chart.height 600
+  chart.events ["onHover"]
   # Select the parent element where to render the chart
   selection = d3.select("#chart")
   # Attach to the selection the data
   data = [...] 
-  selection.data([data])
+  selection.data [data]
   # Render the chart!
   selection.call barchart
  
@@ -28,32 +27,36 @@ window.WukumUrl.Charters ||= {}
   [
     [
       {
+        "name":"a43d",
         "max":88,
         "values":[
           {
             "name":"entry count",
-            "val":88
+            "val":88,
+            ...
           },
           {
             "name":"exit count",
-            "val":23
+            "val":23,
+            ...
           }
-        ],
-        "name":"a43d"
+        ]
       },
-      {
+      {  
+        "name":"4e9a",
         "max":16,
         "values":[
           {
             "name":"entry count",
-            "val":16
+            "val":16,
+            ...
           },
           {
             "name":"exit count",
-            "val":6
+            "val":6,
+            ...
           }
-        ],
-        "name":"4e9a"
+        ]
       }
     ]
   ]
@@ -79,9 +82,6 @@ WukumUrl.Charters.barChart = ->
   #color = d3.scale.category10()
   events = ["onClick"]
 
-  # Making this global for now, in order to easily use it outside, but... FIXME!
-  window.
-  
 
   _outerWidth = ->
     width + margin.left + margin.right
@@ -121,7 +121,7 @@ WukumUrl.Charters.barChart = ->
         .text((d) -> d)
         # Used for future selection and interaction:
         .attr("id", (d) -> "l_#{d}" )
-
+    # Custom events:
     if _.find(events, (evt) -> evt == "onHover") == "onHover"
       dispatch = WukumUrl.Charters.barChart.dispatch
       txt.on "mouseover", (d, i) -> dispatch.onHover.apply this, [d, i, yes]
@@ -136,14 +136,13 @@ WukumUrl.Charters.barChart = ->
   # Highlights the selected item in the legend
   updateLegend = (d, i, entering) ->
     name = d?.name || d
-    console.log name
     item = d3.select("#l_#{name}")
     if entering
       item.attr("class", "selected")
     else
       item.attr("class", "")
 
-  # Highlights the selected bars
+  # Highlights the selected bar(s)
   updateBars = (d, i, entering) ->
     name = d.name || d
     items = d3.selectAll(".b_#{name}")
@@ -152,14 +151,6 @@ WukumUrl.Charters.barChart = ->
       items.attr("class", "#{original_class_values} selected")
     else
       items.attr("class", original_class_values)
-
-  onBarIn = (evt) ->
-    dispatch.in(evt, yes)
-
-  onBarOut = (evt) ->
-    dispatch.out(evt)
-
-
 
 
   ###
@@ -175,7 +166,6 @@ WukumUrl.Charters.barChart = ->
     _.each events, (evt) ->
       dispatch.on "#{evt}.legend", updateLegend
       dispatch.on "#{evt}.onHover.bar", updateBars
-
 
     # Scale ranges need to be called here and not outside of the chart 
     # function, because they need to be updated on every new selection.
