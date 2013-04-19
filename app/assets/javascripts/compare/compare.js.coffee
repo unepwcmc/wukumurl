@@ -46,14 +46,17 @@ $ ($) ->
 
   # TODO: need to refactor and generalize this function,
   # its logic should only depend on the arguments passed in.
-  updateResults = (data, evt, entering) ->
-    n = evt.name
+  updateResults = (data, d, i, entering) ->
+    # Sniffing the name, because the function is called from different 
+    # events with different d meanings.
+    n = d?.name || d
     d = data
     url_el = $("#results_one_url span.results")
     total_count_el = $("#results_one_tot_res span.results")
     month_count_el = $("#results_one_mon_res span.results")
     if entering
-      url_el.html shorten(evt.url)
+      full_url = _.find(d[0].values, (el, idx) -> el.name == n).url
+      url_el.html shorten(full_url)
       total_count_el.html (_.find d[0].values, (el, idx) -> el.name == n).val
       month_count_el.html (_.find d[1].values, (el, idx) -> el.name == n).val
     else
@@ -85,14 +88,15 @@ $ ($) ->
   # Customize the chart:
   barchart.width 400
   barchart.height 500
+  barchart.events ["onHover"]
   # Draw the chart:
   selection = d3.select("#chart_one")
   selection.data [chart_data]
   selection.call barchart
 
   updateResultsPartial = _.partial updateResults, chart_data
-  dispatch.on "in.result", updateResultsPartial
-  dispatch.on "out.result", updateResultsPartial
+  dispatch = WukumUrl.Charters.barChart.dispatch
+  dispatch.on "onHover.result", updateResultsPartial
 
 
 
