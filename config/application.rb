@@ -59,10 +59,6 @@ module Wukumurl
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.serve_static_pages = true
-
-    config.assets.precompile += ['compare.js.coffee', 'short_url.js.coffee' ]
-
     config.middleware.use Rack::Cors do
       allow do
         origins '*'
