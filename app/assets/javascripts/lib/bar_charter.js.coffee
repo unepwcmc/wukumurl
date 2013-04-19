@@ -76,6 +76,7 @@ WukumUrl.Charters.barChart = ->
   # TODO: handle colours better.
   color = d3.scale.linear()
     .range(["#15534C", "#E2E062"])
+  #color = d3.scale.category10()
 
   # Making this global for now, in order to easily use it outside, but... FIXME!
   window.dispatch = d3.dispatch "in", "out"
@@ -258,10 +259,7 @@ WukumUrl.Charters.barChart = ->
       chart_group.exit().remove()
 
       _drawLegend svg, bar_names
-
-      
-
-        
+ 
 
   # IMPORTANT: when customizing the chart, margin MUST be called before
   # height, because height depends on the margin being set.

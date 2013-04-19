@@ -5,7 +5,7 @@ class CompareController < ApplicationController
       .where(:id => url_ids)
       .includes([:visits])
       .to_json(
-        :only => [:id, :short_name], 
+        :only => [:id, :short_name, :url],
         :methods => [
           :visit_count, 
           :visits_today,
