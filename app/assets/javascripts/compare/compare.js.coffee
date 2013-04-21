@@ -86,8 +86,13 @@ $ ($) ->
   # Returns the chart function:
   barchart = WukumUrl.Charters.barChart()
   # Customize the chart:
-  barchart.width 400
+  barchart.width 600
   barchart.height 500
+  barchart.margin
+   top: 20
+   right: 250
+   bottom: 20
+   left: 30
   barchart.events ["onHover"]
   # Draw the chart:
   selection = d3.select("#chart_one")

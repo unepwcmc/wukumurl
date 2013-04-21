@@ -63,13 +63,17 @@ window.WukumUrl.Charters ||= {}
 ###
 WukumUrl.Charters.barChart = ->
 
+  ####
+  # Follows d3 margin convention: http://bl.ocks.org/mbostock/3019563
+  # Properties go clockwise from the top, as in CSS.
   margin =
    top: 20
-   right: 120
+   right: 100
    bottom: 20
    left: 30
-  width = 560
-  height = 500
+  width = 760 - margin.left - margin.right
+  height = 500 - margin.top - margin.bottom
+  ####
   format = d3.format(".0")
   x0Scale = d3.scale.ordinal()
   x1Scale = d3.scale.ordinal()
@@ -83,18 +87,6 @@ WukumUrl.Charters.barChart = ->
   events = ["onClick"]
 
 
-  _outerWidth = ->
-    width + margin.left + margin.right
-
-  _innerWidth = ->
-    width - margin.left - margin.right
-
-  _outerHeight = ->
-    height + margin.left + margin.right
-
-  _innerHeight = ->
-    height - margin.left - margin.right
-
   # TODO: need to hook in the exits!
   _drawLegend = (selection, data) ->
     outer_legend = selection.selectAll("g.outer_legend")
@@ -102,22 +94,22 @@ WukumUrl.Charters.barChart = ->
     .enter().append("g")
       .attr("class", "outer_legend")
       .attr("transform", 
-        "translate(" + (margin.left + margin.right) + "," + margin.top + ")")
+        "translate(" + margin.left + "," + 0 + ")")
     legend = outer_legend.selectAll("g.legend")
         .data(data.slice())
       .enter().append("g")
         .attr("class", "legend")
         .attr("transform", (d, i) -> "translate(0," + i * 20 + ")")
     legend.append("rect")
-        .attr("x", width - 18)
+        .attr("x", width)
         .attr("width", 18)
         .attr("height", 18)
         .style("fill", (d, i) -> color(i+1) )
     txt = legend.append("text")
-        .attr("x", width - 24)
+        .attr("x", width + 22)
         .attr("y", 9)
         .attr("dy", ".35em")
-        .style("text-anchor", "end")
+        #.style("text-anchor", "end")
         .text((d) -> d)
         # Used for future selection and interaction:
         .attr("id", (d) -> "l_#{d}" )
@@ -170,14 +162,18 @@ WukumUrl.Charters.barChart = ->
     # Scale ranges need to be called here and not outside of the chart 
     # function, because they need to be updated on every new selection.
     # !! Why using ouerWidth() ??
-    # X0 refers to the outer group.
-    x0Scale.rangeRoundBands([0, _outerWidth() - margin.right], .2) # args: [min, max], padding
-    yScale.range([_innerHeight(), 0])
+    # X0 refers to the outer bar group.
+    # rangeRoundBands [min, max], padding, outer-padding
+    x0Scale.rangeRoundBands [0, width], .1, .05
+    yScale.range [height, 0]
 
     # This is the first outer selection.
     # Usually the 'selection` length will be equal to one.
     selection.each (data, i) ->
 
+      # Extract the bar names from first data group (data[0]),
+      # because these be will be repeated the same in all groups.
+      # Used for the legend.
       bar_names = _.map data[0].values, (d) -> d.name
 
       # Data input domains
@@ -187,7 +183,7 @@ WukumUrl.Charters.barChart = ->
 
       # Select the svg element, if it exists.
       svg = d3.select(this).selectAll("svg").data([data])
-
+        
       # Otherwise, create the skeletal chart.
       gEnter = svg.enter().append("svg").append("g")
       #gEnter.append("g").attr "class", "chart_group"
@@ -195,22 +191,21 @@ WukumUrl.Charters.barChart = ->
       gEnter.append("g").attr "class", "y axis"
 
       # Set the outer dimensions.
-      svg.attr("width", _outerWidth()).attr("height", height)
+      svg.attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
 
-      # translate(x, y) -> move right x pixels, move down y pixels.
       g = svg.select("g")
+        # move right x pixels, move down y pixels:
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
       # Update the x-axis.
       g.select(".x.axis")
-        .attr("transform", 
-          "translate(0," + (_innerHeight() + margin.bottom) + ")")
+        .attr("transform", "translate(0," + height + ")")
         .call(xAxis)
 
       # Update the y-axis.
       g.select(".y.axis")
         .call(yAxis)
-        .attr("transform", (d) -> "translate(" + margin.left + ",0)")
 
       # Select all the chart groups, if existent.
       chart_group = g.selectAll("g.chart_group").data(data)
@@ -222,8 +217,8 @@ WukumUrl.Charters.barChart = ->
 
       # iterating over every chart group, in order to draw the single bars.
       chart_group.each (inner_data, i) ->
-        # X1 refers to the inner group.
-        x1Scale.rangeRoundBands([0, _innerWidth() / data.length], .1)
+        # X1 refers to the inner-bar-group (the individual bars of each group).
+        x1Scale.rangeRoundBands([0, width / data.length], .1)
         x1Scale.domain inner_data.values.map (d) -> d.name
         bar = d3.select(@).selectAll('.bar')
           .data (d) -> d.values
@@ -232,7 +227,7 @@ WukumUrl.Charters.barChart = ->
           .attr("class", (d) -> "bar b_#{d.name}")
           .attr("x", (d) -> x1Scale d.name)
           .attr("width", 0)
-          .attr("y", (d) -> _innerHeight() )
+          .attr("y", (d) -> height )
           .attr("height", (d) -> 0)
           .style "fill", (d, i) -> 
             color(i+1)
@@ -242,7 +237,7 @@ WukumUrl.Charters.barChart = ->
           .attr("x", (d) -> x1Scale d.name)
           .attr("width", x1Scale.rangeBand())
           .attr("y", (d) -> yScale(d.val) )
-          .attr "height", (d) -> _innerHeight() - yScale(d.val)
+          .attr "height", (d) -> height - yScale(d.val)
         
         if _.find(events, (evt) -> evt == "onHover") == "onHover"
           bar.on "mouseover", (d, i) -> 
@@ -251,7 +246,7 @@ WukumUrl.Charters.barChart = ->
 
       chart_group.exit().remove()
 
-      _drawLegend svg, bar_names
+      _drawLegend g, bar_names
  
 
   # IMPORTANT: when customizing the chart, margin MUST be called before
@@ -263,7 +258,7 @@ WukumUrl.Charters.barChart = ->
 
   chart.width = (_) ->
     return width  unless arguments.length
-    width = _
+    width = _ - margin.left - margin.right
     chart
 
   chart.height = (_) ->
