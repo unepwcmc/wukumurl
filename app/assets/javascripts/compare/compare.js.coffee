@@ -49,7 +49,7 @@ $ ($) ->
   updateResults = (data, d, i, entering) ->
     # Sniffing the name, because the function is called from different 
     # events with different d meanings.
-    n = d?.name || d
+    n = d.name
     d = data
     url_el = $("#results_one_url span.results")
     total_count_el = $("#results_one_tot_res span.results")

@@ -116,8 +116,16 @@ WukumUrl.Charters.barChart = ->
     # Custom events:
     if _.find(events, (evt) -> evt == "onHover") == "onHover"
       dispatch = WukumUrl.Charters.barChart.dispatch
-      txt.on "mouseover", (d, i) -> dispatch.onHover.apply this, [d, i, yes]
-      txt.on "mouseout", (d, i) -> dispatch.onHover.apply this, [d, i]
+      txt.on "mouseover", (d, i) ->
+        # Restructuring the data to match the bars data structure.
+        # In this way we can share listeners for both legend and bar events.
+        d = {name: d}
+        dispatch.onHover.apply this, [d, i, yes]
+      txt.on "mouseout", (d, i) -> 
+        # Restructuring the data to match the bars data structure.
+        # In this way we can share listeners for both legend and bar events.
+        d = {name: d}
+        dispatch.onHover.apply this, [d, i]
 
 
   ###
@@ -127,7 +135,7 @@ WukumUrl.Charters.barChart = ->
 
   # Highlights the selected item in the legend
   updateLegend = (d, i, entering) ->
-    name = d?.name || d
+    name = d.name
     item = d3.select("#l_#{name}")
     if entering
       item.attr("class", "selected")
@@ -136,7 +144,7 @@ WukumUrl.Charters.barChart = ->
 
   # Highlights the selected bar(s)
   updateBars = (d, i, entering) ->
-    name = d.name || d
+    name = d.name
     items = d3.selectAll(".b_#{name}")
     original_class_values = items.attr("class").replace /selected/, ""
     if entering
