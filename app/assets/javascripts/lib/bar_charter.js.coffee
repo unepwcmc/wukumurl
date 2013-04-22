@@ -172,7 +172,7 @@ WukumUrl.Charters.barChart = ->
     # !! Why using ouerWidth() ??
     # X0 refers to the outer bar group.
     # rangeRoundBands [min, max], padding, outer-padding
-    x0Scale.rangeRoundBands [0, width], .1, .05
+    x0Scale.rangeRoundBands [0, width], .1, .01
     yScale.range [height, 0]
 
     # This is the first outer selection.
