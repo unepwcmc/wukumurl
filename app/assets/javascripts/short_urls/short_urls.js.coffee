@@ -73,7 +73,7 @@ $(($)->
       ids.push val
     # But if it is already there, remove it!
     else
-      ids.pop val_pos
+      ids.splice val_pos, 1
     setUrl ids
     
 
