@@ -1,7 +1,7 @@
 class CompareController < ApplicationController
   def index
     url_ids = params[:tags].split("/").map { |s| s.to_i }
-    @urls = ShortUrl
+    urls = ShortUrl
       .where(:id => url_ids)
       .includes([:visits])
       .to_json(
@@ -15,6 +15,7 @@ class CompareController < ApplicationController
           :visits_by_organization
         ]
       )
-    puts @urls
+    #TODO: there must be a better whay of doing this!
+    @data = "{ \"urls\": #{urls}, \"url_ids\": #{url_ids.to_json} }"
   end
 end

@@ -77,12 +77,17 @@ $ ($) ->
       values: []
     _.each data, (d, i) ->
       t_count = d.visit_count
-      total.values.push {name: d.short_name, val: t_count, url: d.url}
+      total.values.push {name: d.short_name, val: t_count, url: d.url, id: d.id}
       m_count = d.visits_this_month.length
-      month.values.push {name: d.short_name, val: m_count, url: d.url}
+      month.values.push {name: d.short_name, val: m_count, url: d.url, id: d.id}
     [total, month]
 
-  chart_data = buildCounts(WukumUrl.data)
+  chart_data = buildCounts(WukumUrl.data.urls)
+  # We want the data to reflect the order of selection in the landing page:
+  _.each chart_data, (obj, i) ->
+    chart_data[i].values = _.sortBy obj.values, (value) ->
+       WukumUrl.data.url_ids.indexOf value.id   
+
   # Returns the chart function:
   barchart = WukumUrl.Charters.barChart()
   # Customize the chart:
