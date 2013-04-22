@@ -47,8 +47,6 @@ $ ($) ->
   # TODO: need to refactor and generalize this function,
   # its logic should only depend on the arguments passed in.
   updateResults = (data, d, i, entering) ->
-    # Sniffing the name, because the function is called from different 
-    # events with different d meanings.
     n = d.name
     d = data
     url_el = $("#results_one_url span.results")
