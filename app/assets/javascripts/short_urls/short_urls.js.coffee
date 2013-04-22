@@ -58,7 +58,6 @@ $(($)->
     
   ids = []
   link = $("span.compare_urls")
-  console.log link
   # Resetting all .compare_urls checkboxes first.
   $('input:checkbox.compare_urls').removeAttr('checked')
 
