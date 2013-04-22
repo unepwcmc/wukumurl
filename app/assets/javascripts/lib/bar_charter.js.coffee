@@ -172,7 +172,7 @@ WukumUrl.Charters.barChart = ->
     # !! Why using ouerWidth() ??
     # X0 refers to the outer bar group.
     # rangeRoundBands [min, max], padding, outer-padding
-    x0Scale.rangeRoundBands [0, width], .1, .01
+    x0Scale.rangeRoundBands [0, width], .1, .02
     yScale.range [height, 0]
 
     # This is the first outer selection.
@@ -226,7 +226,7 @@ WukumUrl.Charters.barChart = ->
       # iterating over every chart group, in order to draw the single bars.
       chart_group.each (inner_data, i) ->
         # X1 refers to the inner-bar-group (the individual bars of each group).
-        x1Scale.rangeRoundBands([0, width / data.length], .1)
+        x1Scale.rangeRoundBands([0, width / data.length], .1, .2)
         x1Scale.domain inner_data.values.map (d) -> d.name
         bar = d3.select(@).selectAll('.bar')
           .data (d) -> d.values
