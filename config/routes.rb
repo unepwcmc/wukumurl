@@ -1,4 +1,6 @@
 Wukumurl::Application.routes.draw do
+  get "map/index"
+
   get "compare/index"
 
   match '/help' => 'help#index'
