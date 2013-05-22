@@ -1,5 +1,6 @@
 Wukumurl::Application.routes.draw do
   get "map/index"
+  match "map/list", :controller => 'map', :action => :list
 
   get "compare/index"
 
