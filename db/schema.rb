@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130522115054) do
+ActiveRecord::Schema.define(:version => 20130522161700) do
 
   create_table "cities", :force => true do |t|
     t.string   "iso2"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20130522115054) do
     t.datetime "updated_at",      :null => false
     t.integer  "country_id"
     t.integer  "organization_id"
+    t.integer  "city_id"
   end
 
 end
