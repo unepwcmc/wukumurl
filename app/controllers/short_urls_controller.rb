@@ -15,6 +15,7 @@ class ShortUrlsController < ApplicationController
     end
   end
 
+  # This is what actually appears on the homepage!
   def visit
     short_url = ShortUrl.find_by_short_name(params[:short_name])
     if short_url
