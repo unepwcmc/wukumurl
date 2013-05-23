@@ -3,7 +3,7 @@ window.WukumUrl.Map ||= {}
 window.WukumUrl.Map.Views ||= {}  
 
 
-WukumUrl.Map.Views.Map = Backbone.View.extend
+class WukumUrl.Map.Views.Map extends Backbone.View
 
   el: "#map-canvas"
 
