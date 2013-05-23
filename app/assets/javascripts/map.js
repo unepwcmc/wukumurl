@@ -3,10 +3,7 @@
 // You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 
-//= require underscore-min
 //= require backbone-min-1.0.0
-//= require laconic
-
 
 //= require map/templates/map.jst
 //= require map/templates/list.jst

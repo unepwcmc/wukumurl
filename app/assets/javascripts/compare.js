@@ -2,7 +2,7 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-//= require underscore-min
+//= require d3-3.1.5
 
 //= require lib/bar_charter
 //= require compare/compare
