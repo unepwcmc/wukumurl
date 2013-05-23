@@ -1,15 +1,10 @@
-<style type="text/css">
-  html { height: 100% }
-  body { height: 100%; margin: 0; padding: 0 }
-  #map-canvas { height: 100% }
-</style>
+<%= stylesheet_link_tag params[:controller] %>
 <script type="text/javascript"
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCc-_RVtz3Vy6D_VijPZZz-Q45_7UNeqxs&sensor=true">
 </script>
 <%= javascript_include_tag params[:controller] %>
 
-<h1>Map#index</h1>
-<p>Find me in app/views/map/index.html.erb</p>
+<h1>Map</h1>
 <div id="map-canvas"></div>
 <div id="url-list"></div>
 

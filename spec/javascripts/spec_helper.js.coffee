@@ -1,6 +1,8 @@
 #= require d3-3.1.5
 #= require jquery
 #= require jquery_ujs
+#= require laconic
+#= require underscore-min
 
 #= require ./support/spec_data
 
