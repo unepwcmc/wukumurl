@@ -3,7 +3,8 @@ window.WukumUrl.Map ||= {}
 window.WukumUrl.Map.Views ||= {}
 
 
-WukumUrl.Map.Views.MainView = Backbone.View.extend
+#WukumUrl.Map.Views.MainView = Backbone.View.extend
+class WukumUrl.Map.Views.MainView extends Backbone.View
 
   initialize: (options) ->
     @views = {}
