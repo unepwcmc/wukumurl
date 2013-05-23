@@ -50,7 +50,7 @@ Wukumurl::Application.configure do
 
   config.serve_static_assets = true
 
-  config.assets.precompile += ['compare.js', 'short_urls.js', 'map.js' ]
+  config.assets.precompile += ['compare.js', 'short_urls.js', 'map.js', 'map.css' ]
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
