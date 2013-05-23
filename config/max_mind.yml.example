@@ -1,3 +1,3 @@
-city_db: '/usr/local/Cellar/geoip/1.4.8/share/GeoIP/GeoLiteCity.dat'
-country_db : '/usr/local/Cellar/geoip/1.4.8/share/GeoIP/GeoIP.dat'
-org_db: '/usr/local/Cellar/geoip/1.4.8/share/GeoIP/GeoLiteCity.dat'
+city_db: '/usr/share/GeoIP/GeoLiteCity.dat'
+country_db : '/usr/share/GeoIP/GeoIP.dat'
+org_db: '/usr/share/GeoIP/GeoLiteOrg.dat'
