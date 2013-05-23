@@ -58,4 +58,4 @@ gem "auto_strip_attributes", "~> 1.0"
 #  gem 'konacha'
 #  gem 'konacha-chai-matchers'
 #end
-
+gem 'geocoder'
