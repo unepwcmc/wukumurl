@@ -54,8 +54,11 @@ gem "auto_strip_attributes", "~> 1.0"
 
 # To use debugger
 
+
 #group :test, :development do
 #  gem 'konacha'
 #  gem 'konacha-chai-matchers'
 #end
+
 gem 'geocoder'
+
