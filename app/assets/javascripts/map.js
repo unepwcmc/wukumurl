@@ -7,6 +7,8 @@
 
 //= require map/templates/map.jst
 //= require map/templates/list.jst
+//= require map/models/short_url
+//= require map/models/short_urls
 //= require map/views/map_view
 //= require map/views/list_view
 //= require map/views/main_view

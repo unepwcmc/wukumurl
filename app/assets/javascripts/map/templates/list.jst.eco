@@ -1,1 +1,28 @@
-<div>ssssssssssssssssssssssss</div>
+<section class="map">
+<ul id="short-url-list" class="lists">
+
+<% if @.length: %>
+  <% for short_url in @: %>
+    
+    <li>
+
+      <div class="details ">
+        <a href="/<%= short_url.get "short_name" %>">wcmc.io/<%= short_url.get "short_name" %></a>
+        <div>
+          <span class='stats'><%= short_url.get "visit_count" %> visits</span>
+        </div>
+      </div>
+      <p><%= short_url.get "url" %></p>
+      <div class='side-hover-action'></div>
+
+    </li> 
+
+  <% end %>
+<% else: %>
+  No urls
+<% end %>
+
+</ul>
+</section>
+
+
