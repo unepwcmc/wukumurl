@@ -8,18 +8,21 @@ body { height: 100%; margin: 0; padding: 0 }
 
 body {
   line-height: 1;
-  background: url(../background_vsmall.gif) top left repeat-x;
+  background: url(../background_small.gif) top left repeat-x;
 }
 
+// Map container.
 .container {
   width: 100%;
   height: 420px;
-  margin: 60 auto;
+  margin: 20 auto;
 }
 
+// Make the margin bigger to push down the map 
+// and enlarge the green header stripe.
 h1 {
   font-size: 2.3em;
-  margin: 6px auto;
+  margin: 18px auto;
   text-align: center;
 }
 
