@@ -36,3 +36,20 @@ span.stats  {
   background: none;
   padding: 0;
 }
+
+.locations, .locations svg {
+  position: absolute;
+}
+ 
+.locations svg {
+  width: 60px;
+  height: 20px;
+  padding-right: 100px;
+  font: 10px sans-serif;
+}
+ 
+.locations circle {
+  fill: #f38417;
+  stroke: black;
+  stroke-width: 1.5px;
+}

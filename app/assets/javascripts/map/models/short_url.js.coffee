@@ -5,19 +5,23 @@ window.WukumUrl.Map.Models ||= {}
 
 class WukumUrl.Map.Models.ShortUrl extends Backbone.Model
 
-  #id: 108,
-  #short_name: "soerprojectteam",
-  #url: "https://docs.google.com/forms/d/1YPHPgYeN1NsxtamotA5DqCreBKFhuGvm0mWBT_T3Y7I/viewform",
-  #visit_count: 10,
-  #visits_id: [
-  #725,
-  #726,
-  #727,
-  #728,
-  #729,
-  #730,
-  #731,
-  #732,
-  #733,
-  #743
-  #]
+  ###
+  #{
+  #  id: 56,
+  #  short_name: "51a1fe179246",
+  #  url: "http://wcmc.io/short_urls/38",
+  #  visit_count: 12,
+  #  visits_location: [
+  #    {
+  #    id: 188,
+  #    latitude: null,
+  #    longitude: null
+  #    },
+  #    {
+  #    id: 189,
+  #    latitude: null,
+  #    longitude: null
+  #    }
+  #  ]
+  #}
+  ###
