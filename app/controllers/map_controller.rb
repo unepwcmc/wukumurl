@@ -7,7 +7,7 @@ class MapController < ApplicationController
         :only => [:id, :short_name, :url],
         :methods => [
           :visit_count, 
-          :visits_id
+          :visits_location
         ]
       )
       render json: short_urls
