@@ -3,6 +3,7 @@
 // You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 
+//= require d3-3.1.5
 //= require backbone-min-1.0.0
 
 //= require map/templates/map.jst
