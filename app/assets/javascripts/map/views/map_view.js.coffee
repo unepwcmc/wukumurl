@@ -16,27 +16,13 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     console.log "render WukumUrl.Map.Views.Map"
     if @options.map_options
       @map = new google.maps.Map @el, @options.map_options
-
-
-  parseDataForMap: ->
-    data = []
-    @collection.each (model) ->
-      _.each model.get("visits_location"), (v) ->
-        unless v.latitude == null or v.longitude == null
-          d = {}
-          d.url_id = model.get "id"
-          d.visit_id = v.id
-          d.lat = v.latitude
-          d.lng = v.longitude
-          data.push d
-    data 
-
+      
 
   renderOverlays: ->
     self = this
     # Create an overlay.
     overlay = new google.maps.OverlayView()
-    data = @parseDataForMap()
+    data = @collection.parseDataForMap()
     
     # Add the container when the overlay is added to the map.
     overlay.onAdd = ->

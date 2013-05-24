@@ -17,5 +17,6 @@ class WukumUrl.Map.Views.List extends Backbone.View
 
   render: ->
     console.log "render WukumUrl.Map.Views.List"
-    template = JST['map/templates/list'] @collection.models
+    console.log @collection.removeNoGeo()
+    template = JST['map/templates/list'] @collection.removeNoGeo()
     @$el.html template
