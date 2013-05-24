@@ -11,8 +11,9 @@
         <div>
           <span class='stats'><%= short_url.get "visit_count" %> visits</span>
         </div>
+        <p><%= short_url.get "url" %></p>
       </div>
-      <p><%= short_url.get "url" %></p>
+
       <div class='side-hover-action'></div>
 
     </li> 
