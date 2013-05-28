@@ -24,9 +24,14 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     if @options.map_options
       @map = new google.maps.Map @el, @options.map_options
 
-  filterData: (short_url) ->
+  filterData: (st) ->
+    #console.log "Views.Map:filterData", st
     @data = @collection.parseDataForMap()
-    @drawSvg @data
+    _.each @data, (data, state) => @drawSvg data, state
+
+      #state = data[0]?.state
+      #@drawSvg data, state
+    #@drawSvg @data
 
 
   # Derived from: https://gist.github.com/mbostock/899711
@@ -45,7 +50,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       self.drawSvg = _.bind self.drawSvg, @, layer
 
     overlay.draw = ->
-      self.drawSvg self.data
+      _.each self.data, (data, state) => self.drawSvg data, state
 
     # Bind our overlay to the map…
     overlay.setMap @map
@@ -53,27 +58,33 @@ class WukumUrl.Map.Views.Map extends Backbone.View
 
   # The function is partially applied with the `layer` argument
   # within the `overlay.onAdd` method.
-  drawSvg: (layer, data) ->
-    #console.log "drawSvg",  data
+  drawSvg: (layer, data, state) ->
+    console.log "drawSvg", data.length, state
     transform = (d) ->
-      d = new google.maps.LatLng(d.value.lat, d.value.lng)
+      #console.log "transform", d
+      d = new google.maps.LatLng(d.lat, d.lng)
       d = projection.fromLatLngToDivPixel(d)
       d3.select(this)
         .style("left", (d.x - padding) + "px")
-        .style "top", (d.y - padding) + "px"
+        .style("top", (d.y - padding) + "px")
     
     projection = @getProjection()
     padding = 10
-    marker = layer.selectAll("svg")
-      .data(d3.entries(data))
-      .each(transform)
+    marker = layer.selectAll("svg.#{state}")
+      .data(data, (d) -> d.visit_id)
+      .each(transform) # update existing markers
     enter = marker.enter().append("svg:svg")
       .each(transform)
       .attr("class", "marker")
-    exit = marker.exit().remove()
-    marker.append("svg:circle")
+      .attr("class", state)
+      .append("svg:circle")
       .attr("r", 4.5).attr("cx", padding).attr("cy", padding)
-      .attr "class", (d) -> if d.value.active then "active"
+      .attr "class", (d) -> d.state
+    exit = marker.exit()
+      .each( (d) -> 
+        #console.log "remove", d 
+      )
+      .remove()
 
     #marker.append("svg:text")
     #.attr("x", padding + 7)

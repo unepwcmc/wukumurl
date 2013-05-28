@@ -6,7 +6,7 @@ window.WukumUrl.Map.Models ||= {}
 class WukumUrl.Map.Models.ShortUrl extends Backbone.Model
 
   defaults: {
-    active: false
+    state: "inactive"
   }
 
   ###
