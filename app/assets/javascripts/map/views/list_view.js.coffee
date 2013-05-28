@@ -24,7 +24,10 @@ class WukumUrl.Map.Views.List extends Backbone.View
 
   selectShortUrl: (e) ->
     url_id = $(e.target).closest('li').attr('id').split("_")[1]
-    @mediator.trigger "url:selected", url_id
+    @collection.each (model) -> model.set "active", false, {silent: true}
+    @collection.get(url_id).set "active", true
+    #@mediator.trigger "url:selected", url_id
 
   selectShortUrlAll: ->
+    @collection.each (model) -> model.set "active", true, {silent: true}
     @mediator.trigger "url:selectedAll"
