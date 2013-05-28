@@ -22,6 +22,7 @@ class WukumUrl.Map.Models.ShortUrls extends Backbone.Collection
           d.visit_id = v.id
           d.lat = v.latitude
           d.lng = v.longitude
+          d.active = model.get "active"
           data.push d
     data
 

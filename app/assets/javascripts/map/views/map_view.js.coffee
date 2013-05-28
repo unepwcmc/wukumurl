@@ -11,8 +11,8 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     @collection = @options.shortUrlsCollection
     @mediator = options.mediator
     @listenTo @collection, "reset", @initOverlays
-    @listenTo @mediator, "url:selected", @filterData
-    @listenTo @mediator, "url:selectedAll", @showDataAll
+    @listenTo @collection, "change", @filterData
+    @listenTo @mediator, "url:selectedAll", @filterData
     # Not ideal, we are setting a class-global data object here.
     # This because of the `overlay.draw` method, used from the Google Maps API.
     # On map pan and zoom this method is called and it expects a `data` value
@@ -24,26 +24,15 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     if @options.map_options
       @map = new google.maps.Map @el, @options.map_options
 
-  filterData: (url_id) ->
-    data = @filterDataAll()
-    @data = _.filter data, (el) -> el.url_id == parseInt(url_id)
-    @drawSvg @data
-
-  filterDataAll: ->
+  filterData: (short_url) ->
     @data = @collection.parseDataForMap()
-
-  updateDataAll: (data) ->
     @drawSvg @data
-
-  showDataAll: ->
-    @data = @filterDataAll()
-    @updateDataAll @data
 
 
   # Derived from: https://gist.github.com/mbostock/899711
   initOverlays: ->
     self = this
-    @data = @filterDataAll()
+    @data = @collection.parseDataForMap()
     # Create an overlay.
     overlay = new google.maps.OverlayView()
     #self.data = @collection.parseDataForMap()
@@ -65,7 +54,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
   # The function is partially applied with the `layer` argument
   # within the `overlay.onAdd` method.
   drawSvg: (layer, data) ->
-    #console.log "drawSvg", layer, data
+    #console.log "drawSvg",  data
     transform = (d) ->
       d = new google.maps.LatLng(d.value.lat, d.value.lng)
       d = projection.fromLatLngToDivPixel(d)
@@ -79,10 +68,12 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       .data(d3.entries(data))
       .each(transform)
     enter = marker.enter().append("svg:svg")
-      .each(transform).attr("class", "marker")
+      .each(transform)
+      .attr("class", "marker")
     exit = marker.exit().remove()
     marker.append("svg:circle")
-      .attr("r", 4.5).attr("cx", padding).attr "cy", padding
+      .attr("r", 4.5).attr("cx", padding).attr("cy", padding)
+      .attr "class", (d) -> if d.value.active then "active"
 
     #marker.append("svg:text")
     #.attr("x", padding + 7)

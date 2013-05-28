@@ -2,6 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$grey: #EDEDED;
+$orange: #f38417;
+
 html { height: 100% }
 body { height: 100%; margin: 0; padding: 0 }
 #map-canvas { height: 100%; width: 100%; }
@@ -85,7 +88,11 @@ span.stats  {
 }
  
 .locations circle {
-  fill: #f38417;
+  fill: $grey;
   stroke: black;
   stroke-width: 1.5px;
+}
+
+.locations circle.active {
+  fill: $orange;
 }
