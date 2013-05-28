@@ -13,17 +13,26 @@ class WukumUrl.Map.Models.ShortUrls extends Backbone.Collection
     @mediator = options.mediator
 
   parseDataForMap: ->
-    data = []
+    #active = []
+    #inactive = []
+    #data = [active, inactive]
+    data = {}
+    data.inactive = []
+    data.active = []
     @each (model) ->
       _.each model.get("visits_location"), (v) ->
         unless v.latitude == null or v.longitude == null
+          state = model.get "state"
           d = {}
           d.url_id = model.get "id"
           d.visit_id = v.id
           d.lat = v.latitude
           d.lng = v.longitude
-          d.active = model.get "active"
-          data.push d
+          d.state = state
+          if state == "active"
+            data.active.push d
+          else
+            data.inactive.push d
     data
 
   # Given a collection of visits_location(s),

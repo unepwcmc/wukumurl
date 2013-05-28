@@ -1,17 +1,17 @@
 <section class="map">
 
-<div class="watch-all" title="select all on map"></div>
+<div class="watch-all <%= @state %>" title="select all on map"></div>
 
 <ul id="short-url-list" class="lists">
 
-<% if @.length: %>
-  <% for short_url in @: %>
+<% if @collection.length and @state == "active": %>
+  <% for short_url in @collection: %>
     
     <li id="url_<%= short_url.get "id" %>">
 
       <div class="details ">
         <a href="/<%= short_url.get "short_name" %>">wcmc.io/<%= short_url.get "short_name" %></a>
-        <div class="watch" title="select on map"></div>
+        <div class="watch <%= short_url.get "state" %>" title="select on map"></div>
         <div>
           <span class='stats'><%= short_url.get "visit_count" %> visits</span>
         </div>
@@ -22,7 +22,7 @@
 
   <% end %>
 <% else: %>
-  No urls
+ 
 <% end %>
 
 </ul>
