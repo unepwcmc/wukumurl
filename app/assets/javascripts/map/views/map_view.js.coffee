@@ -9,51 +9,84 @@ class WukumUrl.Map.Views.Map extends Backbone.View
 
   initialize: (@options) ->
     @collection = @options.shortUrlsCollection
-    @listenTo @collection, "reset", @renderOverlays
+    @mediator = options.mediator
+    @listenTo @collection, "reset", @initOverlays
+    @listenTo @mediator, "url:selected", @filterData
+    @listenTo @mediator, "url:selectedAll", @showDataAll
+    # Not ideal, we are setting a class-global data object here.
+    # This because of the `overlay.draw` method, used from the Google Maps API.
+    # On map pan and zoom this method is called and it expects a `data` value
+    # to be in scope.
+    @data = null
 
 
   render: ->
-    console.log "render WukumUrl.Map.Views.Map"
     if @options.map_options
       @map = new google.maps.Map @el, @options.map_options
-      
 
-  renderOverlays: ->
+  filterData: (url_id) ->
+    data = @filterDataAll()
+    @data = _.filter data, (el) -> el.url_id == parseInt(url_id)
+    @drawSvg @data
+
+  filterDataAll: ->
+    @data = @collection.parseDataForMap()
+
+  updateDataAll: (data) ->
+    @drawSvg @data
+
+  showDataAll: ->
+    @data = @filterDataAll()
+    @updateDataAll @data
+
+
+  # Derived from: https://gist.github.com/mbostock/899711
+  initOverlays: ->
     self = this
+    @data = @filterDataAll()
     # Create an overlay.
     overlay = new google.maps.OverlayView()
-    data = @collection.parseDataForMap()
-    
+    #self.data = @collection.parseDataForMap()
+
     # Add the container when the overlay is added to the map.
     overlay.onAdd = ->
       layer = d3.select(@getPanes().overlayLayer)
         .append("div").attr("class", "locations")
-      
-      # Draw each marker as a separate SVG element.
-      # We could use a single SVG, but what size would it have?
-      overlay.draw = ->
 
-        transform = (d) ->
-          d = new google.maps.LatLng(d.value.lat, d.value.lng)
-          d = projection.fromLatLngToDivPixel(d)
-          d3.select(this)
-            .style("left", (d.x - padding) + "px")
-            .style "top", (d.y - padding) + "px"
-        
-        projection = @getProjection()
-        padding = 10
-        marker = layer.selectAll("svg")
-          .data(d3.entries(data))
-          .each(transform).enter().append("svg:svg")
-          .each(transform).attr("class", "marker")
-        marker.append("svg:circle")
-          .attr("r", 6.5).attr("cx", padding).attr "cy", padding
-        #marker.append("svg:text")
-        #  .attr("x", padding - 3)
-        #  .attr("y", padding)
-        #  .attr("dy", ".31em").text (d) ->
-        #    d.key
-  
+      self.drawSvg = _.bind self.drawSvg, @, layer
+
+    overlay.draw = ->
+      self.drawSvg self.data
+
     # Bind our overlay to the map…
     overlay.setMap @map
+
+
+  # The function is partially applied with the `layer` argument
+  # within the `overlay.onAdd` method.
+  drawSvg: (layer, data) ->
+    #console.log "drawSvg", layer, data
+    transform = (d) ->
+      d = new google.maps.LatLng(d.value.lat, d.value.lng)
+      d = projection.fromLatLngToDivPixel(d)
+      d3.select(this)
+        .style("left", (d.x - padding) + "px")
+        .style "top", (d.y - padding) + "px"
+    
+    projection = @getProjection()
+    padding = 10
+    marker = layer.selectAll("svg")
+      .data(d3.entries(data))
+      .each(transform)
+    enter = marker.enter().append("svg:svg")
+      .each(transform).attr("class", "marker")
+    exit = marker.exit().remove()
+    marker.append("svg:circle")
+      .attr("r", 4.5).attr("cx", padding).attr "cy", padding
+
+    #marker.append("svg:text")
+    #.attr("x", padding + 7)
+    #.attr("y", padding)
+    #.attr("dy", ".31em").text (d) ->
+    #  d.value.visit_id
     

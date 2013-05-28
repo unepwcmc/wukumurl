@@ -11,6 +11,39 @@ body {
   background: url(../background_small.gif) top left repeat-x;
 }
 
+.watch-all {
+  background: url(../watch-2_green.svg);
+  display: block;
+  text-indent: -9999px;
+  width: 30px;
+  height: 30px;
+  background-size: 30px 30px;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.watch {
+  background: url(../watch_grey.svg);
+  display: block;
+  text-indent: -9999px;
+  width: 25px;
+  height: 25px;
+  background-size: 25px 25px;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.watch:hover {
+  background: url(../watch_green.svg);
+  display: block;
+  text-indent: -9999px;
+  width: 25px;
+  height: 25px;
+  background-size: 25px 25px;
+  cursor: pointer;
+  cursor: hand;
+}
+
 // Map container.
 .container {
   width: 100%;

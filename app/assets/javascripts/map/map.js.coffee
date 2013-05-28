@@ -5,7 +5,7 @@ options = {}
 options.mediator = _.clone(Backbone.Events)
 options.map_options = 
   center: new google.maps.LatLng(18, 0)
-  zoom: 1
+  zoom: 0
   mapTypeId: google.maps.MapTypeId.TERRAIN
 
 shortUrls = new window.WukumUrl.Map.Models.ShortUrls options
