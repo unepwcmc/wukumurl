@@ -9,10 +9,10 @@ class Location < ActiveRecord::Base
   end
 
   def self.get_coordinates_using_geocoder global_attributes
-      coordinates = Geocoder::coordinates("#{global_attributes[:organization]} #{global_attributes[:city]} #{global_attributes[:country]}")
-      location = Location.create({ "lat" => global_attributes[:latitude], 
-                               "lon" => global_attributes[:longitude], 
-                               "source" => "Geocoder" })
+    coordinates = Geocoder::coordinates("#{global_attributes[:name]} #{global_attributes[:city]} #{global_attributes[:country_name]}")
+    location = Location.create({ "lat" => global_attributes[:latitude], 
+                                 "lon" => global_attributes[:longitude], 
+                                 "source" => "Geocoder" })
   end
 end
 
