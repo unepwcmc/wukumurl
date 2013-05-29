@@ -7,7 +7,6 @@ class City < ActiveRecord::Base
   def self.find_or_create_by_max_mind_attributes attributes
     # Map max mind names to model names
     attributes = Hash[attributes.map {|k, v| [MaxMindMappings[k], v] }]
-
     city = City.where(attributes).first || City.create(attributes)
   end
 
