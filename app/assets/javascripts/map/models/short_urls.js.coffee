@@ -18,13 +18,13 @@ class WukumUrl.Map.Models.ShortUrls extends Backbone.Collection
     data.active = []
     @each (model) ->
       _.each model.get("visits_location"), (v) ->
-        unless v.latitude == null or v.longitude == null
+        unless v.lat == null or v.lon == null
           state = model.get "state"
           d = {}
           d.url_id = model.get "id"
-          d.visit_id = v.id
-          d.lat = v.latitude
-          d.lng = v.longitude
+          d.visit_id = v.location_id
+          d.lat = v.lat
+          d.lng = v.lon
           d.state = state
           if state == "active"
             data.active.push d
@@ -37,7 +37,7 @@ class WukumUrl.Map.Models.ShortUrls extends Backbone.Collection
   removeNoGeo: ->
     @filter (model) ->
       _.find model.get("visits_location"), (v) ->
-        v.latitude or v.longitude
+        v.lat or v.lon
 
   getActiveUrls: ->
     @removeNoGeo().filter (model) ->
