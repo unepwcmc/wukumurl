@@ -27,7 +27,7 @@ class ShortUrl < ActiveRecord::Base
 
 
   def visits_location
-    Visit.where(short_url_id: self.id).joins(:locations).select([:latitude, :longitude, :source])
+    Visit.where(short_url_id: self.id).joins(:location).select([:lat, :lon, :source, :location_id])
   end
 
   def visits_today
