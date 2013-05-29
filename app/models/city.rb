@@ -8,7 +8,6 @@ class City < ActiveRecord::Base
       new_attributes = attributes.slice(:country_name,:country_code,:latitude,:longitude,:city)
     # Map max mind names to model names
       new_attributes = Hash[new_attributes.map {|k, v| [MaxMindMappings[k], v] }]
-      puts new_attributes
       city = City.where(new_attributes).first || City.create(new_attributes)
   end
 
