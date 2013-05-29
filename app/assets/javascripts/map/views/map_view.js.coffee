@@ -92,7 +92,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       .attr("class", state)
       .append("svg:circle")
       .each(addEventListener)
-      .attr("r", 4.5).attr("cx", padding).attr("cy", padding)
+      .attr("r", 6.5).attr("cx", padding).attr("cy", padding)
       .attr "class", (d) -> d.state
       #
     exit = marker.exit()
