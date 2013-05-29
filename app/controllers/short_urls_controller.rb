@@ -25,7 +25,6 @@ class ShortUrlsController < ApplicationController
 
       redirect_to short_url.url
     else
-      # This is what actually appears on the homepage!
       @short_urls = ShortUrl.not_deleted.order("created_at DESC")
     end
   end
