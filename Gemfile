@@ -7,7 +7,7 @@ gem 'rails', '3.2.13'
 
 gem 'sqlite3'
 gem 'rack-cors', :require => 'rack/cors'
-gem 'geoip-c'
+gem 'geoip-c', '0.8.0'
 gem 'whenever', :require => false
 
 group :development, :test do
