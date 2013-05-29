@@ -67,7 +67,7 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     geocoder (1.1.8)
-    geoip-c (0.8.1)
+    geoip-c (0.8.0)
     highline (1.6.18)
     hike (1.2.1)
     i18n (0.6.1)
@@ -154,7 +154,7 @@ DEPENDENCIES
   debugger
   eco
   geocoder
-  geoip-c
+  geoip-c (= 0.8.0)
   jquery-rails
   pg
   rack-cors

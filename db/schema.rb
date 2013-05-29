@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130524103617) do
+ActiveRecord::Schema.define(:version => 20130529104310) do
+
   create_table "cities", :force => true do |t|
     t.string   "iso2"
     t.string   "iso3"
@@ -32,6 +33,14 @@ ActiveRecord::Schema.define(:version => 20130524103617) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "locations", :force => true do |t|
+    t.float    "lat"
+    t.float    "lon"
+    t.string   "source"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "organizations", :force => true do |t|
     t.text     "name"
     t.datetime "created_at", :null => false
@@ -45,7 +54,6 @@ ActiveRecord::Schema.define(:version => 20130524103617) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.boolean  "deleted"
-    t.integer  "parent_id"
   end
 
   create_table "url_locations", :force => true do |t|
@@ -61,9 +69,7 @@ ActiveRecord::Schema.define(:version => 20130524103617) do
     t.integer  "country_id"
     t.integer  "organization_id"
     t.integer  "city_id"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.string   "location_source"
+    t.integer  "location_id"
   end
 
 end
