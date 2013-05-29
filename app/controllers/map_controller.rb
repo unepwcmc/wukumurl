@@ -6,10 +6,9 @@ class MapController < ApplicationController
       short_urls = ShortUrl.not_deleted.order("created_at DESC").to_json(
         :only => [:id, :short_name, :url],
         :methods => [
-          :visit_count, 
-          :location,
-          :location_id
-        ]
+          :visit_count,
+          :visits_location
+         ]
       )
       render json: short_urls
   end
