@@ -2,8 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$grey: #EDEDED;
+$grey: #CFCFCF;
 $orange: #f38417;
+$green: #8EBD57;
 
 html { height: 100% }
 body { height: 100%; margin: 0; padding: 0 }
@@ -14,27 +15,41 @@ body {
   background: url(../background_small.gif) top left repeat-x;
 }
 
-.watch-all {
-  background: url(../watch-2_grey.svg);
-  display: block;
-  text-indent: -9999px;
-  width: 30px;
-  height: 30px;
-  background-size: 30px 30px;
+span.link {
   cursor: pointer;
   cursor: hand;
 }
 
-.watch-all.active {
-  background: url(../watch-2_green.svg);
-  display: block;
-  text-indent: -9999px;
+
+div .inactive {
+  color: $grey;
+  font-size: 1.2em;
+}
+
+div .active {
+  color: $green;
+  font-size: 1.2em;
+}
+
+span.watch-all {
+  background: url(../watch-2_grey.svg);
+  display: inline-block;
   width: 30px;
   height: 30px;
   background-size: 30px 30px;
-  cursor: pointer;
-  cursor: hand;
 }
+
+span.watch-all.active {
+  background: url(../watch-2_green.svg);
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-size: 30px 30px;
+}
+
+
+
+
 
 .watch {
   background: url(../watch_grey.svg);
@@ -110,3 +125,4 @@ span.stats  {
   fill: $orange;
   opacity: 1;
 }
+

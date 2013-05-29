@@ -13,9 +13,6 @@ class WukumUrl.Map.Models.ShortUrls extends Backbone.Collection
     @mediator = options.mediator
 
   parseDataForMap: ->
-    #active = []
-    #inactive = []
-    #data = [active, inactive]
     data = {}
     data.inactive = []
     data.active = []
@@ -41,4 +38,14 @@ class WukumUrl.Map.Models.ShortUrls extends Backbone.Collection
     @filter (model) ->
       _.find model.get("visits_location"), (v) ->
         v.latitude or v.longitude
+
+  getActiveUrls: ->
+    @removeNoGeo().filter (model) ->
+      model.get("state") == "active"
+
+  getState: ->
+    l = @getActiveUrls().length
+    if l > 0
+      return "active"
+    return "inactive"
 
