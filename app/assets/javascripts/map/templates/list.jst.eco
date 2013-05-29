@@ -1,12 +1,21 @@
 <section class="map">
 
-<div class="watch-all <%= @state %>" title="select all on map"></div>
+<div class="watch-all">
+  <span class="link watch-all <%= @state %>" title="Show all urls"></span>
+  <span class="link <%= @state %>">
+    <% if @state == "inactive": %>
+    Show all URLs
+    <% else: %>
+    Hide all URLs
+    <% end %>
+  </span>
+</div>
 
-<ul id="short-url-list" class="lists">
+<% if @collection.length: %>
+  <ul id="short-url-list" class="lists">
 
-<% if @collection.length and @state == "active": %>
   <% for short_url in @collection: %>
-    
+
     <li id="url_<%= short_url.get "id" %>">
 
       <div class="details ">
@@ -21,11 +30,9 @@
     </li> 
 
   <% end %>
-<% else: %>
- 
+  </ul>
 <% end %>
 
-</ul>
 </section>
 
 

@@ -29,11 +29,6 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     @data = @collection.parseDataForMap()
     _.each @data, (data, state) => @drawSvg data, state
 
-      #state = data[0]?.state
-      #@drawSvg data, state
-    #@drawSvg @data
-
-
   # Derived from: https://gist.github.com/mbostock/899711
   initOverlays: ->
     self = this
@@ -44,13 +39,19 @@ class WukumUrl.Map.Views.Map extends Backbone.View
 
     # Add the container when the overlay is added to the map.
     overlay.onAdd = ->
-      layer = d3.select(@getPanes().overlayLayer)
+      layer = d3.select(@getPanes().overlayMouseTarget)
         .append("div").attr("class", "locations")
 
-      self.drawSvg = _.bind self.drawSvg, @, layer
+      #google.maps.event.addDomListener layer, 'click', ->
+      #  console.log 'sssssssssssssssss'
+      #  google.maps.event.trigger(self, 'click')
+      
+      self.drawSvg = _.bind self.drawSvg, @, layer, self
 
     overlay.draw = ->
       _.each self.data, (data, state) => self.drawSvg data, state
+
+    
 
     # Bind our overlay to the map…
     overlay.setMap @map
@@ -58,15 +59,27 @@ class WukumUrl.Map.Views.Map extends Backbone.View
 
   # The function is partially applied with the `layer` argument
   # within the `overlay.onAdd` method.
-  drawSvg: (layer, data, state) ->
-    console.log "drawSvg", data.length, state
+  drawSvg: (layer, view, data, state) ->
+    #console.log "drawSvg", view
     transform = (d) ->
-      #console.log "transform", d
+      #console.log "transform", d, d3.select(this)
       d = new google.maps.LatLng(d.lat, d.lng)
       d = projection.fromLatLngToDivPixel(d)
       d3.select(this)
         .style("left", (d.x - padding) + "px")
         .style("top", (d.y - padding) + "px")
+
+    addEventListener = (d) ->
+      #console.log "addEventListener", d, this
+      #self = this
+      google.maps.event.addDomListener this, 'click', (e) ->
+        #console.log '##################', e, d
+        view.mediator.trigger "Views:Map:selectUrl", null, d.url_id, d.state
+
+    removeEventListener = (d) ->
+      #console.log "addEventListener", d, this
+      self = this
+      #google.maps.event.removeListener self
     
     projection = @getProjection()
     padding = 10
@@ -78,12 +91,12 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       .attr("class", "marker")
       .attr("class", state)
       .append("svg:circle")
+      .each(addEventListener)
       .attr("r", 4.5).attr("cx", padding).attr("cy", padding)
       .attr "class", (d) -> d.state
+      #
     exit = marker.exit()
-      .each( (d) -> 
-        #console.log "remove", d 
-      )
+      .each(removeEventListener)
       .remove()
 
     #marker.append("svg:text")
