@@ -48,9 +48,6 @@ span.watch-all.active {
 }
 
 
-
-
-
 .watch {
   background: url(../watch_grey.svg);
   display: block;
@@ -116,13 +113,15 @@ span.stats  {
  
 .locations circle {
   fill: $grey;
-  stroke: black;
+  stroke: darken($orange, 10%);
   stroke-width: 1.5px;
-  opacity: .5;
+  opacity: .6;
 }
 
 .locations circle.active {
   fill: $orange;
-  opacity: 1;
+  stroke: darken($grey, 60%);
+  stroke-width: 1.5px;
+  opacity: .8;
 }
 
