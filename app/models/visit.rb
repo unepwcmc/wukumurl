@@ -30,15 +30,16 @@ class Visit < ActiveRecord::Base
     #Look for City and Country using IP
     cdb = GeoIP::City.new(GEO_IP_CONFIG['city_db'])
     city_attributes = cdb.look_up self.ip_address
-    if city_attributes
-      self.city = City.find_or_create_by_max_mind_attributes city_attributes
-    end
-    if organization_attributes.nil?
-      self.location = Location.get_coordinates_using_geoip city_attributes
+    if city_attributes.nil?
     else
-      puts global_attributes = organization_attributes.merge(city_attributes)
-      self.organization = Organization.find_or_create_by_max_mind_attributes organization_attributes
-      self.location = Location.get_coordinates_using_geocoder global_attributes
+      self.city = City.find_or_create_by_max_mind_attributes city_attributes
+      if organization_attributes.nil?
+        self.location = Location.get_coordinates_using_geoip city_attributes
+      else
+        global_attributes = organization_attributes.merge(city_attributes)
+        self.organization = Organization.find_or_create_by_max_mind_attributes organization_attributes
+        self.location = Location.get_coordinates_using_geocoder global_attributes
+      end
     end
   end
 

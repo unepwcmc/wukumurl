@@ -1,6 +1,7 @@
 class Location < ActiveRecord::Base
   attr_accessible :lat, :lon, :source
   has_many :visits
+  has_many :short_urls, :through => :visits
 
   def self.get_coordinates_using_geoip city_attributes
     location_attributes = { "lat" => city_attributes[:latitude], 
@@ -22,6 +23,10 @@ class Location < ActiveRecord::Base
                               "source" => "GeoIP" }
       location =  Location.where(location_attributes).first || Location.create(location_attributes)
     end
+  end
+
+  def location_urls
+    Location.joins(:short_urls).select([:short_name, :url])
   end
 end
 
