@@ -36,7 +36,7 @@ class Visit < ActiveRecord::Base
       if organization_attributes.nil?
         self.location = Location.get_coordinates_using_geoip city_attributes
       else
-        puts global_attributes = organization_attributes.merge(city_attributes)
+        global_attributes = organization_attributes.merge(city_attributes)
         self.organization = Organization.find_or_create_by_max_mind_attributes organization_attributes
         self.location = Location.get_coordinates_using_geocoder global_attributes
       end
