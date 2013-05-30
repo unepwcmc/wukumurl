@@ -49,7 +49,8 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       self.drawSvg = _.bind self.drawSvg, @, layer, self
 
     overlay.draw = ->
-      _.each self.data, (data, state) => self.drawSvg data, state
+      #_.each self.data, (data, state) => self.drawSvg data, state
+      self.drawSvg self.data
 
     
 
@@ -60,7 +61,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
   # The function is partially applied with the `layer` argument
   # within the `overlay.onAdd` method.
   drawSvg: (layer, view, data, state) ->
-    #console.log "drawSvg", view
+    console.log "drawSvg", layer, view, data
     transform = (d) ->
       #console.log "transform", d, d3.select(this)
       d = new google.maps.LatLng(d.lat, d.lng)
@@ -70,16 +71,8 @@ class WukumUrl.Map.Views.Map extends Backbone.View
         .style("top", (d.y - padding) + "px")
 
     addEventListener = (d) ->
-      #console.log "addEventListener", d, this
-      #self = this
       google.maps.event.addDomListener this, 'click', (e) ->
-        #console.log '##################', e, d
         view.mediator.trigger "Views:Map:selectUrl", null, d.url_id, d.state
-
-    removeEventListener = (d) ->
-      #console.log "addEventListener", d, this
-      self = this
-      #google.maps.event.removeListener self
     
     projection = @getProjection()
     padding = 10

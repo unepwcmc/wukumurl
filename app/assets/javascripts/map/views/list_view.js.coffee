@@ -7,9 +7,9 @@ class WukumUrl.Map.Views.List extends Backbone.View
 
   el: "#url-list"
 
-  events:
-    'click .watch': 'selectUrl'
-    'click .watch-all': 'toggleAll'
+  #events:
+    #'click .watch': 'selectUrl'
+    #'click .watch-all': 'toggleAll'
 
   initialize: (options) ->
     @collection = options.shortUrlsCollection
