@@ -30,6 +30,10 @@ class ShortUrl < ActiveRecord::Base
     Visit.where(short_url_id: self.id).joins(:location).select([:lat, :lon, :source, :location_id])
   end
 
+  def visits_city
+    Visit.where(short_url_id: self.id).joins(:city).select([:lat, :lon, :name, :city_id])
+  end
+
   def visits_today
     self.visits.where(['created_at > ?', Date.today])
   end
