@@ -3,7 +3,7 @@ class ShortUrl < ActiveRecord::Base
   attr_accessible :short_name, :url
   validates_uniqueness_of :short_name
   validate :validate_url
-  
+
   before_validation :create_short_name_if_blank
   before_validation :ensure_http_prepend
 
@@ -48,18 +48,26 @@ class ShortUrl < ActiveRecord::Base
 
   # Returns a list of countries with a 'visit_count' attribute
   def visits_by_country
-    Country.select("countries.id, countries.name, COUNT(visits.id) as visit_count")
-            .group("countries.id, countries.name")
-            .joins(:visits)
-            .where(visits: {short_url_id: self.id})
+    City.select("cities.country, COUNT(visits.id) as visit_count")
+    .group("cities.country")
+    .joins(:visits)
+    .where(visits: {short_url_id: self.id})
   end
+
+  def visits_by_city
+    City.select("cities.city_name, COUNT(visits.id) as visit_count")
+    .group("cities.city_name")
+    .joins(:visits)
+    .where(visits: {short_url_id: self.id})
+  end
+
 
   # Returns a list of countries with a 'visit_count' attribute
   def visits_by_organization include_disregarded = false
     orgs = Organization.select("organizations.id, organizations.name, COUNT(visits.id) as visit_count")
-            .group("organizations.id, organizations.name")
-            .joins(:visits)
-            .where(visits: {short_url_id: self.id})
+    .group("organizations.id, organizations.name")
+    .joins(:visits)
+    .where(visits: {short_url_id: self.id})
     orgs = orgs.where("disregard = false OR disregard IS NULL") unless include_disregarded
     orgs
   end
