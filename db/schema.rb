@@ -11,16 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130530105535) do
+ActiveRecord::Schema.define(:version => 20130530092507) do
 
   create_table "cities", :force => true do |t|
     t.string   "iso2"
     t.string   "iso3"
     t.string   "country"
     t.string   "region"
-    t.string   "city_name"
-    t.float    "city_lat"
-    t.float    "city_lon"
+    t.string   "name"
+    t.float    "lat"
+    t.float    "lon"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
