@@ -115,15 +115,15 @@ span.stats  {
 .inactive circle {
   fill: darken($grey, 10%); 
   //fill: $orange;
-  stroke: darken($orange, 40%);
-  stroke-width: 1.5px;
-  opacity: .7;
+  stroke: darken($orange, 10%);
+  stroke-width: 3px;
+  fill-opacity: .7;
 }
 
 .active circle {
   fill: $orange;
-  stroke: darken($grey, 60%);
-  stroke-width: 1.5px;
-  opacity: .8;
+  stroke: darken($green, 20%);
+  stroke-width: 3px;
+  fill-opacity: .8;
 }
 

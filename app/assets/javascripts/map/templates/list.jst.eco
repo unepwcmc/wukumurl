@@ -1,10 +1,10 @@
 <section class="map">
 
-<% if @: %>
+<% if @urls and @state == "active": %>
 
   <ul id="short-url-list" class="lists">
 
-  <% for short_url, url of @: %>
+  <% for short_url, url of @urls: %>
 
     <li>
 

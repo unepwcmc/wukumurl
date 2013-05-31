@@ -8,26 +8,75 @@ class WukumUrl.Map.Views.Map extends Backbone.View
   el: "#map-canvas"
 
   initialize: (@options) ->
-    @collection = @options.shortUrlsCollection
+    # Default collection
+    @collection = @options.citiesCollection
+    @prevCollection = null
     @mediator = options.mediator
     @listenTo @collection, "reset", @initOverlays
     #@listenTo @collection, "change", @filterData
     @listenTo @mediator, "Views:Map:selectLocation", @updateSVG
+    @listenTo @mediator, "Views:Map:collectionChange", @onCollectionChange
+    @listenTo @mediator, "Views:Map:zoomChange", @onZoomChange
     # Not ideal, we are setting a class-global data object here.
     # This because of the `overlay.draw` method, used from the Google Maps API.
     # On map pan and zoom this method is called and it expects a `data` value
     # to be in scope.
     @data = null
+    @zoomSteps = 
+       0:  "citiesCollection"
+       1:  "citiesCollection"
+       2:  "citiesCollection"
+       3:  "citiesCollection"
+       4:  "citiesCollection"
+       5:  "citiesCollection"
+       6:  "citiesCollection"
+       7:  "citiesCollection"
+       8:  "citiesCollection"
+       9:  "citiesCollection"
+       10: "citiesCollection"
+       11: "locationsCollection"
+       12: "locationsCollection"
+       13: "locationsCollection"
+       14: "locationsCollection"
+       15: "locationsCollection"
+       16: "locationsCollection"
+       17: "locationsCollection"
+       18: "locationsCollection"
 
 
   render: ->
     if @options.map_options
       @map = new google.maps.Map @el, @options.map_options
+      @setMapEventListeners @map
 
   #filterData: (st) ->
   #  #console.log "Views.Map:filterData", st
   #  @data = @collection.parseDataForMap()
   #  _.each @data, (data, state) => @drawSvg data, state
+
+  setMapEventListeners: (map) ->
+    self = this
+    google.maps.event.addListener map, 'zoom_changed', ->
+      zoom = map.getZoom()
+      self.mediator.trigger "Views:Map:zoomChange", zoom
+
+  onCollectionChange: (collection) =>
+    # Resetting the prevCollection state so when zooming back to the 
+    # prevCollection we do not find selected circles on the map.
+    @prevCollection.resetState()
+    @data = @collection.parseDataForMap()
+    @drawSvg @data
+
+  onZoomChange: (zoom) =>
+    #console.log "onZoomChange", zoom, @zoomSteps[zoom]
+    newCollectionName = @zoomSteps[zoom]
+    if newCollectionName
+      @prevCollection = @collection
+      @collection = @options[newCollectionName]
+    else 
+      throw new Error "Wrong collection name! #{zoom}"
+    if @collection != @prevCollection
+      @mediator.trigger "Views:Map:collectionChange", @collection
 
   toggleState: (id) ->
     data = {}
@@ -51,7 +100,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
 
   updateSVG: (d) =>
     data = @toggleState d.location_id
-    @mediator.trigger "Views:Map:dataUpdated", data.d
+    @mediator.trigger "Views:Map:dataUpdated", data.d, @collection
     @drawSvg data.data
 
   # Derived from: https://gist.github.com/mbostock/899711
@@ -75,7 +124,6 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     # Bind our overlay to the map…
     overlay.setMap @map
 
-
   # The function is partially applied with the `layer` argument
   # within the `overlay.onAdd` method.
   drawSvg: (layer, view, data) ->
@@ -93,6 +141,8 @@ class WukumUrl.Map.Views.Map extends Backbone.View
         .style("top", (d.y - r) + "px")
         .style("height", r*2)
         .style("width", r*2)
+        .style("padding", "2px")
+
 
     addEventListener = (d) ->
       google.maps.event.addDomListener this, 'click', (e) ->

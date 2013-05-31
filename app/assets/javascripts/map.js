@@ -9,8 +9,9 @@
 //= require map/templates/map.jst
 //= require map/templates/list.jst
 //= require map/models/base
-//= require map/models/short_url
-//= require map/models/short_urls
+//= require map/models/locations
+//= require map/models/cities
+//= require map/models/countries
 //= require map/views/map_view
 //= require map/views/list_view
 //= require map/views/main_view
