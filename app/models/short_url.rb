@@ -12,6 +12,7 @@ class ShortUrl < ActiveRecord::Base
   has_many :visits, :dependent => :destroy
   has_many :locations, :through => :visits
   has_many :cities, :through => :visits
+  has_many :country_locations, :through => :cities
 
 
   def create_short_name_if_blank
