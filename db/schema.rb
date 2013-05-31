@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130530092507) do
+ActiveRecord::Schema.define(:version => 20130531112437) do
 
   create_table "cities", :force => true do |t|
     t.string   "iso2"
@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(:version => 20130530092507) do
     t.string   "iso"
     t.string   "iso3"
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "country_locations", :force => true do |t|
+    t.float    "lat"
+    t.float    "lon"
+    t.string   "iso2"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
