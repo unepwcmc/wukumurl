@@ -13,5 +13,5 @@ WukumUrl.Map.Router = Backbone.Router.extend
     @main_view = new Views.MainView options
 
   index: ->
-    console.log 'index'
+    #console.log 'index'
     

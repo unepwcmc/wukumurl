@@ -12,18 +12,21 @@ class WukumUrl.Map.Views.List extends Backbone.View
     #'click .watch-all': 'toggleAll'
 
   initialize: (options) ->
-    @collection = options.shortUrlsCollection
+    @collection = options.locationsCollection
     @mediator = options.mediator
     @listenTo @collection, "reset", @onDataReady
     @listenTo @mediator, "Views:Map:dataUpdated", @selectUrl
+    @listenTo @mediator, "Views:Map:collectionChange", @onCollectionChange
 
   onDataReady: (collection) ->
     #@render()
 
-  render: (urls) ->
-    #collection = @collection.getActiveUrls()
-    console.log 'PPPP', urls
-    template = JST['map/templates/list'] urls
+  onCollectionChange: (collection) =>
+    @collection = collection
+    @render()
+
+  render: (urls, state) ->
+    template = JST['map/templates/list'] {urls: urls, state: state}
     @$el.html template
 
   getTarget: (e, urlId) ->
@@ -37,27 +40,9 @@ class WukumUrl.Map.Views.List extends Backbone.View
       return if (target.hasClass "active") then "active" else "inactive"
     return @collection.invertedState state
 
-  selectUrl: (d) ->
-    #console.log "selectUrl", @collection.get d.location_id
-    model = @collection.get d.location_id
-    urls = model.groupByShortUrls()
-    @render urls
-    
-
-
-  #selectUrl: (e, urlId, state) ->
-  #  target = @getTarget e, urlId
-  #  target.toggleClass("active")
-  #  urlId or= target.closest('li').attr('id').split("_")[1]
-  #  newState = @getNewState target, state
-  #  @collection.get(urlId).set "state", newState
-  #  @render()
-#
-  #toggleAll: (e) ->
-  #  target = $(e.target)
-  #  target.toggleClass("active")
-  #  newState = if (target.hasClass "active") then "active" else "inactive"
-  #  @collection.each (model) -> model.set "state": newState, {silent: true}
-  #  @mediator.trigger "url:selectedAll", newState
-  #  @render()
-
+  selectUrl: (d, collection) ->
+    #console.log "selectUrl", d
+    model = collection.get d.location_id
+    urls = model.groupByShortUrls collection.url_attribute
+    state = d.state
+    @render urls, state
