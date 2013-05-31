@@ -105,20 +105,22 @@ span.stats  {
 }
  
 .locations svg {
-  width: 60px;
-  height: 20px;
-  padding-right: 100px;
+  //width: 60px;
+  //height: 20px;
+  //padding-right: 100px;
   font: 10px sans-serif;
+  //border: 1px solid #000;
 }
  
-.locations circle {
-  fill: $grey;
-  stroke: darken($orange, 10%);
+.inactive circle {
+  fill: darken($grey, 10%); 
+  //fill: $orange;
+  stroke: darken($orange, 40%);
   stroke-width: 1.5px;
-  opacity: .6;
+  opacity: .7;
 }
 
-.locations circle.active {
+.active circle {
   fill: $orange;
   stroke: darken($grey, 60%);
   stroke-width: 1.5px;
