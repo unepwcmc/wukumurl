@@ -127,3 +127,12 @@ span.stats  {
   fill-opacity: .8;
 }
 
+svg text {
+  fill: darken($orange, 20%);
+  stroke-width: 3;
+  shape-rendering: crispEdges;
+  //font-family: 'Raleway', sans-serif;
+  font-size: 1.6em;
+  //font-weight: bold;
+}
+
