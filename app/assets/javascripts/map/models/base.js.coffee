@@ -22,6 +22,10 @@ class WukumUrl.Map.Models.BaseCollection extends Backbone.Collection
       data = _.uniq data, (d) -> d.location_id
     data
 
+  sortDataForMap: (data) ->
+    _.sortBy data, (d) ->
+      1/d.size
+
   # Given a collection of visits_location(s),
   # do not return the visits with no lat or lng.
   removeNoGeo: ->
