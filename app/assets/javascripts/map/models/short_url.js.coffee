@@ -3,29 +3,30 @@ window.WukumUrl.Map ||= {}
 window.WukumUrl.Map.Models ||= {}
 
 
-class WukumUrl.Map.Models.ShortUrl extends Backbone.Model
-
-  defaults: {
-    state: "inactive"
-  }
+class WukumUrl.Map.Models.ShortUrl extends WukumUrl.Map.Models.BaseModel
 
   ###
-  #{
-  #  id: 56,
-  #  short_name: "51a1fe179246",
-  #  url: "http://wcmc.io/short_urls/38",
-  #  visit_count: 12,
-  #  visits_location: [
-  #    {
-  #    id: 188,
-  #    latitude: null,
-  #    longitude: null
-  #    },
-  #    {
-  #    id: 189,
-  #    latitude: null,
-  #    longitude: null
-  #    }
-  #  ]
-  #}
+  [
+
+    {
+      id: 1237,
+      lat: 41.9603004455566,
+      lon: -83.6735000610352,
+      location_urls: [
+      {
+      short_name: "a43d",
+      url: "http://www.unep-wcmc.org/version1_1009.html"
+      },
+      {
+      short_name: "a43d",
+      url: "http://www.unep-wcmc.org/version1_1009.html"
+      }
+      ]
+    },
+    .
+    .
+    .
+
+  ]
   ###
+
