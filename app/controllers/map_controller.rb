@@ -4,7 +4,7 @@ class MapController < ApplicationController
 
   def list
       location = Location.order("created_at DESC").to_json(
-        :only => [:lat, :lon, :location_id],
+        :only => [:lat, :lon, :id],
         :methods => [
           :location_urls
          ]

@@ -26,7 +26,7 @@ class Location < ActiveRecord::Base
   end
 
   def location_urls
-    Location.joins(:short_urls).select([:short_name, :url])
+    Location.where(id: self.id).joins(:short_urls).select([:short_name, :url])
   end
 end
 
