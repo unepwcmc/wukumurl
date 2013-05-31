@@ -64,7 +64,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     # Resetting the prevCollection state so when zooming back to the 
     # prevCollection we do not find selected circles on the map.
     @prevCollection.resetState()
-    @data = @collection.sortDataForMap @collection.parseDataForMap()
+    @data = @collection.parseDataForMap()
     @drawSvg @data
 
   onZoomChange: (zoom) =>
@@ -107,7 +107,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
   initOverlays: ->
     #console.log "initOverlays"
     self = this
-    @data = @collection.sortDataForMap @collection.parseDataForMap()
+    @data = @collection.parseDataForMap()
     # Create an overlay.
     overlay = new google.maps.OverlayView()
 
@@ -187,10 +187,10 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       #.each(removeEventListener)
       .remove()
 
-    marker.append("svg:text")
-    .attr("x", (d) -> view.calculateRadius(d.size * rFactor) - 10)
-    .attr("y", (d) -> view.calculateRadius(d.size * rFactor) )
-    .attr("dy", ".31em").text (d) ->
-      if view.calculateRadius(d.size * rFactor) > 10
-        d.size
+    #marker.append("svg:text")
+    #.attr("x", (d) -> view.calculateRadius(d.size * rFactor) - 10)
+    #.attr("y", (d) -> view.calculateRadius(d.size * rFactor) )
+    #.attr("dy", ".31em").text (d) ->
+    #  if view.calculateRadius(d.size * rFactor) > 10
+    #    d.size
     
