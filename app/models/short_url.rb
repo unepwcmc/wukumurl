@@ -9,7 +9,10 @@ class ShortUrl < ActiveRecord::Base
 
   auto_strip_attributes :url
 
-  has_many :visits, :dependent => :destroy  
+  has_many :visits, :dependent => :destroy
+  has_many :locations, :through => :visits
+  has_many :cities, :through => :visits
+
 
   def create_short_name_if_blank
     unless self.short_name?
@@ -25,7 +28,8 @@ class ShortUrl < ActiveRecord::Base
     Visit.where(short_url_id: self.id).count
   end
 
-
+=begin
+  #old methods for location
   def visits_location
     Visit.where(short_url_id: self.id).joins(:location).select([:lat, :lon, :source, :location_id])
   end
@@ -33,7 +37,7 @@ class ShortUrl < ActiveRecord::Base
   def visits_city
     Visit.where(short_url_id: self.id).joins(:city, :location).select([:city_lat, :city_lon, :city_name, :city_id, :location_id])
   end
-
+=end
   def visits_today
     self.visits.where(['created_at > ?', Date.today])
   end
