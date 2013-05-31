@@ -187,9 +187,10 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       #.each(removeEventListener)
       .remove()
 
-    #marker.append("svg:text")
-    #.attr("x", padding + 7)
-    #.attr("y", padding)
-    #.attr("dy", ".31em").text (d) ->
-    #  d.value.visit_id
+    marker.append("svg:text")
+    .attr("x", (d) -> view.calculateRadius(d.size * rFactor) - 10)
+    .attr("y", (d) -> view.calculateRadius(d.size * rFactor) )
+    .attr("dy", ".31em").text (d) ->
+      if view.calculateRadius(d.size * rFactor) > 10
+        d.size
     
