@@ -15,17 +15,15 @@ class WukumUrl.Map.Views.List extends Backbone.View
     @collection = options.shortUrlsCollection
     @mediator = options.mediator
     @listenTo @collection, "reset", @onDataReady
-    @listenTo @mediator, "Views:Map:selectUrl", @selectUrl
+    @listenTo @mediator, "Views:Map:dataUpdated", @selectUrl
 
   onDataReady: (collection) ->
-    @render()
+    #@render()
 
-  render: ->
-    collection = @collection.getActiveUrls()
-    template = JST['map/templates/list'] {
-      collection: @collection.getActiveUrls()
-      state: @collection.getState()
-    }
+  render: (urls) ->
+    #collection = @collection.getActiveUrls()
+    console.log 'PPPP', urls
+    template = JST['map/templates/list'] urls
     @$el.html template
 
   getTarget: (e, urlId) ->
@@ -34,31 +32,32 @@ class WukumUrl.Map.Views.List extends Backbone.View
     else
       return @$el.find "#url_#{urlId}"
 
-  toggleState: (state) ->
-    if state == "inactive"
-      return "active"
-    if state == "active"
-      return "inactive"
-    throw new Error "State value should either be active or inactive, not: #{state}"
-
   getNewState: (target, state) ->
     unless state
       return if (target.hasClass "active") then "active" else "inactive"
-    return @toggleState state
+    return @collection.invertedState state
 
-  selectUrl: (e, urlId, state) ->
-    target = @getTarget e, urlId
-    target.toggleClass("active")
-    urlId or= target.closest('li').attr('id').split("_")[1]
-    newState = @getNewState target, state
-    @collection.get(urlId).set "state", newState
-    @render()
+  selectUrl: (d) ->
+    #console.log "selectUrl", @collection.get d.location_id
+    model = @collection.get d.location_id
+    urls = model.groupByShortUrls()
+    @render urls
+    
 
-  toggleAll: (e) ->
-    target = $(e.target)
-    target.toggleClass("active")
-    newState = if (target.hasClass "active") then "active" else "inactive"
-    @collection.each (model) -> model.set "state": newState, {silent: true}
-    @mediator.trigger "url:selectedAll", newState
-    @render()
+
+  #selectUrl: (e, urlId, state) ->
+  #  target = @getTarget e, urlId
+  #  target.toggleClass("active")
+  #  urlId or= target.closest('li').attr('id').split("_")[1]
+  #  newState = @getNewState target, state
+  #  @collection.get(urlId).set "state", newState
+  #  @render()
+#
+  #toggleAll: (e) ->
+  #  target = $(e.target)
+  #  target.toggleClass("active")
+  #  newState = if (target.hasClass "active") then "active" else "inactive"
+  #  @collection.each (model) -> model.set "state": newState, {silent: true}
+  #  @mediator.trigger "url:selectedAll", newState
+  #  @render()
 
