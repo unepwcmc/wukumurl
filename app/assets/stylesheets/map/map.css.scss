@@ -113,11 +113,11 @@ span.stats  {
 }
  
 .inactive circle {
-  //fill: darken($grey, 10%); 
-  fill: $orange;
+  fill: darken($grey, 10%); 
+  //fill: $orange;
   stroke: darken($orange, 10%);
   stroke-width: 2px;
-  fill-opacity: .3;
+  fill-opacity: .8;
 }
 
 .active circle {
@@ -129,7 +129,7 @@ span.stats  {
 }
 
 svg text {
-  fill: darken($orange, 35%);
+  fill: darken($orange, 25%);
   //stroke-width: 1;
   //stroke: darken($orange, 15%);
   //shape-rendering: crispEdges;
