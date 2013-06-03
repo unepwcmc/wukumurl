@@ -48,7 +48,8 @@ class WukumUrl.Map.Views.List extends Backbone.View
     return @collection.invertedState state
 
   selectUrl: (d, collection) ->
-    #console.log "selectUrl", d
+    unless d
+      return @render()
     model = collection.get d.id
     urls = model.groupByShortUrls collection.url_attribute
     @render d, model, urls
