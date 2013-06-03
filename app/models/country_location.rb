@@ -4,6 +4,6 @@ class CountryLocation < ActiveRecord::Base
   has_many :short_urls, :through => :city
 
   def country_urls
-    CountryLocation.where(iso2: "PT").joins(:short_urls).select([:short_name, :url])
+    CountryLocation.where(iso2: self.iso2).joins(:short_urls).select([:short_name, :url])
   end
 end

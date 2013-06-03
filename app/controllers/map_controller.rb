@@ -24,7 +24,7 @@ class MapController < ApplicationController
 
   def country_list
     country = CountryLocation.order("iso2 DESC").to_json(
-      :only => [:lat, :lon, :iso2],
+      :only => [:lat, :lon, :iso2, :id],
       :methods => [
          :country_urls
       ]
