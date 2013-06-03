@@ -14,7 +14,7 @@ class MapController < ApplicationController
 
   def city_list
     city = City.order("created_at DESC").to_json(
-      :only => [:lat, :lon, :id],
+      :only => [:lat, :lon, :id, :name],
       :methods => [
          :city_urls
       ]

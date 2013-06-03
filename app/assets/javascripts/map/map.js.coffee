@@ -3,7 +3,7 @@ window.WukumUrl.Map ||= {}
 
 gStyles = [
   featureType: "all"
-  stylers: [saturation: -90]
+  stylers: [saturation: -100]
 ,
   featureType: "road.arterial"
   elementType: "geometry"

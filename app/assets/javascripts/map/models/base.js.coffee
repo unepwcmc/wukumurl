@@ -18,18 +18,20 @@ class WukumUrl.Map.Models.BaseCollection extends Backbone.Collection
     #console.log "parseDataForMap"
     data = []
     @each (model) =>
-      lat = model.get "lat"
-      lng = model.get "lon"
-      id = parseInt model.get("id")
-      d = {}
-      d.lat = lat
-      d.lng = lng
-      d.state = model.get "state"
-      d.size = model.get(@url_attribute).length
-      d.id = id
-      d.uique_id = @genUniqId(lat, lng, id)
-      data.push d
-      data = _.uniq data, (d) -> d.uique_id
+      size = model.get(@url_attribute).length
+      if size > 1
+        lat = model.get "lat"
+        lng = model.get "lon"
+        id = parseInt model.get("id")
+        d = {}
+        d.lat = lat
+        d.lng = lng
+        d.state = model.get "state"
+        d.size = size
+        d.id = id
+        d.uique_id = @genUniqId(lat, lng, id)
+        data.push d
+        data = _.uniq data, (d) -> d.uique_id
     @sortDataForMap data
 
   # Sort data so the bigger circles appear behind the smaller ones on the map.
