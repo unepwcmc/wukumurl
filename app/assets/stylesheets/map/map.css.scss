@@ -82,7 +82,7 @@ span.watch-all.active {
 // and enlarge the green header stripe.
 h1 {
   font-size: 2.3em;
-  margin: 18px auto;
+  margin: 2px auto;
   text-align: center;
 }
 
@@ -113,11 +113,11 @@ span.stats  {
 }
  
 .inactive circle {
-  fill: darken($grey, 10%); 
-  //fill: $orange;
+  //fill: darken($grey, 10%); 
+  fill: $orange;
   stroke: darken($orange, 10%);
-  stroke-width: 3px;
-  fill-opacity: .8;
+  stroke-width: 2px;
+  fill-opacity: .3;
 }
 
 .active circle {
@@ -133,7 +133,28 @@ svg text {
   //stroke: darken($orange, 15%);
   //shape-rendering: crispEdges;
   //font-family: 'Raleway', sans-serif;
-  font-size: 2.2em;
+  font-size: 2em;
   //font-weight: bold;
 }
 
+#help, #home {
+  display: none;
+}
+
+.sub-header {
+  //margin: 0;
+}
+
+#list-intro-header {
+  padding-top: 30px;
+  font-size: 1.3em;
+  margin: 2px auto;
+  text-align: center;
+  font-weight: bold;
+}
+
+#list-intro-sub-header {
+  font-size: 1em;
+  margin: 2px auto;
+  text-align: center;
+}
