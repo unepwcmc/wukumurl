@@ -17,6 +17,8 @@ class WukumUrl.Map.Views.List extends Backbone.View
     @listenTo @collection, "reset", @onDataReady
     @listenTo @mediator, "Views:Map:dataUpdated", @selectUrl
     @listenTo @mediator, "Views:Map:collectionChange", @onCollectionChange
+    # Render intro text.
+    @render()
 
   onDataReady: (collection) ->
     #@render()
