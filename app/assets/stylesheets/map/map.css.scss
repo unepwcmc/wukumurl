@@ -117,7 +117,7 @@ span.stats  {
   //fill: $orange;
   stroke: darken($orange, 10%);
   stroke-width: 3px;
-  fill-opacity: .7;
+  fill-opacity: .8;
 }
 
 .active circle {
@@ -128,11 +128,12 @@ span.stats  {
 }
 
 svg text {
-  fill: darken($orange, 20%);
-  stroke-width: 3;
-  shape-rendering: crispEdges;
+  fill: darken($orange, 15%);
+  //stroke-width: 1;
+  //stroke: darken($orange, 15%);
+  //shape-rendering: crispEdges;
   //font-family: 'Raleway', sans-serif;
-  font-size: 1.6em;
+  font-size: 2.2em;
   //font-weight: bold;
 }
 
