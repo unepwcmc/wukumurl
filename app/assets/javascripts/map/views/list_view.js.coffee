@@ -28,7 +28,6 @@ class WukumUrl.Map.Views.List extends Backbone.View
     @render()
 
   render: (d, model, urls) ->
-    console.log model, model?.attributes
     template = JST['map/templates/list'] {
       urls: urls
       state: d?.state
