@@ -20,6 +20,11 @@
 
   <% end %>
   </ul>
+<% else: %>
+
+<p id="list-intro-header">Click on markers to explore link locations and data</p>
+<p id="list-intro-sub-header">(zoom for greate detail)</p>
+
 <% end %>
 
 </section>
