@@ -21,7 +21,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     # This because of the `overlay.draw` method, used from the Google Maps API.
     # On map pan and zoom this method is called and it expects a `data` value
     # to be in scope.
-    @data = null
+    @data = @max = null
     @zoomSteps = 
        0:  "countriesCollection"
        1:  "countriesCollection"
@@ -68,6 +68,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     if newCollectionName
       @prevCollection = @collection
       @collection = @options[newCollectionName]
+      @max = @collection.getMaxVal()
     else 
       throw new Error "Wrong collection name! #{zoom}"
     if @collection != @prevCollection
@@ -89,8 +90,8 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     data
 
   calculateRadius: (value) ->
-    maxValue = 309
-    maxSize = 40
+    maxValue = @max
+    maxSize = 35
     Math.sqrt(value / maxValue) * maxSize
 
   updateSVG: (d) =>
@@ -103,6 +104,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     #console.log "initOverlays"
     self = this
     @data = @collection.parseDataForMap()
+    @max = @collection.getMaxVal()
     # Create an overlay.
     overlay = new google.maps.OverlayView()
 
