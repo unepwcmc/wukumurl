@@ -122,13 +122,14 @@ span.stats  {
 
 .active circle {
   fill: $orange;
-  stroke: darken($green, 20%);
-  stroke-width: 3px;
+  stroke: darken($orange, 10%);
+  //stroke: darken($green, 20%);
+  stroke-width: 2px;
   fill-opacity: .8;
 }
 
 svg text {
-  fill: darken($orange, 15%);
+  fill: darken($orange, 35%);
   //stroke-width: 1;
   //stroke: darken($orange, 15%);
   //shape-rendering: crispEdges;
@@ -158,3 +159,13 @@ svg text {
   margin: 2px auto;
   text-align: center;
 }
+
+#list-header {
+  padding-top: 20px;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+//list-header span {
+// margin-left: 550px;
+//

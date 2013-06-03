@@ -1,12 +1,30 @@
 window.WukumUrl ||= {}
 window.WukumUrl.Map ||= {}
 
+gStyles = [
+  featureType: "all"
+  stylers: [saturation: -90]
+,
+  featureType: "road.arterial"
+  elementType: "geometry"
+  stylers: [
+    hue: "#00ffee"
+  ,
+    saturation: 50
+  ]
+,
+  featureType: "poi.business"
+  elementType: "labels"
+  stylers: [visibility: "off"]
+]
+
 options = {}
 options.mediator = _.clone(Backbone.Events)
 options.map_options = 
   center: new google.maps.LatLng(18, 0)
   zoom: 2
-  mapTypeId: google.maps.MapTypeId.TERRAIN
+  mapTypeId: google.maps.MapTypeId.ROADMAP
+  styles: gStyles
 location_options = _.extend({url_attribute: "location_urls"}, options)
 city_options = _.extend({url_attribute: "city_urls"}, options)
 countries_options = _.extend({url_attribute: "country_urls"}, options)

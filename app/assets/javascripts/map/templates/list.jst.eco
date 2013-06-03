@@ -2,6 +2,8 @@
 
 <% if @urls and @state == "active": %>
 
+  <p id="list-header"><%= @name %> <%= @size %></p>
+
   <ul id="short-url-list" class="lists">
 
   <% for short_url, url of @urls: %>
