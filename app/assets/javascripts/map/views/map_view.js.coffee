@@ -9,7 +9,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
 
   initialize: (@options) ->
     # Default collection
-    @collection = @options.citiesCollection
+    @collection = @options.countriesCollection
     @prevCollection = null
     @mediator = options.mediator
     @listenTo @collection, "reset", @initOverlays
@@ -23,18 +23,18 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     # to be in scope.
     @data = null
     @zoomSteps = 
-       0:  "citiesCollection"
-       1:  "citiesCollection"
-       2:  "citiesCollection"
-       3:  "citiesCollection"
-       4:  "citiesCollection"
-       5:  "citiesCollection"
+       0:  "countriesCollection"
+       1:  "countriesCollection"
+       2:  "countriesCollection"
+       3:  "countriesCollection"
+       4:  "countriesCollection"
+       5:  "countriesCollection"
        6:  "citiesCollection"
        7:  "citiesCollection"
        8:  "citiesCollection"
        9:  "citiesCollection"
        10: "citiesCollection"
-       11: "locationsCollection"
+       11: "citiesCollection"
        12: "locationsCollection"
        13: "locationsCollection"
        14: "locationsCollection"
@@ -48,11 +48,6 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     if @options.map_options
       @map = new google.maps.Map @el, @options.map_options
       @setMapEventListeners @map
-
-  #filterData: (st) ->
-  #  #console.log "Views.Map:filterData", st
-  #  @data = @collection.parseDataForMap()
-  #  _.each @data, (data, state) => @drawSvg data, state
 
   setMapEventListeners: (map) ->
     self = this
@@ -81,7 +76,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
   toggleState: (id) ->
     data = {}
     _.each @data, (d, idx) =>
-      if d.location_id == id
+      if d.id == id
         state = d.state
         newState = @collection.invertedState state
         @collection.get(id).set "state", newState
@@ -99,7 +94,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     Math.sqrt(value / maxValue) * maxSize
 
   updateSVG: (d) =>
-    data = @toggleState d.location_id
+    data = @toggleState d.id
     @mediator.trigger "Views:Map:dataUpdated", data.d, @collection
     @drawSvg data.data
 
@@ -146,15 +141,15 @@ class WukumUrl.Map.Views.Map extends Backbone.View
 
     addEventListener = (d) ->
       google.maps.event.addDomListener this, 'click', (e) ->
-        #view.toggleState d.location_id
+        #view.toggleState d.uique_id
         #console.log "addEventListener", d
         view.mediator.trigger "Views:Map:selectLocation", d
     
     projection = @getProjection()
     #padding = 10
     marker = layer.selectAll("svg")
-      #.data(data, (d) -> d.location_id)
-      .data(data)
+      .data(data, (d) -> d.uique_id)
+      #.data(data)
       .each(transform) # update existing markers
       .attr("class", (d) -> d.state)
     enter = marker.enter().append("svg:svg")
@@ -187,10 +182,12 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       #.each(removeEventListener)
       .remove()
 
-    #marker.append("svg:text")
-    #.attr("x", (d) -> view.calculateRadius(d.size * rFactor) - 10)
-    #.attr("y", (d) -> view.calculateRadius(d.size * rFactor) )
-    #.attr("dy", ".31em").text (d) ->
-    #  if view.calculateRadius(d.size * rFactor) > 10
-    #    d.size
+    marker.append("svg:text")
+    .attr("x", (d) -> 
+      view.calculateRadius(d.size * rFactor) - 16)
+    .attr("y", (d) -> 
+      view.calculateRadius(d.size * rFactor) )
+    .attr("dy", ".31em").text (d) ->
+      if view.calculateRadius(d.size * rFactor) > 14
+        d.size
     

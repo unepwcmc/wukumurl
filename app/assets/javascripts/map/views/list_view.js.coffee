@@ -42,7 +42,7 @@ class WukumUrl.Map.Views.List extends Backbone.View
 
   selectUrl: (d, collection) ->
     #console.log "selectUrl", d
-    model = collection.get d.location_id
+    model = collection.get d.id
     urls = model.groupByShortUrls collection.url_attribute
     state = d.state
     @render urls, state

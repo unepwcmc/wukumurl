@@ -9,19 +9,30 @@ class WukumUrl.Map.Models.BaseCollection extends Backbone.Collection
     @mediator = options.mediator
     @url_attribute = options.url_attribute
 
+  # We need a unique id across country-city-location dots,
+  # so d3 knows when to enter, update and exit.
+  genUniqId: (lat, lng, id) ->
+    lat + lng + id
+
   parseDataForMap: ->
+    #console.log "parseDataForMap"
     data = []
     @each (model) =>
+      lat = model.get "lat"
+      lng = model.get "lon"
+      id = parseInt model.get("id")
       d = {}
-      d.lat = model.get "lat"
-      d.lng = model.get "lon"
+      d.lat = lat
+      d.lng = lng
       d.state = model.get "state"
       d.size = model.get(@url_attribute).length
-      d.location_id = parseInt model.get("id")
+      d.id = id
+      d.uique_id = @genUniqId(lat, lng, id)
       data.push d
-      data = _.uniq data, (d) -> d.location_id
-    data
+      data = _.uniq data, (d) -> d.uique_id
+    @sortDataForMap data
 
+  # Sort data so the bigger circles appear behind the smaller ones on the map.
   sortDataForMap: (data) ->
     _.sortBy data, (d) ->
       1/d.size
@@ -43,6 +54,7 @@ class WukumUrl.Map.Models.BaseCollection extends Backbone.Collection
       return "active"
     return "inactive"
 
+  # Given a state: "active" or "inactive", which is its inverted?
   invertedState: (state) ->
     if state == "inactive"
       return "active"
