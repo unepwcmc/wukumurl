@@ -85,7 +85,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
   # Calculate the radius as a value-area proportion.
   calculateRadius: (value) ->
     maxValue = @max
-    maxSize = 35
+    maxSize = 30
     Math.sqrt(value / maxValue) * maxSize
 
   # The collection changes depending on zoom-level.
