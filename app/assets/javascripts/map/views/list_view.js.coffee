@@ -27,8 +27,14 @@ class WukumUrl.Map.Views.List extends Backbone.View
     @collection = collection
     @render()
 
-  render: (urls, state) ->
-    template = JST['map/templates/list'] {urls: urls, state: state}
+  render: (d, model, urls) ->
+    console.log model, model?.attributes
+    template = JST['map/templates/list'] {
+      urls: urls
+      state: d?.state
+      name: model?.get "name"
+      size: d?.size
+    }
     @$el.html template
 
   getTarget: (e, urlId) ->
@@ -46,5 +52,4 @@ class WukumUrl.Map.Views.List extends Backbone.View
     #console.log "selectUrl", d
     model = collection.get d.id
     urls = model.groupByShortUrls collection.url_attribute
-    state = d.state
-    @render urls, state
+    @render d, model, urls

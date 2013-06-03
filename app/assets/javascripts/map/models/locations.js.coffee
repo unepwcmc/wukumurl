@@ -37,3 +37,7 @@ class WukumUrl.Map.Models.Locations extends WukumUrl.Map.Models.BaseCollection
   model: window.WukumUrl.Map.Models.BaseModel
 
   url: '/map/locations'
+
+  getMaxVal: ->
+    m = @max (model) -> model.get("location_urls").length
+    m.get("location_urls").length
