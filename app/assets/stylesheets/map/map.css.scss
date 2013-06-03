@@ -161,11 +161,21 @@ svg text {
 }
 
 #list-header {
-  padding-top: 20px;
+  position: relative;
+  padding-top: 24px;
+  padding-bottom: 4px;
   font-weight: bold;
   font-size: 1.2em;
 }
 
-//list-header span {
-// margin-left: 550px;
-//
+list-header span {
+ margin-left: 550px;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
