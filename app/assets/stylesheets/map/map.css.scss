@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 $grey: #CFCFCF;
-$orange: #f38417;
+$orange: #f7941d;
 $green: #8EBD57;
 
 html { height: 100% }
@@ -105,9 +105,6 @@ span.stats  {
 }
  
 .locations svg {
-  //width: 60px;
-  //height: 20px;
-  //padding-right: 100px;
   font: 10px sans-serif;
   //border: 1px solid #000;
 }
@@ -121,21 +118,15 @@ span.stats  {
 }
 
 .active circle {
-  fill: $orange;
+  fill: lighten($grey, 10%);
   stroke: darken($orange, 10%);
-  //stroke: darken($green, 20%);
   stroke-width: 2px;
   fill-opacity: .8;
 }
 
 svg text {
   fill: darken($orange, 25%);
-  //stroke-width: 1;
-  //stroke: darken($orange, 15%);
-  //shape-rendering: crispEdges;
-  //font-family: 'Raleway', sans-serif;
   font-size: 2em;
-  //font-weight: bold;
 }
 
 #help, #home {
@@ -161,11 +152,21 @@ svg text {
 }
 
 #list-header {
-  padding-top: 20px;
+  position: relative;
+  padding-top: 24px;
+  padding-bottom: 4px;
   font-weight: bold;
   font-size: 1.2em;
 }
 
-//list-header span {
-// margin-left: 550px;
-//
+list-header span {
+ margin-left: 550px;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}

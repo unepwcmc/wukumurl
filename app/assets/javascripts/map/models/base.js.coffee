@@ -15,7 +15,6 @@ class WukumUrl.Map.Models.BaseCollection extends Backbone.Collection
     lat + lng + id
 
   parseDataForMap: ->
-    #console.log "parseDataForMap"
     data = []
     @each (model) =>
       size = model.get(@url_attribute).length
@@ -77,5 +76,5 @@ class WukumUrl.Map.Models.BaseModel extends Backbone.Model
   }
 
   groupByShortUrls: (url_attr) ->
-    urls = @.get url_attr#"location_urls"
+    urls = @.get url_attr
     _.groupBy urls, (url) -> url.short_name

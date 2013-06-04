@@ -3,7 +3,19 @@ window.WukumUrl.Map ||= {}
 
 gStyles = [
   featureType: "all"
-  stylers: [saturation: -100]
+  stylers: [saturation: -90]
+,
+  featureType: "administrative.country"
+  elementType: "labels.text.fill"
+  stylers: [
+    "lightness": 35
+  ]
+,
+  featureType: "administrative.locality"
+  elementType: "labels.text.fill"
+  stylers: [
+    "lightness": 35
+  ]
 ,
   featureType: "road.highway"
   elementType: "labels"
