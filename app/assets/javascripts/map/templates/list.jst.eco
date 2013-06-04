@@ -2,7 +2,7 @@
 
 <% if @urls and @state == "active": %>
 
-  <p id="list-header"><%= @name %> <%= @size %></p>
+  <div id="list-header"><span class="left"><%= @name %></span> <span class="right"><%= @size %><span></div>
 
   <ul id="short-url-list" class="lists">
 
