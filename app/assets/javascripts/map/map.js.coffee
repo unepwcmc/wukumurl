@@ -5,13 +5,32 @@ gStyles = [
   featureType: "all"
   stylers: [saturation: -100]
 ,
-  featureType: "road.arterial"
-  elementType: "geometry"
-  stylers: [
-    hue: "#00ffee"
-  ,
-    saturation: 50
-  ]
+  featureType: "road.highway"
+  elementType: "labels"
+  stylers: [visibility: "off"]
+,
+  featureType: "water"
+	elementType: "geometry.fill"
+	stylers: [
+		{color: "#ececec"}
+	]
+,
+ featureType: "landscape"
+ elementType: "geometry.fill"
+ stylers: [
+ 	{color: "#d7d7d7"}
+ ]
+,
+	featyreType: "administrative.country"
+	elementType: "labels.text"
+	stylers: [ {color: "#666666" } ]
+,
+	featyreType: "administrative.country"
+	elementType: "labels.text.stroke"
+	stylers: [ 
+		{color: "#dddddd" } 
+		{weight: "1px"}
+	]
 ,
   featureType: "poi.business"
   elementType: "labels"

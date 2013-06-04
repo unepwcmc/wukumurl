@@ -113,11 +113,11 @@ span.stats  {
 }
  
 .inactive circle {
-  fill: darken($grey, 10%); 
-  //fill: $orange;
+  //fill: darken($grey, 10%); 
+  fill: $orange;
   stroke: darken($orange, 10%);
-  stroke-width: 2px;
-  fill-opacity: .8;
+  stroke-width: 1px;
+  fill-opacity: .5;
 }
 
 .active circle {
