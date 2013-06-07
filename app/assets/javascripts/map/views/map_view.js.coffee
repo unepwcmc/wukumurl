@@ -132,15 +132,23 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       unless level
         return value
       cat = _.find level, (v, i) -> value < v.max_val
-      console.log cat.size
       cat.size
 
   # Calculate the radius as a value-area proportion.
   calculateRadius: (value) ->
+    if @options.use_categories
+      return @categorizeValueMem value
     maxValue = @max
     maxSize = 30
-    @categorizeValueMem Math.sqrt(value / maxValue) * maxSize
+    Math.sqrt(value / maxValue) * maxSize
 
+  centreText: (value) ->
+    if value > 99
+      return 16
+    if value > 9
+      return 12
+    4
+    
   setCollection: (collectionName) ->
     @prevCollection = @collection
     @collection = @options[collectionName]
@@ -221,9 +229,9 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       .data(data, (d) -> d.uique_id)
       .each(transform) # update existing markers
       .attr("class", (d) -> d.state)
+
     enter = marker.enter().append("svg:svg")
       .each(transform)
-      .attr("class", "marker")
       .attr("class", (d) -> d.state)
       .append("svg:circle")
       .each(addEventListeners)
@@ -235,12 +243,16 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       .remove()
 
     # TODO: Circle labels need a better implementation.
-    marker.append("svg:text")
-    .attr("x", (d) -> 
-      view.calculateRadius(d.size * rFactor) - 16)
+    marker.insert("svg:text", "circle")
+    #marker.append("svg:text")
+    .attr("x", (d) ->
+      view.calculateRadius(d.size * rFactor) - view.centreText(d.size))
     .attr("y", (d) -> 
       view.calculateRadius(d.size * rFactor) )
     .attr("dy", ".31em").text (d) ->
       if view.calculateRadius(d.size * rFactor) > 14
+        #circle = d3.select(this).node().parentNode.firstChild
         d.size
+
+
     

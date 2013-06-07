@@ -51,6 +51,7 @@ gStyles = [
 
 options = {}
 options.mediator = _.clone(Backbone.Events)
+options.use_categories = yes
 options.map_options = 
   center: new google.maps.LatLng(18, 0)
   zoom: 2
