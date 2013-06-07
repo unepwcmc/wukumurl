@@ -174,9 +174,11 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     @max = @collection.getMaxVal()
     {collection: @collection, prevCollection: @prevCollection, max: @max}
 
-  setCollectionName: (zoom) ->
+  setCollectionName: (zoom) =>
     @prevCollectionName = @collectionName
     @collectionName = @zoomSteps[zoom]
+    @mediator.trigger "Views:Map:collectionNameChange", @collectionName
+    @collectionName
 
   # The collection changes depending on zoom-level.
   onCollectionChange: (collection) =>
