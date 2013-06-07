@@ -36,6 +36,7 @@ end
 gem 'pg'
 
 gem 'jquery-rails'
+gem 'eco'
 
 gem "auto_strip_attributes", "~> 1.0"
 
@@ -52,4 +53,9 @@ gem "auto_strip_attributes", "~> 1.0"
 # gem 'capistrano'
 
 # To use debugger
+
+#group :test, :development do
+#  gem 'konacha'
+#  gem 'konacha-chai-matchers'
+#end
 
