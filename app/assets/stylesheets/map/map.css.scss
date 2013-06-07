@@ -114,18 +114,18 @@ span.stats  {
   fill: $orange;
   stroke: darken($orange, 10%);
   stroke-width: 1px;
-  fill-opacity: .5;
+  fill-opacity: .4;
 }
 
 .active circle {
   fill: lighten($grey, 10%);
   stroke: darken($orange, 10%);
   stroke-width: 2px;
-  fill-opacity: .8;
+  fill-opacity: .5;
 }
 
 svg text {
-  fill: darken($orange, 25%);
+  fill: darken($orange, 35%);
   font-size: 2em;
 }
 
