@@ -42,7 +42,7 @@ class WukumUrl.Map.Views.List extends Backbone.View
     template = JST['map/templates/list'] {
       urls: urls
       state: d?.state
-      name: model?.get("name") or "Organizations"
+      name: model?.get("name") or model?.get("organization")?.name or ""
       size: d?.size
       collectionName: collectionName
     }
