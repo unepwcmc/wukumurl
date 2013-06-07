@@ -27,25 +27,69 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     # to be in scope.
     @data = @max = null
     @zoomSteps = 
-       0:  "countriesCollection"
-       1:  "countriesCollection"
-       2:  "countriesCollection"
-       3:  "countriesCollection"
-       4:  "countriesCollection"
-       5:  "countriesCollection"
-       6:  "citiesCollection"
-       7:  "citiesCollection"
-       8:  "citiesCollection"
-       9:  "citiesCollection"
-       10: "citiesCollection"
-       11: "citiesCollection"
-       12: "locationsCollection"
-       13: "locationsCollection"
-       14: "locationsCollection"
-       15: "locationsCollection"
-       16: "locationsCollection"
-       17: "locationsCollection"
-       18: "locationsCollection"
+      0:  "countriesCollection"
+      1:  "countriesCollection"
+      2:  "countriesCollection"
+      3:  "countriesCollection"
+      4:  "countriesCollection"
+      5:  "countriesCollection"
+      6:  "citiesCollection"
+      7:  "citiesCollection"
+      8:  "citiesCollection"
+      9:  "citiesCollection"
+      10: "citiesCollection"
+      11: "citiesCollection"
+      12: "locationsCollection"
+      13: "locationsCollection"
+      14: "locationsCollection"
+      15: "locationsCollection"
+      16: "locationsCollection"
+      17: "locationsCollection"
+      18: "locationsCollection"
+    @setCollectionName @options.map_options.zoom
+    @categories =
+      countriesCollection: [
+          max_val: 10
+          size: 8
+        ,
+          max_val: 20
+          size: 16
+        ,
+          max_val: Infinity
+          size: 24
+        ]
+      citiesCollection: [
+          max_val: 4
+          size: 6
+        ,
+          max_val: 8
+          size: 12
+        ,
+          max_val: 16
+          size: 18
+        ,
+          max_val: Infinity
+          size: 24
+        ]
+      locationsCollection: [
+          max_val: 2
+          size: 4
+        ,
+          max_val: 5
+          size: 8
+        ,
+          max_val: 8
+          size: 14
+        ,
+          max_val: 16
+          size: 18
+        ,
+          max_val: Infinity
+          size: 24
+        ]
+    # Caching the values for the categorizeValue function
+    @categorizeValueMem = @categorizeValue()
+    
 
   render: ->
     if @options.map_options
@@ -82,11 +126,29 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     data.data = @data
     data
 
+  categorizeValue: ->
+    _.memoize (value) =>
+      level = @categories[@collectionName]
+      unless level
+        return value
+      cat = _.find level, (v, i) -> value < v.max_val
+      console.log cat.size
+      cat.size
+
   # Calculate the radius as a value-area proportion.
   calculateRadius: (value) ->
     maxValue = @max
     maxSize = 30
-    Math.sqrt(value / maxValue) * maxSize
+    @categorizeValueMem Math.sqrt(value / maxValue) * maxSize
+
+  setCollection: (collectionName) ->
+    @prevCollection = @collection
+    @collection = @options[collectionName]
+    @max = @collection.getMaxVal()
+    {collection: @collection, prevCollection: @prevCollection, max: @max}
+
+  setCollectionName: (zoom) ->
+    @collectionName = @zoomSteps[zoom]
 
   # The collection changes depending on zoom-level.
   onCollectionChange: (collection) =>
@@ -95,17 +157,15 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     @prevCollection.resetState()
     @data = @collection.parseDataForMap()
     @drawSvg @data
-
+  
   onZoomChange: (zoom) =>
-    newCollectionName = @zoomSteps[zoom]
+    newCollectionName = @setCollectionName zoom
     if newCollectionName
-      @prevCollection = @collection
-      @collection = @options[newCollectionName]
-      @max = @collection.getMaxVal()
+      c = @setCollection newCollectionName
     else 
       throw new Error "Wrong collection name! #{zoom}"
-    if @collection != @prevCollection
-      @mediator.trigger "Views:Map:collectionChange", @collection
+    if c.collection != c.prevCollection
+      @mediator.trigger "Views:Map:collectionChange", c.collection
 
   onMapClick: =>
     unless @killEvent
