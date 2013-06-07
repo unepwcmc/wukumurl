@@ -5,15 +5,15 @@ class Visit < ActiveRecord::Base
   belongs_to :country
   belongs_to :organization
 
-  def geo_locate
-    require 'geoip'
-    geo_locate_country
-    geo_locate_organization
+  # Pass in GeoIP database instances separately, as creating an instance
+  # per Visit results in a memory leak.
+  def geo_locate country_db, organisation_db
+    geo_locate_country(country_db)
+    geo_locate_organization(organisation_db)
   end
 
-  def geo_locate_country
-    cdb = GeoIP::Country.new(GEO_IP_CONFIG['country_db'])
-    country_attributes = cdb.look_up self.ip_address
+  def geo_locate_country db
+    country_attributes = db.look_up self.ip_address
     if country_attributes.nil?
       # Too noisy for now
       #puts "Unable to geolocate country of visit #{self.id}"
@@ -22,9 +22,8 @@ class Visit < ActiveRecord::Base
     end
   end
 
-  def geo_locate_organization
-    cdb = GeoIP::Organization.new(GEO_IP_CONFIG['org_db'])
-    organization_attributes = cdb.look_up self.ip_address
+  def geo_locate_organization db
+    organization_attributes = db.look_up self.ip_address
     if organization_attributes.nil?
       # Too noisy for now
       #puts "Unable to geolocate organisation of visit #{self.id}"
