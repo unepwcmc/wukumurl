@@ -10,7 +10,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
   initialize: (@options) ->
     # Default collection
     @collection = @options.countriesCollection
-    @prevCollection = null
+    @prevCollection = @prevCollectionName = null
     @mediator = options.mediator
     @listenTo @collection, "reset", @initOverlays
     #@listenTo @collection, "change", @filterData
@@ -49,46 +49,58 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     @setCollectionName @options.map_options.zoom
     @categories =
       countriesCollection: [
-          max_val: 10
+          max_val: 9
           size: 8
+          font_size: 15
         ,
           max_val: 20
           size: 16
+          font_size: 20
         ,
           max_val: Infinity
           size: 24
+          font_size: 24
         ]
       citiesCollection: [
           max_val: 4
-          size: 6
+          size: 16
+          font_size: 16
         ,
-          max_val: 8
+          max_val: 9
           size: 12
+          font_size: 18
         ,
           max_val: 16
           size: 18
+          font_size: 22
         ,
           max_val: Infinity
           size: 24
+          font_size: 25
         ]
       locationsCollection: [
           max_val: 2
           size: 4
+          font_size: 15
         ,
           max_val: 5
           size: 8
+          font_size: 16
         ,
-          max_val: 8
+          max_val: 9
           size: 14
+          font_size: 18
         ,
           max_val: 16
           size: 18
+          font_size: 22
         ,
           max_val: Infinity
           size: 24
+          font_size: 26
         ]
-    # Caching the values for the categorizeValue function
-    @categorizeValueMem = @categorizeValue()
+    # Caching the values for the etCat function
+    @getCatMem = @getCat()
     
 
   render: ->
@@ -126,27 +138,34 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     data.data = @data
     data
 
-  categorizeValue: ->
+  getCat: ->
     _.memoize (value) =>
       level = @categories[@collectionName]
       unless level
-        return value
-      cat = _.find level, (v, i) -> value < v.max_val
-      cat.size
+        throw new Error "getCat: cannot find level"
+      _.find level, (v, i) -> value < v.max_val
+
+  categorizeValue: (value) ->
+    cat = @getCatMem value
+    cat.size
+
+  getFontSize: (value) ->
+    cat = @getCatMem value
+    cat.font_size
 
   # Calculate the radius as a value-area proportion.
   calculateRadius: (value) ->
     if @options.use_categories
-      return @categorizeValueMem value
+      return @categorizeValue value
     maxValue = @max
     maxSize = 30
     Math.sqrt(value / maxValue) * maxSize
 
   centreText: (value) ->
     if value > 99
-      return 16
+      return 20
     if value > 9
-      return 12
+      return 13
     4
     
   setCollection: (collectionName) ->
@@ -156,6 +175,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     {collection: @collection, prevCollection: @prevCollection, max: @max}
 
   setCollectionName: (zoom) ->
+    @prevCollectionName = @collectionName
     @collectionName = @zoomSteps[zoom]
 
   # The collection changes depending on zoom-level.
@@ -242,17 +262,24 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       #.each(removeEventListener) # TODO?
       .remove()
 
-    # TODO: Circle labels need a better implementation.
-    marker.insert("svg:text", "circle")
-    #marker.append("svg:text")
-    .attr("x", (d) ->
-      view.calculateRadius(d.size * rFactor) - view.centreText(d.size))
-    .attr("y", (d) -> 
-      view.calculateRadius(d.size * rFactor) )
-    .attr("dy", ".31em").text (d) ->
-      if view.calculateRadius(d.size * rFactor) > 14
-        #circle = d3.select(this).node().parentNode.firstChild
+    # TODO: this needs refactoring.
+    if view.collectionName != view.prevCollectionName
+      # TODO: Circle labels need a better implementation.
+      marker.insert("svg:text", "circle")
+      #marker.append("svg:text")
+      .attr("x", (d) ->
+        view.calculateRadius(d.size * rFactor) - view.centreText(d.size))
+      .attr("y", (d) -> 
+        view.calculateRadius(d.size * rFactor) )
+      .attr("dy", ".31em")
+      .text (d) ->
+        #if view.calculateRadius(d.size * rFactor) > 14
+          #circle = d3.select(this).node().parentNode.firstChild
         d.size
+      .style("font-size", (d) -> 
+        s = view.getFontSize d.size
+        "#{s}px"
+      )
 
 
     
