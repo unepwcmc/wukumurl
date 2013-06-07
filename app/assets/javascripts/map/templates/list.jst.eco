@@ -2,7 +2,18 @@
 
 <% if @urls and @state == "active": %>
 
-  <div id="list-header"><span class="left"><%= @name %></span> <span class="right"><%= @size %><span></div>
+  <div id="list-header">
+    <span class="left"><%= @name %></span> <span class="right"><%= @size %></span>
+
+  <% if @collectionName == "countriesCollection": %>
+    <p id="list-sub-header">zoom in to see city detail on map.</p>
+  <% end %>
+  <% if @collectionName == "citiesCollection": %>
+    <p id="list-sub-header">zoom in to see organization detail on map.</p>
+  <% end %>
+     
+  </div>
+  
 
   <ul id="short-url-list" class="lists">
 

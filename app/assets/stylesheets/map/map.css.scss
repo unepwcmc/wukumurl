@@ -153,10 +153,14 @@ svg text {
 
 #list-header {
   position: relative;
-  padding-top: 24px;
-  padding-bottom: 4px;
+  padding-top: 22px;
+  padding-bottom: 2px;
   font-weight: bold;
   font-size: 1.2em;
+}
+#list-sub-header {
+  margin-top: 20px;
+  font-size: .8em;
 }
 
 list-header span {
