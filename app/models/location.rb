@@ -29,6 +29,7 @@ class Location < ActiveRecord::Base
     Location.where(id: self.id).joins(:short_urls).select([:short_name, :url])
   end
 
+  #TODO: need to return organizations, not only first
   def organization
     id = Location.where(id: self.id).joins(:visits).select([:organization_id])
     Organization.where(id: id).select([:name]).first
