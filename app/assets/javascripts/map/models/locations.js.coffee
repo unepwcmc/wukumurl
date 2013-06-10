@@ -39,5 +39,12 @@ class WukumUrl.Map.Models.Locations extends WukumUrl.Map.Models.BaseCollection
   url: '/map/locations'
 
   getMaxVal: ->
-    m = @max (model) -> model.get("location_urls").length
-    m.get("location_urls").length
+    m = @max (model) -> model.get("location_urls")?.length
+    m.get("location_urls")?.length
+
+  # Names are here Organizations
+  getNames: ->
+    names = []
+    _.each @get("organizations"), (k, name) ->
+      names.push name
+    names
