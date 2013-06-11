@@ -1,0 +1,17 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: wukumurl_development
+  pool: 5
+  username: postgres
+  password:
+  host: localhost
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: wukumurl_test
+  pool: 5
+  username: postgres
+  password:
+  host: localhost
