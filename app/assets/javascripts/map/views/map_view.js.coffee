@@ -237,9 +237,10 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       d3.select(this)
         .style("left", (d.x - r) + "px")
         .style("top", (d.y - r) + "px")
-        .style("height", r*2)
-        .style("width", r*2)
+        .style("height", "#{r*2}px")
+        .style("width", "#{r*2}px")
         .style("padding", "2px")
+
 
     addEventListeners = (d) ->
       google.maps.event.addDomListener this, 'click', (e) ->
@@ -265,6 +266,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       .remove()
 
     # TODO: this needs refactoring.
+    # BUG: text is redrawn on click!
     if view.collectionName != view.prevCollectionName
       # TODO: Circle labels need a better implementation.
       marker.insert("svg:text", "circle")
