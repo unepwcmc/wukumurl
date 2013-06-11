@@ -15,7 +15,7 @@
   </div>
   
 
-  <ul id="short-url-list" class="lists">
+  <ul id="short-url-list" class="lists <% if @collectionName == "locationsCollection": %>expand<% end %>">
 
   <% for short_url, url of @urls: %>
 
