@@ -49,11 +49,11 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     @setCollectionName @options.map_options.zoom
     @categories =
       countriesCollection: [
-          max_val: 9
+          max_val: 10
           size: 8
           font_size: 15
         ,
-          max_val: 20
+          max_val: 99
           size: 16
           font_size: 20
         ,
@@ -62,16 +62,16 @@ class WukumUrl.Map.Views.Map extends Backbone.View
           font_size: 24
         ]
       citiesCollection: [
-          max_val: 4
-          size: 16
+          max_val: 10
+          size: 12
           font_size: 16
         ,
-          max_val: 9
-          size: 12
+          max_val: 49
+          size: 16
           font_size: 18
         ,
-          max_val: 16
-          size: 18
+          max_val: 99
+          size: 20
           font_size: 22
         ,
           max_val: Infinity
@@ -79,19 +79,19 @@ class WukumUrl.Map.Views.Map extends Backbone.View
           font_size: 25
         ]
       locationsCollection: [
-          max_val: 2
+          max_val: 5
           size: 4
           font_size: 15
         ,
-          max_val: 5
+          max_val: 9
           size: 8
           font_size: 16
         ,
-          max_val: 9
+          max_val: 20
           size: 14
           font_size: 18
         ,
-          max_val: 16
+          max_val: 40
           size: 18
           font_size: 22
         ,
