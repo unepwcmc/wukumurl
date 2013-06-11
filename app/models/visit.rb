@@ -7,8 +7,6 @@ class Visit < ActiveRecord::Base
   belongs_to :city
   belongs_to :location
 
-  require 'geoip'
-  require 'geocoder'
 =begin
   def geo_locate_country
     cdb = GeoIP::Country.new(GEO_IP_CONFIG['country_db'])
@@ -22,13 +20,11 @@ class Visit < ActiveRecord::Base
   end
 =end
 
-  def geo_locate
+  def geo_locate (cdb, orgdb)
     #Look for Organization using IP
-    orgdb = GeoIP::Organization.new(GEO_IP_CONFIG['org_db'])
     organization_attributes = orgdb.look_up self.ip_address
 
     #Look for City and Country using IP
-    cdb = GeoIP::City.new(GEO_IP_CONFIG['city_db'])
     city_attributes = cdb.look_up self.ip_address
     if city_attributes.nil?
     else
