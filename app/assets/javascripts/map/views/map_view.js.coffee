@@ -204,7 +204,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
   updateSVG: (d) =>
     data = @toggleState d.id
     @mediator.trigger "Views:Map:dataUpdated", data.d, @collection
-    @drawSvg data.data
+    @drawSvg data.data, no # no, do not update svg:text
 
   # Derived from: https://gist.github.com/mbostock/899711
   initOverlays: ->
@@ -228,7 +228,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
 
   # The function is partially applied with the `layer` argument
   # within the `overlay.onAdd` method.
-  drawSvg: (layer, view, data) ->
+  drawSvg: (layer, view, data, updateTxt=yes) ->
     rFactor = 1
     transform = (d) ->
       r = view.calculateRadius(d.size * rFactor)
@@ -261,13 +261,14 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       .attr("r", (d) -> view.calculateRadius(d.size * rFactor) )
       .attr("cx", (d) -> view.calculateRadius(d.size * rFactor) )
       .attr("cy", (d) -> view.calculateRadius(d.size * rFactor) )
+
     exit = marker.exit()
       #.each(removeEventListener) # TODO?
       .remove()
 
     # TODO: this needs refactoring.
     # BUG: text is redrawn on click!
-    if view.collectionName != view.prevCollectionName
+    if view.collectionName != view.prevCollectionName and updateTxt
       # TODO: Circle labels need a better implementation.
       marker.insert("svg:text", "circle")
       #marker.append("svg:text")
