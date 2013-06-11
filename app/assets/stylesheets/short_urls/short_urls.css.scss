@@ -398,3 +398,20 @@ ul.lists {
 span.compare_urls {
   color: #E3E3E3;
 }
+
+
+span.map-link {
+
+}
+
+span.map-link a {
+  float: right;
+  background: url(/assets/map-button.png) no-repeat;
+  color: #fff;
+  width: 88px;
+  height: 24px;
+  text-align: center;
+  padding-top: 3px; 
+  //line-height: 0;
+}
+
