@@ -1,10 +1,10 @@
 class City < ActiveRecord::Base
-  attr_accessible :country, :iso2, :iso3, :city_lat, :city_lon, :city_name, :region
+  attr_accessible :country, :iso2, :iso3, :lat, :lon, :name, :region
   has_many :visits
   has_many :short_urls, :through => :visits
   belongs_to :country_location, :foreign_key => "iso2", :primary_key => "id"
 
-  MaxMindMappings = {country_name: :country, country_code: :iso2, country_code3: :iso3, latitude: :city_lat, longitude: :city_lon, city: :city_name, region: :region}
+  MaxMindMappings = {country_name: :country, country_code: :iso2, country_code3: :iso3, latitude: :lat, longitude: :lon, city: :name, region: :region}
 
   def self.find_or_create_by_max_mind_attributes attributes
       short_attributes = attributes.slice(:country_name, :country_code, :latitude, :longitude, :region, :city)
