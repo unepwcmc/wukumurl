@@ -6,7 +6,8 @@ class MapController < ApplicationController
     location = Location.order("created_at DESC").to_json(
       :only => [:lat, :lon, :id],
       :methods => [
-        :location_urls
+        :location_urls,
+        :organization
       ]
     )
     render json: location

@@ -17,6 +17,10 @@ class WukumUrl.Map.Views.List extends Backbone.View
     @listenTo @collection, "reset", @onDataReady
     @listenTo @mediator, "Views:Map:dataUpdated", @selectUrl
     @listenTo @mediator, "Views:Map:collectionChange", @onCollectionChange
+    @listenTo @mediator, "Views:Map:collectionNameChange", 
+      @onCollectionNameChange
+    # TODO: this should be passed with some configuration.
+    @collectionName = "countriesCollection"
     # Render intro text.
     @render()
 
@@ -27,12 +31,20 @@ class WukumUrl.Map.Views.List extends Backbone.View
     @collection = collection
     @render()
 
-  render: (d, model, urls) ->
+  onCollectionChange: (collection) =>
+    @collection = collection
+    @render()
+
+  onCollectionNameChange: (collectionName) =>
+    @collectionName = collectionName
+
+  render: (d, model, urls, collectionName) ->
     template = JST['map/templates/list'] {
       urls: urls
       state: d?.state
-      name: model?.get "name"
+      name: model?.get("name") or model?.get("organization")?.name or ""
       size: d?.size
+      collectionName: collectionName
     }
     @$el.html template
 
@@ -52,4 +64,4 @@ class WukumUrl.Map.Views.List extends Backbone.View
       return @render()
     model = collection.get d.id
     urls = model.groupByShortUrls collection.url_attribute
-    @render d, model, urls
+    @render d, model, urls, @collectionName

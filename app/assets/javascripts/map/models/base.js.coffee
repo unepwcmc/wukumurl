@@ -78,3 +78,7 @@ class WukumUrl.Map.Models.BaseModel extends Backbone.Model
   groupByShortUrls: (url_attr) ->
     urls = @.get url_attr
     _.groupBy urls, (url) -> url.short_name
+
+
+  getNames: ->
+    [model?.get("name")]

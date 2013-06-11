@@ -12,7 +12,7 @@ body { height: 100%; margin: 0; padding: 0 }
 
 body {
   line-height: 1;
-  background: url(../background_small.gif) top left repeat-x;
+  background: url(background_small.gif) top left repeat-x;
 }
 
 span.link {
@@ -126,7 +126,7 @@ span.stats  {
 
 svg text {
   fill: darken($orange, 35%);
-  font-size: 2em;
+  //font-size: 2em;
 }
 
 #help, #home {
@@ -153,10 +153,14 @@ svg text {
 
 #list-header {
   position: relative;
-  padding-top: 24px;
-  padding-bottom: 4px;
+  padding-top: 22px;
+  padding-bottom: 2px;
   font-weight: bold;
   font-size: 1.2em;
+}
+#list-sub-header {
+  margin-top: 20px;
+  font-size: .8em;
 }
 
 list-header span {
