@@ -36,7 +36,7 @@
 <% else: %>
 
 <p id="list-intro-header">Click on markers to explore link locations and data</p>
-<p id="list-intro-sub-header">(zoom for greate detail)</p>
+<p id="list-intro-sub-header">(zoom for greater detail)</p>
 
 <% end %>
 
