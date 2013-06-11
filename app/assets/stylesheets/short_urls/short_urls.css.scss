@@ -34,7 +34,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
   line-height: 1;
-  background: url(background.gif) top left repeat-x;
+  background: url(/assets/background.gif) top left repeat-x;
 }
 ul {
   list-style: none;
@@ -174,7 +174,7 @@ span.stat{
 }
 
 a.link{
-  background: url(icon_link.png)  left no-repeat;
+  background: url(/assets/icon_link.png)  left no-repeat;
   padding: 10px;
   margin: 0 0 0 20px;
 }
@@ -193,18 +193,18 @@ a.nav{
 }
 
 #help{
-	background: url(help_icon.png);	
+	background: url(/assets/help_icon.png);	
 }
 #help:hover{
-	background: url(help_icon2.png);
+	background: url(/assets/help_icon2.png);
 }
 
 #home{
-	background: url(home_icon.png);	
+	background: url(/assets/home_icon.png);	
 }
 
 #home:hover{
-	background: url(home_icon2.png);	
+	background: url(/assets/home_icon2.png);	
 }
 
 /* structure */
@@ -369,13 +369,13 @@ ul.lists {
 		color: #999;
 		font-weight: normal;
 		font-size: 0.8em; 
- 		background: url(remove-0.png) right no-repeat;
+ 		background: url(/assets/remove-0.png) right no-repeat;
       padding: 0px 12px 0px 0px;     
       }
 
 	 a:hover{
 		color: #ff7f7f;
-		background: url(remove.png) right no-repeat;
+		background: url(/assets/remove.png) right no-repeat;
       padding: 0px 12px 0px 0px;
 		}
     }
