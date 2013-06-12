@@ -12,6 +12,6 @@
 //
 
 //= require jquery
-//// require jquery_ujs
+//= require jquery_ujs
 //= require laconic
 //= require underscore-min
