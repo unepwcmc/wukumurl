@@ -178,3 +178,13 @@ list-header span {
 ul.expand {
   margin: 26px 0 0 0;
 }
+
+.ajax-loader {
+  z-index: 999999999;
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  margin-left: -33px; /* -1 * image width / 2 */
+  margin-top: -33px;  /* -1 * image height / 2 */
+  display: block;
+}
