@@ -209,6 +209,8 @@ class WukumUrl.Map.Views.Map extends Backbone.View
   # Derived from: https://gist.github.com/mbostock/899711
   initOverlays: ->
     self = this
+    # Remove loading gif
+    $(".ajax-loader").hide()
     @data = @collection.parseDataForMap()
     @max = @collection.getMaxVal()
     # Create an overlay.
