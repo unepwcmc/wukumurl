@@ -258,7 +258,22 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     enter = marker.enter().append("svg:svg")
       .each(transform)
       .attr("class", (d) -> d.state)
-      .append("svg:circle")
+
+    # Lets position the text first (under the circle), so it does not interfere
+    # with the click events. Only works because our circles are semi-transparent.
+    txt = enter.append("svg:text")
+      .attr("x", (d) ->
+        view.calculateRadius(d.size * rFactor) - view.centreText(d.size))
+      .attr("y", (d) -> 
+        view.calculateRadius(d.size * rFactor) )
+      .attr("dy", ".31em")
+      .text((d) -> d.size)
+      .style("font-size", (d) -> 
+        s = view.getFontSize d.size
+        "#{s}px"
+      )
+
+    circle = enter.append("svg:circle")
       .each(addEventListeners)
       .attr("r", (d) -> view.calculateRadius(d.size * rFactor) )
       .attr("cx", (d) -> view.calculateRadius(d.size * rFactor) )
@@ -268,25 +283,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       #.each(removeEventListener) # TODO?
       .remove()
 
-    # TODO: this needs refactoring.
-    # BUG: text is redrawn on click!
-    if view.collectionName != view.prevCollectionName and updateTxt
-      # TODO: Circle labels need a better implementation.
-      marker.insert("svg:text", "circle")
-      #marker.append("svg:text")
-      .attr("x", (d) ->
-        view.calculateRadius(d.size * rFactor) - view.centreText(d.size))
-      .attr("y", (d) -> 
-        view.calculateRadius(d.size * rFactor) )
-      .attr("dy", ".31em")
-      .text (d) ->
-        #if view.calculateRadius(d.size * rFactor) > 14
-          #circle = d3.select(this).node().parentNode.firstChild
-        d.size
-      .style("font-size", (d) -> 
-        s = view.getFontSize d.size
-        "#{s}px"
-      )
+   
 
 
     
