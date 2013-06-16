@@ -154,12 +154,13 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     cat.font_size
 
   # Calculate the radius as a value-area proportion.
-  calculateRadius: (value) ->
-    if @options.use_categories
-      return @categorizeValue value
-    maxValue = @max
-    maxSize = 30
-    Math.sqrt(value / maxValue) * maxSize
+  calculateRadius: ->
+    _.memoize (value) =>
+      if @options.use_categories
+        return @categorizeValue value
+      maxValue = @max
+      maxSize = 30
+      Math.sqrt(value / maxValue) * maxSize
 
   centreText: (value) ->
     if value > 99
@@ -230,10 +231,11 @@ class WukumUrl.Map.Views.Map extends Backbone.View
 
   # The function is partially applied with the `layer` argument
   # within the `overlay.onAdd` method.
-  drawSvg: (layer, view, data, updateTxt=yes) ->
+  drawSvg: (layer, self, data, updateTxt=yes) ->
     rFactor = 1
+    cR = self.calculateRadius()
     transform = (d) ->
-      r = view.calculateRadius(d.size * rFactor)
+      r = cR(d.size * rFactor)
       d = new google.maps.LatLng(d.lat, d.lng)
       d = projection.fromLatLngToDivPixel(d)
       d3.select(this)
@@ -243,11 +245,10 @@ class WukumUrl.Map.Views.Map extends Backbone.View
         .style("width", "#{r*2}px")
         .style("padding", "2px")
 
-
     addEventListeners = (d) ->
       google.maps.event.addDomListener this, 'click', (e) ->
-        view.mediator.trigger "Views:Map:selectLocation", d
-        view.killEvent = yes
+        self.mediator.trigger "Views:Map:selectLocation", d
+        self.killEvent = yes
     
     projection = @getProjection()
     marker = layer.selectAll("svg")
@@ -263,21 +264,21 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     # with the click events. Only works because our circles are semi-transparent.
     txt = enter.append("svg:text")
       .attr("x", (d) ->
-        view.calculateRadius(d.size * rFactor) - view.centreText(d.size))
+        cR(d.size * rFactor) - self.centreText(d.size))
       .attr("y", (d) -> 
-        view.calculateRadius(d.size * rFactor) )
+        cR(d.size * rFactor) )
       .attr("dy", ".31em")
       .text((d) -> d.size)
       .style("font-size", (d) -> 
-        s = view.getFontSize d.size
+        s = self.getFontSize d.size
         "#{s}px"
       )
 
     circle = enter.append("svg:circle")
       .each(addEventListeners)
-      .attr("r", (d) -> view.calculateRadius(d.size * rFactor) )
-      .attr("cx", (d) -> view.calculateRadius(d.size * rFactor) )
-      .attr("cy", (d) -> view.calculateRadius(d.size * rFactor) )
+      .attr("r", (d) -> cR(d.size * rFactor) )
+      .attr("cx", (d) -> cR(d.size * rFactor) )
+      .attr("cy", (d) -> cR(d.size * rFactor) )
 
     exit = marker.exit()
       #.each(removeEventListener) # TODO?
