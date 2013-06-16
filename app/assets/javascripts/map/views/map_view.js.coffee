@@ -229,8 +229,10 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     # Bind our overlay to the map…
     overlay.setMap @map
 
-  # The function is partially applied with the `layer` argument
-  # within the `overlay.onAdd` method.
+  # The function is partially applied with `layer` and `self` arguments.
+  # `layer` is the div element that wraps all the svg elements that 
+  #  appear on the map.
+  # `self` is a reference to the instance (this) of WukumUrl.Map.Views.Map.
   drawSvg: (layer, self, data, updateTxt=yes) ->
     rFactor = 1
     cR = self.calculateRadius()
