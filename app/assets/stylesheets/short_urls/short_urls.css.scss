@@ -36,7 +36,7 @@ footer, header, hgroup, menu, nav, section {
 
 body {
   line-height: 1;
-  background: url(background.gif) top left repeat-x;
+  background: image-url("background.gif") top left repeat-x;
 }
 
 ul {
@@ -175,7 +175,7 @@ span.stat {
 }
 
 a.link {
-  background: url(icon_link.png)  left no-repeat;
+  background: image-url("icon_link.png")  left no-repeat;
   padding: 10px;
   margin: 0 0 0 20px;
 }
@@ -194,19 +194,18 @@ a.nav{
 }
 
 #help {
-  background: url(help_icon.png);
+  background: image-url("help_icon.png");
 }
-
 #help:hover {
-  background: url(help_icon2.png);
+  background: image-url("help_icon2.png");
 }
 
 #home {
-  background: url(home_icon.png);
+  background: image-url("home_icon.png");
 }
 
 #home:hover {
-  background: url(home_icon2.png);
+  background: image-url("home_icon2.png");
 }
 
 /* structure */
@@ -219,11 +218,11 @@ a.nav{
 
 header{
   width: 100%;
-  height: 295px;
+  height: 265px;
 }
 
 section{
-  margin: 20px 0 0 0;
+  margin: 22px 0 0 0;
 }
 
 footer{
@@ -284,7 +283,7 @@ ul.stat-groups li{
 
 ul.lists {
   border-top: 1px solid #474a5c;
-  margin: 20px 0 0 0;
+  margin: 12px 0 0 0;
 
   li {
     float: left;
@@ -303,14 +302,14 @@ ul.lists {
       margin-top: 5px;
       margin-bottom: 5px;
 
-      div{
+      div {
         float: right;
 
         a {
           font-weight: normal;
           padding: 0 30px 0 0;
           color: #475933;
-          background: url(icon_charts.png) right no-repeat;
+          background: image-url("icon_charts.png") right no-repeat;
         }
       }
     }
@@ -336,6 +335,7 @@ ul.lists {
       -webkit-border-radius: 10px;
       -moz-border-radius: 10px;
       border-radius: 10px;
+      padding: 2px;
 
       a {
         font-weight:normal;
@@ -369,14 +369,14 @@ ul.lists {
       a {
         color: #999;
         font-weight: normal;
-        font-size: 0.8em;
-        background: url(remove-0.png) right no-repeat;
+        font-size: 0.8em; 
+        background: image-url("remove-0.png") right no-repeat;
         padding: 0px 12px 0px 0px;
       }
 
-      a:hover{
+      a:hover {
         color: #ff7f7f;
-        background: url(remove.png) right no-repeat;
+        background: image-url("remove.png") right no-repeat;
         padding: 0px 12px 0px 0px;
       }
     }
@@ -398,3 +398,22 @@ ul.lists {
 span.compare_urls {
   color: #E3E3E3;
 }
+
+
+div.map-link {
+  width: 100%;
+  height: 30px;
+}
+
+div.map-link a {
+  float: right;
+  background: image-url("map-button.png") no-repeat;
+  color: #fff;
+  width: 88px;
+  height: 24px;
+  text-align: center;
+  padding-top: 5px; 
+  font-weight: normal;
+  font-size: 0.8em;
+}
+

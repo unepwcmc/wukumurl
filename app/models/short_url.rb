@@ -3,13 +3,17 @@ class ShortUrl < ActiveRecord::Base
   attr_accessible :short_name, :url
   validates_uniqueness_of :short_name
   validate :validate_url
-  
+
   before_validation :create_short_name_if_blank
   before_validation :ensure_http_prepend
 
   auto_strip_attributes :url
 
-  has_many :visits, :dependent => :destroy  
+  has_many :visits, :dependent => :destroy
+  has_many :locations, :through => :visits
+  has_many :cities, :through => :visits
+  has_many :country_locations, :through => :cities
+
 
   def create_short_name_if_blank
     unless self.short_name?
@@ -29,6 +33,16 @@ class ShortUrl < ActiveRecord::Base
     Visit.where(short_url_id: self.id).select([:id, :longitude, :latitude])
   end
 
+=begin
+  #old methods for location
+  def visits_location
+    Visit.where(short_url_id: self.id).joins(:location).select([:lat, :lon, :source, :location_id])
+  end
+
+  def visits_city
+    Visit.where(short_url_id: self.id).joins(:city, :location).select([:city_lat, :city_lon, :city_name, :city_id, :location_id])
+  end
+=end
   def visits_today
     self.visits.where(['created_at > ?', Date.today])
   end
@@ -43,18 +57,26 @@ class ShortUrl < ActiveRecord::Base
 
   # Returns a list of countries with a 'visit_count' attribute
   def visits_by_country
-    Country.select("countries.id, countries.name, COUNT(visits.id) as visit_count")
-            .group("countries.id, countries.name")
-            .joins(:visits)
-            .where(visits: {short_url_id: self.id})
+    City.select("cities.country, COUNT(visits.id) as visit_count")
+    .group("cities.country")
+    .joins(:visits)
+    .where(visits: {short_url_id: self.id})
   end
+
+  def visits_by_city
+    City.select("cities.city_name, COUNT(visits.id) as visit_count")
+    .group("cities.city_name")
+    .joins(:visits)
+    .where(visits: {short_url_id: self.id})
+  end
+
 
   # Returns a list of countries with a 'visit_count' attribute
   def visits_by_organization include_disregarded = false
     orgs = Organization.select("organizations.id, organizations.name, COUNT(visits.id) as visit_count")
-            .group("organizations.id, organizations.name")
-            .joins(:visits)
-            .where(visits: {short_url_id: self.id})
+    .group("organizations.id, organizations.name")
+    .joins(:visits)
+    .where(visits: {short_url_id: self.id})
     orgs = orgs.where("disregard = false OR disregard IS NULL") unless include_disregarded
     orgs
   end

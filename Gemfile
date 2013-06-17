@@ -7,7 +7,7 @@ gem 'rails', '3.2.13'
 
 gem 'sqlite3'
 gem 'rack-cors', :require => 'rack/cors'
-gem 'geoip-c'
+gem 'geoip-c', '0.8.0'
 gem 'whenever', :require => false
 
 group :development, :test do
@@ -54,8 +54,11 @@ gem "auto_strip_attributes", "~> 1.0"
 
 # To use debugger
 
+
 #group :test, :development do
 #  gem 'konacha'
 #  gem 'konacha-chai-matchers'
 #end
+
+gem 'geocoder'
 

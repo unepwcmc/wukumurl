@@ -1,19 +1,16 @@
 class Visit < ActiveRecord::Base
-  attr_accessible :ip_address, :short_url_id
+  attr_accessible :ip_address, :short_url_id, :short_name, :latitude, :longitude, :location_source
 
   belongs_to :short_url
   belongs_to :country
   belongs_to :organization
+  belongs_to :city
+  belongs_to :location
 
-  # Pass in GeoIP database instances separately, as creating an instance
-  # per Visit results in a memory leak.
-  def geo_locate country_db, organisation_db
-    geo_locate_country(country_db)
-    geo_locate_organization(organisation_db)
-  end
-
-  def geo_locate_country db
-    country_attributes = db.look_up self.ip_address
+=begin
+  def geo_locate_country
+    cdb = GeoIP::Country.new(GEO_IP_CONFIG['country_db'])
+    country_attributes = cdb.look_up self.ip_address
     if country_attributes.nil?
       # Too noisy for now
       #puts "Unable to geolocate country of visit #{self.id}"
@@ -21,18 +18,30 @@ class Visit < ActiveRecord::Base
       self.country = Country.find_or_create_by_max_mind_attributes country_attributes
     end
   end
+=end
 
-  def geo_locate_organization db
-    organization_attributes = db.look_up self.ip_address
-    if organization_attributes.nil?
-      # Too noisy for now
-      #puts "Unable to geolocate organisation of visit #{self.id}"
+  def geo_locate (cdb, orgdb)
+    #Look for Organization using IP
+    organization_attributes = orgdb.look_up self.ip_address
+
+    #Look for City and Country using IP
+    city_attributes = cdb.look_up self.ip_address
+    if city_attributes.nil?
     else
-      self.organization = Organization.find_or_create_by_max_mind_attributes organization_attributes
+      self.city = City.find_or_create_by_max_mind_attributes city_attributes
+      if organization_attributes.nil?
+        self.location = Location.get_coordinates_using_geoip city_attributes
+      else
+        global_attributes = organization_attributes.merge(city_attributes)
+        self.organization = Organization.find_or_create_by_max_mind_attributes organization_attributes
+        self.location = Location.get_coordinates_using_geocoder global_attributes
+      end
     end
   end
 
+
+
   def self.un_geolocated
-    self.where(country_id: nil)
+    self.where(city_id: nil)
   end
 end

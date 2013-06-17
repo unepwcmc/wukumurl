@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag params[:controller] %>
 <%= javascript_include_tag params[:controller] %>
   <header>
 
@@ -13,7 +14,8 @@
 
   <section>
 
-  <span class='compare_urls'>Compare urls!</span>
+  <div class="map-link"><%= link_to("Map View", "/map") %></div>
+  <span class='compare_urls'>Compare urls!</span> 
 
   <ul id="short-url-list" class="lists">
     <% @short_urls.each do |short_url| %>

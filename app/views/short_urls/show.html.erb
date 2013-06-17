@@ -1,3 +1,4 @@
+  <%= stylesheet_link_tag params[:controller] %>
   <%= javascript_include_tag params[:controller] %>
   <header>
 
@@ -43,7 +44,7 @@
           <% @visits_by_country.each do |country| %>
             <li>
               <div class="details">
-                <%= country.name %>
+                <%= country.country %>
                 <span class="stat"><%= country.visit_count %></span>
               </div>
             </li>
