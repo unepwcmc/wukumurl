@@ -247,6 +247,20 @@ class WukumUrl.Map.Views.Map extends Backbone.View
         .style("width", "#{r*2}px")
         .style("padding", "2px")
 
+    transformTxt = (d) ->
+      r = cR(d.size * rFactor)
+      d3.select(this)
+        .attr("x", (d) -> r - self.centreText(d.size))
+        .attr("y", (d) -> r )
+
+    transformCircle = (d) ->
+      r = cR(d.size * rFactor)
+      d3.select(this)
+        .attr("r", (d) -> r )
+        .attr("cx", (d) -> r )
+        .attr("cy", (d) -> r )
+
+
     addEventListeners = (d) ->
       google.maps.event.addDomListener this, 'click', (e) ->
         self.mediator.trigger "Views:Map:selectLocation", d
@@ -265,10 +279,10 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     # Lets position the text first (under the circle), so it does not interfere
     # with the click events. Only works because our circles are semi-transparent.
     txt = enter.append("svg:text")
-      .attr("x", (d) ->
-        cR(d.size * rFactor) - self.centreText(d.size))
-      .attr("y", (d) -> 
-        cR(d.size * rFactor) )
+      .each(transformTxt)
+      #.attr("x", (d) ->
+      #  cR(d.size * rFactor) - self.centreText(d.size))
+      #.attr("y", (d) -> cR(d.size * rFactor) )
       .attr("dy", ".31em")
       .text((d) -> d.size)
       .style("font-size", (d) -> 
@@ -278,9 +292,10 @@ class WukumUrl.Map.Views.Map extends Backbone.View
 
     circle = enter.append("svg:circle")
       .each(addEventListeners)
-      .attr("r", (d) -> cR(d.size * rFactor) )
-      .attr("cx", (d) -> cR(d.size * rFactor) )
-      .attr("cy", (d) -> cR(d.size * rFactor) )
+      .each(transformCircle)
+      #.attr("r", (d) -> cR(d.size * rFactor) )
+      #.attr("cx", (d) -> cR(d.size * rFactor) )
+      #.attr("cy", (d) -> cR(d.size * rFactor) )
 
     exit = marker.exit()
       #.each(removeEventListener) # TODO?
