@@ -1,6 +1,11 @@
 #= require spec_helper
+#= require lib/bar_charter
 #= require compare
 
+window.WukumUrl ||= {}
+window.WukumUrl.data ||= {}
+
+window.WukumUrl.data.urls = window.spec_data.compare_short_urls
 
 describe "Compare", ->
 

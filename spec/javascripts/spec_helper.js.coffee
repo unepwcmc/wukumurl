@@ -1,6 +1,7 @@
 #= require d3-3.1.5
 #= require jquery
 #= require jquery_ujs
+#= require laconic
 #= require underscore-min
 
 #= require ./support/spec_data
@@ -10,6 +11,7 @@
 #= require chai-changes
 #= require chai-factories
 #= require chai-jquery
+#= require chai-backbone
 
 
 # set the Mocha test interface

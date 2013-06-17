@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  lat: 1.5
+  lon: 1.5
+  source: MyString
+
+two:
+  lat: 1.5
+  lon: 1.5
+  source: MyString

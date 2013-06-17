@@ -1,0 +1,45 @@
+<section class="map">
+
+<% if @urls and @state == "active": %>
+
+  <div id="list-header">
+    <span class="left"><%= @name %></span> <span class="right"><%= @size %></span>
+
+  <% if @collectionName == "countriesCollection": %>
+    <p id="list-sub-header">zoom in to see city detail on map.</p>
+  <% end %>
+  <% if @collectionName == "citiesCollection": %>
+    <p id="list-sub-header">zoom in to see organization detail on map.</p>
+  <% end %>
+     
+  </div>
+  
+
+  <ul id="short-url-list" class="lists <% if @collectionName == "locationsCollection": %>expand<% end %>">
+
+  <% for short_url, url of @urls: %>
+
+    <li>
+
+      <div class="details">
+        <a href="/<%= short_url %>">wcmc.io/<%= short_url %></a>
+        <div>
+          <span class='stats'><%= url.length %> visits</span>
+        </div>
+        <p><%= url[0]?.url %></p>
+      </div>
+
+    </li> 
+
+  <% end %>
+  </ul>
+<% else: %>
+
+<p id="list-intro-header">Click on markers to explore link locations and data</p>
+<p id="list-intro-sub-header">(zoom for greater detail)</p>
+
+<% end %>
+
+</section>
+
+
