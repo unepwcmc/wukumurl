@@ -47,6 +47,8 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       17: "locationsCollection"
       18: "locationsCollection"
     @setCollectionName @options.map_options.zoom
+    # TODO: move this into a function that can better handle the data changing 
+    # over time. 
     @categories =
       countriesCollection: [
           max_val: 10
@@ -233,9 +235,10 @@ class WukumUrl.Map.Views.Map extends Backbone.View
   # `layer` is the div element that wraps all the svg elements that 
   #  appear on the map.
   # `self` is a reference to the instance (this) of WukumUrl.Map.Views.Map.
-  drawSvg: (layer, self, data, updateTxt=yes) ->
+  drawSvg: (layer, self, data) ->
     rFactor = 1
     cR = self.calculateRadius()
+
     transform = (d) ->
       r = cR(d.size * rFactor)
       d = new google.maps.LatLng(d.lat, d.lng)
@@ -260,13 +263,13 @@ class WukumUrl.Map.Views.Map extends Backbone.View
         .attr("cx", (d) -> r )
         .attr("cy", (d) -> r )
 
-
     addEventListeners = (d) ->
       google.maps.event.addDomListener this, 'click', (e) ->
         self.mediator.trigger "Views:Map:selectLocation", d
         self.killEvent = yes
     
     projection = @getProjection()
+
     marker = layer.selectAll("svg")
       .data(data, (d) -> d.uique_id)
       .each(transform) # update existing markers
@@ -280,9 +283,6 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     # with the click events. Only works because our circles are semi-transparent.
     txt = enter.append("svg:text")
       .each(transformTxt)
-      #.attr("x", (d) ->
-      #  cR(d.size * rFactor) - self.centreText(d.size))
-      #.attr("y", (d) -> cR(d.size * rFactor) )
       .attr("dy", ".31em")
       .text((d) -> d.size)
       .style("font-size", (d) -> 
@@ -293,9 +293,6 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     circle = enter.append("svg:circle")
       .each(addEventListeners)
       .each(transformCircle)
-      #.attr("r", (d) -> cR(d.size * rFactor) )
-      #.attr("cx", (d) -> cR(d.size * rFactor) )
-      #.attr("cy", (d) -> cR(d.size * rFactor) )
 
     exit = marker.exit()
       #.each(removeEventListener) # TODO?
