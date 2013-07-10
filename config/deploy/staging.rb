@@ -4,8 +4,8 @@ set :domain, "unepwcmc-011.vm.brightbox.net"
 ## List of servers
 server "unepwcmc-011.vm.brightbox.net", :app, :web, :db, :primary => true
  
-set :application, "urmp"
-set :server_name, "urmp.unepwcmc-011.vm.brightbox.net"
+set :application, "wukumurl"
+set :server_name, "wukumurl.unepwcmc-011.vm.brightbox.net"
 set :sudo_user, "rails"
 set :app_port, "80" 
 
