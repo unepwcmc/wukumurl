@@ -6,6 +6,9 @@ require 'brightbox/passenger'
 load "deploy/assets"
 set :rake, 'bundle exec rake'
 
+
+set :generate_webserver_config, false
+
 set :whenever_command, "bundle exec whenever"
 require "whenever/capistrano"
 # so unfortunately the whenever task is fired before bundling takes place
