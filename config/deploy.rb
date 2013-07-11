@@ -9,6 +9,8 @@ set :rake, 'bundle exec rake'
 
 set :generate_webserver_config, false
 
+ssh_options[:forward_agent] = true
+
 set :whenever_command, "bundle exec whenever"
 require "whenever/capistrano"
 # so unfortunately the whenever task is fired before bundling takes place
@@ -18,8 +20,7 @@ require "whenever/capistrano"
 # and Apache configs. Should be unique on the Brightbox
 set :application, "wukumurl"
 
-set(:pub_key) { Capistrano::CLI.ui.ask ("Enter Name of Public key: ") }
-ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", pub_key)]
+
 
 
 # Target directory for the application on the web and app servers.
