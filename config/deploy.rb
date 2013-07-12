@@ -6,6 +6,11 @@ require 'brightbox/passenger'
 load "deploy/assets"
 set :rake, 'bundle exec rake'
 
+
+set :generate_webserver_config, false
+
+ssh_options[:forward_agent] = true
+
 set :whenever_command, "bundle exec whenever"
 require "whenever/capistrano"
 # so unfortunately the whenever task is fired before bundling takes place
@@ -14,6 +19,9 @@ require "whenever/capistrano"
 # The name of your application.  Used for deployment directory and filenames
 # and Apache configs. Should be unique on the Brightbox
 set :application, "wukumurl"
+
+
+
 
 # Target directory for the application on the web and app servers.
 set(:deploy_to) { File.join("", "home", user, application) }
