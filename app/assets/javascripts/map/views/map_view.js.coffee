@@ -60,7 +60,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
           font_size: 20
         ,
           max_val: Infinity
-          size: 24
+          size: 28
           font_size: 24
         ]
       citiesCollection: [
@@ -165,6 +165,8 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       Math.sqrt(value / maxValue) * maxSize
 
   centreText: (value) ->
+    if value > 999
+      return 28
     if value > 99
       return 20
     if value > 9
