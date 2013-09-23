@@ -1,5 +1,7 @@
 class CompareController < ApplicationController
   def index
+    return redirect_to :root if params[:tags].blank?
+
     url_ids = params[:tags].split("/").map { |s| s.to_i }
     urls = ShortUrl
       .where(:id => url_ids)
