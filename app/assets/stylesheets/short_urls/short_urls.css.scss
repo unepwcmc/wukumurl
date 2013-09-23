@@ -266,6 +266,7 @@ footer{
 }
 
 .btn:hover {
+  cursor: pointer;
   color: #666;
 }
 
@@ -395,25 +396,28 @@ ul.lists {
   }
 }
 
-span.compare_urls {
+.compare_urls {
   color: #E3E3E3;
 }
 
-
-div.map-link {
+.map-link {
   width: 100%;
   height: 30px;
-}
 
-div.map-link a {
-  float: right;
-  background: image-url("map-button.png") no-repeat;
-  color: #fff;
-  width: 88px;
-  height: 24px;
-  text-align: center;
-  padding-top: 5px; 
-  font-weight: normal;
-  font-size: 0.8em;
-}
+  a {
+    background: #638a1a;
+    border-radius: 7px;
+    float: right;
+    color: #fff;
+    width: 88px;
+    height: 19px;
+    text-align: center;
+    padding-top: 5px;
+    font-weight: normal;
+    font-size: 0.8em;
 
+    &:hover {
+      background-color: #78A741;
+    }
+  }
+}
