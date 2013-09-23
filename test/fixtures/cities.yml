@@ -6,8 +6,8 @@ one:
   country: MyString
   region: MyString
   name: MyString
-  latitude: 1.5
-  longitude: 1.5
+  lat: 1.5
+  lon: 1.5
 
 two:
   iso2: MyString
@@ -15,5 +15,5 @@ two:
   country: MyString
   region: MyString
   name: MyString
-  latitude: 1.5
-  longitude: 1.5
+  lat: 1.5
+  lon: 1.5
