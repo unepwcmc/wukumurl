@@ -84,4 +84,15 @@ class ShortUrlTest < ActiveSupport::TestCase
     assert not_deleted.include?(short_urls(:hn))
     assert !not_deleted.include?(short_urls(:deleted))
   end
+
+  test "should default not_a_robot to true" do
+    link = ShortUrl.create(url: 'http://envirobear.com')
+    assert_equal true, link.not_a_robot
+  end
+
+  test "should not be able to save if non_robot is false" do
+    link = ShortUrl.create(url: 'http://envirobear.com', not_a_robot: false)
+    assert_equal ["Not a robot must be checked"], link.errors.to_a
+    assert_nil link.id
+  end
 end
