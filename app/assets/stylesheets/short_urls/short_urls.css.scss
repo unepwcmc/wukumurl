@@ -231,26 +231,47 @@ footer{
   margin: 40px 0 0 0;
   }
 
-/* form */
-.form-container{
+.form-container {
   width: 100%;
   background: #474a5c;
   margin: 20px 0 ;
   -webkit-box-shadow:  3px 3px 0px 0px rgba(96, 138, 48, 1);
   box-shadow:  3px 3px 0px 0px rgba(96, 138, 48, 1);
-}
+  color: white;
 
-.form-container form input{
-  margin: 12px 0 12px 12px;
-  width: 470px;
-  padding: 10px;
-  border: 0;
-  background: #eeeeee;
-  font-size: 1em;
-  -webkit-box-shadow: inset 0px 3px 1px 0px rgba(80, 95, 180, 0.2);
-  box-shadow: inset 0px 3px 1px 0px rgba(80, 95, 180, 0.2);
-}
+  $errorRed: rgb(255, 90, 90);
+  form {
+    input {
+      margin: 12px 0 12px 12px;
+      border: 0;
 
+      &.error {
+        border: 1px solid $errorRed;
+      }
+    }
+
+    label {
+      font-size: 0.9em;
+
+      &.error {
+        color: $errorRed;
+      }
+    }
+
+    input[type="checkbox"] {
+      margin-top: 0;
+    }
+
+    input[type="text"] {
+      width: 470px;
+      padding: 10px;
+      background: #eeeeee;
+      font-size: 1em;
+      -webkit-box-shadow: inset 0px 3px 1px 0px rgba(80, 95, 180, 0.2);
+      box-shadow: inset 0px 3px 1px 0px rgba(80, 95, 180, 0.2);
+    }
+  }
+}
 
 .btn{
   width: 80px;
@@ -412,7 +433,7 @@ ul.lists {
     width: 88px;
     height: 19px;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 5px; 
     font-weight: normal;
     font-size: 0.8em;
 

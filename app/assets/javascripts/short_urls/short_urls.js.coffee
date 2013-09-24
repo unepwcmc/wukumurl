@@ -1,21 +1,31 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-
 $(($)->
+
+  captcha_el = $("""
+    <label for="not_a_robot">
+      <input type="checkbox" name="not_a_robot" id="not_a_robot">
+      I am not a robot
+    </label>
+  """)
+  $('.form-container form').append(captcha_el)
 
   $('.form-container').on('submit', 'form', (e) ->
     e.preventDefault()
-    url = $('#url-to-shorten').val()
+
+    data =
+      url: $('#url_to_shorten').val()
+      not_a_robot: $('#not_a_robot').is(':checked')
 
     $.ajax(
       url: '/'
       type: 'POST'
-      data: {url:url}
+      data: data
     ).done((shortUrl)->
+      $('form').children().removeClass('error')
+
       $('#short-url-list').prepend("""
          <li>
            <div class="details">
+             <input type="checkbox" value="#{shortUrl.id}" class="compare_urls">
              <a href="/#{shortUrl.short_name}">
                wcmc.io/#{shortUrl.short_name}
              </a>
@@ -28,10 +38,8 @@ $(($)->
          </li>
        """)
     ).fail((response) ->
-      errorMsg = ""
       for field, error of $.parseJSON(response.responseText)
-        errorMsg += "#{field} #{error}\n"
-      alert(errorMsg)
+        $("##{field}, [for=#{field}]").addClass('error')
     )
     return false
   )

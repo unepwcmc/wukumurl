@@ -3,15 +3,17 @@ class ShortUrlsController < ApplicationController
     if params[:url].present?
       short_url = ShortUrl.new(
         url: params[:url],
-        short_name: params[:short_name]
+        short_name: params[:short_name],
+        not_a_robot: params[:not_a_robot] == "true"
       )
+
       if short_url.save
         render json: short_url, status: :created
       else
         render json: short_url.errors, status: :unprocessable_entity
       end
     else
-      render json: {error: "You must specify a url parameter to redirect to"}, status: :unprocessable_entity
+      render json: {url_to_shorten: "You must specify a url parameter to redirect to"}, status: :unprocessable_entity
     end
   end
 
