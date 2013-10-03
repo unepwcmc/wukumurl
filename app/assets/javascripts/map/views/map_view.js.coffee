@@ -47,6 +47,8 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       17: "locationsCollection"
       18: "locationsCollection"
     @setCollectionName @options.map_options.zoom
+    # TODO: move this into a function that can better handle the data changing 
+    # over time. 
     @categories =
       countriesCollection: [
           max_val: 10
@@ -58,7 +60,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
           font_size: 20
         ,
           max_val: Infinity
-          size: 24
+          size: 28
           font_size: 24
         ]
       citiesCollection: [
@@ -163,6 +165,8 @@ class WukumUrl.Map.Views.Map extends Backbone.View
       Math.sqrt(value / maxValue) * maxSize
 
   centreText: (value) ->
+    if value > 999
+      return 28
     if value > 99
       return 20
     if value > 9
@@ -233,9 +237,10 @@ class WukumUrl.Map.Views.Map extends Backbone.View
   # `layer` is the div element that wraps all the svg elements that 
   #  appear on the map.
   # `self` is a reference to the instance (this) of WukumUrl.Map.Views.Map.
-  drawSvg: (layer, self, data, updateTxt=yes) ->
+  drawSvg: (layer, self, data) ->
     rFactor = 1
     cR = self.calculateRadius()
+
     transform = (d) ->
       r = cR(d.size * rFactor)
       d = new google.maps.LatLng(d.lat, d.lng)
@@ -247,12 +252,26 @@ class WukumUrl.Map.Views.Map extends Backbone.View
         .style("width", "#{r*2}px")
         .style("padding", "2px")
 
+    transformTxt = (d) ->
+      r = cR(d.size * rFactor)
+      d3.select(this)
+        .attr("x", (d) -> r - self.centreText(d.size))
+        .attr("y", (d) -> r )
+
+    transformCircle = (d) ->
+      r = cR(d.size * rFactor)
+      d3.select(this)
+        .attr("r", (d) -> r )
+        .attr("cx", (d) -> r )
+        .attr("cy", (d) -> r )
+
     addEventListeners = (d) ->
       google.maps.event.addDomListener this, 'click', (e) ->
         self.mediator.trigger "Views:Map:selectLocation", d
         self.killEvent = yes
     
     projection = @getProjection()
+
     marker = layer.selectAll("svg")
       .data(data, (d) -> d.uique_id)
       .each(transform) # update existing markers
@@ -265,10 +284,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
     # Lets position the text first (under the circle), so it does not interfere
     # with the click events. Only works because our circles are semi-transparent.
     txt = enter.append("svg:text")
-      .attr("x", (d) ->
-        cR(d.size * rFactor) - self.centreText(d.size))
-      .attr("y", (d) -> 
-        cR(d.size * rFactor) )
+      .each(transformTxt)
       .attr("dy", ".31em")
       .text((d) -> d.size)
       .style("font-size", (d) -> 
@@ -278,9 +294,7 @@ class WukumUrl.Map.Views.Map extends Backbone.View
 
     circle = enter.append("svg:circle")
       .each(addEventListeners)
-      .attr("r", (d) -> cR(d.size * rFactor) )
-      .attr("cx", (d) -> cR(d.size * rFactor) )
-      .attr("cy", (d) -> cR(d.size * rFactor) )
+      .each(transformCircle)
 
     exit = marker.exit()
       #.each(removeEventListener) # TODO?
