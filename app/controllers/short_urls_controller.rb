@@ -32,7 +32,10 @@ class ShortUrlsController < ApplicationController
   end
 
   def show
-    @short_url = ShortUrl.find(params[:id])
+    @short_url = ShortUrl.where(short_name: params[:short_name]).first
+
+    return redirect_to :root unless @short_url
+
     @visits = @short_url.visit_count
     @visits_by_country = @short_url.visits_by_country
     @visits_by_organization = @short_url.visits_by_organization
