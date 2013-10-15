@@ -7,7 +7,7 @@ class Location < ActiveRecord::Base
     location_attributes = { "lat" => city_attributes[:latitude], 
                                  "lon" => city_attributes[:longitude], 
                                  "source" => "GeoIP" }
-    location = Location.where(location_attributes).first || Location.create(location_attributes)
+    Location.where(location_attributes).first || Location.create(location_attributes)
   end
 
   def self.get_coordinates_using_geocoder global_attributes
@@ -16,12 +16,12 @@ class Location < ActiveRecord::Base
       location_attributes = { "lat" => geocoder_coordinates[0], 
                    "lon" => geocoder_coordinates[1], 
                    "source" => "Geocoder" }
-      location =  Location.where(location_attributes).first || Location.create(location_attributes)
+      return Location.where(location_attributes).first || Location.create(location_attributes)
     else
       location_attributes = { "lat" => global_attributes[:latitude], 
                               "lon" => global_attributes[:longitude], 
                               "source" => "GeoIP" }
-      location =  Location.where(location_attributes).first || Location.create(location_attributes)
+      return Location.where(location_attributes).first || Location.create(location_attributes)
     end
   end
 
@@ -34,8 +34,4 @@ class Location < ActiveRecord::Base
     id = Location.where(id: self.id).joins(:visits).select([:organization_id])
     Organization.where(id: id).select([:name]).first
   end
-
 end
-
-
-

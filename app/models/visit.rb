@@ -1,5 +1,6 @@
 class Visit < ActiveRecord::Base
-  attr_accessible :ip_address, :short_url_id, :short_name, :latitude, :longitude, :location_source
+  attr_accessible :ip_address, :short_url_id, :short_name, :latitude,
+    :longitude, :location_source
 
   belongs_to :short_url
   belongs_to :country
@@ -7,27 +8,13 @@ class Visit < ActiveRecord::Base
   belongs_to :city
   belongs_to :location
 
-=begin
-  def geo_locate_country
-    cdb = GeoIP::Country.new(GEO_IP_CONFIG['country_db'])
-    country_attributes = cdb.look_up self.ip_address
-    if country_attributes.nil?
-      # Too noisy for now
-      #puts "Unable to geolocate country of visit #{self.id}"
-    else
-      self.country = Country.find_or_create_by_max_mind_attributes country_attributes
-    end
-  end
-=end
-
   def geo_locate (cdb, orgdb)
     #Look for Organization using IP
     organization_attributes = orgdb.look_up self.ip_address
 
     #Look for City and Country using IP
     city_attributes = cdb.look_up self.ip_address
-    if city_attributes.nil?
-    else
+    unless city_attributes.nil?
       self.city = City.find_or_create_by_max_mind_attributes city_attributes
       if organization_attributes.nil?
         self.location = Location.get_coordinates_using_geoip city_attributes
@@ -38,8 +25,6 @@ class Visit < ActiveRecord::Base
       end
     end
   end
-
-
 
   def self.un_geolocated
     self.where(city_id: nil)
