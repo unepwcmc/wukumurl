@@ -32,7 +32,11 @@ class ShortUrlsController < ApplicationController
   end
 
   def show
-    @short_url = ShortUrl.where(short_name: params[:short_name]).first
+    if params[:short_name].present?
+      @short_url = ShortUrl.where(short_name: params[:short_name]).first
+    elsif params[:id].present?
+      @short_url = ShortUrl.find(params[:id])
+    end
 
     return redirect_to :root unless @short_url
 

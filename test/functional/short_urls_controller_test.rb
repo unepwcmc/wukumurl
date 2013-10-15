@@ -7,6 +7,12 @@ class ShortUrlsControllerTest < ActionController::TestCase
     assert :success
   end
 
+  test "GET show also works in the form /short_urls/:id" do
+    short_url = short_urls(:hn)
+    get :show, id: short_url.id
+    assert :success
+  end
+
   test "GET show redirects to home page if ShortUrl doesn't exist" do
     get :show, short_name: "GOB"
     assert_redirected_to :root
