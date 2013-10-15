@@ -1,19 +1,8 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  iso2: MyString
-  iso3: MyString
-  country: MyString
-  region: MyString
-  name: MyString
-  lat: 1.5
-  lon: 1.5
-
-two:
-  iso2: MyString
-  iso3: MyString
-  country: MyString
-  region: MyString
-  name: MyString
-  lat: 1.5
-  lon: 1.5
+duncan:
+  iso2: "CA"
+  iso3: "CAN"
+  country: canada
+  region: 'Vancouver Island'
+  name: 'Duncan'
+  lat: 48.778611
+  lon: -123.707778
