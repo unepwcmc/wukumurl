@@ -64,7 +64,7 @@
                 <span class="stat"><%= organization.visit_count %></span>
               </div>
               <div class='side-hover-action'>
-                <%= link_to 'Disregard', organization, :method => :delete, :confirm => "Are you sure?" %>
+                <%= link_to 'Disregard', organization, :method => :delete, :data => {:confirm => "Are you sure?"} %>
               </div>
             </li>
           <% end %>
