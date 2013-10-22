@@ -1,11 +1,9 @@
 class ShortUrl < ActiveRecord::Base
   require 'securerandom'
-  attr_accessible :short_name, :url
   validates_uniqueness_of :short_name
   validate :validate_url
 
   attr_accessor :not_a_robot
-  attr_accessible :not_a_robot
 
   before_validation :create_short_name_if_blank
   before_validation :ensure_http_prepend
