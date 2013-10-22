@@ -1,21 +1,22 @@
-<%= stylesheet_link_tag params[:controller] %>
-<%= javascript_include_tag params[:controller] %>
+  <%= stylesheet_link_tag params[:controller] %>
+  <%= javascript_include_tag params[:controller] %>
+
   <header>
 
-  <h1>wcmc.io<span>shorten // share // track</span></h1>
-  <div class="form-container">
-    <form>
-      <input id="url_to_shorten" type="text" placeholder="Paste a link to shorten">
-      <button id="shorten-link-btn" class="btn" type="submit" >Shorten</button>
-    </form>
-  </div>
+    <h1>wcmc.io<span>shorten // share // track</span></h1>
+    <div class="form-container">
+      <form>
+        <input id="url_to_shorten" type="text" placeholder="Paste a link to shorten">
+        <button id="shorten-link-btn" class="btn" type="submit" >Shorten</button>
+      </form>
+    </div>
 
   </header>
 
   <section>
 
   <span class="map-link"><%= link_to("Map View", "/map") %></span>
-  <span class='compare_urls'>Compare urls!</span> 
+  <span class='compare_urls'>Compare urls!</span>
 
   <ul id="short-url-list" class="lists">
     <% @short_urls.each do |short_url| %>
@@ -40,5 +41,3 @@
 
 <footer>
 </footer>
-
-

@@ -63,7 +63,7 @@ $(($)->
     else
       a = 'Compare urls!'
     link.html a
-    
+
   ids = []
   link = $("span.compare_urls")
   # Resetting all .compare_urls checkboxes first.
@@ -82,7 +82,4 @@ $(($)->
     else
       ids.splice val_pos, 1
     setUrl ids
-    
-
 )
-
