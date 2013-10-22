@@ -105,17 +105,3 @@ $ ($) ->
   updateResultsPartial = _.partial updateResults, chart_data
   dispatch = WukumUrl.Charters.barChart.dispatch
   dispatch.on "onHover.result", updateResultsPartial
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
