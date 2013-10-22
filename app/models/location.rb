@@ -1,5 +1,4 @@
 class Location < ActiveRecord::Base
-  attr_accessible :lat, :lon, :source
   has_many :visits
   has_many :short_urls, :through => :visits
 

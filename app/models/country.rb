@@ -1,5 +1,4 @@
 class Country < ActiveRecord::Base
-  attr_accessible :iso, :iso3, :name
   has_many :visits
 
   MaxMindMappings = {country_name: :name, country_code: :iso, country_code3: :iso3}
