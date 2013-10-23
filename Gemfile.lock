@@ -56,6 +56,11 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.2.1)
+      factory_girl (~> 4.2.0)
+      railties (>= 3.0.0)
     geocoder (1.1.8)
     geoip-c (0.8.0)
     highline (1.6.18)
@@ -138,6 +143,7 @@ DEPENDENCIES
   capistrano-ext
   coffee-rails (~> 4.0.0)
   eco
+  factory_girl_rails (= 4.2.1)
   geocoder
   geoip-c (= 0.8.0)
   jquery-rails
