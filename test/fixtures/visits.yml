@@ -17,7 +17,6 @@ old_canadian_geolocated:
   ip_address: "10.2.32.12"
   short_url: hn
   created_at: "<%= 2.months.ago.to_s(:db) %>"
-  country: canada
   city: duncan
 
 ungeolocatable_visit:
@@ -27,17 +26,14 @@ ungeolocatable_visit:
 canadian_wcmc_visit:
   ip_address: "10.2.32.12"
   short_url: wcmc
-  country: canada
 
 usa_wcmc_visit:
   ip_address: "10.2.32.12"
   short_url: wcmc
-  country: usa
 
 usa_wcmc_visit_2:
   ip_address: "10.2.32.12"
   short_url: wcmc
-  country: usa
 
 wcmc_hn_visit:
   short_url: hn
