@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 4.0.0'
 
+gem 'factory_girl_rails', '4.2.1'
+
 gem 'sqlite3'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'geoip-c', '0.8.0'
