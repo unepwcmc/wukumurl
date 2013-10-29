@@ -38,6 +38,27 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'forgotten password' do
+    get "forgot_password"
+    assert_response :success
+
+    user = FactoryGirl.create(:user)
+
+    post_via_redirect "/forgot_password",
+      'user[email]' => user.email
+
+    mail = ActionMailer::Base.deliveries.last
+
+    assert_equal user.email, mail['to'].to_s
+    assert_equal "Reset password instructions", mail['subject'].to_s
+
+    assert_response :success
+  end
+
+  test 'devise sends mail from the correct email' do
+    skip
+  end
+
   teardown do
     Warden.test_reset!
   end
