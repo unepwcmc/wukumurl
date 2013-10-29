@@ -37,5 +37,5 @@ Wukumurl::Application.routes.draw do
 
   resources :organizations, only: [:destroy]
 
-  root :to => 'short_urls#visit'
+  root :to => 'short_urls#index'
 end
