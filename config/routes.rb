@@ -1,4 +1,5 @@
 Wukumurl::Application.routes.draw do
+  devise_for :users
   get "map", :controller => 'map', :action => :index
   get "map/locations", :controller => 'map', :action => :location_list
   get "map/cities", :controller => 'map', :action => :city_list
