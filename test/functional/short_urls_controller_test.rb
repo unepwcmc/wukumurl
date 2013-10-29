@@ -1,13 +1,21 @@
 require 'test_helper'
 
 class ShortUrlsControllerTest < ActionController::TestCase
+  test "GET :index renders a list of shortened URLs" do
+    get :index
+    assert :success
+
+    assert_not_nil assigns(:short_urls)
+    assert_template :index
+  end
+
   test "can access a ShortUrl info page by appending /info to the link" do
     short_url = short_urls(:hn)
     get :show, short_name: short_url.short_name
     assert :success
   end
 
-  test "GET show also works in the form /short_urls/:id" do
+  test "GET show works via the route /short_urls/:id" do
     short_url = short_urls(:hn)
     get :show, id: short_url.id
     assert :success
