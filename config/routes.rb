@@ -4,9 +4,14 @@ Wukumurl::Application.routes.draw do
   devise_scope :user do
     get "login", to: "devise/sessions#new"
     post "login", to: "devise/sessions#create"
+
     get "logout", to: "devise/sessions#destroy"
+
     get "register", to: "devise/registrations#new"
     post "register", to: "devise/registrations#create"
+
+    get "forgot_password", to: "devise/passwords#new"
+    post "forgot_password", to: "devise/passwords#create"
   end
 
   get "map", :controller => 'map', :action => :index
