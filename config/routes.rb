@@ -1,5 +1,14 @@
 Wukumurl::Application.routes.draw do
   devise_for :users
+
+  devise_scope :user do
+    get "login", to: "devise/sessions#new"
+    post "login", to: "devise/sessions#create"
+    get "logout", to: "devise/sessions#destroy"
+    get "register", to: "devise/registrations#new"
+    post "register", to: "devise/registrations#create"
+  end
+
   get "map", :controller => 'map', :action => :index
   get "map/locations", :controller => 'map', :action => :location_list
   get "map/cities", :controller => 'map', :action => :city_list
