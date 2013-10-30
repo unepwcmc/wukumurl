@@ -13,6 +13,10 @@ group :development do
   gem 'capistrano'
   gem 'capistrano-ext'
   gem 'brightbox'
+
+  gem 'guard'
+  gem 'guard-minitest'
+  gem 'rb-fsevent', '~> 0.9'
 end
 
 gem 'sass-rails', '~> 4.0.0.rc1'
