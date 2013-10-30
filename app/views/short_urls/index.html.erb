@@ -31,7 +31,7 @@
           <p><%= short_url.url %></p>
         </div>
         <div class='side-hover-action'>
-          <%= link_to 'Delete', short_url, :method => :delete, :confirm => "Are you sure?" %>
+          <%= link_to 'Delete', short_url, :method => :delete, :data => {:confirm => "Are you sure?"} %>
         </div>
       </li>
     <% end %>
