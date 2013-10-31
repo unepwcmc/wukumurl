@@ -15,6 +15,4 @@ class City < ActiveRecord::Base
   def city_urls
     City.where(id: self.id).joins(:short_urls).select([:short_name, :url])
   end
-
-
 end

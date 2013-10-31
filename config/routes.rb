@@ -19,8 +19,6 @@ Wukumurl::Application.routes.draw do
   get "map/cities", :controller => 'map', :action => :city_list
   get "map/countries", :controller => 'map', :action => :country_list
 
-  get "compare/index"
-
   get '/help' => 'help#index'
 
   match '/' => 'short_urls#create', :controller => 'short_urls', :via => :post
@@ -30,8 +28,6 @@ Wukumurl::Application.routes.draw do
     :controller => 'short_urls',
     :action => :show,
     :as => 'short_url_info'
-
-  get '/compare/*tags' => "compare#index"
 
   resources :short_urls
 
