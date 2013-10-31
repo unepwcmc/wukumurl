@@ -3,7 +3,7 @@ require 'test_helper'
 class ShortUrlsControllerTest < ActionController::TestCase
   test "GET index renders a list of shortened URLs" do
     get :index
-    assert :success
+    assert_response :success
 
     assert_not_nil assigns(:short_urls)
     assert_template :index
@@ -12,13 +12,13 @@ class ShortUrlsControllerTest < ActionController::TestCase
   test "can access a ShortUrl info page by appending /info to the link" do
     short_url = FactoryGirl.create(:short_url)
     get :show, short_name: short_url.short_name
-    assert :success
+    assert_response :success
   end
 
   test "GET show works via the route /short_urls/:id" do
-    short_url =  FactoryGirl.create(:short_url)
+    short_url = FactoryGirl.create(:short_url)
     get :show, id: short_url.id
-    assert :success
+    assert_response :success
   end
 
   test "GET show redirects to home page if ShortUrl doesn't exist" do
@@ -26,26 +26,29 @@ class ShortUrlsControllerTest < ActionController::TestCase
     assert_redirected_to :root
   end
 
-  test "POST create" do
-    skip
-  end
-
   test "POST create fails when no url to shorten is supplied" do
-    skip
+    post :create
+    assert_response :unprocessable_entity
   end
 
   test "DELETE destroy marks a ShortUrl as deleted, but does not delete it" do
-    skip
+    short_url = FactoryGirl.create(:short_url)
+
+    assert_difference('ShortUrl.count', 0) do
+      delete :destroy, id: short_url.id
+    end
+
+    assert_redirected_to :root
   end
 
-  test "should add URLs if non_robot parameter is true" do
-    post :create, url: "http://envirobear.com", not_a_robot: true
-    assert :success
+  test "POST create should add URLs if non_robot parameter is true" do
+    post :create, url: "http://envirobear.com", not_a_robot: "true"
+    assert_response :success
   end
 
-  test "should not add URLs if non_robot parameter is false" do
-    post :create, url: "http://news.ycombinator.com", not_a_robot: false
-    assert :unprocessable_entity
+  test "POST create should not add URLs if non_robot parameter is false" do
+    post :create, url: "http://news.ycombinator.com"
+    assert_response :unprocessable_entity
 
     errors = {"not_a_robot" => ["must be checked"]}
     response_errors = JSON.parse(response.body)

@@ -48,9 +48,10 @@ class ShortUrlsController < ApplicationController
   end
 
   def destroy
-    @short_url = ShortUrl.find(params[:id])
-    @short_url.deleted = true
-    @short_url.save
-    redirect_to :action => "visit"
+    short_url = ShortUrl.find(params[:id])
+    short_url.deleted = true
+    short_url.save
+
+    redirect_to :root
   end
 end
