@@ -43,43 +43,4 @@ $(($)->
     )
     return false
   )
-
-
-  ###
-    Dynamically build the url for the `compare` page depending 
-    on the clicks into the url checkboxes.
-  ###
-
-  updateUrl = (ids) ->
-    url = "/compare/"
-    _.each ids, (id) ->
-      url += id + "/"
-    url
-
-  setUrl = (ids) ->
-    if ids.length > 0
-      # Uses laconic.js
-      a = $.el.a {'href' : updateUrl(ids)}, 'Compare urls!'
-    else
-      a = 'Compare urls!'
-    link.html a
-
-  ids = []
-  link = $("span.compare_urls")
-  # Resetting all .compare_urls checkboxes first.
-  $('input:checkbox.compare_urls').removeAttr('checked')
-
-  $("input:checkbox.compare_urls").on "click", (evt) ->
-    val = evt.target.value
-    val_pos = undefined
-    _.each ids, (id, i) ->
-      if id == val
-        val_pos = i
-    # If the url id is not in the list, add it!
-    if val_pos == undefined
-      ids.push val
-    # But if it is already there, remove it!
-    else
-      ids.splice val_pos, 1
-    setUrl ids
 )
