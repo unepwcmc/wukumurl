@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ShortUrlsControllerTest < ActionController::TestCase
-  test "GET :index renders a list of shortened URLs" do
+  test "GET index renders a list of shortened URLs" do
     get :index
     assert :success
 
@@ -10,13 +10,13 @@ class ShortUrlsControllerTest < ActionController::TestCase
   end
 
   test "can access a ShortUrl info page by appending /info to the link" do
-    short_url = short_urls(:hn)
+    short_url = FactoryGirl.create(:short_url)
     get :show, short_name: short_url.short_name
     assert :success
   end
 
   test "GET show works via the route /short_urls/:id" do
-    short_url = short_urls(:hn)
+    short_url =  FactoryGirl.create(:short_url)
     get :show, id: short_url.id
     assert :success
   end
@@ -24,6 +24,18 @@ class ShortUrlsControllerTest < ActionController::TestCase
   test "GET show redirects to home page if ShortUrl doesn't exist" do
     get :show, short_name: "GOB"
     assert_redirected_to :root
+  end
+
+  test "POST create" do
+    skip
+  end
+
+  test "POST create fails when no url to shorten is supplied" do
+    skip
+  end
+
+  test "DELETE destroy marks a ShortUrl as deleted, but does not delete it" do
+    skip
   end
 
   test "should add URLs if non_robot parameter is true" do

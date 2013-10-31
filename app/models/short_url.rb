@@ -73,7 +73,6 @@ class ShortUrl < ActiveRecord::Base
     .where(visits: {short_url_id: self.id})
   end
 
-
   # Returns a list of countries with a 'visit_count' attribute
   def visits_by_organization include_disregarded = false
     orgs = Organization.
