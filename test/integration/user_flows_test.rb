@@ -10,8 +10,10 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     user = FactoryGirl.create(:user)
 
     post_via_redirect "/login",
-      'user[email]' => user.email,
-      'user[password]' => FactoryGirl.attributes_for(:user)[:password]
+      user: {
+        email: user.email,
+        password: FactoryGirl.attributes_for(:user)[:password]
+      }
 
     assert_equal '/', path
   end
@@ -30,9 +32,11 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     post_via_redirect "/register",
-      'user[email]' => "hats@boats.com",
-      'user[password]' => "password",
-      'user[password_confirmation]' => "password"
+      user: {
+        email: "hats@boats.com",
+        password: "password",
+        password_confirmation: "password"
+      }
 
     assert_equal '/', path
     assert_response :success
@@ -45,7 +49,9 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     user = FactoryGirl.create(:user)
 
     post_via_redirect "/forgot_password",
-      'user[email]' => user.email
+      user: {
+        email: user.email
+      }
 
     mail = ActionMailer::Base.deliveries.last
 
