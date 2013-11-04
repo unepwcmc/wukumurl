@@ -20,6 +20,8 @@ class ShortUrl < ActiveRecord::Base
   has_many :cities, :through => :visits
   has_many :country_locations, :through => :cities
 
+  belongs_to :user
+
   def not_a_robot
     if @not_a_robot.nil?
       return true
