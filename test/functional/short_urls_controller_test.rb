@@ -54,4 +54,12 @@ class ShortUrlsControllerTest < ActionController::TestCase
     response_errors = JSON.parse(response.body)
     assert_equal errors, response_errors
   end
+
+  test "POST create should add URLs using short_name if present" do
+    post(
+      :create, 
+      {url: "http://envirobear.com", not_a_robot: "true", short_name: "xxx"}
+    )
+    assert_equal ShortUrl.last.short_name, "xxx"
+  end
 end
