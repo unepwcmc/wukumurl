@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class ShortUrlsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   test "GET index renders a list of shortened URLs" do
     get :index
     assert_response :success
@@ -29,6 +31,17 @@ class ShortUrlsControllerTest < ActionController::TestCase
   test "POST create fails when no url to shorten is supplied" do
     post :create
     assert_response :unprocessable_entity
+  end
+
+  test "POST create associates the logged in user with the ShortUrl" do
+    user = FactoryGirl.create(:user)
+    sign_in user
+
+    post :create, url: 'http://google.com', user: user, not_a_robot: "true"
+    assert_response :success
+
+    short_url = ShortUrl.last
+    assert_equal user.id, short_url.user.id
   end
 
   test "DELETE destroy marks a ShortUrl as deleted, but does not delete it" do
