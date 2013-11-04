@@ -76,15 +76,18 @@ class ShortUrl < ActiveRecord::Base
   end
 
   # Returns a list of countries with a 'visit_count' attribute
-  def visits_by_organization include_disregarded = false
+  def visits_by_organization group_by_disregarded: true, disregard_threshold: 5
     orgs = Organization.
       select("organizations.id, organizations.name, COUNT(visits.id) as visit_count").
       group("organizations.id, organizations.name").
       joins(:visits).
       where(visits: {short_url_id: self.id})
 
-    unless include_disregarded
-      orgs = orgs.where("disregard = 0 OR disregard IS NULL")
+    if group_by_disregarded
+      orgs = {
+        pertinent: orgs.where("disregard < #{disregard_threshold}"),
+        non_pertinent: orgs.where("disregard >= #{disregard_threshold}")
+      }
     end
 
     orgs

@@ -32,6 +32,11 @@ class ShortUrlTest < ActiveSupport::TestCase
       short_url: @short_url,
       organization: FactoryGirl.create(:organization, name: 'BT', disregard: 1)
     )
+
+    FactoryGirl.create(:visit,
+      short_url: @short_url,
+      organization: FactoryGirl.create(:organization, name: 'Virgin Media', disregard: 5)
+    )
   end
 
   test "visits_today should return only visits from today" do
@@ -66,9 +71,9 @@ class ShortUrlTest < ActiveSupport::TestCase
     assert_equal 1, counts["Canada"]
   end
 
-  test "visits_by_organization should return stats correctly, excluding
-    disregarded organisations" do
-    organization_stats = @short_url.visits_by_organization
+  test "visits_by_organization should return stats correctly with grouping disabled" do
+    organization_stats = @short_url.visits_by_organization group_by_disregarded: false
+
     counts = {}
     organization_stats.each do |organization|
       counts[organization.name] = organization.visit_count.to_i
@@ -76,19 +81,25 @@ class ShortUrlTest < ActiveSupport::TestCase
 
     assert_equal 1, counts["Apple"]
     assert_equal 1, counts["WCMC"]
-    assert_nil counts["BT"]
   end
 
-  test "visits_by_organization with include_disregarded set to true
-    should include disregarded orgs" do
-    organization_stats = @short_url.visits_by_organization(true)
+  test "visits_by_organization with group_by_diregarded = true
+    separates the visits in to pertinent and non-pertinent depending on
+    the Organization's disregard count" do
+    organization_stats = @short_url.visits_by_organization(group_by_disregarded: true)
+
     counts = {}
-    organization_stats.each do |organization|
-      counts[organization.name] = organization.visit_count.to_i
+    organization_stats.each do |pertinence, organizations|
+      organizations.each do |organization|
+        counts[pertinence] ||= {}
+        counts[pertinence][organization.name] = organization.visit_count.to_i
+      end
     end
 
-    assert_equal 1, counts["Apple"]
-    assert_equal 1, counts["WCMC"]
+    assert_equal 1, counts[:pertinent]["Apple"]
+    assert_equal 1, counts[:pertinent]["WCMC"]
+    assert_equal 1, counts[:pertinent]["BT"]
+    assert_equal 1, counts[:non_pertinent]["Virgin Media"]
   end
 
   test "saving a link with no http:// in front should have it inserted" do
