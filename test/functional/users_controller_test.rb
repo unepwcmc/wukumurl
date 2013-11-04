@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   test 'GET show retrieves all the URLs created by the user' do
-    get :show, id: FactoryGirl.create(:user).id
+    sign_in FactoryGirl.create(:user)
+    get :show
     assert_response :success
 
     assert_not_nil assigns(:short_urls)

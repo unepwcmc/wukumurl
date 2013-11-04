@@ -14,7 +14,7 @@ Wukumurl::Application.routes.draw do
     post "forgot_password", to: "devise/passwords#create"
   end
 
-  resources :users, only: [:show]
+  get '/me' => 'users#show'
 
   get "map", :controller => 'map', :action => :index
   get "map/locations", :controller => 'map', :action => :location_list
