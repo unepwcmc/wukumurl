@@ -22,6 +22,13 @@ class ShortUrl < ActiveRecord::Base
 
   belongs_to :user
 
+  scope :ordered_by_visits_desc, -> {
+    joins('LEFT JOIN visits ON visits.short_url_id = short_urls.id').
+    select('short_urls.*, count(visits.id) AS visits_count').
+    group('short_urls.id').
+    order('visits_count DESC')
+  }
+
   def not_a_robot
     if @not_a_robot.nil?
       return true
