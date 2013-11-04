@@ -1,9 +1,11 @@
 require 'test_helper'
 
 class OrganizationsControllerTest < ActionController::TestCase
-  test "DELETE :destroy marks an Organisation as disregarded, but does not delete it" do
+  def setup
     @request.env['HTTP_REFERER'] = '/'
+  end
 
+  test "DELETE :destroy marks an Organisation as disregarded, but does not delete it" do
     organization = FactoryGirl.create(:organization)
 
     assert_equal 0, organization.disregard
@@ -20,8 +22,6 @@ class OrganizationsControllerTest < ActionController::TestCase
   end
 
   test "DELETE :destroy increments an Organization's disregarded count if it exists" do
-    @request.env['HTTP_REFERER'] = '/'
-
     organization = FactoryGirl.create(:organization)
 
     assert_equal 0, organization.disregard

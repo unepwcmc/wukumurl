@@ -53,17 +53,20 @@
         <div class="details">
           By Organisation
         </div>
+
+        <h4>Pertinent</h4>
+
         <ul class="lists">
-          <% @visits_by_organization.each do |organization| %>
-            <li>
-              <div class="details">
-                <%= organization.name %>
-                <span class="stat"><%= organization.visit_count %></span>
-              </div>
-              <div class='side-hover-action'>
-                <%= link_to 'Disregard', organization, :method => :delete, :data => {:confirm => "Are you sure?"} %>
-              </div>
-            </li>
+          <% @visits_by_organization[:pertinent].each do |organization| %>
+            <%= render "organization_list_item", organization: organization %>
+          <% end %>
+        </ul>
+
+        <h4>Non-pertinent</h4>
+
+        <ul class="lists">
+          <% @visits_by_organization[:non_pertinent].each do |organization| %>
+            <%= render "organization_list_item", organization: organization %>
           <% end %>
         </ul>
       </li>
