@@ -13,6 +13,7 @@ $(($)->
 
     data =
       url: $('#url_to_shorten').val()
+      short_name: $('#short_name').val()
       not_a_robot: $('#not_a_robot').is(':checked')
 
     $.ajax(
