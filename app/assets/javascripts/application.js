@@ -15,3 +15,4 @@
 //= require jquery_ujs
 //= require laconic
 //= require underscore-min
+//= require ZeroClipboard.min
