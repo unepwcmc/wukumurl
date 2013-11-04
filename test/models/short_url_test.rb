@@ -129,4 +129,11 @@ class ShortUrlTest < ActiveSupport::TestCase
     link = FactoryGirl.build(:short_url, url: 'http://envirobear.com', not_a_robot: false)
     refute link.valid?
   end
+
+  test "can create a ShortUrl with a User association" do
+    user = FactoryGirl.create(:user)
+    short_url = FactoryGirl.create(:short_url, user: user)
+
+    assert_equal user, short_url.user
+  end
 end
