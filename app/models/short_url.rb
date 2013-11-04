@@ -84,7 +84,7 @@ class ShortUrl < ActiveRecord::Base
       where(visits: {short_url_id: self.id})
 
     unless include_disregarded
-      orgs = orgs.where("disregard = false OR disregard IS NULL")
+      orgs = orgs.where("disregard = 0 OR disregard IS NULL")
     end
 
     orgs

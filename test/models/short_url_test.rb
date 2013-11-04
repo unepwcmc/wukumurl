@@ -30,7 +30,7 @@ class ShortUrlTest < ActiveSupport::TestCase
 
     FactoryGirl.create(:visit,
       short_url: @short_url,
-      organization: FactoryGirl.create(:organization, name: 'BT', disregard: true)
+      organization: FactoryGirl.create(:organization, name: 'BT', disregard: 1)
     )
   end
 
