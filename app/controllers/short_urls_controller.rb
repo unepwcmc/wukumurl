@@ -17,7 +17,9 @@ class ShortUrlsController < ApplicationController
         render json: short_url.errors, status: :unprocessable_entity
       end
     else
-      render json: {url_to_shorten: "You must specify a url parameter to redirect to"}, status: :unprocessable_entity
+      render json: {
+        url_to_shorten: "You must specify a url parameter to redirect to"
+      }, status: :unprocessable_entity
     end
   end
 
