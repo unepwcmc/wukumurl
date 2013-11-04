@@ -19,6 +19,7 @@ class ShortUrl < ActiveRecord::Base
   has_many :locations, :through => :visits
   has_many :cities, :through => :visits
   has_many :country_locations, :through => :cities
+  has_many :disregard_votes
 
   belongs_to :user
 
