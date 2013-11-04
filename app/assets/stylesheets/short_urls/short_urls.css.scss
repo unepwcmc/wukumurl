@@ -345,6 +345,10 @@ ul.lists {
       border-top: 1px dotted #ccc;
       text-align:left;
       word-break: break-all;
+
+      button {
+        float: right;
+      }
     }
 
     a {

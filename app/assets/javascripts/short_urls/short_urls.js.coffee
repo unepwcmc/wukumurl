@@ -43,4 +43,6 @@ $(($)->
     )
     return false
   )
+
+  new ZeroClipboard($(".copy-url"), moviePath: "/assets/ZeroClipboard.swf")
 )
