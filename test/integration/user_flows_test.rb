@@ -33,7 +33,7 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'sign up' do
+  test 'sign up registers the user and sends a confirmation email' do
     get "/register"
     assert_response :success
 
@@ -46,6 +46,11 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
 
     assert_equal '/', path
     assert_response :success
+
+    mail = ActionMailer::Base.deliveries.last
+
+    assert_equal "hats@boats.com", mail['to'].to_s
+    assert_equal "Confirmation instructions", mail['subject'].to_s
   end
 
   test 'forgotten password' do
