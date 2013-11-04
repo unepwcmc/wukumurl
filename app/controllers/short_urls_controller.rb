@@ -1,6 +1,8 @@
 class ShortUrlsController < ApplicationController
   def index
-    @short_urls = ShortUrl.not_deleted.order("created_at DESC")
+    @short_urls = ShortUrl.
+      ordered_by_visits_desc.
+      not_deleted
   end
 
   def create

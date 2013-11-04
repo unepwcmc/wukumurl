@@ -3,11 +3,24 @@ require 'test_helper'
 class ShortUrlsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
-  test "GET index renders a list of shortened URLs" do
+  test "GET index renders a list of shortened URLs ordered by visits" do
+    short_urls = [
+      FactoryGirl.create(:short_url),
+      FactoryGirl.create(:short_url)
+    ]
+
+    (1..20).each do
+      FactoryGirl.create(:visit, short_url: short_urls[1])
+    end
+
     get :index
     assert_response :success
 
-    assert_not_nil assigns(:short_urls)
+    assigned_urls = assigns(:short_urls)
+    assert_not_nil assigned_urls
+
+    assert_equal short_urls[1], assigned_urls.first
+
     assert_template :index
   end
 
