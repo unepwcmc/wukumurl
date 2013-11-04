@@ -3,6 +3,12 @@ require 'test_helper'
 class UserFlowsTest < ActionDispatch::IntegrationTest
   include Warden::Test::Helpers
 
+  test 'show user links' do
+    login_as FactoryGirl.create(:user)
+    get "/me"
+    assert_response :success
+  end
+
   test 'log in' do
     get "/login"
     assert_response :success

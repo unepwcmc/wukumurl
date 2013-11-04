@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   def show
-    user = User.find(params[:id])
-
-    @short_urls = user.short_urls
+    return redirect_to :root unless current_user
+    @short_urls = current_user.short_urls
   end
 end
