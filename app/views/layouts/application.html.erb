@@ -7,6 +7,9 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
 
+    <%= stylesheet_link_tag params[:controller] %>
+    <%= javascript_include_tag params[:controller] %>
+
     <!-- enable HTML5 elements in IE7+8 -->
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
