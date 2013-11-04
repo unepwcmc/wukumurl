@@ -62,7 +62,21 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
   end
 
   test 'devise sends mail from the correct email' do
-    skip
+    get "forgot_password"
+    assert_response :success
+
+    user = FactoryGirl.create(:user)
+
+    post_via_redirect "/forgot_password",
+      user: {
+        email: user.email
+      }
+
+    mail = ActionMailer::Base.deliveries.last
+
+    assert_equal 'no-reply@unep-wcmc.org', mail['from'].to_s
+
+    assert_response :success
   end
 
   teardown do
