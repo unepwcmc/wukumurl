@@ -55,15 +55,15 @@ class ShortUrlsController < ApplicationController
     short_url = ShortUrl.find(params[:id])
     short_url.deleted = true
     short_url.save
-
     redirect_to :root
   end
 
   def update
     short_url = ShortUrl.find(params[:id])
-    short_url.short_name = params[:new_name]
+    short_name = params[:short_url][:short_name]
+    short_url.short_name = short_name
     short_url.save
-    render json: {new_name: params[:new_name]}
+    redirect_to :action => "show", :short_name => short_name
   end
 
   private
