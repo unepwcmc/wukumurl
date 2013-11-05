@@ -9,6 +9,8 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'geoip-c', '0.8.0'
 gem 'whenever', :require => false
 
+gem 'debugger'
+
 group :development do
   gem 'capistrano'
   gem 'capistrano-ext'
