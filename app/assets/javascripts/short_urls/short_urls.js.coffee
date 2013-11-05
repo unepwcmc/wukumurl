@@ -46,4 +46,44 @@ $(($)->
   )
 
   new ZeroClipboard($(".copy-url"), moviePath: "/assets/ZeroClipboard.swf")
+
+
+  # Edit Short Url Name section
+
+  rootHasNotChanged = (url) ->
+    re = /wcmc.io\//
+    url.match(re)
+
+  removeRoot = (url) ->
+    url.replace /wcmc.io\//, ""
+
+  $('form.inline').submit (e) -> 
+    e.preventDefault()
+    current_short_url_val = $('#short_url').val()
+    current_short_url_name = removeRoot current_short_url_val
+    short_url = $('#short_url')
+    short_url_val = short_url.val()
+    short_url_name = removeRoot short_url_val
+    short_url_id = e.target[0].name
+    if rootHasNotChanged(short_url_val)
+      data =
+        new_name: short_url_name
+        id: short_url_id
+      $.ajax(
+        url: "/short_urls/#{short_url_id}"
+        type: 'PUT'
+        data: data
+      ).done((shortUrl)->
+        current_short_url_val = "wcmc.io/#{shortUrl.new_name}"
+        current_short_url_name = shortUrl.new_name
+        $('#short_url').val current_short_url_val
+      ).fail((jqXHR, textStatus) ->
+        console.log textStatus 
+      )
+    else
+      #TODO: use something like https://github.com/hxgf/smoke.js ?
+      alert 'The url root "wcmc.io/" can not be modified'
+      short_url.val current_short_url_val
+    return false
+  
 )

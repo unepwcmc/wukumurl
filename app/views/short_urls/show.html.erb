@@ -1,6 +1,15 @@
   <header>
     <h1>wcmc.io<span>shorten // share // track</span></h1>
-    <h2>ShortUrl: wcmc.io/<%= @short_url.short_name %></h2>
+    <h2>ShortUrl: 
+      <% if @url_belongs_to_user %>
+        <form class="inline">
+          <input id="short_url" type="text" value="wcmc.io/<%= @short_url.short_name %>" name="<%= @short_url.id %>">
+          <button id="edit_short_url_name" class="btn" type="submit" >Change Name</button>
+        </form>
+      <% else %>
+        wcmc.io/<%= @short_url.short_name %>
+      <% end %>
+    </h2>
     <p>Original URL: <%= @short_url.url %></p>
   </header>
 

@@ -45,6 +45,7 @@ class ShortUrlsController < ApplicationController
 
     return redirect_to :root unless @short_url
 
+    @url_belongs_to_user = does_url_belong_to_user? @short_url
     @visits = @short_url.visit_count
     @visits_by_country = @short_url.visits_by_country
     @visits_by_organization = @short_url.visits_by_organization
@@ -56,5 +57,22 @@ class ShortUrlsController < ApplicationController
     short_url.save
 
     redirect_to :root
+  end
+
+  def update
+    short_url = ShortUrl.find(params[:id])
+    short_url.short_name = params[:new_name]
+    short_url.save
+    render json: {new_name: params[:new_name]}
+  end
+
+  private
+
+  def does_url_belong_to_user? short_url
+    if user_signed_in? and current_user.short_urls.find_by_id(short_url.id)
+      return true
+    else
+      return false
+    end
   end
 end
