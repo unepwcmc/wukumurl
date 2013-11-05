@@ -1,6 +1,14 @@
   <header>
     <h1>wcmc.io<span>shorten // share // track</span></h1>
-    <h2>ShortUrl: wcmc.io/<%= @short_url.short_name %></h2>
+    <h2>ShortUrl: wcmc.io/<%= @short_url.short_name %>
+      <% if @url_belongs_to_user %>
+        <%= form_for @short_url, url: {action: "update", id: @short_url.id}, 
+          html: {class: "update-form"} do |f| %>
+            <%= f.text_field :short_name %>
+            <%= f.submit "Update Name" %>
+        <% end %>
+      <% end %>
+    </h2>
     <p>Original URL: <%= @short_url.url %></p>
   </header>
 
