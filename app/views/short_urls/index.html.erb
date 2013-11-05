@@ -1,6 +1,19 @@
 <header class="main">
   <div id="home">Home</div>
-  <div id="header-actions">Login</div>
+  <div id="header-actions">
+    <% if user_signed_in? %>
+      <div id="greetings">Hello
+        <%= truncate("#{current_user.email}", 
+          :length => 22, :omission => '...') %>
+      </div>
+      <div id="new-link"><button>+ New Link</button></div>
+      <div id="search-link">
+        <input type="text">
+      </div>
+    <% else -%>
+      <div id="sign-in">Sign in or register</div>
+    <% end -%>
+  </div>
 </header>
 
 <section id="title">
@@ -12,7 +25,18 @@
 
 <section id="dashboard">
   <section class="left">
-    <div>left</div>
+    <div>
+      <div>Total visits</div>
+      <div>
+        <ol id="short-url-list" class="lists">
+        <% @short_urls.each do |short_url| %>
+          <li>
+            <%= short_url.short_name %>
+          </li>
+        <% end %>
+      </ol>
+      </div>
+    </div>
   </section>
   <section class="right">
     <div>right</div>
