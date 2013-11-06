@@ -1,5 +1,8 @@
 @import "susy";
 
+$dark-grey: #2c2c2c;
+$light-grey: #f7f7f7;
+
 
 $total-columns: 12;
 $column-width: 60px;
@@ -12,6 +15,7 @@ $container-width: 70%;
 
 section, header {
   margin: 10px 0 10px 0;
+  color: $dark-grey;
 }
 
 // Notice: the map is out of the 12 columns fluid container
@@ -40,11 +44,36 @@ header.main, #title, #dashboard {
 }
 
 #dashboard {
+  section > div {
+    padding: 10px;
+  }
   section.left {
     @include span-columns(6,$total-columns);
   }
   section.right {
     @include span-columns(6 omega,$total-columns);
+  }
+  section > div {
+    background-color: $light-grey;
+  }
+  section table {
+    tr {
+
+    }
+    thead tr {
+      border-bottom: 1px solid darken($light-grey, 20%);
+    }
+    tbody tr {
+      border-bottom: 1px solid darken($light-grey, 3%);
+    }
+    td {
+      height: 35px;
+    }
+    td.right {
+      text-align: right;
+    }
+    width: 90%;
+    margin: 0 auto;
   }
 }
 
