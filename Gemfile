@@ -17,6 +17,8 @@ group :development do
   gem 'guard'
   gem 'guard-minitest'
   gem 'rb-fsevent', '~> 0.9'
+
+  gem 'debugger'
 end
 
 gem 'sass-rails', '~> 4.0.0.rc1'

@@ -1,4 +1,7 @@
 class ShortUrlsController < ApplicationController
+
+  before_filter :authenticate_user!, :only => [:update]
+
   def index
     @short_urls = ShortUrl.
       ordered_by_visits_desc.
@@ -20,7 +23,9 @@ class ShortUrlsController < ApplicationController
         render json: short_url.errors, status: :unprocessable_entity
       end
     else
-      render json: {url_to_shorten: "You must specify a url parameter to redirect to"}, status: :unprocessable_entity
+      render json: {
+        url_to_shorten: "You must specify a url parameter to redirect to"
+      }, status: :unprocessable_entity
     end
   end
 
@@ -45,6 +50,7 @@ class ShortUrlsController < ApplicationController
 
     return redirect_to :root unless @short_url
 
+    @url_belongs_to_user = @short_url.does_url_belong_to_user? current_user
     @visits = @short_url.visit_count
     @visits_by_country = @short_url.visits_by_country
     @visits_by_organization = @short_url.visits_by_organization
@@ -54,7 +60,14 @@ class ShortUrlsController < ApplicationController
     short_url = ShortUrl.find(params[:id])
     short_url.deleted = true
     short_url.save
-
     redirect_to :root
+  end
+
+  def update
+    short_url = ShortUrl.find(params[:id])
+    short_name = params[:short_url][:short_name]
+    short_url.short_name = short_name
+    short_url.save
+    redirect_to :action => "show", :short_name => short_name
   end
 end
