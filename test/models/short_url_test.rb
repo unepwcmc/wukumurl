@@ -42,6 +42,8 @@ class ShortUrlTest < ActiveSupport::TestCase
       organization: virgin_media
     )
 
+    FactoryGirl.create(:organization, name: 'Plusnet')
+
     create_disregard_votes(virgin_media, 5)
   end
 
@@ -96,11 +98,14 @@ class ShortUrlTest < ActiveSupport::TestCase
   end
 
   test "visits_by_organization with group_by_disregarded = true
+    does not duplicate records with multiple visits from the same organization" do
+    skip
+  end
+
+  test "visits_by_organization with group_by_disregarded = true
     separates the visits in to pertinent and non-pertinent depending on
     the Organization's disregard count" do
     organization_stats = @short_url.visits_by_organization(group_by_disregarded: true)
-
-    p organization_stats
 
     counts = {}
     organization_stats.each do |pertinence, organizations|
@@ -114,6 +119,7 @@ class ShortUrlTest < ActiveSupport::TestCase
     assert_equal 1, counts[:pertinent]["WCMC"]
     assert_equal 1, counts[:pertinent]["BT"]
     assert_nil counts[:pertinent]["Virgin Media"]
+    assert_nil counts[:pertinent]["Plusnet"]
     assert_equal 1, counts[:non_pertinent]["Virgin Media"]
   end
 
