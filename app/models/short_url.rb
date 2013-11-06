@@ -76,13 +76,19 @@ class ShortUrl < ActiveRecord::Base
     .where(visits: {short_url_id: self.id})
   end
 
-  def visits_from_pertinent_organizations
+  def visits_from_pertinent_organizations threshold = 5
     Organization.find_by_sql("
-      SELECT organizations.*
+      SELECT organizations.*, visit_count
       FROM organizations
-      INNER JOIN visits
-      ON short_url_id = #{self.id}
-        AND organization_id = organizations.id
+      INNER JOIN
+        (
+          SELECT
+            COUNT(visits.id) as visit_count, visits.organization_id
+          FROM visits
+          WHERE visits.short_url_id = #{self.id}
+          GROUP BY organization_id
+        ) AS visits_for_orgs
+      ON visits_for_orgs.organization_id = organizations.id
       INNER JOIN
         (
           SELECT
@@ -96,7 +102,7 @@ class ShortUrl < ActiveRecord::Base
         ) AS globally_pertinent_organizations
       ON
         globally_pertinent_organizations.org_id = organizations.id
-        AND globally_pertinent_organizations.count < 5
+        AND globally_pertinent_organizations.count < #{threshold}
       LEFT OUTER JOIN
         (
           SELECT organization_id
@@ -113,11 +119,17 @@ class ShortUrl < ActiveRecord::Base
 
   def visits_from_organizations without: {}
     query = "
-      SELECT organizations.*
+      SELECT organizations.*, visit_count
       FROM organizations
-      INNER JOIN visits
-      ON short_url_id = #{self.id}
-        AND organization_id = organizations.id
+      INNER JOIN
+        (
+          SELECT
+            COUNT(visits.id) as visit_count, visits.organization_id
+          FROM visits
+          WHERE visits.short_url_id = #{self.id}
+          GROUP BY organization_id
+        ) AS visits_for_orgs
+      ON visits_for_orgs.organization_id = organizations.id
     "
 
     ignore_ids = without.map(&:id).join(', ')
