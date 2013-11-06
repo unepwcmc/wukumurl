@@ -1,6 +1,6 @@
 <header class="main">
-  <div id="home">Home</div>
-  <div id="header-actions">
+  <div id="home-banner">Home</div>
+  <div id="header-actions" class="<% if user_signed_in? %>signed-in<% end -%>">
     <% if user_signed_in? %>
       <div id="greetings">Hello
         <%= truncate("#{current_user.email}", 
@@ -25,30 +25,9 @@
 
 <section id="dashboard">
   <section class="left">
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <td>
-              Total visits
-            </td>
-            <td>
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-        <% @short_urls.last(8).each_with_index do |short_url, index| %>
-          <tr>
-            <td>
-              <%= index + 1 %>. <%= short_url.short_name %>
-            </td>
-            <td class="right">
-              <%= short_url.created_at.strftime("%d %b. %Y") %>
-            </td>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
+
+    <%= render partial: "short_url_table", locals: {title: "Total visits"} %>
+    
   </section>
   <section class="right">
     <div>right</div>

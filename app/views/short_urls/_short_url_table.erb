@@ -1,0 +1,29 @@
+<div>
+  <div id="url-table-wrapper">
+    <table id="url-table">
+      <thead>
+        <tr>
+          <td>
+            <%= title -%>
+          </td>
+          <td>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+      <% @short_urls.each_with_index do |short_url, index| %>
+        <tr class="<% if index > 7 %>all hidden<% end -%>">
+          <td>
+            <%= index + 1 %>. <%= short_url.short_name %>
+          </td>
+          <td class="right">
+            <%= short_url.created_at.strftime("%d %b. %Y") %>
+          </td>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+    <% if @short_urls.length > 8 %>
+      <button id="view-all">View All</button>
+    <% end %>
+</div>

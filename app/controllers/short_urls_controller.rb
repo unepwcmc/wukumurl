@@ -1,6 +1,11 @@
 class ShortUrlsController < ApplicationController
   def index
-    @short_urls = ShortUrl.ordered_by_visits_desc.not_deleted
+    if user_signed_in?
+      @short_urls = ShortUrl.where(user: current_user)
+        .ordered_by_visits_desc.not_deleted
+    else
+      @short_urls = ShortUrl.ordered_by_visits_desc.not_deleted
+    end
   end
 
   def create
