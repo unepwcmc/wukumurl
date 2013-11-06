@@ -25,9 +25,17 @@
 
 <section id="dashboard">
   <section class="left">
-
-    <%= render partial: "short_url_table", locals: {title: "Total visits"} %>
-    
+    <%= render partial: "single_row_table", locals: {
+      title: "Total number of visits",
+      value: "15000000" } %>
+    <% if user_signed_in? %>
+      <%= render partial: "short_url_table", locals: {title: "Your links"} %>
+    <% else -%>
+      <%= render partial: "single_row_table", locals: {
+        title: "Number of links shared",
+        value: "300" } %>
+      <%= render partial: "short_url_table", locals: {title: "Total visits"} %>
+    <% end -%>
   </section>
   <section class="right">
     <div>right</div>
