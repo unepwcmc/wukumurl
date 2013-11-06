@@ -1,6 +1,6 @@
 class ShortUrlsController < ApplicationController
 
-  before_filter :user_required, :only => [:update]
+  before_filter :authenticate_user!, :only => [:update]
 
   def index
     @short_urls = ShortUrl.not_deleted.order("created_at DESC")
@@ -48,8 +48,7 @@ class ShortUrlsController < ApplicationController
 
     return redirect_to :root unless @short_url
 
-    @url_belongs_to_user = user_signed_in? and
-      @short_url.does_url_belong_to_user?(current_user)
+    @url_belongs_to_user = @short_url.does_url_belong_to_user? current_user
     @visits = @short_url.visit_count
     @visits_by_country = @short_url.visits_by_country
     @visits_by_organization = @short_url.visits_by_organization
