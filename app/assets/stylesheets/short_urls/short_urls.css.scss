@@ -3,15 +3,15 @@
 $dark-grey: #2c2c2c;
 $light-grey: #f7f7f7;
 
-
 $total-columns: 12;
+$home-banner-columns: 4;
+$header-actions-columns: $total-columns - $home-banner-columns;
 $column-width: 60px;
 $gutter-width: 20px;
 $grid-padding: 10px;
 
 $container-style: fluid;
 $container-width: 70%;
-
 
 section, header {
   margin: 10px 0 10px 0;
@@ -21,21 +21,31 @@ section, header {
 // Notice: the map is out of the 12 columns fluid container
 header.main, #title, #dashboard {
   @include container; 
-  //@include susy-grid-background; // For debugging!
+  @include susy-grid-background; // For debugging!
 }
 
-#home {
-  @include span-columns(4,$total-columns);
+#home-banner {
+  @include span-columns( $home-banner-columns - 2,$total-columns);
   @include post(2);
 }
 
 #header-actions {
-  $header-columns: 6;
-  @include span-columns($header-columns omega,$total-columns);
-  #greetings {@include span-columns(2,$header-columns);}
-  #new-link {@include span-columns(2,$header-columns);}
-  #search-link {@include span-columns(2 omega,$header-columns);}
-  #sign-in {@include span-columns(3 omega,$header-columns);}
+  @include prefix(2,$header-actions-columns);
+  @include span-columns($header-actions-columns - 2 omega,$total-columns);
+  div {
+    @include isolate-grid(1);
+  }
+}
+
+#header-actions.signed-in {
+  @include span-columns($header-actions-columns omega,$total-columns);
+  div {
+    @include isolate-grid(3);
+  }
+}
+
+.hidden {
+  display: none;
 }
 
 #map {
@@ -44,11 +54,17 @@ header.main, #title, #dashboard {
 }
 
 #dashboard {
+  button {
+    float: right;
+    margin: 10px;
+  }
   section > div {
     padding: 10px;
+    overflow: auto;
   }
   section.left {
     @include span-columns(6,$total-columns);
+
   }
   section.right {
     @include span-columns(6 omega,$total-columns);
@@ -57,9 +73,6 @@ header.main, #title, #dashboard {
     background-color: $light-grey;
   }
   section table {
-    tr {
-
-    }
     thead tr {
       border-bottom: 1px solid darken($light-grey, 20%);
     }
@@ -75,6 +88,11 @@ header.main, #title, #dashboard {
     width: 90%;
     margin: 0 auto;
   }
+  #url-table-wrapper {
+    height: 350px;
+    overflow: auto;
+  }
+  
 }
 
 

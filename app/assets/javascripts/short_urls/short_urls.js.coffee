@@ -46,5 +46,11 @@ $(($)->
   )
 
   new ZeroClipboard($(".copy-url"), moviePath: "/assets/ZeroClipboard.swf")
+
+  $('#view-all').click( ->
+    text = $(@).text()
+    $(@).text( if text == "View All" then "Reduce" else "View All")
+    $('#url-table tr.all').toggleClass('hidden')
+  )
   
 )
