@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class ShortUrlTest < ActiveSupport::TestCase
+
   def setup
     @short_url = FactoryGirl.create(:short_url)
 
@@ -147,4 +148,17 @@ class ShortUrlTest < ActiveSupport::TestCase
 
     assert_equal user, short_url.user
   end
+
+  test "the short url belongs to the user" do
+    user = FactoryGirl.create(:user)
+    short_url = FactoryGirl.create(:short_url, user: user)
+    assert_equal short_url.does_url_belong_to_user?(user), true
+  end
+
+  test "the short url does not belong to the user" do
+    user = FactoryGirl.create(:user)
+    short_url = FactoryGirl.create(:short_url)
+    assert_equal short_url.does_url_belong_to_user?(user), false
+  end
+
 end
