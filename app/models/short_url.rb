@@ -76,11 +76,13 @@ class ShortUrl < ActiveRecord::Base
     .where(visits: {short_url_id: self.id})
   end
 
-  # Returns a list of countries with a 'visit_count' attribute
-  def visits_by_organization group_by_disregarded: true, disregard_threshold: 5
-    orgs = Organization.find_by_sql("
-      SELECT organizations.*, globally_pertinent_organizations.count
+  def visits_from_pertinent_organizations
+    Organization.find_by_sql("
+      SELECT organizations.*
       FROM organizations
+      INNER JOIN visits
+      ON short_url_id = #{self.id}
+        AND organization_id = organizations.id
       INNER JOIN
         (
           SELECT
@@ -107,6 +109,38 @@ class ShortUrl < ActiveRecord::Base
       WHERE
         disregarded_for_short_url_organizations.organization_id IS NULL
     ")
+  end
+
+  def visits_from_organizations without: {}
+    query = "
+      SELECT organizations.*
+      FROM organizations
+      INNER JOIN visits
+      ON short_url_id = #{self.id}
+        AND organization_id = organizations.id
+    "
+
+    ignore_ids = without.map(&:id).join(', ')
+    if ignore_ids.length > 0
+      query += " WHERE organizations.id NOT IN (#{ignore_ids})"
+    end
+
+    Organization.find_by_sql(query)
+  end
+
+  # Returns a list of countries with a 'visit_count' attribute
+  def visits_by_organization group_by_disregarded: true, disregard_threshold: 5
+    if group_by_disregarded
+      pertinent_organizations = visits_from_pertinent_organizations
+      non_pertinent_organizations = visits_from_organizations without: pertinent_organizations
+
+      orgs = {
+        pertinent: pertinent_organizations,
+        non_pertinent: non_pertinent_organizations
+      }
+    else
+      orgs = visits_from_organizations
+    end
 
     orgs
   end
