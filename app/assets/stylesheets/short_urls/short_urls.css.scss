@@ -21,7 +21,7 @@ section, header {
 // Notice: the map is out of the 12 columns fluid container
 header.main, #title, #dashboard {
   @include container; 
-  @include susy-grid-background; // For debugging!
+  //@include susy-grid-background; // For debugging!
 }
 
 #home-banner {
@@ -33,7 +33,7 @@ header.main, #title, #dashboard {
   @include prefix(2,$header-actions-columns);
   @include span-columns($header-actions-columns - 2 omega,$total-columns);
   div {
-    @include isolate-grid(1);
+    @include isolate-grid(6);
   }
 }
 
@@ -71,6 +71,7 @@ header.main, #title, #dashboard {
   }
   section > div {
     background-color: $light-grey;
+    margin: 10px;
   }
   section table {
     thead tr {
