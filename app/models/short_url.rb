@@ -22,6 +22,14 @@ class ShortUrl < ActiveRecord::Base
 
   belongs_to :user
 
+  def does_url_belong_to_user? current_user
+    if current_user.short_urls.find_by_id(self.id)
+      return true
+    else
+      return false
+    end
+  end
+
   def not_a_robot
     if @not_a_robot.nil?
       return true
