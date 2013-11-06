@@ -89,17 +89,22 @@ class ShortUrlsControllerTest < ActionController::TestCase
     assert_equal ShortUrl.last.short_name, "xxx"
   end
 
-  test "POST update should update the URLs short_name" do
-    post(
-      :create, 
-      {url: "http://envirobear.com", not_a_robot: "true", short_name: "xxx"}
-    )
+  test "POST update should update the URLs short_name if user is signed in" do
+    sign_in FactoryGirl.create(:user)
+    short_url = FactoryGirl.create(:short_url, short_name: "xxx")
+    
     id = ShortUrl.last[:id]
     short_url = {:short_name => "zzz"}
-    post(
-      :update, 
-      {id: id, short_url: short_url}
-    )
+    post( :update, {id: id, short_url: short_url} )
     assert_equal ShortUrl.last.short_name, "zzz"
+  end
+
+  test "POST update should not update the URLs short_name if user is not signed in" do
+    short_url = FactoryGirl.create(:short_url, short_name: "xxx")
+    
+    id = ShortUrl.last[:id]
+    short_url = {:short_name => "zzz"}
+    post( :update, {id: id, short_url: short_url} )
+    assert_equal ShortUrl.last.short_name, "xxx"
   end
 end

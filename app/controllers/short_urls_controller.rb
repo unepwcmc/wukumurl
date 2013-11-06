@@ -1,4 +1,7 @@
 class ShortUrlsController < ApplicationController
+
+  before_filter :authenticate_user!, :only => [:update]
+
   def index
     if user_signed_in?
       @short_urls = ShortUrl.where(user: current_user)
@@ -50,7 +53,7 @@ class ShortUrlsController < ApplicationController
 
     return redirect_to :root unless @short_url
 
-    @url_belongs_to_user = does_url_belong_to_user? @short_url
+    @url_belongs_to_user = @short_url.does_url_belong_to_user? current_user
     @visits = @short_url.visit_count
     @visits_by_country = @short_url.visits_by_country
     @visits_by_organization = @short_url.visits_by_organization
@@ -69,15 +72,5 @@ class ShortUrlsController < ApplicationController
     short_url.short_name = short_name
     short_url.save
     redirect_to :action => "show", :short_name => short_name
-  end
-
-  private
-
-  def does_url_belong_to_user? short_url
-    if user_signed_in? and current_user.short_urls.find_by_id(short_url.id)
-      return true
-    else
-      return false
-    end
   end
 end
