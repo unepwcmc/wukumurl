@@ -30,7 +30,7 @@ class ShortUrl < ActiveRecord::Base
   }
 
   def does_url_belong_to_user? current_user
-    if current_user and current_user.short_urls.find_by_id(self.id)
+    if current_user && current_user.short_urls.find_by_id(self.id)
       return true
     else
       return false
