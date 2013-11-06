@@ -1,4 +1,7 @@
 class ShortUrlsController < ApplicationController
+
+  before_filter :user_required, :only => [:update]
+
   def index
     @short_urls = ShortUrl.not_deleted.order("created_at DESC")
   end
