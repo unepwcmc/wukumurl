@@ -33,19 +33,51 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'sign up' do
+  test 'sign up registers the user and sends a confirmation email' do
     get "/register"
     assert_response :success
 
     post_via_redirect "/register",
       user: {
-        email: "hats@boats.com",
+        email: "hats@unep-wcmc.org",
         password: "password",
         password_confirmation: "password"
       }
 
     assert_equal '/', path
     assert_response :success
+
+    mail = ActionMailer::Base.deliveries.last
+
+    assert_equal "hats@unep-wcmc.org", mail['to'].to_s
+    assert_equal "Confirmation instructions", mail['subject'].to_s
+  end
+
+  test 'sign up registers the user and allows them to confirm their email' do
+    get "/register"
+    assert_response :success
+
+    post_via_redirect "/register",
+      user: {
+        email: "hats@unep-wcmc.org",
+        password: "password",
+        password_confirmation: "password"
+      }
+
+    assert_equal '/', path
+    assert_response :success
+
+    mail = ActionMailer::Base.deliveries.last
+
+    # Get confirmation token as it's not store in the DB
+    if mail.body.to_s =~ /confirmation_token=(.*)"/
+      get_via_redirect user_confirmation_path,
+        confirmation_token: $1
+    end
+
+    assert_response :success
+
+    assert_not_nil User.last.confirmed_at
   end
 
   test 'forgotten password' do

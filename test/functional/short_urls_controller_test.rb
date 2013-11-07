@@ -3,11 +3,24 @@ require 'test_helper'
 class ShortUrlsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
-  test "GET index renders a list of shortened URLs" do
+  test "GET index renders a list of shortened URLs ordered by visits" do
+    short_urls = [
+      FactoryGirl.create(:short_url),
+      FactoryGirl.create(:short_url)
+    ]
+
+    (1..20).each do
+      FactoryGirl.create(:visit, short_url: short_urls[1])
+    end
+
     get :index
     assert_response :success
 
-    assert_not_nil assigns(:short_urls)
+    assigned_urls = assigns(:short_urls)
+    assert_not_nil assigned_urls
+
+    assert_equal short_urls[1], assigned_urls.first
+
     assert_template :index
   end
 
@@ -66,5 +79,32 @@ class ShortUrlsControllerTest < ActionController::TestCase
     errors = {"not_a_robot" => ["must be checked"]}
     response_errors = JSON.parse(response.body)
     assert_equal errors, response_errors
+  end
+
+  test "POST create should add URLs using short_name if present" do
+    post(
+      :create, 
+      {url: "http://envirobear.com", not_a_robot: "true", short_name: "xxx"}
+    )
+    assert_equal ShortUrl.last.short_name, "xxx"
+  end
+
+  test "POST update should update the URLs short_name if user is signed in" do
+    sign_in FactoryGirl.create(:user)
+    short_url = FactoryGirl.create(:short_url, short_name: "xxx")
+    
+    id = ShortUrl.last[:id]
+    short_url = {:short_name => "zzz"}
+    post( :update, {id: id, short_url: short_url} )
+    assert_equal ShortUrl.last.short_name, "zzz"
+  end
+
+  test "POST update should not update the URLs short_name if user is not signed in" do
+    short_url = FactoryGirl.create(:short_url, short_name: "xxx")
+    
+    id = ShortUrl.last[:id]
+    short_url = {:short_name => "zzz"}
+    post( :update, {id: id, short_url: short_url} )
+    assert_equal ShortUrl.last.short_name, "xxx"
   end
 end

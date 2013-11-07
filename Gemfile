@@ -9,8 +9,6 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'geoip-c', '0.8.0'
 gem 'whenever', :require => false
 
-gem 'debugger'
-
 group :development do
   gem 'capistrano'
   gem 'capistrano-ext'
@@ -19,6 +17,8 @@ group :development do
   gem 'guard'
   gem 'guard-minitest'
   gem 'rb-fsevent', '~> 0.9'
+
+  gem 'debugger'
 end
 
 gem 'sass-rails', '~> 4.0.0.rc1'
