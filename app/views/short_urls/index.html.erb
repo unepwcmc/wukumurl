@@ -17,17 +17,21 @@
       title: "Total number of visits",
       value: "15000000" } %>
     <% if user_signed_in? %>
-      <%= render partial: "multi_row_table", locals: {title: "Your links"} %>
+      <%= render partial: "short_urls_table", locals: {
+        title: "Your links",
+        data: @short_urls
+      } %>
     <% else -%>
       <%= render partial: "single_row_table", locals: {
         title: "Number of links shared",
         value: "300" } %>
-      <%= render partial: "multi_row_table", locals: {title: "Total visits"} %>
+      <%= render partial: "short_urls_table", locals: {title: "Total visits"} %>
     <% end -%>
   </section>
   <section class="right">
-    <div>
-      <%= render partial: "chart_block" %>
-    </div>
+    <%= render partial: "chart_block" %>
+    <%= render partial: "organizations_table", locals: {
+      title: "Top organizations by number of visits"
+    } %>
   </section>
 </section>
