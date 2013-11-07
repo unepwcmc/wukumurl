@@ -1,5 +1,11 @@
 <section id="title">
-  <div>Shared stuff</div>
+  <div>
+    <% if user_signed_in? %>
+    Your shared links
+    <% else -%>
+    Shared documents by WCMC
+    <% end -%>
+  </div>
 </section>
 
 <section id="map">
