@@ -14,9 +14,6 @@ $column-width: 60px;
 $gutter-width: 20px;
 $grid-padding: 10px;
 
-$container-style: fluid;
-$container-width: 70%;
-
 // Notice: the map is out of the 12 columns fluid container
 header.main, #title, #dashboard {
   @include container; 
