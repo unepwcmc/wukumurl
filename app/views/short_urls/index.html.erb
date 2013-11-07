@@ -1,21 +1,3 @@
-<header class="main">
-  <div id="home-banner">Home</div>
-  <div id="header-actions" class="<% if user_signed_in? %>signed-in<% end -%>">
-    <% if user_signed_in? %>
-      <div id="greetings">Hello
-        <%= truncate("#{current_user.email}", 
-          :length => 22, :omission => '...') %>
-      </div>
-      <div id="new-link"><button>+ New Link</button></div>
-      <div id="search-link">
-        <input type="text">
-      </div>
-    <% else -%>
-      <div id="sign-in">Sign in or register</div>
-    <% end -%>
-  </div>
-</header>
-
 <section id="title">
   <div>Shared stuff</div>
 </section>
@@ -29,12 +11,12 @@
       title: "Total number of visits",
       value: "15000000" } %>
     <% if user_signed_in? %>
-      <%= render partial: "short_url_table", locals: {title: "Your links"} %>
+      <%= render partial: "multi_row_table", locals: {title: "Your links"} %>
     <% else -%>
       <%= render partial: "single_row_table", locals: {
         title: "Number of links shared",
         value: "300" } %>
-      <%= render partial: "short_url_table", locals: {title: "Total visits"} %>
+      <%= render partial: "multi_row_table", locals: {title: "Total visits"} %>
     <% end -%>
   </section>
   <section class="right">

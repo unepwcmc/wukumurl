@@ -18,8 +18,23 @@
 
   <body>
     <div class="container">
-      <%= link_to '', '/help', :class=>"nav", :id=>"help" %>
-      <%= link_to '', '/', :class=>"nav", :id=>"home" %>
+      <header class="main">
+        <div id="home-banner">Home</div>
+        <div id="header-actions" class="<% if user_signed_in? %>signed-in<% end -%>">
+          <% if user_signed_in? %>
+            <div id="greetings">Hello
+              <%= truncate("#{current_user.email}", 
+                :length => 22, :omission => '...') %>
+            </div>
+            <div id="new-link"><button>+ New Link</button></div>
+            <div id="search-link">
+              <input type="text">
+            </div>
+          <% else -%>
+            <div id="sign-in">Sign in or register</div>
+          <% end -%>
+        </div>
+      </header>
 
       <%= yield %>
 
