@@ -6,6 +6,7 @@ $light-grey: #f7f7f7;
 $total-columns: 12;
 $home-banner-columns: 4;
 $header-actions-columns: $total-columns - $home-banner-columns;
+$section-columns: 6;
 $column-width: 60px;
 $gutter-width: 20px;
 $grid-padding: 10px;
@@ -63,11 +64,17 @@ header.main, #title, #dashboard {
     overflow: auto;
   }
   section.left {
-    @include span-columns(6,$total-columns);
+    @include span-columns($section-columns,$total-columns);
 
   }
   section.right {
-    @include span-columns(6 omega,$total-columns);
+    @include span-columns($section-columns omega,$total-columns);
+    #pie {
+      @include span-columns(7,12);
+    }
+    #pie-legend {
+      @include span-columns(5 omega,12);
+    }
   }
   section > div {
     background-color: $light-grey;
