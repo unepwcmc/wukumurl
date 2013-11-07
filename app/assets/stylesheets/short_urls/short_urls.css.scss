@@ -98,6 +98,10 @@ header.main {
   height: 400px;
 }
 
+#pie-wrapper {
+  height: 240px;
+}
+
 #dashboard {
   button {
     float: right;
@@ -153,12 +157,13 @@ header.main {
       height: 35px;
     }
     td.right {
+      padding-left: 5px;
       text-align: right;
     }
     width: 90%;
     margin: 0 auto;
   }
-  #url-table-wrapper {
+  .multi-row-table-wrapper {
     height: 350px;
     overflow: auto;
   }

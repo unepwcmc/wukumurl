@@ -7,6 +7,8 @@ class ShortUrlsController < ApplicationController
     #TODO: this query should be user aware!
     @visits_by_country = City.select("country, count(*) as value")
       .joins(:visits).group(:country).order('value desc')
+    @visits_by_organization = Organization.select("name, count(*) as value")
+      .joins(:visits).group(:name).order('value desc')
     @colours = @@colours
     if user_signed_in?
       @short_urls = ShortUrl.where(user: current_user)
