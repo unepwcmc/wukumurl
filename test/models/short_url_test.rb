@@ -98,11 +98,6 @@ class ShortUrlTest < ActiveSupport::TestCase
   end
 
   test "visits_by_organization with group_by_disregarded = true
-    does not duplicate records with multiple visits from the same organization" do
-    skip
-  end
-
-  test "visits_by_organization with group_by_disregarded = true
     separates the visits in to pertinent and non-pertinent depending on
     the Organization's disregard count" do
     organization_stats = @short_url.visits_by_organization(group_by_disregarded: true)
