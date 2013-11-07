@@ -52,5 +52,29 @@ $(($)->
     $(@).text( if text == "View All" then "Reduce" else "View All")
     $('#url-table tr.all').toggleClass('hidden')
   )
-  
+
+  # piechart
+  # Get the context of the canvas element we want to select
+  pieData = [
+    {
+      value: 20
+      color:"#777777"
+    },
+    {
+      value : 30
+      color : "#bbbbbb"
+    },
+    {
+      value : 10
+      color : "#dddddd"
+    },
+    {
+      value : 40
+      color : "#333333"
+    }   
+  ]
+  pieOptions = {}
+  ctx = document.getElementById("pie").getContext("2d")
+  piechart = new Chart(ctx).Pie(pieData, pieOptions)
+
 )
