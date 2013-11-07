@@ -53,26 +53,21 @@ $(($)->
     $('#url-table tr.all').toggleClass('hidden')
   )
 
-  # piechart
-  # Get the context of the canvas element we want to select
-  pieData = [
-    {
-      value: 20
-      color:"#777777"
-    },
-    {
-      value : 30
-      color : "#bbbbbb"
-    },
-    {
-      value : 10
-      color : "#dddddd"
-    },
-    {
-      value : 40
-      color : "#333333"
-    }   
-  ]
+  # piechart section
+
+  v = visits_by_country_global
+  country_threshold = 3
+  colors = ["#777777", "#bbbbbb", "#dddddd", "#333333"]
+  mainCountries = v[0..country_threshold - 1]
+  otherCountriesData = v[country_threshold..v.length]
+  otherCountries = _.reduce otherCountriesData, (result, item, index) -> 
+    result.value += item.value
+    result.country = "other" if result.country != "other"
+    result
+  pieData = _.map mainCountries.concat(otherCountries), (item, index, list) ->
+    item.color = colors[index]
+    item
+
   pieOptions = {}
   ctx = document.getElementById("pie").getContext("2d")
   piechart = new Chart(ctx).Pie(pieData, pieOptions)

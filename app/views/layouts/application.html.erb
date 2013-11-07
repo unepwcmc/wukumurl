@@ -4,6 +4,9 @@
     <title>wcmc.io shorten // share // track</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
+    <script>
+      var visits_by_country_global = <%= @visits_by_country.to_json.html_safe %>;
+    </script>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
 
