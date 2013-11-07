@@ -81,6 +81,12 @@ header.main {
   display: none;
 }
 
+.title {
+  font-weight: bold;
+  padding: 10px 0; 
+  border-bottom: 1px solid darken($light-grey, 20%);
+}
+
 #title {
   font-weight: bold;
   padding: 15px 0; 
@@ -112,6 +118,7 @@ header.main {
     @include span-columns($section-columns omega,$total-columns);
     #pie {
       @include span-columns(7,12);
+      padding-top: 12px;
     }
     #pie-legend {
       @include span-columns(5 omega,12);

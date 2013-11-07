@@ -3,6 +3,8 @@ class ShortUrlsController < ApplicationController
   before_filter :authenticate_user!, :only => [:update]
 
   def index
+    @visits_by_country = City.select("country, count(*) as value")
+      .joins(:visits).group(:country).order('value desc')
     if user_signed_in?
       @short_urls = ShortUrl.where(user: current_user)
         .ordered_by_visits_desc.not_deleted
