@@ -66,7 +66,8 @@
 
         <ul class="lists">
           <% @visits_by_organization[:pertinent].each do |organization| %>
-            <%= render "organization_list_item", organization: organization %>
+            <%= render "organization_list_item", organization:
+              organization, short_url: @short_url %>
           <% end %>
         </ul>
 
@@ -74,7 +75,8 @@
 
         <ul class="lists">
           <% @visits_by_organization[:non_pertinent].each do |organization| %>
-            <%= render "organization_list_item", organization: organization %>
+            <%= render "organization_list_item", organization:
+              organization, short_url: @short_url %>
           <% end %>
         </ul>
       </li>
