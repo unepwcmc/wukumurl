@@ -2,6 +2,9 @@
 
 $dark-grey: #2c2c2c;
 $light-grey: #f7f7f7;
+$font-small: 0.8em;
+$font-normal: 1em;
+$font-big: 2em;
 
 $total-columns: 12;
 $home-banner-columns: 4;
@@ -51,7 +54,7 @@ header.main, #title, #dashboard {
 section, header {
   margin: 10px 0 10px 0;
   color: $dark-grey;
-  font-size: 1em;
+  font-size: $font-normal;
   line-height: 1.1;
   table {
     .right {
@@ -63,14 +66,28 @@ section, header {
   }
   table.single {
     tbody {
-      font-size: 2em;
+      font-size: $font-big;
       line-height: 2;
     }
   }
 }
 
+header.main {
+  padding-bottom: 15px;
+  border-bottom: 1px solid darken($light-grey, 30%);
+}
+
 .hidden {
   display: none;
+}
+
+#title {
+  font-weight: bold;
+  padding: 15px 0; 
+}
+
+#greetings, #sign-in {
+  font-size: $font-small;
 }
 
 #map {

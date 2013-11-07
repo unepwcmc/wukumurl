@@ -24,7 +24,7 @@
           <% if user_signed_in? %>
             <div id="greetings">Hello
               <%= truncate("#{current_user.email}", 
-                :length => 22, :omission => '...') %>
+                :length => 19, :omission => '...') %>
             </div>
             <div id="new-link"><button>+ New Link</button></div>
             <div id="search-link">
