@@ -14,11 +14,6 @@ $grid-padding: 10px;
 $container-style: fluid;
 $container-width: 70%;
 
-section, header {
-  margin: 10px 0 10px 0;
-  color: $dark-grey;
-}
-
 // Notice: the map is out of the 12 columns fluid container
 header.main, #title, #dashboard {
   @include container; 
@@ -42,6 +37,35 @@ header.main, #title, #dashboard {
   @include span-columns($header-actions-columns omega,$total-columns);
   div {
     @include isolate-grid(3);
+  }
+}
+
+.container {
+  font-family: 'Open Sans', sans-serif;
+  a {
+    text-decoration:none;
+    color: $dark-grey;
+  }
+}
+
+section, header {
+  margin: 10px 0 10px 0;
+  color: $dark-grey;
+  font-size: 1em;
+  line-height: 1.1;
+  table {
+    .right {
+      font-weight: bold; 
+    }
+    thead {
+      font-weight: bold; 
+    }
+  }
+  table.single {
+    tbody {
+      font-size: 2em;
+      line-height: 2;
+    }
   }
 }
 
