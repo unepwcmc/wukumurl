@@ -57,7 +57,7 @@ $(($)->
   # piechart section
 
   # data preparation
-  v = visits_by_country_global
+  v = global_data_config.visits_by_country
   country_threshold = 3
   colours = ["#777777", "#bbbbbb", "#dddddd", "#333333"]
   mainCountries = v[0..country_threshold - 1]
@@ -82,6 +82,24 @@ $(($)->
     percent = parseInt(pieData[index].value / totalVisits * 100) + "%"
     $(@).find("div").text percent
     $(@).find("span").text pieData[index].country
+  )
+
+  # modal section
+
+  blanket = $('#blanket')
+  infoModal = $('#info-modal')
+
+  toggleFirstTimeModal = (status) ->
+    blanket[status]()
+    infoModal[status]()
+
+  toggleAddLinkTooltip = (status) ->
+    #TODO
+
+  toggleFirstTimeModal("show") if yes #global_data_config.no_urls_yet
+  infoModal.find("button").click( (e) ->
+    toggleFirstTimeModal "hide"
+    toggleAddLinkTooltip "show"
   )
 
 )
