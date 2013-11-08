@@ -1,11 +1,21 @@
 class ShortUrlsController < ApplicationController
 
   before_filter :authenticate_user!, :only => [:update]
+  @@colours = ["#777777", "#bbbbbb", "#dddddd", "#333333"]
 
   def index
-    @short_urls = ShortUrl.
-      ordered_by_visits_desc.
-      not_deleted
+    #TODO: this query should be user aware!
+    @visits_by_country = City.select("country, count(*) as value")
+      .joins(:visits).group(:country).order('value desc')
+    @visits_by_organization = Organization.select("name, count(*) as value")
+      .joins(:visits).group(:name).order('value desc')
+    @colours = @@colours
+    if user_signed_in?
+      @short_urls = ShortUrl.where(user: current_user)
+        .ordered_by_visits_desc.not_deleted
+    else
+      @short_urls = ShortUrl.ordered_by_visits_desc.not_deleted
+    end
   end
 
   def create

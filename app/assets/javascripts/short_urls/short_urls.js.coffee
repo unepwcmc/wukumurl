@@ -46,5 +46,42 @@ $(($)->
   )
 
   new ZeroClipboard($(".copy-url"), moviePath: "/assets/ZeroClipboard.swf")
-  
+
+  # Show/Hide full length table in dashboard
+  $('.view-all').click( ->
+    text = $(@).text()
+    $(@).text( if text == "View All" then "Reduce" else "View All")
+    $(@).closest('div').find('tr.all').toggleClass('hidden')
+  )
+
+  # piechart section
+
+  # data preparation
+  v = visits_by_country_global
+  country_threshold = 3
+  colours = ["#777777", "#bbbbbb", "#dddddd", "#333333"]
+  mainCountries = v[0..country_threshold - 1]
+  otherCountriesData = v[country_threshold..v.length]
+  otherCountries = _.reduce otherCountriesData, (result, item, index) -> 
+    result.value += item.value
+    result.country = "other" if result.country != "other"
+    result
+  totalVisits = 0
+  pieData = _.map mainCountries.concat(otherCountries), (item, index, list) ->
+    totalVisits += item.value
+    item.color = colours[index]
+    item
+
+  # draw piechart
+  pieOptions = {}
+  ctx = document.getElementById("pie").getContext("2d")
+  piechart = new Chart(ctx).Pie(pieData, pieOptions)
+
+  # draw legend
+  $("#pie-legend li").each( (index, el) ->
+    percent = parseInt(pieData[index].value / totalVisits * 100) + "%"
+    $(@).find("div").text percent
+    $(@).find("span").text pieData[index].country
+  )
+
 )

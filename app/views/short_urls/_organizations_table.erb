@@ -1,0 +1,29 @@
+<div>
+  <div id="organization-table-wrapper" class="multi-row-table-wrapper">
+    <table id="organization-table">
+      <thead>
+        <tr>
+          <td>
+            <%= title -%>
+          </td>
+          <td>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+      <% @visits_by_organization.each_with_index do |organization, index| %>
+        <tr class="<% if index > 7 %>all hidden<% end -%>">
+          <td>
+            <%= organization.name %>
+          </td>
+          <td class="right">
+            <%= organization.value %>
+          </td>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+    <% if@visits_by_organization.length > 8 %>
+      <button class="view-all">View All</button>
+    <% end %>
+</div>
