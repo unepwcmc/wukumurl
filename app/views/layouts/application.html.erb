@@ -25,16 +25,26 @@
         <div id="home-banner">Home</div>
         <div id="header-actions" class="<% if user_signed_in? %>signed-in<% end -%>">
           <% if user_signed_in? %>
-            <div id="greetings">Hello
-              <%= truncate("#{current_user.email}", 
-                :length => 19, :omission => '...') %>
-            </div>
+            <ul class="items">
+              <li>
+                <p id="greetings">Hello
+                  <%= truncate("#{current_user.email}", 
+                    :length => 19, :omission => '...') %>
+                </p>
+              </li>
+                <li>
+                  <p><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></p>
+                </li>
+            </ul>
             <div id="new-link"><button>+ New Link</button></div>
             <div id="search-link">
               <input type="text">
             </div>
           <% else -%>
-            <div id="sign-in">Sign in or register</div>
+            <div id="sign-in">
+              <%= link_to "Sign up", new_user_registration_path %> or 
+              <%= link_to "sign in", new_user_session_path %>
+            </div>
           <% end -%>
         </div>
       </header>
