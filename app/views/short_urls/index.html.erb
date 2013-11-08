@@ -1,39 +1,37 @@
-  <header>
+<section id="title">
+  <div>
+    <% if user_signed_in? %>
+    Your shared links
+    <% else -%>
+    Shared documents by WCMC
+    <% end -%>
+  </div>
+</section>
 
-    <h1>wcmc.io<span>shorten // share // track</span></h1>
-    <div class="form-container">
-      <form>
-        <input id="url_to_shorten" type="text" placeholder="Paste a link to shorten">
-        <input id="short_name" type="text" placeholder="Custom name (optional)">
-        <button id="shorten-link-btn" class="btn" type="submit" >Shorten</button>
-      </form>
-    </div>
+<section id="map">
+</section>
 
-  </header>
-
-  <section>
-
-    <div class="map-link"><%= link_to("Map View", "/map") %></div>
-
-    <ul id="short-url-list" class="lists">
-      <% @short_urls.each do |short_url| %>
-        <li>
-          <div class="details ">
-            <%= link_to("wcmc.io/#{short_url.short_name}", visit_short_url_path(short_name: short_url.short_name)) %>
-            <div>
-              <span class='stats'><%= link_to("#{short_url.visit_count} visits", short_url_info_path(short_url.short_name)) %></span>
-              <%= link_to("view stats", short_url_info_path(short_url.short_name)) %>
-            </div>
-            <p>
-              <%= short_url.url %>
-              <button class="copy-url" data-clipboard-text="<%= visit_short_url_url(short_name: short_url.short_name) %>">Copy</button>
-            </p>
-          </div>
-          <div class='side-hover-action'>
-            <%= link_to 'Delete', short_url, :method => :delete, :data => {:confirm => "Are you sure?"} %>
-          </div>
-        </li>
-      <% end %>
-    </ul>
-
+<section id="dashboard">
+  <section class="left">
+    <%= render partial: "single_row_table", locals: {
+      title: "Total number of visits",
+      value: "15000000" } %>
+    <% if user_signed_in? %>
+      <%= render partial: "short_urls_table", locals: {
+        title: "Your links",
+        data: @short_urls
+      } %>
+    <% else -%>
+      <%= render partial: "single_row_table", locals: {
+        title: "Number of links shared",
+        value: "300" } %>
+      <%= render partial: "short_urls_table", locals: {title: "Total visits"} %>
+    <% end -%>
   </section>
+  <section class="right">
+    <%= render partial: "chart_block" %>
+    <%= render partial: "organizations_table", locals: {
+      title: "Top organizations by number of visits"
+    } %>
+  </section>
+</section>
