@@ -1,5 +1,6 @@
 $(($)->
 
+
   captcha_el = $("""
     <label for="not_a_robot">
       <input type="checkbox" name="not_a_robot" id="not_a_robot">
@@ -46,6 +47,13 @@ $(($)->
   )
 
   new ZeroClipboard($(".copy-url"), moviePath: "/assets/ZeroClipboard.swf")
+
+  #map
+  map = L.map('map').setView([0, 0], 1)
+  L.tileLayer("http://carbon-tool.cartodb.com/tiles/wcmc_io_organizations_visits_count/{z}/{x}/{y}.png", {
+    maxZoom: 18
+  }).addTo(map)
+
 
   # Show/Hide full length table in dashboard
   $('.view-all').click( ->

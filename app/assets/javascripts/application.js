@@ -16,3 +16,4 @@
 //= require laconic
 //= require lodash.min.js
 //= require ZeroClipboard.min
+//= require leaflet
