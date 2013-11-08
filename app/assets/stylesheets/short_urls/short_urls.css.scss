@@ -40,6 +40,10 @@ header.main, #title, #dashboard {
   }
 }
 
+ul {
+  list-style-type: none;
+}
+
 .container {
   font-family: 'Open Sans', sans-serif;
   a {
@@ -66,6 +70,27 @@ section, header {
       font-size: $font-big;
       line-height: 2;
     }
+  }
+}
+
+header {
+  .items {
+    display: inline-block;
+    background: white;
+    position:absolute;
+  }
+  .items > li:not(:first-child) {
+    display: none;
+  }
+  .items:hover > li:not(:first-child) {
+    display: block;
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+  p {
+    font-size: 0.9em;
   }
 }
 
@@ -124,9 +149,6 @@ header.main {
     #pie-legend {
       @include span-columns(3 omega,6);
       float: none;
-      ul {
-        list-style-type: none;
-      }
       li div {
         width: 40px;
         height: 26px;
