@@ -50,7 +50,7 @@ $(($)->
   # Show/Hide full length table in dashboard
   $('.view-all').click( ->
     text = $(@).text()
-    $(@).text( if text == "View All" then "Reduce" else "View All")
+    $(@).text( if text == "View All" then "Hide" else "View All")
     $(@).closest('div').find('tr.all').toggleClass('hidden')
   )
 
