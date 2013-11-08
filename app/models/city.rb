@@ -1,5 +1,4 @@
 class City < ActiveRecord::Base
-  attr_accessible :country, :iso2, :iso3, :lat, :lon, :name, :region
   has_many :visits
   has_many :short_urls, :through => :visits
   belongs_to :country_location, :foreign_key => "iso2", :primary_key => "id"
@@ -16,6 +15,4 @@ class City < ActiveRecord::Base
   def city_urls
     City.where(id: self.id).joins(:short_urls).select([:short_name, :url])
   end
-
-
 end

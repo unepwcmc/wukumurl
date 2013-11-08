@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag params[:controller] %>
+
 <script type="text/javascript"
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCc-_RVtz3Vy6D_VijPZZz-Q45_7UNeqxs&sensor=true">
 </script>
@@ -9,9 +10,3 @@
 <%= image_tag "ajax-loader.gif", :class => "ajax-loader"%>
 <div id="map-canvas"></div>
 <div id="url-list"></div>
-
-
-<script type="text/javascript">
-  //window.WukumUrl = WukumUrl || {};
-  //window.WukumUrl.data = JSON.parse(<%= @data.to_json.html_safe %>);
-</script>

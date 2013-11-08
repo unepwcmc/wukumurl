@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '~> 4.0.0'
+
+gem 'factory_girl_rails', '4.2.1'
 
 gem 'sqlite3'
 gem 'rack-cors', :require => 'rack/cors'
@@ -11,14 +13,18 @@ group :development do
   gem 'capistrano'
   gem 'capistrano-ext'
   gem 'brightbox'
+
+  gem 'guard'
+  gem 'guard-minitest'
+  gem 'rb-fsevent', '~> 0.9'
+
+  gem 'debugger'
 end
 
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+gem 'sass-rails', '~> 4.0.0.rc1'
+gem 'coffee-rails', '~> 4.0.0'
 
-  gem 'uglifier', '>= 1.0.3'
-end
+gem 'uglifier', '>= 1.0.3'
 
 gem 'pg'
 
@@ -26,5 +32,7 @@ gem 'jquery-rails'
 gem 'eco'
 
 gem "auto_strip_attributes", "~> 1.0"
+
+gem 'devise'
 
 gem 'geocoder'

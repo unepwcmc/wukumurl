@@ -1,7 +1,5 @@
 namespace :geo_locate do
-
   task visits: :environment do
-
     require 'geoip'
     require 'geocoder'
 
@@ -13,4 +11,4 @@ namespace :geo_locate do
       visit.save
     end
   end
-end 
+end
