@@ -10,12 +10,13 @@ class ShortUrlsController < ApplicationController
     @visits_by_organization = Organization.select("name, count(*) as value")
       .joins(:visits).group(:name).order('value desc')
     @colours = @@colours
-    @no_urls_yet = current_user.no_urls_yet?
     if user_signed_in?
       @short_urls = ShortUrl.where(user: current_user)
         .ordered_by_visits_desc.not_deleted
+      @no_urls_yet = current_user.no_urls_yet?
     else
       @short_urls = ShortUrl.ordered_by_visits_desc.not_deleted
+      @no_urls_yet = nil
     end
   end
 
