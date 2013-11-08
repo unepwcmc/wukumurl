@@ -1,5 +1,10 @@
 /*
  *= require_self
  *= require short_urls/normalize
+ *= require leaflet.css
+ *= require leaflet.ie.css
  *= require short_urls/short_urls
 */
+
+
+	
