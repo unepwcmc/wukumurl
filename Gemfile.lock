@@ -87,7 +87,7 @@ GEM
     formatador (0.2.4)
     fssm (0.2.10)
     geocoder (1.1.8)
-    geoip-c (0.8.0)
+    geoip-c (0.9.1)
     guard (2.2.3)
       formatador (>= 0.2.4)
       listen (~> 2.1)
@@ -206,7 +206,7 @@ DEPENDENCIES
   eco
   factory_girl_rails (= 4.2.1)
   geocoder
-  geoip-c (= 0.8.0)
+  geoip-c (= 0.9.1)
   guard
   guard-minitest
   jquery-rails
