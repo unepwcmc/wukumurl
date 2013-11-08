@@ -1,11 +1,9 @@
 class ShortUrl < ActiveRecord::Base
   require 'securerandom'
-  attr_accessible :short_name, :url
   validates_uniqueness_of :short_name
   validate :validate_url
 
   attr_accessor :not_a_robot
-  attr_accessible :not_a_robot
 
   before_validation :create_short_name_if_blank
   before_validation :ensure_http_prepend
@@ -21,6 +19,23 @@ class ShortUrl < ActiveRecord::Base
   has_many :locations, :through => :visits
   has_many :cities, :through => :visits
   has_many :country_locations, :through => :cities
+
+  belongs_to :user
+
+  scope :ordered_by_visits_desc, -> {
+    joins('LEFT JOIN visits ON visits.short_url_id = short_urls.id').
+    select('short_urls.*, count(visits.id) AS visits_count').
+    group('short_urls.id').
+    order('visits_count DESC')
+  }
+
+  def does_url_belong_to_user? current_user
+    if current_user && current_user.short_urls.find_by_id(self.id)
+      return true
+    else
+      return false
+    end
+  end
 
   def not_a_robot
     if @not_a_robot.nil?
@@ -43,7 +58,7 @@ class ShortUrl < ActiveRecord::Base
   def visit_count
     Visit.where(short_url_id: self.id).count
   end
-  
+
   def visits_location
     Visit.where(short_url_id: self.id).select([:id, :longitude, :latitude])
   end
@@ -75,17 +90,19 @@ class ShortUrl < ActiveRecord::Base
     .where(visits: {short_url_id: self.id})
   end
 
-
   # Returns a list of countries with a 'visit_count' attribute
-  def visits_by_organization include_disregarded = false
+  def visits_by_organization group_by_disregarded: true, disregard_threshold: 5
     orgs = Organization.
       select("organizations.id, organizations.name, COUNT(visits.id) as visit_count").
       group("organizations.id, organizations.name").
       joins(:visits).
       where(visits: {short_url_id: self.id})
 
-    unless include_disregarded
-      orgs = orgs.where("disregard = false OR disregard IS NULL")
+    if group_by_disregarded
+      orgs = {
+        pertinent: orgs.where("disregard < #{disregard_threshold}"),
+        non_pertinent: orgs.where("disregard >= #{disregard_threshold}")
+      }
     end
 
     orgs

@@ -304,9 +304,6 @@ ul.stat-groups li{
 }
 
 ul.lists {
-  border-top: 1px solid #474a5c;
-  margin: 12px 0 0 0;
-
   li {
     float: left;
     width: 100%;
@@ -315,6 +312,9 @@ ul.lists {
     border-bottom: 1px solid #cccccc;
     position:relative;
 
+    &:first-child {
+      border-top: 1px solid #474a5c;
+    }
 
     .details {
       float: left;
@@ -345,6 +345,10 @@ ul.lists {
       border-top: 1px dotted #ccc;
       text-align:left;
       word-break: break-all;
+
+      button {
+        float: right;
+      }
     }
 
     a {
@@ -415,10 +419,6 @@ ul.lists {
       display:inline;
     }
   }
-}
-
-.compare_urls {
-  color: #E3E3E3;
 }
 
 .map-link {
