@@ -22,8 +22,12 @@
   <body>
     <div class="container">
       <header class="main">
-        <div id="home-banner">Home</div>
-        <div id="header-actions" class="<% if user_signed_in? %>signed-in<% end -%>">
+        <div id="header-links-container">
+          <div id="home-banner">
+            <h1>WCMC.io</h1>
+            <h2>Measure the impact of digital documents you care about</h2>
+          </div>
+          <div id="header-actions" class="<% if user_signed_in? %>signed-in<% end -%>">
           <% if user_signed_in? %>
             <ul class="items">
               <li>
@@ -47,6 +51,7 @@
             </div>
           <% end -%>
         </div>
+        </div><!-- header-links-container -->
       </header>
 
       <%= yield %>
