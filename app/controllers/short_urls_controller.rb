@@ -16,7 +16,7 @@ class ShortUrlsController < ApplicationController
       @no_urls_yet = current_user.no_urls_yet?
     else
       @short_urls = ShortUrl.ordered_by_visits_desc.not_deleted
-      @no_urls_yet = nil
+      @no_urls_yet = false
     end
   end
 
