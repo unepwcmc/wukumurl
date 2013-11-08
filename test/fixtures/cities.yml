@@ -1,8 +1,0 @@
-duncan:
-  iso2: "CA"
-  iso3: "CAN"
-  country: canada
-  region: 'Vancouver Island'
-  name: 'Duncan'
-  lat: 48.778611
-  lon: -123.707778

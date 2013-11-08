@@ -2,22 +2,60 @@
 <html>
   <head>
     <title>wcmc.io shorten // share // track</title>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
+    <script>
+      var global_data_config = {
+        visits_by_country: <%= @visits_by_country.to_json.html_safe %>,
+        no_urls_yet: <%= @no_urls_yet %>
+      };
+    </script>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
 
-      <!-- enable HTML5 elements in IE7+8 -->
-      <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-      <![endif]-->
-    
+    <%= stylesheet_link_tag params[:controller] %>
+    <%= javascript_include_tag params[:controller] %>
+
+    <!-- enable HTML5 elements in IE7+8 -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
 
   <body>
     <div class="container">
-      <%= link_to '', '/help', :class=>"nav", :id=>"help" %>  
-      <%= link_to '', '/', :class=>"nav", :id=>"home" %>
+      <header class="main">
+        <div id="header-links-container">
+          <div id="home-banner">
+            <h1>WCMC.io</h1>
+            <h2>Measure the impact of digital documents you care about</h2>
+          </div>
+          <div id="header-actions" class="<% if user_signed_in? %>signed-in<% end -%>">
+          <% if user_signed_in? %>
+            <ul class="items">
+              <li>
+                <p id="greetings">Hello
+                  <%= truncate("#{current_user.email}", 
+                    :length => 19, :omission => '...') %>
+                </p>
+              </li>
+                <li>
+                  <p><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></p>
+                </li>
+            </ul>
+            <div id="new-link"><button>+ New Link</button></div>
+            <div id="search-link">
+              <input type="text">
+            </div>
+          <% else -%>
+            <div id="sign-in">
+              <%= link_to "Sign up", new_user_registration_path %> or 
+              <%= link_to "sign in", new_user_session_path %>
+            </div>
+          <% end -%>
+        </div>
+        </div><!-- header-links-container -->
+      </header>
 
       <%= yield %>
 

@@ -1,17 +1,31 @@
-  <%= stylesheet_link_tag params[:controller] %>
-  <%= javascript_include_tag params[:controller] %>
-  <header>
+  
+<section id="title">
+  <div>http://wcmc.io/<%= @short_url.short_name %></div>
+</section>
 
-  <h1>wcmc.io<span>shorten // share // track</span></h1>
-  <h2>ShortUrl: wcmc.io/<%= @short_url.short_name %></h2>
-  <p>Original URL: <%= @short_url.url %></p>
- </header>
+<section id="map">
+</section>
+
+<% if false %>
+  <header>
+    <h1>wcmc.io<span>shorten // share // track</span></h1>
+    <h2>ShortUrl: wcmc.io/<%= @short_url.short_name %>
+      <% if @url_belongs_to_user %>
+        <%= form_for @short_url, url: {action: "update", id: @short_url.id}, 
+          html: {class: "update-form"} do |f| %>
+            <%= f.text_field :short_name %>
+            <%= f.submit "Update Name" %>
+        <% end %>
+      <% end %>
+    </h2>
+    <p>Original URL: <%= @short_url.url %></p>
+  </header>
 
   <section>
     <ul class="stat-groups">
       <li>
         <div class="details">
-          Overall Clicks 
+          Overall Clicks
           <span class="stat"><%= @visits %></span>
         </div>
         <ul class="lists">
@@ -56,20 +70,24 @@
         <div class="details">
           By Organisation
         </div>
+
+        <h4>Pertinent</h4>
+
         <ul class="lists">
-          <% @visits_by_organization.each do |organization| %>
-            <li>
-              <div class="details">
-                <%= organization.name %>
-                <span class="stat"><%= organization.visit_count %></span>
-              </div>
-              <div class='side-hover-action'>
-                <%= link_to 'Disregard', organization, :method => :delete, :confirm => "Are you sure?" %>
-              </div>
-            </li>
+          <% @visits_by_organization[:pertinent].each do |organization| %>
+            <%= render "organization_list_item", organization: organization %>
+          <% end %>
+        </ul>
+
+        <h4>Non-pertinent</h4>
+
+        <ul class="lists">
+          <% @visits_by_organization[:non_pertinent].each do |organization| %>
+            <%= render "organization_list_item", organization: organization %>
           <% end %>
         </ul>
       </li>
 
     </ul>
   </section>
+<% end %>

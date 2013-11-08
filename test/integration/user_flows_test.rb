@@ -1,0 +1,123 @@
+require 'test_helper'
+
+class UserFlowsTest < ActionDispatch::IntegrationTest
+  include Warden::Test::Helpers
+
+  test 'show user links' do
+    login_as FactoryGirl.create(:user)
+    get "/me"
+    assert_response :success
+  end
+
+  test 'log in' do
+    get "/login"
+    assert_response :success
+
+    user = FactoryGirl.create(:user)
+
+    post_via_redirect "/login",
+      user: {
+        email: user.email,
+        password: FactoryGirl.attributes_for(:user)[:password]
+      }
+
+    assert_equal '/', path
+  end
+
+  test 'log out' do
+    login_as FactoryGirl.create(:user)
+
+    get_via_redirect "/logout"
+
+    assert_equal '/', path
+    assert_response :success
+  end
+
+  test 'sign up registers the user and sends a confirmation email' do
+    get "/register"
+    assert_response :success
+
+    post_via_redirect "/register",
+      user: {
+        email: "hats@unep-wcmc.org",
+        password: "password",
+        password_confirmation: "password"
+      }
+
+    assert_equal '/', path
+    assert_response :success
+
+    mail = ActionMailer::Base.deliveries.last
+
+    assert_equal "hats@unep-wcmc.org", mail['to'].to_s
+    assert_equal "Confirmation instructions", mail['subject'].to_s
+  end
+
+  test 'sign up registers the user and allows them to confirm their email' do
+    get "/register"
+    assert_response :success
+
+    post_via_redirect "/register",
+      user: {
+        email: "hats@unep-wcmc.org",
+        password: "password",
+        password_confirmation: "password"
+      }
+
+    assert_equal '/', path
+    assert_response :success
+
+    mail = ActionMailer::Base.deliveries.last
+
+    # Get confirmation token as it's not store in the DB
+    if mail.body.to_s =~ /confirmation_token=(.*)"/
+      get_via_redirect user_confirmation_path,
+        confirmation_token: $1
+    end
+
+    assert_response :success
+
+    assert_not_nil User.last.confirmed_at
+  end
+
+  test 'forgotten password' do
+    get "forgot_password"
+    assert_response :success
+
+    user = FactoryGirl.create(:user)
+
+    post_via_redirect "/forgot_password",
+      user: {
+        email: user.email
+      }
+
+    mail = ActionMailer::Base.deliveries.last
+
+    assert_equal user.email, mail['to'].to_s
+    assert_equal "Reset password instructions", mail['subject'].to_s
+
+    assert_response :success
+  end
+
+  test 'devise sends mail from the correct email' do
+    get "forgot_password"
+    assert_response :success
+
+    user = FactoryGirl.create(:user)
+
+    post_via_redirect "/forgot_password",
+      user: {
+        email: user.email
+      }
+
+    mail = ActionMailer::Base.deliveries.last
+
+    assert_equal 'no-reply@unep-wcmc.org', mail['from'].to_s
+
+    assert_response :success
+  end
+
+  teardown do
+    Warden.test_reset!
+  end
+end

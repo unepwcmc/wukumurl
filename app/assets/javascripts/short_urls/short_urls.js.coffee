@@ -13,6 +13,7 @@ $(($)->
 
     data =
       url: $('#url_to_shorten').val()
+      short_name: $('#short_name').val()
       not_a_robot: $('#not_a_robot').is(':checked')
 
     $.ajax(
@@ -44,45 +45,61 @@ $(($)->
     return false
   )
 
+  new ZeroClipboard($(".copy-url"), moviePath: "/assets/ZeroClipboard.swf")
 
-  ###
-    Dynamically build the url for the `compare` page depending 
-    on the clicks into the url checkboxes.
-  ###
+  # Show/Hide full length table in dashboard
+  $('.view-all').click( ->
+    text = $(@).text()
+    $(@).text( if text == "View All" then "Hide" else "View All")
+    $(@).closest('div').find('tr.all').toggleClass('hidden')
+  )
 
-  updateUrl = (ids) ->
-    url = "/compare/"
-    _.each ids, (id) ->
-      url += id + "/"
-    url
+  # piechart section
 
-  setUrl = (ids) ->
-    if ids.length > 0
-      # Uses laconic.js
-      a = $.el.a {'href' : updateUrl(ids)}, 'Compare urls!'
-    else
-      a = 'Compare urls!'
-    link.html a
-    
-  ids = []
-  link = $("span.compare_urls")
-  # Resetting all .compare_urls checkboxes first.
-  $('input:checkbox.compare_urls').removeAttr('checked')
+  # data preparation
+  v = global_data_config.visits_by_country
+  country_threshold = 3
+  colours = ["#777777", "#bbbbbb", "#dddddd", "#333333"]
+  mainCountries = v[0..country_threshold - 1]
+  otherCountriesData = v[country_threshold..v.length]
+  otherCountries = _.reduce otherCountriesData, (result, item, index) -> 
+    result.value += item.value
+    result.country = "other" if result.country != "other"
+    result
+  totalVisits = 0
+  pieData = _.map mainCountries.concat(otherCountries), (item, index, list) ->
+    totalVisits += item.value
+    item.color = colours[index]
+    item
 
-  $("input:checkbox.compare_urls").on "click", (evt) ->
-    val = evt.target.value
-    val_pos = undefined
-    _.each ids, (id, i) ->
-      if id == val
-        val_pos = i
-    # If the url id is not in the list, add it!
-    if val_pos == undefined
-      ids.push val
-    # But if it is already there, remove it!
-    else
-      ids.splice val_pos, 1
-    setUrl ids
-    
+  # draw piechart
+  pieOptions = {}
+  ctx = document.getElementById("pie").getContext("2d")
+  piechart = new Chart(ctx).Pie(pieData, pieOptions)
+
+  # draw legend
+  $("#pie-legend li").each( (index, el) ->
+    percent = parseInt(pieData[index].value / totalVisits * 100) + "%"
+    $(@).find("div").text percent
+    $(@).find("span").text pieData[index].country
+  )
+
+  # modal section
+
+  blanket = $('#blanket')
+  infoModal = $('#info-modal')
+
+  toggleFirstTimeModal = (status) ->
+    blanket[status]()
+    infoModal[status]()
+
+  toggleAddLinkTooltip = (status) ->
+    #TODO
+
+  toggleFirstTimeModal("show") if yes #global_data_config.no_urls_yet
+  infoModal.find("button").click( (e) ->
+    toggleFirstTimeModal "hide"
+    toggleAddLinkTooltip "show"
+  )
 
 )
-

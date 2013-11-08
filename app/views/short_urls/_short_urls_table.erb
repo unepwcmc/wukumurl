@@ -1,0 +1,30 @@
+<div>
+  <div id="url-table-wrapper" class="multi-row-table-wrapper">
+    <table id="url-table">
+      <thead>
+        <tr>
+          <td>
+            <%= title -%>
+          </td>
+          <td>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+      <% @short_urls.each_with_index do |short_url, index| %>
+        <tr class="<% if index > 7 %>all hidden<% end -%>">
+          <td>
+            <%= index + 1 %>. <%= link_to short_url.short_name , 
+              short_url_info_path(short_url.short_name) %>
+          </td>
+          <td class="right time">
+            <%= short_url.created_at.strftime("%d %b. %Y") %>
+          </td>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+    <% if @short_urls.length > 8 %>
+      <button class="view-all">View All</button>
+    <% end %>
+</div>
