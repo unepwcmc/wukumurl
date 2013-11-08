@@ -2,7 +2,9 @@
 
 URL shortener and analytics
 
-## MaxMind
+## Setup
+
+### MaxMind
 
 We're using Max Mind GeoIP databases (CountryLite and Organization) to
 analyse the ip addresses of users. We're using this gem, checkout the
@@ -13,15 +15,6 @@ install instructions for setup details:
 You will then need to setup a `config/max_mind.yml` file with the
 locations of your MaxMind DBs. An example of this is in
 `config/max_mind.yml.example`.
-
-### Setup
-
-#### Countries
-
-The map view requires a list of countries to function. You can seed
-these using:
-
-    rake db:seed
 
 #### Ubuntu setup
 
@@ -41,7 +34,22 @@ into this folder, then point your `config/max_mind.yml` to these.
     brew install geoip
 
 Your Max Mind DBs will be in `/usr/local/share/GeoIP/`, add the extras,
-then point `config/max_mind.yml` to them
+then point `config/max_mind.yml` to them.
+
+### Install
+
+Normal rails setup:
+
+* `bundle install`
+* `rake db:create`
+* `rake db:migrate`
+
+### Countries
+
+The map view requires a list of countries to function. You can seed
+these using:
+
+    rake db:seed
 
 ## Geolocate task
 
@@ -53,9 +61,3 @@ You can use the `cap rake_invoke task=<task_name>` to invoke this task on
 the server:
 
     cap rake_invoke task=geo_locate:visits
-
-## Creating with short names
-
-If you need a short name for a link, you can create it with curl:
-
-    curl --data "url=http://url.to/shorten&short_name=myUrl" wcmc.io/
