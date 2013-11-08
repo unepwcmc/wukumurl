@@ -103,6 +103,34 @@ ul {
   list-style-type: none;
 }
 
+#blanket {
+  display: none;
+  z-index: 999999;
+  background-color: black;
+  opacity: 0.5;
+  position:absolute;
+  top: 0;
+  width:100%; 
+  height:200%;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter:alpha(opacity=50); 
+}
+
+#info-modal {
+  display: none;
+  z-index: 9999999;
+  width: 600px;
+  //height: 250px;
+  position:fixed;
+  top:20%;
+  left:50%;
+  //margin-top:-100px;
+  margin-left:-300px;
+  background-color: $dark-grey;
+  color: white;
+  padding: 20px;
+}
+
 .container {
   font-family: 'Open Sans', sans-serif;
   a {
