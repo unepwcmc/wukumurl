@@ -43,7 +43,10 @@
                   <p><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></p>
                 </li>
             </ul>
-            <div id="new-link"><button>+ New Link</button></div>
+            <div id="new-link">
+              <button>+ New Link</button>
+              <%= render partial: "add_link" %>
+            </div>
             <div id="search-link">
               <input type="text">
             </div>
