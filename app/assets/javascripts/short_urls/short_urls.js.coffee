@@ -88,13 +88,14 @@ $(($)->
 
   blanket = $('#blanket')
   infoModal = $('#info-modal')
+  newLinkForm = $('#new-link-form-wrapper')
 
   toggleFirstTimeModal = (status) ->
     blanket[status]()
     infoModal[status]()
 
   toggleAddLinkTooltip = (status) ->
-    #TODO
+    newLinkForm[status]()
 
   toggleFirstTimeModal("show") if yes #global_data_config.no_urls_yet
   infoModal.find("button").click( (e) ->

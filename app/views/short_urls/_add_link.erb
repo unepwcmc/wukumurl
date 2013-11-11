@@ -1,10 +1,12 @@
 <div id="new-link-form-wrapper">
-  <%= form_for @short_url, url: {action: "create"}, 
-    html: {class: "update-form"} do |f| %>
-      <%= f.label "Insert the url you want to share" %>:
-      <%= f.text_field :url %>
-      <%= f.label "Edit the url before sharing" %>:
-      <%= f.text_field :short_name %>
-      <%= f.submit "Done" %>
+  <% if false %>
+    <%= form_for @short_url, url: {action: "create"}, 
+      html: {class: "update-form"} do |f| %>
+        <%= f.label "Insert the url you want to share" %>:
+        <%= f.text_field :url %>
+        <%= f.label "Edit the url before sharing" %>:
+        <%= f.text_field :short_name %>
+        <%= f.submit "Done" %>
+    <% end %>
   <% end %>
 </div>
