@@ -21,7 +21,7 @@ class ShortUrlsController < ApplicationController
   end
 
   def create
-    if params[:url].present?
+    if params[:short_url][:url].present?
       short_url = ShortUrl.new(
         url: params[:url],
         short_name: params[:short_name],

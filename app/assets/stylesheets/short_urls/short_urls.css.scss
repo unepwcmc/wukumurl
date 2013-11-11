@@ -103,6 +103,18 @@ ul {
   list-style-type: none;
 }
 
+#new-link {
+  position: relative;
+  #new-link-form-wrapper {
+    display: none;
+    position: absolute;
+    top: 37px;
+    margin: 0;
+    width: 300px;
+    background-color: darken($light-grey, 30%);
+  }
+}
+
 #blanket {
   display: none;
   z-index: 999999;
