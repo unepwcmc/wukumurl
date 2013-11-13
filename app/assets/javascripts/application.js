@@ -13,6 +13,5 @@
 
 //= require jquery
 //= require jquery_ujs
-//= require laconic
 //= require lodash.min.js
 //= require ZeroClipboard.min
