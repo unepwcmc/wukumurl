@@ -73,7 +73,9 @@ $(($)->
     item
 
   # draw piechart
-  pieOptions = {}
+  pieOptions = {
+    animation: false
+  }
   ctx = document.getElementById("pie").getContext("2d")
   piechart = new Chart(ctx).Pie(pieData, pieOptions)
 

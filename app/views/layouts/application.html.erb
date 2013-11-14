@@ -23,33 +23,24 @@
   </head>
 
   <body>
-    <div class="container">
-      <header class="main">
-        <div id="header-links-container">
-          <div id="home-banner">
-            <h1>WCMC.io</h1>
-            <h2>Measure the impact of digital documents you care about</h2>
-          </div>
-          <div id="header-actions" class="<% if user_signed_in? %>signed-in<% end -%>">
+    <header>
+      <div class="inner">
+
+        <div class="left">
+          <h1>WCMC.io</h1>
+          <h2>Measure the impact of digital documents you care about</h2>
+        </div>
+
+        <div class="header-actions <% if user_signed_in? %>signed-in<% end -%>">
           <% if user_signed_in? %>
-            <ul class="items">
-              <li>
-                <p id="greetings">Hello
-                  <%= truncate("#{current_user.email}", 
-                    :length => 19, :omission => '...') %>
-                </p>
-              </li>
-                <li>
-                  <p><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></p>
-                </li>
-            </ul>
-            <div id="new-link">
-              <button>+ New Link</button>
-              <%= render partial: "add_link" %>
+            <div id="greetings">
+              Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>
             </div>
-            <div id="search-link">
-              <input type="text">
-            </div>
+
+            <button>+ New Link</button>
+            <%= render partial: "add_link" %>
+
+            <input type="search">
           <% else -%>
             <div id="sign-in">
               <%= link_to "Sign up", new_user_registration_path %> or 
@@ -57,13 +48,13 @@
             </div>
           <% end -%>
         </div>
-        </div><!-- header-links-container -->
-      </header>
 
-      <%= yield %>
+      </div>
+    </header>
 
-      <footer>
-      </footer>
-    </div>
+    <%= yield %>
+
+    <footer>
+    </footer>
   </body>
 </html>

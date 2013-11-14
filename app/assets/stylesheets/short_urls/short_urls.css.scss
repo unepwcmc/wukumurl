@@ -23,99 +23,96 @@ $column-width: 4.2em;
 $gutter-width: 1em;
 $grid-padding: 1em;
 
-// Notice: the map is out of the 12 columns fluid container
 #title, #dashboard {
-  @include container; 
-  //@include susy-grid-background; // For debugging!
+  @include container;
 }
 
 body {
+  font-family: 'Open Sans', sans-serif;
   background-color: #f7f7f7;
-}
 
-header.main {
-  margin: 0 auto;
-  padding: 20px 0;
-  background: $blue;
-  div#header-links-container {
-    max-width: 61.4em;
-    margin: auto;
-    overflow: hidden;
-  }
-}
-
-#home-banner {
-  padding: 0;
-  margin: 0;
-  width: 60%;
-  float: left;
-  h1, h2 {
-    margin: 0;
-  }
-  h1 {
-    line-height: 1em;
-    font-size: 1.5em;
-    color: #fff;
-    font-weight: 400;
-  }
-  h2 {
-    line-height: .5em;
-    font-size: 1em;
-    border: none;
-    color: $white-text;
-    font-weight: 300;
-  }
-}
-
-#header-actions {
-  margin-top: 33px;
-  width: 40%;
-  float: right;
-  text-align: right;
-  color: $white-text;
-  font-weight: 300;
-  line-height: .5em;
-  font-size: 1.25em;
   a {
-    color: $white-text;
-    font-weight: 300;
-    line-height: .5em;
-    &:hover, &:active {
-      color: #fff;
-      text-decoration: underline;
-      -webkit-transition: all 0.5s ease;
-			-moz-transition: all 0.5s ease;
-			-ms-transition: all 0.5s ease;
-			-o-transition: all 0.5s ease;
-			transition: all 0.5s ease;
-    }
+    text-decoration:none;
+    color: $dark-grey;
   }
 }
 
-#header-actions.signed-in {
-  @include span-columns($header-actions-columns omega,$total-columns);
-  div {
-    @include isolate-grid(3);
-  }
+.hidden {
+  display: none;
 }
 
 ul {
   list-style-type: none;
 }
 
-#new-link {
-  position: relative;
-  #new-link-form-wrapper {
-    display: none;
-    position: absolute;
-    top: 37px;
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+     -moz-transition: $transition;
+       -o-transition: $transition;
+          transition: $transition;
+}
+
+header {
+  margin: 0 auto;
+  padding: 20px 0;
+  background: $blue;
+  border-bottom: 1px solid darken($light-grey, 30%);
+
+  .inner {
+    max-width: 61.4em;
+    margin: auto;
+    overflow: hidden;
+  }
+
+  .left {
+    float: left;
+  }
+
+  h1, h2 {
     margin: 0;
-    width: 300px;
-    background-color: darken($light-grey, 30%);
+  }
+
+  h1 {
+    line-height: 1em;
+    font-size: 1.5em;
+    color: #fff;
+    font-weight: 400;
+  }
+
+  h2 {
+    font-size: 1em;
+    border: none;
+    color: $white-text;
+    font-weight: 300;
+  }
+
+  .header-actions {
+    margin-top: 21px;
+    width: 55%;
+    float: right;
+    text-align: right;
+    color: $white-text;
+    font-weight: 300;
+    line-height: .5em;
+
+    * {
+      display: inline;
+      margin-left: 5px;
+    }
+
+    a {
+      color: $white-text;
+      @include transition(all 0.5s ease);
+
+      &:hover, &:active {
+        color: #fff;
+        @include transition(all 0.5s ease);
+      }
+    }
   }
 }
 
-#blanket {
+.blanket {
   display: none;
   z-index: 999999;
   background-color: black;
@@ -128,42 +125,57 @@ ul {
   filter:alpha(opacity=50); 
 }
 
-#info-modal {
+.modal {
   display: none;
   z-index: 9999999;
   width: 600px;
-  //height: 250px;
   position:fixed;
   top:20%;
   left:50%;
-  //margin-top:-100px;
   margin-left:-300px;
   background-color: $dark-grey;
   color: white;
   padding: 20px;
 }
 
-.container {
-  font-family: 'Open Sans', sans-serif;
-  a {
-    text-decoration:none;
-    color: $dark-grey;
+.new-link {
+  position: relative;
+
+  .new-link-form-wrapper {
+    display: none;
+    position: absolute;
+    top: 37px;
+    margin: 0;
+    width: 300px;
+    background-color: darken($light-grey, 30%);
   }
 }
 
-section, header {
+section {
   margin: 10px 0 10px 0;
   color: $dark-grey;
   font-size: $font-normal;
   line-height: 1.1;
+
   table {
-    .right {
-      font-weight: bold; 
-    }
     thead {
-      font-weight: bold; 
+      font-size: 1.25em;
+      line-height: 1em;
+      font-weight: bold;
+      padding: 10px 0;
+      border-bottom: 1px solid $header-border;
+      color: $blue;
+    }
+
+    .right {
+      font-weight: bold;
+    }
+
+    thead {
+      font-weight: bold;
     }
   }
+
   table.single {
     tbody {
       font-size: $font-big;
@@ -193,43 +205,15 @@ header {
   }
 }
 
-header.main {
-  border-bottom: 1px solid darken($light-grey, 30%);
-}
-
-.hidden {
-  display: none;
-}
-
-h2, thead {
-  font-size: 1.25em;
-  line-height: 1em;
-  font-weight: bold;
-  padding: 10px 0;
-  border-bottom: 1px solid $header-border;
-  color: $blue;
-}
-
-h2 {
-  margin: 0;
-}
 
 #title {
   font-weight: bold;
   padding: 15px 0; 
 }
 
-#greetings, #sign-in {
-  font-size: $font-small;
-}
-
 #map {
   width: 100%;
   height: 400px;
-}
-
-#pie-wrapper {
-  //height: 240px;
 }
 
 #dashboard {
@@ -324,7 +308,4 @@ h2 {
     height: 350px;
     overflow: auto;
   }
-  
 }
-
-
