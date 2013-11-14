@@ -1,15 +1,10 @@
-<div>
-  <div id="url-table-wrapper" class="multi-row-table-wrapper">
-    <table id="url-table">
-      <thead>
-        <tr>
-          <td>
-            <%= title -%>
-          </td>
-          <td>
-          </td>
-        </tr>
-      </thead>
+<section>
+  <header>
+    <h4><%= title %></h4>
+  </header>
+
+  <div class="multi-row-table-wrapper">
+    <table>
       <tbody>
       <% @short_urls.each_with_index do |short_url, index| %>
         <tr class="<% if index > 7 %>all hidden<% end -%>">
@@ -20,11 +15,13 @@
           <td class="right time">
             <%= short_url.created_at.strftime("%d %b. %Y") %>
           </td>
+        </tr>
       <% end %>
       </tbody>
     </table>
   </div>
-    <% if @short_urls.length > 8 %>
-      <button class="view-all">View All</button>
-    <% end %>
-</div>
+
+  <% if @short_urls.length > 8 %>
+    <button class="view-all">View All</button>
+  <% end %>
+</section>

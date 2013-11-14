@@ -1,39 +1,49 @@
-<section id="title">
-  <h1>
-    <% if user_signed_in? %>
-    Your shared links
-    <% else -%>
-    Shared documents by WCMC
-    <% end -%>
-  </h1>
-</section>
+<header>
+  <div class="inner">
+    <h3>
+      <% if user_signed_in? %>
+      Your shared links
+      <% else -%>
+      Shared documents by WCMC
+      <% end -%>
+    </h3>
+  </div>
+</header>
 
 <section id="map">
 </section>
 
-<section id="dashboard">
-  <section class="left">
-    <%= render partial: "single_row_table", locals: {
+<div class="dashboard">
+  <div class="left">
+    <%= render partial: "headline_number", locals: {
       title: "Total number of visits",
-      value: "15000000" } %>
+      value: 1500000
+    } %>
+
     <% if user_signed_in? %>
       <%= render partial: "short_urls_table", locals: {
         title: "Your links",
         data: @short_urls
       } %>
     <% else -%>
-      <%= render partial: "single_row_table", locals: {
+      <%= render partial: "headline_number", locals: {
         title: "Number of links shared",
-        value: "300" } %>
-      <%= render partial: "short_urls_table", locals: {title: "Top links by number of visits"} %>
+        value: 300
+      } %>
+
+      <%= render partial: "short_urls_table", locals: {
+        title: "Top links by number of visits",
+        data: @short_urls
+      } %>
     <% end -%>
-  </section>
-  <section class="right">
+  </div>
+
+  <div class="right">
     <%= render partial: "chart_block" %>
     <%= render partial: "organizations_table", locals: {
       title: "Top organizations by number of visits"
     } %>
-  </section>
-</section>
+  </div>
+</div>
 
 <%= render partial: "info_modal" %>

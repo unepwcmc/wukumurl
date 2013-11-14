@@ -76,11 +76,11 @@ $(($)->
   pieOptions = {
     animation: false
   }
-  ctx = document.getElementById("pie").getContext("2d")
+  ctx = $('.pie-chart canvas').get(0).getContext("2d")
   piechart = new Chart(ctx).Pie(pieData, pieOptions)
 
   # draw legend
-  $("#pie-legend li").each( (index, el) ->
+  $(".pie-chart ul li").each( (index, el) ->
     percent = parseInt(pieData[index].value / totalVisits * 100) + "%"
     $(@).find("div").text percent
     $(@).find("span").text pieData[index].country
