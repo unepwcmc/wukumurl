@@ -3,15 +3,27 @@ class ShortUrlsController < ApplicationController
   before_filter :authenticate_user!, :only => [:update]
 
   def index
-    @short_urls = ShortUrl.
-      ordered_by_visits_desc.
-      not_deleted
+    #TODO: this query should be user aware!
+    @visits_by_country = City.select("country, count(*) as value")
+      .joins(:visits).group(:country).order('value desc')
+    @visits_by_organization = Organization.select("name, count(*) as value")
+      .joins(:visits).group(:name).order('value desc')
+
+    if user_signed_in?
+      @short_urls = ShortUrl.where(user: current_user)
+        .ordered_by_visits_desc.not_deleted
+      @no_urls_yet = current_user.no_urls_yet?
+    else
+      @short_urls = ShortUrl.ordered_by_visits_desc.not_deleted
+      @no_urls_yet = false
+    end
   end
 
   def create
-    if params[:url].present?
+    short_url_params = params[:short_url]
+    if short_url_params && short_url_params[:url].present?
       short_url = ShortUrl.new(
-        url: params[:url],
+        url: short_url_params[:url],
         short_name: params[:short_name],
         not_a_robot: params[:not_a_robot] == "true",
         user: current_user
