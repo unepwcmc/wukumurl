@@ -6,7 +6,6 @@
 
     <script>
       var global_data_config = {
-        visits_by_country: <%= @visits_by_country.to_json.html_safe %>,
         no_urls_yet: <%= @no_urls_yet %>
       };
     </script>
@@ -56,5 +55,10 @@
 
     <footer>
     </footer>
+
+    <script>
+      var pieChart = new PieChart(<%= @visits_by_country.to_json.html_safe %>);
+    </script>
+
   </body>
 </html>

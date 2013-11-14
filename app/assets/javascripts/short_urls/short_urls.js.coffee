@@ -54,37 +54,6 @@ $(($)->
     $(@).closest('div').find('tr.all').toggleClass('hidden')
   )
 
-  # piechart section
-
-  # data preparation
-  v = global_data_config.visits_by_country
-  country_threshold = 3
-  colours = ["#777777", "#bbbbbb", "#dddddd", "#333333"]
-  mainCountries = v[0..country_threshold - 1]
-  otherCountriesData = v[country_threshold..v.length]
-  otherCountries = _.reduce otherCountriesData, (result, item, index) -> 
-    result.value += item.value
-    result.country = "other" if result.country != "other"
-    result
-  totalVisits = 0
-  pieData = _.map mainCountries.concat(otherCountries), (item, index, list) ->
-    totalVisits += item.value
-    item.color = colours[index]
-    item
-
-  # draw piechart
-  pieOptions = {
-    animation: false
-  }
-  ctx = $('.pie-chart canvas').get(0).getContext("2d")
-  piechart = new Chart(ctx).Pie(pieData, pieOptions)
-
-  # draw legend
-  $(".pie-chart ul li").each( (index, el) ->
-    percent = parseInt(pieData[index].value / totalVisits * 100) + "%"
-    $(@).find("div").text percent
-    $(@).find("span").text pieData[index].country
-  )
 
   # modal section
 
@@ -106,3 +75,58 @@ $(($)->
   )
 
 )
+
+class window.PieChart
+  colours: ["#777777", "#bbbbbb", "#dddddd", "#333333"]
+  country_threshold: 3
+
+  constructor: (visits) ->
+    topThreeCountries = @topThreeCountries(visits)
+    @visits = @populateColor(topThreeCountries)
+
+    @render()
+
+  totalVisits: ->
+    totalVisits = 0
+
+    _.each(@visits, (item) =>
+      totalVisits += item.value
+    )
+
+    return totalVisits
+
+  populateColor: (visits) ->
+    _.map(visits, (item, index, list) =>
+      item.color = @colours[index]
+      return item
+    )
+
+  topThreeCountries: (visits) ->
+    mainCountries = visits[0..@country_threshold - 1]
+
+    otherCountriesData = visits[@country_threshold..visits.length]
+    otherCountries = _.reduce(otherCountriesData, (result, item, index) ->
+      result.value += item.value
+      result.country = "other" if result.country != "other"
+
+      return result
+    )
+
+    return mainCountries.concat(otherCountries)
+
+  render: ->
+    pieOptions = {
+      animation: false
+    }
+
+    context = $('.pie-chart canvas').get(0).getContext("2d")
+    new Chart(context).Pie(@visits, pieOptions)
+
+    @renderLegend()
+
+  renderLegend: ->
+    $(".pie-chart ul li").each( (index, el) =>
+      percent = parseInt(@visits[index].value / @totalVisits() * 100) + "%"
+      $(el).find("div").text percent
+      $(el).find("span").text @visits[index].country
+    )
