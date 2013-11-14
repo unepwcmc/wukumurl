@@ -31,7 +31,7 @@
           <h2>Measure the impact of digital documents you care about</h2>
         </div>
 
-        <div class="header-actions <% if user_signed_in? %>signed-in<% end -%>">
+        <div class="header-actions">
           <% if user_signed_in? %>
             Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>
 
@@ -42,10 +42,8 @@
 
             <input type="search">
           <% else -%>
-            <div id="sign-in">
-              <%= link_to "Sign up", new_user_registration_path %> or 
-              <%= link_to "sign in", new_user_session_path %>
-            </div>
+            <%= link_to "Sign up", new_user_registration_path %> or
+            <%= link_to "sign in", new_user_session_path %>
           <% end -%>
         </div>
 
