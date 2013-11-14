@@ -1,4 +1,3 @@
-@import "compass/css3/border-radius";
 @import "susy";
 
 $heading: rgba(0,0,0,0.6);
@@ -23,10 +22,6 @@ $column-width: 4.2em;
 $gutter-width: 1em;
 $grid-padding: 1em;
 
-#title, #dashboard {
-  @include container;
-}
-
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: #f7f7f7;
@@ -41,10 +36,6 @@ body {
   display: none;
 }
 
-ul {
-  list-style-type: none;
-}
-
 @mixin transition($transition) {
   -webkit-transition: $transition;
      -moz-transition: $transition;
@@ -52,11 +43,18 @@ ul {
           transition: $transition;
 }
 
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+  border-radius: $radius;
+}
+
 header {
   margin: 0 auto;
   padding: 20px 0;
   background: $blue;
-  border-bottom: 1px solid darken($light-grey, 30%);
 
   .inner {
     max-width: 61.4em;
@@ -94,6 +92,29 @@ header {
     color: $white-text;
     font-weight: 300;
     line-height: .5em;
+
+    .new-link {
+      position: relative;
+
+      button {
+        border: 1px solid white;
+        color: white;
+
+        &:hover, &:active {
+          color: $blue;
+          background-color: white;
+        }
+      }
+
+      .new-link-form-wrapper {
+        display: none;
+        position: absolute;
+        top: 37px;
+        margin: 0;
+        width: 300px;
+        background-color: darken($light-grey, 30%);
+      }
+    }
 
     * {
       display: inline;
@@ -138,122 +159,104 @@ header {
   padding: 20px;
 }
 
-.new-link {
-  position: relative;
+.main {
+  max-width: 61.4em;
+  margin: 0 auto;
 
-  .new-link-form-wrapper {
-    display: none;
-    position: absolute;
-    top: 37px;
-    margin: 0;
-    width: 300px;
-    background-color: darken($light-grey, 30%);
-  }
-}
+  header {
+    background: none;
+    color: black;
 
-section {
-  margin: 10px 0 10px 0;
-  color: $dark-grey;
-  font-size: $font-normal;
-  line-height: 1.1;
-
-  table {
-    thead {
-      font-size: 1.25em;
-      line-height: 1em;
-      font-weight: bold;
-      padding: 10px 0;
-      border-bottom: 1px solid $header-border;
-      color: $blue;
-    }
-
-    .right {
-      font-weight: bold;
-    }
-
-    thead {
-      font-weight: bold;
+    h3 {
+      margin: 0;
     }
   }
-
-  table.single {
-    tbody {
-      font-size: $font-big;
-      line-height: 2;
-    }
-  }
-}
-
-header {
-  .items {
-    display: inline-block;
-    background: white;
-    position:absolute;
-  }
-  .items > li:not(:first-child) {
-    display: none;
-  }
-  .items:hover > li:not(:first-child) {
-    display: block;
-  }
-  ul {
-    padding: 0;
-    margin: 0;
-  }
-  p {
-    font-size: 0.9em;
-  }
-}
-
-
-#title {
-  font-weight: bold;
-  padding: 15px 0; 
 }
 
 #map {
   width: 100%;
-  height: 400px;
+  /*height: 400px;*/
 }
 
-#dashboard {
+button {
+  @include border-radius (5px);
+  border: 1px solid $blue;
+  color: $blue;
+  background: none;
+  padding: 3px 10px;
+  @include transition(all 0.5s ease);
+
+  &:hover, &:active {
+    background-color: $blue;
+    color: #fff;
+    @include transition(all 0.5s ease);
+  }
+}
+
+.dashboard {
   margin-top: 0;
   padding: 0;
+
   button {
-    float: right;
-    margin-top: 20px;
-    @include border-radius (5px);
     border: 1px solid $green;
     color: $green;
-    background: none;
-    padding: 3px 10px;
+    float: right;
+
     &:hover, &:active {
+      color: white;
       background-color: $green;
-      color: #fff;
-      -webkit-transition: all 0.5s ease;
-			-moz-transition: all 0.5s ease;
-			-ms-transition: all 0.5s ease;
-			-o-transition: all 0.5s ease;
-			transition: all 0.5s ease;
     }
   }
-  section > div {
+
+  div.left {
+    @include span-columns($section-columns,$total-columns);
+  }
+
+  div.right {
+    @include span-columns($section-columns omega,$total-columns);
+  }
+
+  section {
     padding: 10px;
     overflow: auto;
-  }
-  section.left {
-    @include span-columns($section-columns,$total-columns);
+    background-color: #fff;
+    margin-bottom: 20px;
+    @include border-radius(5px);
 
-  }
-  section.right {
-    @include span-columns($section-columns omega,$total-columns);
-    #pie {
-      @include span-columns(3,6);
-      padding-top: 12px;
+    header {
+      padding: 10px 0;
+      margin-bottom: 10px;
+      border-bottom: 1px solid $header-border;
+
+      h4 {
+        margin: 0;
+        font-size: 1.25em;
+        font-weight: bold;
+        color: $blue;
+      }
     }
-    #pie-legend {
-      @include span-columns(3 omega,6);
-      float: none;
+
+    p {
+      margin: 0;
+      font-size: 3em;
+      font-weight: 400;
+      text-align: right;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .pie-chart {
+    ul {
+      float: right;
+      width: 16em;
+      padding: 0;
+      list-style-type: none;
+      margin: 0;
+      margin-top: 10px;
+
       li div {
         width: 40px;
         height: 26px;
@@ -263,49 +266,42 @@ header {
         padding-left: 10px;
         float:left;
       }
+
       li span {
         line-height: 29pt;
         font-size: 0.9em;
       }
     }
   }
-  section > div {
-    background-color: #fff;
-    margin-bottom: 20px;
-    padding: 20px;
-    @include border-radius(5px);
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
+
   section table {
     width: 100%;
+
     tbody tr {
       border-bottom: 1px solid $light-border;
       &.single-row {
         border-bottom: none;
       }
     }
+
     td {
       height: 45px;
     }
+
     td.right {
       padding-left: 5px;
       text-align: right;
+
       &.time {
         color: $light-text;
         font-weight: 300;
       }
-      &.big_numbers {
-        font-size: 2.5em;
-        font-weight: 400;
-        line-height: 1.25em;
-        height: 35px;
-      }
     }
   }
+
   .multi-row-table-wrapper {
-    height: 350px;
+    margin-bottom: 10px;
+    height: 385px;
     overflow: auto;
   }
 }

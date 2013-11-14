@@ -57,8 +57,6 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
-    compass-rails (2.0.alpha.0)
-      compass (>= 0.12.2, < 0.14)
     debugger (1.6.2)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
@@ -200,7 +198,6 @@ DEPENDENCIES
   capistrano
   capistrano-ext
   coffee-rails (~> 4.0.0)
-  compass-rails (~> 2.0.alpha.0)
   debugger
   devise
   eco

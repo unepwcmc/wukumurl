@@ -33,12 +33,12 @@
 
         <div class="header-actions <% if user_signed_in? %>signed-in<% end -%>">
           <% if user_signed_in? %>
-            <div id="greetings">
-              Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>
-            </div>
+            Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>
 
-            <button>+ New Link</button>
-            <%= render partial: "add_link" %>
+            <div class="new-link">
+              <button>+ New Link</button>
+              <%= render partial: "add_link" %>
+            </div>
 
             <input type="search">
           <% else -%>
@@ -52,7 +52,9 @@
       </div>
     </header>
 
-    <%= yield %>
+    <div class="main">
+      <%= yield %>
+    </div>
 
     <footer>
     </footer>

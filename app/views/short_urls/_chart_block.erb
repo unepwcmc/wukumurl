@@ -1,16 +1,18 @@
-<div id="pie-wrapper">  
-  <h2>Countries with more visits</h2>
-  <canvas id="pie" width="170" height="170"></canvas>
-  <div id="pie-legend">
-    <ul>
-      <% for colour in @colours %>
+<section class="pie-chart">
+  <header>
+    <h4>Countries with more visits</h4>
+  </header>
+
+  <canvas width="170" height="170"></canvas>
+
+  <ul class="legend">
+    <% for colour in @colours %>
       <li>
         <div class="legend-colour" style="background-color: <%= colour %>">
         </div>
         <span class="legend-text">
         </span>
       </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
+    <% end %>
+  </ul>
+</section>
