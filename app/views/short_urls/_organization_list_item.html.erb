@@ -1,0 +1,9 @@
+<li>
+  <div class="details">
+    <%= organization.name %>
+    <span class="stat"><%= organization.visit_count %></span>
+  </div>
+  <div class='side-hover-action'>
+    <%= link_to 'Disregard', organization_path(organization, :short_url_id => short_url.id), :method => :delete, :data => {:confirm => "Are you sure?"} %>
+  </div>
+</li>
