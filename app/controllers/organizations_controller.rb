@@ -1,8 +1,12 @@
 class OrganizationsController < ApplicationController
   def destroy
     organization = Organization.find(params[:id])
-    organization.increment!(:disregard)
-    organization.save
+
+    DisregardVote.create(
+      organization: organization,
+      short_url_id: params[:short_url_id]
+    )
+
     redirect_to :back
   end
 end
