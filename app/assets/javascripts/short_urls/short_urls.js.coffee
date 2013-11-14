@@ -54,9 +54,7 @@ $(($)->
     $(@).closest('div').find('tr.all').toggleClass('hidden')
   )
 
-
   # modal section
-
   blanket = $('#blanket')
   infoModal = $('#info-modal')
   newLinkForm = $('#new-link-form-wrapper')
@@ -86,7 +84,7 @@ class window.PieChart
 
     @render()
 
-  totalVisits: ->
+  calculateTotalVisits: ->
     totalVisits = 0
 
     _.each(@visits, (item) =>
@@ -125,8 +123,28 @@ class window.PieChart
     @renderLegend()
 
   renderLegend: ->
-    $(".pie-chart ul li").each( (index, el) =>
-      percent = parseInt(@visits[index].value / @totalVisits() * 100) + "%"
-      $(el).find("div").text percent
-      $(el).find("span").text @visits[index].country
+    legendTemplate = _.template("""
+      <li>
+        <div class="legend-colour" style="background-color: <%= colour %>">
+          <%= percent %>
+        </div>
+        <span class="legend-text">
+          <%= country %>
+        </span>
+      </li>
+    """)
+    $legendEl = $(".pie-chart .legend")
+
+    totalVisits = @calculateTotalVisits()
+
+    _.each(@visits, (item, index) =>
+      percent = parseInt(item.value / totalVisits  * 100) + "%"
+
+      $legendEl.append(
+        legendTemplate(
+          percent: percent
+          country: item.country
+          colour: item.color
+        )
+      )
     )
