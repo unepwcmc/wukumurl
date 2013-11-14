@@ -50,6 +50,10 @@ $(($)->
 
   #map
   map = L.map('map').setView([0, 0], 1)
+  L.tileLayer('http://a.tile.stamen.com/toner/{z}/{x}/{y}.png', {
+    attribution: 'stamen http://maps.stamen.com/'
+  }).addTo(map);
+
   L.tileLayer("http://carbon-tool.cartodb.com/tiles/wcmc_io_organizations_visits_count/{z}/{x}/{y}.png", {
     maxZoom: 18
   }).addTo(map)
