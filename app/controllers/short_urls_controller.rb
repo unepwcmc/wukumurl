@@ -20,9 +20,10 @@ class ShortUrlsController < ApplicationController
   end
 
   def create
-    if params[:short_url][:url].present?
+    short_url_params = params[:short_url]
+    if short_url_params && short_url_params[:url].present?
       short_url = ShortUrl.new(
-        url: params[:url],
+        url: short_url_params[:url],
         short_name: params[:short_name],
         not_a_robot: params[:not_a_robot] == "true",
         user: current_user
