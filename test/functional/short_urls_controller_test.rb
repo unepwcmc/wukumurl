@@ -50,7 +50,7 @@ class ShortUrlsControllerTest < ActionController::TestCase
     user = FactoryGirl.create(:user)
     sign_in user
 
-    post :create, url: 'http://google.com', user: user, not_a_robot: "true"
+    post :create, short_url: {url: 'http://google.com'}, user: user, not_a_robot: "true"
     assert_response :success
 
     short_url = ShortUrl.last
@@ -68,12 +68,12 @@ class ShortUrlsControllerTest < ActionController::TestCase
   end
 
   test "POST create should add URLs if non_robot parameter is true" do
-    post :create, url: "http://envirobear.com", not_a_robot: "true"
+    post :create, short_url: {url: "http://envirobear.com"}, not_a_robot: "true"
     assert_response :success
   end
 
   test "POST create should not add URLs if non_robot parameter is false" do
-    post :create, url: "http://news.ycombinator.com"
+    post :create, short_url: {url: "http://news.ycombinator.com"}
     assert_response :unprocessable_entity
 
     errors = {"not_a_robot" => ["must be checked"]}
@@ -83,8 +83,8 @@ class ShortUrlsControllerTest < ActionController::TestCase
 
   test "POST create should add URLs using short_name if present" do
     post(
-      :create, 
-      {url: "http://envirobear.com", not_a_robot: "true", short_name: "xxx"}
+      :create,
+      short_url: {url: "http://envirobear.com"}, not_a_robot: "true", short_name: "xxx"
     )
     assert_equal ShortUrl.last.short_name, "xxx"
   end
@@ -92,7 +92,7 @@ class ShortUrlsControllerTest < ActionController::TestCase
   test "POST update should update the URLs short_name if user is signed in" do
     sign_in FactoryGirl.create(:user)
     short_url = FactoryGirl.create(:short_url, short_name: "xxx")
-    
+
     id = ShortUrl.last[:id]
     short_url = {:short_name => "zzz"}
     post( :update, {id: id, short_url: short_url} )
@@ -101,7 +101,7 @@ class ShortUrlsControllerTest < ActionController::TestCase
 
   test "POST update should not update the URLs short_name if user is not signed in" do
     short_url = FactoryGirl.create(:short_url, short_name: "xxx")
-    
+
     id = ShortUrl.last[:id]
     short_url = {:short_name => "zzz"}
     post( :update, {id: id, short_url: short_url} )

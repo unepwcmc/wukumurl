@@ -2,8 +2,13 @@
 <html>
   <head>
     <title>wcmc.io shorten // share // track</title>
-    <link href='//fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
+    <script>
+      var global_data_config = {
+        no_urls_yet: <%= @no_urls_yet %>
+      };
+    </script>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
 
@@ -17,14 +22,43 @@
   </head>
 
   <body>
-    <div class="container">
-      <%= link_to '', '/help', :class=>"nav", :id=>"help" %>
-      <%= link_to '', '/', :class=>"nav", :id=>"home" %>
+    <header>
+      <div class="inner">
 
+        <div class="left">
+          <h1>WCMC.io</h1>
+          <h2>Measure the impact of digital documents you care about</h2>
+        </div>
+
+        <div class="header-actions">
+          <% if user_signed_in? %>
+            Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>
+
+            <div class="new-link">
+              <button>+ New Link</button>
+              <%= render partial: "short_urls/add_link" %>
+            </div>
+
+            <input type="search">
+          <% else -%>
+            <%= link_to "Sign up", new_user_registration_path %> or
+            <%= link_to "sign in", new_user_session_path %>
+          <% end -%>
+        </div>
+
+      </div>
+    </header>
+
+    <div class="main">
       <%= yield %>
-
-      <footer>
-      </footer>
     </div>
+
+    <footer>
+    </footer>
+
+    <script>
+      var pieChart = new PieChart(<%= @visits_by_country.to_json.html_safe %>);
+    </script>
+
   </body>
 </html>
