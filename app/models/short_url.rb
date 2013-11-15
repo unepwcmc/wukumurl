@@ -3,15 +3,8 @@ class ShortUrl < ActiveRecord::Base
   validates_uniqueness_of :short_name
   validate :validate_url
 
-  attr_accessor :not_a_robot
-
   before_validation :create_short_name_if_blank
   before_validation :ensure_http_prepend
-
-  validates :not_a_robot, :inclusion => {
-    :in => [true],
-    :message => "must be checked"
-  }
 
   auto_strip_attributes :url
 
@@ -36,14 +29,6 @@ class ShortUrl < ActiveRecord::Base
     else
       return false
     end
-  end
-
-  def not_a_robot
-    if @not_a_robot.nil?
-      return true
-    end
-
-    @not_a_robot
   end
 
   def create_short_name_if_blank
