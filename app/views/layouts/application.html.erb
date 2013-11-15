@@ -31,7 +31,8 @@
 
         <div class="header-actions">
           <% if user_signed_in? %>
-            Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>
+            Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>,
+            <a href="<%= logout_path %>">sign out?</a>
 
             <button class="new-link">+ New Link</button>
           <% else -%>
@@ -55,8 +56,6 @@
 
     <script>
       var pieChart = new PieChart(<%= @visits_by_country.to_json.html_safe %>);
-      var newLinkView = new Backbone.Views.NewLinkView();
-      $('.new-link-form').html(newLinkView.el);
     </script>
 
   </body>
