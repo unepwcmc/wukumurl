@@ -15,9 +15,8 @@
     <%= stylesheet_link_tag params[:controller] %>
     <%= javascript_include_tag params[:controller] %>
 
-    <!-- enable HTML5 elements in IE7+8 -->
     <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
 
@@ -34,12 +33,7 @@
           <% if user_signed_in? %>
             Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>
 
-            <div class="new-link">
-              <button>+ New Link</button>
-              <%= render partial: "short_urls/add_link" %>
-            </div>
-
-            <input type="search">
+            <button class="new-link">+ New Link</button>
           <% else -%>
             <%= link_to "Sign up", new_user_registration_path %> or
             <%= link_to "sign in", new_user_session_path %>
@@ -56,8 +50,13 @@
     <footer>
     </footer>
 
+    <div class="new-link-form"></div>
+    <div class="modal-overlay"></div>
+
     <script>
       var pieChart = new PieChart(<%= @visits_by_country.to_json.html_safe %>);
+      var newLinkView = new Backbone.Views.NewLinkView();
+      $('.new-link-form').html(newLinkView.el);
     </script>
 
   </body>

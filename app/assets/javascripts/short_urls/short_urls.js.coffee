@@ -1,50 +1,4 @@
 $(($)->
-
-  captcha_el = $("""
-    <label for="not_a_robot">
-      <input type="checkbox" name="not_a_robot" id="not_a_robot">
-      I am not a robot
-    </label>
-  """)
-  $('.form-container form').append(captcha_el)
-
-  $('.form-container').on('submit', 'form', (e) ->
-    e.preventDefault()
-
-    data =
-      url: $('#url_to_shorten').val()
-      short_name: $('#short_name').val()
-      not_a_robot: $('#not_a_robot').is(':checked')
-
-    $.ajax(
-      url: '/'
-      type: 'POST'
-      data: data
-    ).done((shortUrl)->
-      $('form').children().removeClass('error')
-
-      $('#short-url-list').prepend("""
-         <li>
-           <div class="details">
-             <input type="checkbox" value="#{shortUrl.id}" class="compare_urls">
-             <a href="/#{shortUrl.short_name}">
-               wcmc.io/#{shortUrl.short_name}
-             </a>
-             <div>
-               <span class='stats'><a href="/short_urls/#{shortUrl.id}">0 visits</span></span>
-               <a href="/short_urls/#{shortUrl.id}">view stats</a>
-             </div>
-             <p>#{shortUrl.url}</p>
-           </div>
-         </li>
-       """)
-    ).fail((response) ->
-      for field, error of $.parseJSON(response.responseText)
-        $("##{field}, [for=#{field}]").addClass('error')
-    )
-    return false
-  )
-
   new ZeroClipboard($(".copy-url"), moviePath: "/assets/ZeroClipboard.swf")
 
   # Show/Hide full length table in dashboard
@@ -74,77 +28,47 @@ $(($)->
 
 )
 
-class window.PieChart
-  colours: ["#777777", "#bbbbbb", "#dddddd", "#333333"]
-  country_threshold: 3
+window.Backbone ||= {}
+window.Backbone.Views ||= {}
 
-  constructor: (visits) ->
-    topThreeCountries = @topThreeCountries(visits)
-    @visits = @populateColor(topThreeCountries)
+class Backbone.Views.NewLinkView extends Backbone.View
+  template: JST['templates/new_link']
 
+  events:
+    'click #edit_name': 'toggleEditName'
+    'click .create': 'saveLink'
+
+  initialize: ->
     @render()
 
-  calculateTotalVisits: ->
-    totalVisits = 0
+  saveLink: (event) =>
+    event.preventDefault()
 
-    _.each(@visits, (item) =>
-      totalVisits += item.value
-    )
+    data =
+      url: @$el.find('#url').val()
+      short_name: @$el.find('#short_name').val()
 
-    return totalVisits
+    $.ajax(
+      url: '/'
+      type: 'POST'
+      data: data)
+    .done(@renderSuccess)
+    .fail(@renderFailure)
 
-  populateColor: (visits) ->
-    _.map(visits, (item, index, list) =>
-      item.color = @colours[index]
-      return item
-    )
+  toggleEditName: ->
+    @$el
+      .find('#short_name')
+      .parent()
+      .toggle()
 
-  topThreeCountries: (visits) ->
-    mainCountries = visits[0..@country_threshold - 1]
+  renderFailure: (error) ->
+    console.log arguments
 
-    otherCountriesData = visits[@country_threshold..visits.length]
-    otherCountries = _.reduce(otherCountriesData, (result, item, index) ->
-      result.value += item.value
-      result.country = "other" if result.country != "other"
-
-      return result
-    )
-
-    return mainCountries.concat(otherCountries)
+  renderSuccess: (shortUrl) =>
+    template = JST['templates/link_added']
+    @$el.html(template())
+    return @
 
   render: ->
-    pieOptions = {
-      animation: false
-    }
-
-    context = $('.pie-chart canvas').get(0).getContext("2d")
-    new Chart(context).Pie(@visits, pieOptions)
-
-    @renderLegend()
-
-  renderLegend: ->
-    legendTemplate = _.template("""
-      <li>
-        <div class="legend-colour" style="background-color: <%= colour %>">
-          <%= percent %>
-        </div>
-        <span class="legend-text">
-          <%= country %>
-        </span>
-      </li>
-    """)
-    $legendEl = $(".pie-chart .legend")
-
-    totalVisits = @calculateTotalVisits()
-
-    _.each(@visits, (item, index) =>
-      percent = parseInt(item.value / totalVisits  * 100) + "%"
-
-      $legendEl.append(
-        legendTemplate(
-          percent: percent
-          country: item.country
-          colour: item.color
-        )
-      )
-    )
+    @$el.html(@template())
+    return @
