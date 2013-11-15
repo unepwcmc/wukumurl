@@ -50,7 +50,7 @@ class ShortUrlsControllerTest < ActionController::TestCase
     user = FactoryGirl.create(:user)
     sign_in user
 
-    post :create, short_url: {url: 'http://google.com'}, user: user, not_a_robot: "true"
+    post :create, url: 'http://google.com', user: user
     assert_response :success
 
     short_url = ShortUrl.last
@@ -67,24 +67,9 @@ class ShortUrlsControllerTest < ActionController::TestCase
     assert_redirected_to :root
   end
 
-  test "POST create should add URLs if non_robot parameter is true" do
-    post :create, short_url: {url: "http://envirobear.com"}, not_a_robot: "true"
-    assert_response :success
-  end
-
-  test "POST create should not add URLs if non_robot parameter is false" do
-    post :create, short_url: {url: "http://news.ycombinator.com"}
-    assert_response :unprocessable_entity
-
-    errors = {"not_a_robot" => ["must be checked"]}
-    response_errors = JSON.parse(response.body)
-    assert_equal errors, response_errors
-  end
-
   test "POST create should add URLs using short_name if present" do
     post(
-      :create,
-      short_url: {url: "http://envirobear.com"}, not_a_robot: "true", short_name: "xxx"
+      :create, url: "http://envirobear.com", short_name: "xxx"
     )
     assert_equal ShortUrl.last.short_name, "xxx"
   end

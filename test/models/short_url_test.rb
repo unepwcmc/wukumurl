@@ -159,16 +159,6 @@ class ShortUrlTest < ActiveSupport::TestCase
     assert !not_deleted.include?(deleted_url)
   end
 
-  test "should default not_a_robot to true" do
-    link = FactoryGirl.create(:short_url, url: 'http://envirobear.com')
-    assert_equal true, link.not_a_robot
-  end
-
-  test "should not be able to save if non_robot is false" do
-    link = FactoryGirl.build(:short_url, url: 'http://envirobear.com', not_a_robot: false)
-    refute link.valid?
-  end
-
   test "can create a ShortUrl with a User association" do
     user = FactoryGirl.create(:user)
     short_url = FactoryGirl.create(:short_url, user: user)

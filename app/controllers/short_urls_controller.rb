@@ -24,7 +24,6 @@ class ShortUrlsController < ApplicationController
       short_url = ShortUrl.new(
         url: params[:url],
         short_name: params[:short_name],
-        not_a_robot: true,
         user: current_user
       )
 
