@@ -1,6 +1,4 @@
 $(($)->
-  new ZeroClipboard($(".copy-url"), moviePath: "/assets/ZeroClipboard.swf")
-
   # Show/Hide full length table in dashboard
   $('.view-all').click( ->
     text = $(@).text()
@@ -9,9 +7,8 @@ $(($)->
   )
 
   # modal section
-  blanket = $('#blanket')
+  blanket = $('.modal-overlay')
   infoModal = $('#info-modal')
-  newLinkForm = $('#new-link-form-wrapper')
 
   toggleFirstTimeModal = (status) ->
     blanket[status]()
@@ -20,55 +17,23 @@ $(($)->
   toggleAddLinkTooltip = (status) ->
     newLinkForm[status]()
 
-  toggleFirstTimeModal("show") if yes #global_data_config.no_urls_yet
+  newLinkForm = $('.new-link-form')
+  newLinkView = null
+  $('.new-link').on('click', (event) ->
+    if newLinkView?
+      newLinkForm.hide()
+      newLinkView.close()
+      newLinkView = null
+    else
+      newLinkView = new Backbone.Views.NewLinkView()
+      newLinkForm.html(newLinkView.el)
+      newLinkForm.show()
+  )
+
+  toggleFirstTimeModal("show") if no #global_data_config.no_urls_yet
   infoModal.find("button").click( (e) ->
     toggleFirstTimeModal "hide"
     toggleAddLinkTooltip "show"
   )
 
 )
-
-window.Backbone ||= {}
-window.Backbone.Views ||= {}
-
-class Backbone.Views.NewLinkView extends Backbone.View
-  template: JST['templates/new_link']
-
-  events:
-    'click #edit_name': 'toggleEditName'
-    'click .create': 'saveLink'
-
-  initialize: ->
-    @render()
-
-  saveLink: (event) =>
-    event.preventDefault()
-
-    data =
-      url: @$el.find('#url').val()
-      short_name: @$el.find('#short_name').val()
-
-    $.ajax(
-      url: '/'
-      type: 'POST'
-      data: data)
-    .done(@renderSuccess)
-    .fail(@renderFailure)
-
-  toggleEditName: ->
-    @$el
-      .find('#short_name')
-      .parent()
-      .toggle()
-
-  renderFailure: (error) ->
-    console.log arguments
-
-  renderSuccess: (shortUrl) =>
-    template = JST['templates/link_added']
-    @$el.html(template())
-    return @
-
-  render: ->
-    @$el.html(@template())
-    return @
