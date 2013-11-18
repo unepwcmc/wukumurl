@@ -4,11 +4,6 @@
     <title>wcmc.io shorten // share // track</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
-    <script>
-      var global_data_config = {
-        no_urls_yet: <%= @no_urls_yet %>
-      };
-    </script>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
 
@@ -36,8 +31,8 @@
 
             <button class="new-link">+ New Link</button>
           <% else -%>
-            <%= link_to "Sign up", new_user_registration_path %> or
-            <%= link_to "sign in", new_user_session_path %>
+            <%= link_to "Sign up", new_user_registration_path, :class => 'sign-up' %> or
+            <%= link_to "sign in", new_user_session_path, :class => 'sign-in' %>
           <% end -%>
         </div>
 
@@ -51,10 +46,14 @@
     <footer>
     </footer>
 
-    <div class="sign-up-form"></div>
-    <div class="sign-in-form"></div>
+    <div class="sign-up-form popover">
+      <%= render "devise/registrations/new" %>
+    </div>
+    <div class="sign-in-form popover">
+      <%= render "devise/sessions/new" %>
+    </div>
 
-    <div class="new-link-form"></div>
+    <div class="new-link-form popover"></div>
     <div class="modal-overlay"></div>
 
     <script>

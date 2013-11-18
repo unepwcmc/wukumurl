@@ -30,6 +30,11 @@ $(($)->
       newLinkForm.show()
   )
 
+  $('.sign-up, .sign-in').on('click', (event) ->
+    event.preventDefault()
+    $(".#{@className}-form").toggle()
+  )
+
   toggleFirstTimeModal("show") if no #global_data_config.no_urls_yet
   infoModal.find("button").click( (e) ->
     toggleFirstTimeModal "hide"
