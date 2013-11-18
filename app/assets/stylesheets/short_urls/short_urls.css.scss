@@ -128,10 +128,10 @@ header {
   opacity: 0.5;
   position:absolute;
   top: 0;
-  width:100%; 
+  width:100%;
   height:200%;
   -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter:alpha(opacity=50); 
+  filter:alpha(opacity=50);
 }
 
 .modal {
@@ -294,24 +294,17 @@ button {
   }
 }
 
-.new-link-form {
+.popover {
   display: none;
   position: absolute;
-  top: 87px;
-  left: 667px;
   z-index: 9999999;
 
   margin: 0;
   background: #ddd;
-  width: 425px;
   background-color: $lightish-grey;
   border: 1px solid #bdbdbd;
   @include border-radius(5px);
   padding: 10px;
-
-  -webkit-box-shadow: 0px 0px 7px rgba(50, 50, 50, 0.75);
-  -moz-box-shadow:    0px 0px 7px rgba(50, 50, 50, 0.75);
-  box-shadow:         0px 0px 7px rgba(50, 50, 50, 0.75);
 
   form {
     fieldset {
@@ -341,7 +334,25 @@ button {
   }
 }
 
-.new-link-form:after, .new-link-form:before {
+.sign-up-form {
+  top: 70px;
+  left: 923px;
+  width: 205px;
+}
+
+.sign-in-form {
+  top: 70px;
+  left: 997px;
+  width: 205px;
+}
+
+.new-link-form {
+  top: 87px;
+  left: 667px;
+  width: 425px;
+}
+
+.popover:after, .popover:before {
   bottom: 100%;
   left: 50%;
   border: solid transparent;
@@ -352,14 +363,14 @@ button {
   pointer-events: none;
 }
 
-.new-link-form:after {
+.popover:after {
   border-color: rgba(221, 221, 221, 0);
   border-bottom-color: #ddd;
   border-width: 14px;
   margin-left: -14px;
 }
 
-.new-link-form:before {
+.popover:before {
   border-color: rgba(189, 189, 189, 0);
   border-bottom-color: #bdbdbd;
   border-width: 16px;
