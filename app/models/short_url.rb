@@ -86,7 +86,6 @@ class ShortUrl < ActiveRecord::Base
           GROUP BY organization_id
         ) AS visits_for_orgs
       ON visits_for_orgs.organization_id = organizations.id
-      ORDER BY visit_count DESC
     "
   end
 
@@ -117,6 +116,7 @@ class ShortUrl < ActiveRecord::Base
         disregarded_for_short_url_organizations.organization_id = globally_pertinent_organizations.org_id
       WHERE
         disregarded_for_short_url_organizations.organization_id IS NULL
+      ORDER BY visit_count DESC
     "
   end
 
@@ -139,7 +139,10 @@ class ShortUrl < ActiveRecord::Base
       )
 
       non_pertinent_organizations = Organization.find_by_sql(
-        [organizations_query, non_pertinent_organization_query(without: pertinent_organizations)].join(" ")
+        [
+          organizations_query,
+          non_pertinent_organization_query(without: pertinent_organizations)
+        ].join(" ")
       )
 
       orgs = {
@@ -147,7 +150,10 @@ class ShortUrl < ActiveRecord::Base
         non_pertinent: non_pertinent_organizations
       }
     else
-      orgs = Organization.find_by_sql(organizations_query)
+      orgs = Organization.find_by_sql([
+        organizations_query,
+        "ORDER BY visit_count DESC"
+      ].join(" "))
     end
 
     orgs
