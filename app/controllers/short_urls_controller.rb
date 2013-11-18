@@ -65,9 +65,9 @@ class ShortUrlsController < ApplicationController
     return redirect_to :root unless @short_url
 
     @url_belongs_to_user = @short_url.does_url_belong_to_user? current_user
-    @visits = @short_url.visit_count
+    @total_visits = @short_url.visit_count
     @visits_by_country = @short_url.visits_by_country
-    @visits_by_organization = @short_url.visits_by_organization
+    @visits_by_organization = @short_url.visits_by_organization group_by_disregarded: false
   end
 
   def destroy

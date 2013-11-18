@@ -12,7 +12,7 @@
             <%= organization.name %>
           </td>
           <td class="right">
-            <%= organization.value %>
+            <%= organization.try(:value) || organization.visit_count %>
           </td>
         </tr>
       <% end %>
