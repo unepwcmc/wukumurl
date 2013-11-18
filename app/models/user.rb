@@ -46,12 +46,12 @@ class User < ActiveRecord::Base
 
   def visits_by_country
     result = ActiveRecord::Base.connection.execute("
-      SELECT cities.country, visit_count
+      SELECT cities.country, value
       FROM cities
       INNER JOIN
         (
           SELECT
-            COUNT(visits.id) as visit_count, visits.city_id, visits.short_url_id
+            COUNT(visits.id) as value, visits.city_id, visits.short_url_id
           FROM visits
           GROUP BY city_id, short_url_id
         ) AS visits_for_orgs
