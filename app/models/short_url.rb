@@ -23,12 +23,9 @@ class ShortUrl < ActiveRecord::Base
     order('visits_count DESC')
   }
 
-  def does_url_belong_to_user? current_user
-    if current_user && current_user.short_urls.find_by_id(self.id)
-      return true
-    else
-      return false
-    end
+  def owned_by? current_user
+    return !current_user.blank? &&
+      !current_user.short_urls.find_by_id(self.id).blank?
   end
 
   def create_short_name_if_blank
