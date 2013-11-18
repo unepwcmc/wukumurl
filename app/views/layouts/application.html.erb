@@ -41,11 +41,7 @@
       <header>
         <div class="inner">
           <h3>
-            <% if user_signed_in? %>
-            Your shared links
-            <% else -%>
-            Shared documents by WCMC
-            <% end -%>
+            <%= yield(:title) %>
           </h3>
         </div>
       </header>
