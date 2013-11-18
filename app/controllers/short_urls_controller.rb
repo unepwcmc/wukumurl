@@ -3,17 +3,24 @@ class ShortUrlsController < ApplicationController
   before_filter :authenticate_user!, :only => [:update]
 
   def index
-    #TODO: this query should be user aware!
-    @visits_by_country = City.select("country, count(*) as value")
-      .joins(:visits).group(:country).order('value desc')
-    @visits_by_organization = Organization.select("name, count(*) as value")
-      .joins(:visits).group(:name).order('value desc')
+    @visits_by_country = City.
+      select("country, count(*) as value").
+      joins(:visits).
+      group(:country).
+      order('value desc')
+
+    @visits_by_organization = Organization.
+      select("name, count(*) as value").
+      joins(:visits).
+      group(:name).
+      order('value desc')
 
     @total_visits = Visit.count
     @total_urls   = ShortUrl.count
 
-    @short_urls = ShortUrl.ordered_by_visits_desc.not_deleted
-    @no_urls_yet = false
+    @short_urls = ShortUrl.
+      ordered_by_visits_desc.
+      not_deleted
   end
 
   def create
