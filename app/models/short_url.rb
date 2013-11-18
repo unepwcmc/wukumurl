@@ -89,6 +89,7 @@ class ShortUrl < ActiveRecord::Base
           GROUP BY organization_id
         ) AS visits_for_orgs
       ON visits_for_orgs.organization_id = organizations.id
+      ORDER BY visit_count DESC
     "
   end
 
