@@ -20,6 +20,6 @@ class UsersController < ApplicationController
       ordered_by_visits_desc.
       not_deleted
 
-    @no_urls_yet = current_user.no_urls_yet?
+    @no_urls_yet = current_user.no_urls?
   end
 end
