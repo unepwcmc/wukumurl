@@ -34,7 +34,7 @@ class window.PieChart
       return result
     )
 
-    return mainCountries.concat(otherCountries)
+    return mainCountries.concat(otherCountries || [])
 
   render: ->
     pieOptions = {
