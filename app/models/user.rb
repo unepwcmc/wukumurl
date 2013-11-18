@@ -5,7 +5,23 @@ class User < ActiveRecord::Base
 
   has_many :short_urls
 
-  def no_urls_yet?
-    self.short_urls.find_by_id(self.id) == 0
+  def visits
+    Visit.find_by_sql("
+      SELECT visits.*, COUNT(visits.id) as count
+      FROM visits
+      INNER JOIN
+        (
+          SELECT id
+          FROM short_urls
+          WHERE user_id = #{self.id}
+          GROUP BY id
+        ) AS short_urls_for_visits
+        ON visits.short_url_id = short_urls_for_visits.id
+      GROUP BY visits.id
+    ")
+  end
+
+  def no_urls?
+    self.short_urls.length == 0
   end
 end
