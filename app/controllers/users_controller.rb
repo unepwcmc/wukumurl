@@ -7,16 +7,15 @@ class UsersController < ApplicationController
       order('value desc')
 
     @visits_by_organization = Organization.
-      select("name, count(*) as value").
+      select("name, count(*) as visit_count").
       joins(:visits).
       group(:name).
-      order('value desc')
+      order('visit_count desc')
 
-    @total_visits = Visit.count
-    @total_urls   = ShortUrl.count
+    @total_visits = current_user.visits.length
 
-    @short_urls = ShortUrl.
-      where(user: current_user).
+    @short_urls = current_user.
+      short_urls.
       ordered_by_visits_desc.
       not_deleted
 
