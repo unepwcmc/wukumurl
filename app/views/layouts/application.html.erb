@@ -5,10 +5,8 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
     <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag "application" %>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag params[:controller] %>
-    <%= javascript_include_tag params[:controller] %>
 
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -40,7 +38,26 @@
     </header>
 
     <div class="main">
-      <%= yield %>
+      <header>
+        <div class="inner">
+          <h3>
+            <% if user_signed_in? %>
+            Your shared links
+            <% else -%>
+            Shared documents by WCMC
+            <% end -%>
+          </h3>
+        </div>
+      </header>
+
+      <section id="map">
+      </section>
+
+      <div class="dashboard">
+        <%= yield %>
+      </div>
+
+      <%= render partial: "short_urls/info_modal" %>
     </div>
 
     <footer>
