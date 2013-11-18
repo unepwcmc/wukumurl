@@ -51,4 +51,26 @@ class UserTest < ActiveSupport::TestCase
 
     assert_equal user_visit_count, user.visits.length
   end
+
+  test ".visits_by_organization returns all organizations with visit
+    counts for short urls owned by User" do
+    user = FactoryGirl.create(:user)
+
+    bt = FactoryGirl.create(:organization, name: 'BT')
+    virgin = FactoryGirl.create(:organization, name: 'Virgin Media')
+    plusnet = FactoryGirl.create(:organization, name: 'Plustnet')
+
+    hacker_news = FactoryGirl.create(:short_url,
+      url: 'http://news.ycombinator.com', user: user)
+    bbc = FactoryGirl.create(:short_url, url: 'http://bbc.co.uk')
+
+    FactoryGirl.create(:visit, organization: bt, short_url: hacker_news)
+    FactoryGirl.create(:visit, organization: virgin, short_url: hacker_news)
+    FactoryGirl.create(:visit, organization: plusnet, short_url: bbc)
+
+    visits_by_organization = user.visits_by_organization
+
+    assert_equal 2, visits_by_organization.length
+    assert_equal bt.id, visits_by_organization.first.id
+  end
 end

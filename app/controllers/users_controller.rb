@@ -6,11 +6,7 @@ class UsersController < ApplicationController
       group(:country).
       order('value desc')
 
-    @visits_by_organization = Organization.
-      select("name, count(*) as visit_count").
-      joins(:visits).
-      group(:name).
-      order('visit_count desc')
+    @visits_by_organization = current_user.visits_by_organization
 
     @total_visits = current_user.visits.length
 
