@@ -1,21 +1,26 @@
 class ShortUrlsController < ApplicationController
 
   before_filter :authenticate_user!, :only => [:update]
-  @@colours = ["#777777", "#bbbbbb", "#dddddd", "#333333"]
 
   def index
-    #TODO: this query should be user aware!
-    @visits_by_country = City.select("country, count(*) as value")
-      .joins(:visits).group(:country).order('value desc')
-    @visits_by_organization = Organization.select("name, count(*) as value")
-      .joins(:visits).group(:name).order('value desc')
-    @colours = @@colours
-    if user_signed_in?
-      @short_urls = ShortUrl.where(user: current_user)
-        .ordered_by_visits_desc.not_deleted
-    else
-      @short_urls = ShortUrl.ordered_by_visits_desc.not_deleted
-    end
+    @visits_by_country = City.
+      select("country, count(*) as value").
+      joins(:visits).
+      group(:country).
+      order('value desc')
+
+    @visits_by_organization = Organization.
+      select("name, count(*) as visit_count").
+      joins(:visits).
+      group(:name).
+      order('visit_count desc')
+
+    @total_visits = Visit.count
+    @total_urls   = ShortUrl.count
+
+    @short_urls = ShortUrl.
+      ordered_by_visits_desc.
+      not_deleted
   end
 
   def create
@@ -23,7 +28,6 @@ class ShortUrlsController < ApplicationController
       short_url = ShortUrl.new(
         url: params[:url],
         short_name: params[:short_name],
-        not_a_robot: params[:not_a_robot] == "true",
         user: current_user
       )
 
@@ -34,7 +38,7 @@ class ShortUrlsController < ApplicationController
       end
     else
       render json: {
-        url_to_shorten: "You must specify a url parameter to redirect to"
+        url: "You must specify a url parameter to redirect to"
       }, status: :unprocessable_entity
     end
   end
@@ -60,10 +64,10 @@ class ShortUrlsController < ApplicationController
 
     return redirect_to :root unless @short_url
 
-    @url_belongs_to_user = @short_url.does_url_belong_to_user? current_user
-    @visits = @short_url.visit_count
+    @url_belongs_to_user = @short_url.owned_by? current_user
+    @total_visits = @short_url.visit_count
     @visits_by_country = @short_url.visits_by_country
-    @visits_by_organization = @short_url.visits_by_organization
+    @visits_by_organization = @short_url.visits_by_organization group_by_disregarded: false
   end
 
   def destroy

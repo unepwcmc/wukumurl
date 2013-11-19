@@ -1,5 +1,5 @@
 Wukumurl::Application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { sessions: 'sessions' }
 
   devise_scope :user do
     get "login", to: "devise/sessions#new"
@@ -13,8 +13,6 @@ Wukumurl::Application.routes.draw do
     get "forgot_password", to: "devise/passwords#new"
     post "forgot_password", to: "devise/passwords#create"
   end
-
-  get '/me' => 'users#show'
 
   get "map", :controller => 'map', :action => :index
   get "map/locations", :controller => 'map', :action => :location_list
@@ -36,5 +34,9 @@ Wukumurl::Application.routes.draw do
 
   resources :organizations, only: [:destroy]
 
-  root :to => 'short_urls#index'
+  authenticated :user do
+    root to: 'users#show', as: :authenticated_root
+  end
+
+  root to: 'short_urls#index', as: :root
 end

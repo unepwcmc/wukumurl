@@ -37,6 +37,13 @@ ActiveRecord::Schema.define(version: 20131104172147) do
     t.string   "name"
   end
 
+  create_table "disregard_votes", force: true do |t|
+    t.integer  "short_url_id"
+    t.integer  "organization_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "locations", force: true do |t|
     t.float    "lat"
     t.float    "lon"
@@ -47,9 +54,8 @@ ActiveRecord::Schema.define(version: 20131104172147) do
 
   create_table "organizations", force: true do |t|
     t.text     "name"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "disregard",  default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "short_urls", force: true do |t|

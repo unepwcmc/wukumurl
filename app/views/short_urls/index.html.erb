@@ -1,37 +1,25 @@
-<section id="title">
-  <div>
-    <% if user_signed_in? %>
-    Your shared links
-    <% else -%>
-    Shared documents by WCMC
-    <% end -%>
-  </div>
-</section>
+<% title "Shared documents by WCMC" %>
 
-<section id="map" class="leaflet-container leaflet-fade-anim">
-</section>
+<div class="left">
+  <%= render partial: "headline_number", locals: {
+    title: "Total number of visits",
+    value: @total_visits
+  } %>
 
-<section id="dashboard">
-  <section class="left">
-    <%= render partial: "single_row_table", locals: {
-      title: "Total number of visits",
-      value: "15000000" } %>
-    <% if user_signed_in? %>
-      <%= render partial: "short_urls_table", locals: {
-        title: "Your links",
-        data: @short_urls
-      } %>
-    <% else -%>
-      <%= render partial: "single_row_table", locals: {
-        title: "Number of links shared",
-        value: "300" } %>
-      <%= render partial: "short_urls_table", locals: {title: "Total visits"} %>
-    <% end -%>
-  </section>
-  <section class="right">
-    <%= render partial: "chart_block" %>
-    <%= render partial: "organizations_table", locals: {
-      title: "Top organizations by number of visits"
-    } %>
-  </section>
-</section>
+  <%= render partial: "headline_number", locals: {
+    title: "Number of links shared",
+    value: @total_urls
+  } %>
+
+  <%= render partial: "short_urls_table", locals: {
+    title: "Top links by number of visits",
+    data: @short_urls
+  } %>
+</div>
+
+<div class="right">
+  <%= render partial: "chart_block" %>
+  <%= render partial: "organizations_table", locals: {
+    title: "Top organizations by number of visits"
+  } %>
+</div>
