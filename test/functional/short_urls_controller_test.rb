@@ -51,10 +51,10 @@ class ShortUrlsControllerTest < ActionController::TestCase
     assert_equal user.id, short_url.user.id
   end
 
-  test "DELETE destroy marks a ShortUrl as deleted, but does not delete it" do
+  test "DELETE deletes" do
     short_url = FactoryGirl.create(:short_url)
 
-    assert_difference('ShortUrl.count', 0) do
+    assert_difference('ShortUrl.count', -1) do
       delete :destroy, id: short_url.id
     end
 
