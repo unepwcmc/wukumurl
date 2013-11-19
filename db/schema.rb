@@ -24,16 +24,16 @@ ActiveRecord::Schema.define(version: 20131119104237) do
     t.string   "name"
     t.float    "lat"
     t.float    "lon"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "country_locations", force: true do |t|
     t.float    "lat"
     t.float    "lon"
     t.string   "iso2"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "name"
   end
 
@@ -48,21 +48,21 @@ ActiveRecord::Schema.define(version: 20131119104237) do
     t.float    "lat"
     t.float    "lon"
     t.string   "source"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "organizations", force: true do |t|
     t.text     "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "short_urls", force: true do |t|
     t.string   "short_name"
     t.text     "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "deleted"
     t.integer  "user_id"
   end
@@ -88,8 +88,8 @@ ActiveRecord::Schema.define(version: 20131119104237) do
   create_table "visits", force: true do |t|
     t.string   "ip_address"
     t.integer  "short_url_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "organization_id"
     t.integer  "city_id"
     t.integer  "location_id"

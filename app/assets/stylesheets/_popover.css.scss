@@ -7,13 +7,58 @@
   z-index: 9999999;
 
   margin: 0;
-  background: #ddd;
-  background-color: $lightish-grey;
-  border: 1px solid #bdbdbd;
+  background-color: $light-grey;
   @include border-radius(5px);
-  padding: 10px;
+  padding: 15px;
+  color: $darkBlue;
+  width: 300px;
+  box-shadow: 2px 5px 2px rgba(0,0,0,0.10);
+  border: 1px solid #eee;
 
   form {
+    
+    overflow: hidden;
+    
+    div {
+      padding-bottom: 15px;
+    }
+    
+    div#remember {
+      float: left;
+      padding-bottom: 0;
+    }
+    
+    div#sign_button {
+      float: right;
+      padding-bottom: 0;
+    }
+    
+    input {
+      @include border-radius(3px);
+      &[type="email"], &[type="password"] {
+        width: 290px;
+        border: none;
+        line-height: 1.75em;
+        padding-left: 10px;
+        margin-top: 5px;
+        border: 1px solid #eee;
+      }
+      &[type="submit"] {
+        @include border-radius(5px);
+        background: $orange;
+        color: #fff;
+        font-weight: 300;
+        line-height: 1.75em;
+        border: none;
+        padding: 0 10px 3px 10px;
+      }
+    }
+    
+    input[type="checkbox"] {
+      border: none;
+      background: #fff;
+    }
+    
     fieldset {
       border: none;
       padding: 0;
@@ -53,15 +98,15 @@
 }
 
 .popover:after {
-  border-color: rgba(221, 221, 221, 0);
-  border-bottom-color: #ddd;
+  border-color: rgba(48, 110, 157, 0);
+  border-bottom-color: $light-grey;
   border-width: 14px;
   margin-left: -14px;
 }
 
 .popover:before {
-  border-color: rgba(189, 189, 189, 0);
-  border-bottom-color: #bdbdbd;
+  border-color: rgba(48, 110, 157, 0);
+  border-bottom-color: $light-grey;
   border-width: 16px;
   margin-left: -16px;
 }
