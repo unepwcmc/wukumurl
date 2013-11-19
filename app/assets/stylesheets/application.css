@@ -9,7 +9,8 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require short_urls/normalize
- *= require short_urls/short_urls
+ *= require normalize
+ *= require leaflet
+ *= require base
  *= require_tree .
  */
