@@ -14,7 +14,7 @@
   </head>
 
   <body>
-    <header>
+    <div class="header">
       <div class="inner">
 
         <div class="left">
@@ -35,23 +35,19 @@
         </div>
 
       </div>
+    </div>
+
+    <header>
+      <h3>
+        <%= yield(:title) %>
+      </h3>
     </header>
 
-    <div class="main">
-      <header>
-        <div class="inner">
-          <h3>
-            <%= yield(:title) %>
-          </h3>
-        </div>
-      </header>
+    <div id="map" class="leaflet-container leaflet-fade-anim">
+    </div>
 
-      <section id="map">
-      </section>
-
-      <div class="dashboard">
-        <%= yield %>
-      </div>
+    <div class="dashboard">
+      <%= yield %>
     </div>
 
     <footer>
