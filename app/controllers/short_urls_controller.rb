@@ -67,21 +67,25 @@ class ShortUrlsController < ApplicationController
 
   def destroy
     short_url = ShortUrl.find(params[:id])
-    short_url.deleted = true
-    short_url.save
-    redirect_to :root
+
+    if short_url.destroy
+      redirect_to :root
+    end
   end
 
   def update
     short_url = ShortUrl.find(params[:id])
 
-    short_url.url = params[:url]
-    short_url.short_name = params[:short_name]
-
-    if short_url.save
+    if short_url.update_attributes(short_url_params)
       redirect_to :action => "show", :short_name => short_url.short_name
     else
       render json: short_url.errors, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def short_url_params
+    params.require(:short_url).permit(:url, :short_name)
   end
 end
