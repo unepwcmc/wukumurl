@@ -29,8 +29,7 @@
 
             <button class="new-link">+ New Link</button>
           <% else -%>
-            <%= link_to "Sign up", new_user_registration_path, :class => 'sign-up' %> or
-            <%= link_to "sign in", new_user_session_path, :class => 'sign-in' %>
+            <%= link_to "Sign in", new_user_session_path, :class => 'sign-in' %>
           <% end -%>
         </div>
 
@@ -57,9 +56,6 @@
     <footer>
     </footer>
 
-    <div class="sign-up-form popover">
-      <%= render "devise/registrations/new" %>
-    </div>
     <div class="sign-in-form popover">
       <%= render "devise/sessions/new" %>
     </div>
