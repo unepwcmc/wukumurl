@@ -11,6 +11,7 @@
  *= require_self
  *= require normalize
  *= require leaflet
+ *= require font-awesome
  *= require base
  *= require_tree .
  */
