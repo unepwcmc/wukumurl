@@ -139,7 +139,8 @@ header {
   margin-bottom: 15px;
 }
 
-button {
+button,
+.button {
   @include border-radius (5px);
   border: 1px solid $blue;
   color: $blue;
