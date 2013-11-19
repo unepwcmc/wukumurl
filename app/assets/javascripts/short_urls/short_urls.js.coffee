@@ -1,6 +1,6 @@
 $(($)->
   #map
-  map = L.map('map').setView([0, 0], 1)
+  map = L.map('map', scrollWheelZoom: false).setView([0, 0], 1)
   L.tileLayer('http://a.tile.stamen.com/toner/{z}/{x}/{y}.png', {
     attribution: 'stamen http://maps.stamen.com/'
   }).addTo(map)
