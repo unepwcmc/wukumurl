@@ -30,12 +30,6 @@ class ShortUrlsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "GET show works via the route /short_urls/:id" do
-    short_url = FactoryGirl.create(:short_url)
-    get :show, id: short_url.id
-    assert_response :success
-  end
-
   test "GET show redirects to home page if ShortUrl doesn't exist" do
     get :show, short_name: "GOB"
     assert_redirected_to :root
