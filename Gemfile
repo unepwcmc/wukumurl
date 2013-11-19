@@ -39,3 +39,4 @@ gem 'uglifier', '>= 1.0.3'
 gem "auto_strip_attributes", "~> 1.0"
 
 gem 'devise'
+gem 'net-ldap'
