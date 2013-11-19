@@ -56,12 +56,7 @@ class ShortUrlsController < ApplicationController
   end
 
   def show
-    if params[:short_name].present?
-      @short_url = ShortUrl.where(short_name: params[:short_name]).first
-    elsif params[:id].present?
-      @short_url = ShortUrl.find(params[:id])
-    end
-
+    @short_url = ShortUrl.where(short_name: params[:short_name]).first
     return redirect_to :root unless @short_url
 
     @url_belongs_to_user = @short_url.owned_by? current_user
