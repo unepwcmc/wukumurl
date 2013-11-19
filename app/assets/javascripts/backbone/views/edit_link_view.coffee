@@ -21,7 +21,7 @@ class Backbone.Views.EditLinkView extends Backbone.View
     $.ajax(
       url: "/short_urls/#{@short_url.id}"
       type: 'PUT'
-      data: data)
+      data: {short_url: data})
     .done(@renderSuccess)
     .fail(@renderFailure)
 
