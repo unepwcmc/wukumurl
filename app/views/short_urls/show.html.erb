@@ -1,8 +1,10 @@
 <% title "http://wcmc.io/#{@short_url.short_name}" %>
 
-<% content_for :page_actions do %>
-  <button><i class="fa-trash-o"></i> Delete this link</button>
-  <button><i class="fa-pencil-square-o"></i> Edit this link</button>
+<% if @short_url.owned_by? current_user %>
+  <% content_for :page_actions do %>
+    <button><i class="fa fa-trash-o"></i> Delete this link</button>
+    <button><i class="fa fa-pencil-square-o"></i> Edit this link</button>
+  <% end %>
 <% end %>
 
 <div class="left">
