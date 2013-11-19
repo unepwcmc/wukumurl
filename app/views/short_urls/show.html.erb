@@ -2,11 +2,14 @@
 
 <% if @short_url.owned_by? current_user %>
   <% content_for :page_actions do %>
+
     <%= link_to @short_url, :method => :delete,
       :data => {:confirm => "Are you sure?"}, :class => 'button' do %>
       <i class="fa fa-trash-o"></i> Delete this link
     <% end %>
-    <button><i class="fa fa-pencil-square-o"></i> Edit this link</button>
+
+    <button class="edit-link"><i class="fa fa-pencil-square-o"></i> Edit this link</button>
+
   <% end %>
 <% end %>
 
@@ -24,3 +27,24 @@
     title: "Top organizations by number of visits"
   } %>
 </div>
+
+<div class="edit-link-form popover"></div>
+
+<script>
+  var editLinkForm = $('.edit-link-form');
+  var editLinkView = null;
+
+  $('.edit-link').on('click', function (event) {
+    if (editLinkView) {
+      editLinkForm.hide();
+      editLinkView.close();
+      editLinkView = null;
+    } else {
+      editLinkView = new Backbone.Views.EditLinkView({
+        short_url: <%= @short_url.to_json.html_safe %>
+      });
+      editLinkForm.html(editLinkView.el);
+      editLinkForm.show();
+    }
+  });
+</script>

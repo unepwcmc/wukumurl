@@ -74,9 +74,14 @@ class ShortUrlsController < ApplicationController
 
   def update
     short_url = ShortUrl.find(params[:id])
-    short_name = params[:short_url][:short_name]
-    short_url.short_name = short_name
-    short_url.save
-    redirect_to :action => "show", :short_name => short_name
+
+    short_url.url = params[:url]
+    short_url.short_name = params[:short_name]
+
+    if short_url.save
+      redirect_to :action => "show", :short_name => short_url.short_name
+    else
+      render json: short_url.errors, status: :unprocessable_entity
+    end
   end
 end
