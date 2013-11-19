@@ -1,5 +1,10 @@
 <% title "http://wcmc.io/#{@short_url.short_name}" %>
 
+<% content_for :page_actions do %>
+  <button><i class="fa-trash-o"></i> Delete this link</button>
+  <button><i class="fa-pencil-square-o"></i> Edit this link</button>
+<% end %>
+
 <div class="left">
   <%= render partial: "short_urls/headline_number", locals: {
     title: "Total number of visits",

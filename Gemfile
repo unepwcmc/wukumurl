@@ -2,11 +2,13 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 4.0.0'
 
-gem 'factory_girl_rails', '4.2.1'
+gem 'pg'
 
-gem 'sqlite3'
 gem 'rack-cors', :require => 'rack/cors'
+
 gem 'geoip-c', '0.9.1'
+gem 'geocoder'
+
 gem 'whenever', :require => false
 
 group :development do
@@ -21,24 +23,19 @@ group :development do
   gem 'debugger'
 end
 
+gem 'factory_girl_rails', '4.2.1'
+
 gem 'sass-rails', '~> 4.0.0.rc1'
 gem "compass-rails", "~> 2.0.alpha.0"
 gem "susy"
+gem 'font-awesome-sass'
+
 gem 'ejs', '~> 1.1.1'
-
 gem 'coffee-rails', '~> 4.0.0'
-
-gem 'uglifier', '>= 1.0.3'
-
-gem 'pg'
-
 gem 'jquery-rails'
-gem 'eco'
+gem 'leaflet-rails'
+gem 'uglifier', '>= 1.0.3'
 
 gem "auto_strip_attributes", "~> 1.0"
 
 gem 'devise'
-
-gem 'geocoder'
-
-gem 'leaflet-rails'

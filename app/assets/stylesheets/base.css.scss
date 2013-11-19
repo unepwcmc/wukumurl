@@ -17,6 +17,14 @@ body {
   display: none;
 }
 
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
 div.header {
   margin: 0 auto;
   padding: 20px 0;
@@ -26,10 +34,6 @@ div.header {
     max-width: 61.4em;
     margin: auto;
     overflow: hidden;
-  }
-
-  .left {
-    float: left;
   }
 
   h1, h2 {
@@ -124,6 +128,7 @@ header {
   color: black;
 
   h3 {
+    float: left;
     margin: 0;
   }
 }
