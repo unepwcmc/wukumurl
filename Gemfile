@@ -6,7 +6,7 @@ gem 'factory_girl_rails', '4.2.1'
 
 gem 'sqlite3'
 gem 'rack-cors', :require => 'rack/cors'
-gem 'geoip-c', '0.8.0'
+gem 'geoip-c', '0.9.1'
 gem 'whenever', :require => false
 
 group :development do
@@ -24,6 +24,7 @@ end
 gem 'sass-rails', '~> 4.0.0.rc1'
 gem "compass-rails", "~> 2.0.alpha.0"
 gem "susy"
+gem 'ejs', '~> 1.1.1'
 
 gem 'coffee-rails', '~> 4.0.0'
 

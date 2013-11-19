@@ -1,7 +1,16 @@
 @import "susy";
 
-$dark-grey: #2c2c2c;
+$heading: rgba(0,0,0,0.6);
+$white-text: rgba(255,255,255, 0.7);
+$dark-grey: #333;
+$lightish-grey: #ddd;
 $light-grey: #f7f7f7;
+$light-text: #ccc;
+$header-border: #e2e2e2;
+$light-border: #f5f5f5;
+$blue: #4295d5;
+$orange: #F07000;
+$green: #75B036;
 $font-small: 0.8em;
 $font-normal: 1em;
 $font-big: 2em;
@@ -14,119 +23,228 @@ $column-width: 4.2em;
 $gutter-width: 1em;
 $grid-padding: 1em;
 
-// Notice: the map is out of the 12 columns fluid container
-header.main, #title, #dashboard {
-  @include container; 
-  //@include susy-grid-background; // For debugging!
-}
-
-#home-banner {
-  @include span-columns( $home-banner-columns - 2,$total-columns);
-  @include post(2);
-}
-
-#header-actions {
-  @include prefix(2,$header-actions-columns);
-  @include span-columns($header-actions-columns - 2 omega,$total-columns);
-  div {
-    @include isolate-grid(6);
-  }
-}
-
-#header-actions.signed-in {
-  @include span-columns($header-actions-columns omega,$total-columns);
-  div {
-    @include isolate-grid(3);
-  }
-}
-
-.container {
+body {
   font-family: 'Open Sans', sans-serif;
+  background-color: #f7f7f7;
+
   a {
     text-decoration:none;
     color: $dark-grey;
   }
 }
 
-section, header {
-  margin: 10px 0 10px 0;
-  color: $dark-grey;
-  font-size: $font-normal;
-  line-height: 1.1;
-  table {
-    .right {
-      font-weight: bold; 
-    }
-    thead {
-      font-weight: bold; 
-    }
-  }
-  table.single {
-    tbody {
-      font-size: $font-big;
-      line-height: 2;
-    }
-  }
-}
-
-header.main {
-  padding-bottom: 15px;
-  border-bottom: 1px solid darken($light-grey, 30%);
-}
-
 .hidden {
   display: none;
 }
 
-.title {
-  font-weight: bold;
-  padding: 10px 0; 
-  border-bottom: 1px solid darken($light-grey, 20%);
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+     -moz-transition: $transition;
+       -o-transition: $transition;
+          transition: $transition;
 }
 
-#title {
-  font-weight: bold;
-  padding: 15px 0; 
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+  border-radius: $radius;
 }
 
-#greetings, #sign-in {
-  font-size: $font-small;
+header {
+  margin: 0 auto;
+  padding: 20px 0;
+  background: $blue;
+
+  .inner {
+    max-width: 61.4em;
+    margin: auto;
+    overflow: hidden;
+  }
+
+  .left {
+    float: left;
+  }
+
+  h1, h2 {
+    margin: 0;
+  }
+
+  h1 {
+    line-height: 1em;
+    font-size: 1.5em;
+    color: #fff;
+    font-weight: 400;
+  }
+
+  h2 {
+    font-size: 1em;
+    border: none;
+    color: $white-text;
+    font-weight: 300;
+  }
+
+  .header-actions {
+    margin-top: 21px;
+    width: 55%;
+    float: right;
+    text-align: right;
+    color: $white-text;
+    font-weight: 300;
+    line-height: .5em;
+
+    button {
+      border: 1px solid white;
+      color: white;
+
+      &:hover, &:active {
+        color: $blue;
+        background-color: white;
+      }
+    }
+
+    * {
+      display: inline;
+      margin-left: 5px;
+    }
+
+    a {
+      color: $white-text;
+      @include transition(all 0.5s ease);
+
+      &:hover, &:active {
+        color: #fff;
+        @include transition(all 0.5s ease);
+      }
+    }
+  }
+}
+
+.modal-overlay {
+  display: none;
+  z-index: 999999;
+  background-color: black;
+  opacity: 0.5;
+  position:absolute;
+  top: 0;
+  width:100%;
+  height:200%;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter:alpha(opacity=50);
+}
+
+.modal {
+  display: none;
+  z-index: 9999999;
+  width: 600px;
+  position:fixed;
+  top:20%;
+  left:50%;
+  margin-left:-300px;
+  background-color: $dark-grey;
+  color: white;
+  padding: 20px;
+}
+
+.main {
+  max-width: 61.4em;
+  margin: 0 auto;
+
+  header {
+    background: none;
+    color: black;
+
+    h3 {
+      margin: 0;
+    }
+  }
 }
 
 #map {
   width: 100%;
-  height: 400px;
+  /*height: 400px;*/
 }
 
-#pie-wrapper {
-  //height: 240px;
-}
+button {
+  @include border-radius (5px);
+  border: 1px solid $blue;
+  color: $blue;
+  background: none;
+  padding: 3px 10px;
+  @include transition(all 0.5s ease);
 
-#dashboard {
-  button {
-    float: right;
-    margin: 10px;
+  &:hover, &:active {
+    background-color: $blue;
+    color: #fff;
+    @include transition(all 0.5s ease);
   }
-  section > div {
+}
+
+.dashboard {
+  margin-top: 0;
+  padding: 0;
+
+  button {
+    border: 1px solid $green;
+    color: $green;
+    float: right;
+
+    &:hover, &:active {
+      color: white;
+      background-color: $green;
+    }
+  }
+
+  div.left {
+    @include span-columns($section-columns,$total-columns);
+  }
+
+  div.right {
+    @include span-columns($section-columns omega,$total-columns);
+  }
+
+  section {
     padding: 10px;
     overflow: auto;
-  }
-  section.left {
-    @include span-columns($section-columns,$total-columns);
+    background-color: #fff;
+    margin-bottom: 20px;
+    @include border-radius(5px);
 
-  }
-  section.right {
-    @include span-columns($section-columns omega,$total-columns);
-    #pie {
-      @include span-columns(3,6);
-      padding-top: 12px;
-    }
-    #pie-legend {
-      @include span-columns(3 omega,6);
-      float: none;
-      ul {
-        list-style-type: none;
+    header {
+      padding: 10px 0;
+      margin-bottom: 10px;
+      border-bottom: 1px solid $header-border;
+
+      h4 {
+        margin: 0;
+        font-size: 1.25em;
+        font-weight: bold;
+        color: $blue;
       }
+    }
+
+    p {
+      margin: 0;
+      font-size: 3em;
+      font-weight: 400;
+      text-align: right;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .pie-chart {
+    ul {
+      float: right;
+      width: 16em;
+      padding: 0;
+      list-style-type: none;
+      margin: 0;
+      margin-top: 10px;
+
       li div {
         width: 40px;
         height: 26px;
@@ -136,38 +254,125 @@ header.main {
         padding-left: 10px;
         float:left;
       }
+
       li span {
         line-height: 29pt;
         font-size: 0.9em;
       }
     }
   }
-  section > div {
-    background-color: $light-grey;
-    margin: 10px;
-  }
+
   section table {
-    thead tr {
-      border-bottom: 1px solid darken($light-grey, 20%);
-    }
+    width: 100%;
+
     tbody tr {
-      border-bottom: 1px solid darken($light-grey, 3%);
+      border-bottom: 1px solid $light-border;
+      &.single-row {
+        border-bottom: none;
+      }
     }
+
     td {
-      height: 35px;
+      height: 45px;
     }
+
     td.right {
       padding-left: 5px;
       text-align: right;
+
+      &.time {
+        color: $light-text;
+        font-weight: 300;
+      }
     }
-    width: 90%;
-    margin: 0 auto;
   }
+
   .multi-row-table-wrapper {
-    height: 350px;
+    margin-bottom: 10px;
+    height: 385px;
     overflow: auto;
   }
-  
 }
 
+.popover {
+  display: none;
+  position: absolute;
+  z-index: 9999999;
 
+  margin: 0;
+  background: #ddd;
+  background-color: $lightish-grey;
+  border: 1px solid #bdbdbd;
+  @include border-radius(5px);
+  padding: 10px;
+
+  form {
+    fieldset {
+      border: none;
+      padding: 0;
+
+      &, dd {
+        margin: 0;
+      }
+
+      input[type="text"] {
+        width: 99%;
+
+        &.error {
+          border: 1px solid #ff5a5a;
+        }
+      }
+
+      label.error {
+        color: #ff5a5a;
+      }
+
+      input[type="submit"], button {
+        float: right;
+      }
+    }
+  }
+}
+
+.sign-up-form {
+  top: 70px;
+  left: 923px;
+  width: 205px;
+}
+
+.sign-in-form {
+  top: 70px;
+  left: 997px;
+  width: 205px;
+}
+
+.new-link-form {
+  top: 87px;
+  left: 667px;
+  width: 425px;
+}
+
+.popover:after, .popover:before {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.popover:after {
+  border-color: rgba(221, 221, 221, 0);
+  border-bottom-color: #ddd;
+  border-width: 14px;
+  margin-left: -14px;
+}
+
+.popover:before {
+  border-color: rgba(189, 189, 189, 0);
+  border-bottom-color: #bdbdbd;
+  border-width: 16px;
+  margin-left: -16px;
+}

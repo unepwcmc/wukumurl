@@ -29,15 +29,29 @@ class ShortUrlTest < ActiveSupport::TestCase
       organization: FactoryGirl.create(:organization, name: 'WCMC')
     )
 
+    bt = FactoryGirl.create(:organization, name: 'BT')
     FactoryGirl.create(:visit,
       short_url: @short_url,
-      organization: FactoryGirl.create(:organization, name: 'BT', disregard: 1)
+      organization: bt
     )
 
+    create_disregard_votes(bt)
+
+    virgin_media = FactoryGirl.create(:organization, name: 'Virgin Media')
     FactoryGirl.create(:visit,
       short_url: @short_url,
-      organization: FactoryGirl.create(:organization, name: 'Virgin Media', disregard: 5)
+      organization: virgin_media
     )
+
+    FactoryGirl.create(:organization, name: 'Plusnet')
+
+    create_disregard_votes(virgin_media, 5)
+  end
+
+  def create_disregard_votes(organization, count=1)
+    (1..count).each do
+      FactoryGirl.create(:disregard_vote, organization: organization)
+    end
   end
 
   test "ordered_by_visits_desc scope orders by visit count" do
@@ -95,7 +109,7 @@ class ShortUrlTest < ActiveSupport::TestCase
     assert_equal 1, counts["WCMC"]
   end
 
-  test "visits_by_organization with group_by_diregarded = true
+  test "visits_by_organization with group_by_disregarded = true
     separates the visits in to pertinent and non-pertinent depending on
     the Organization's disregard count" do
     organization_stats = @short_url.visits_by_organization(group_by_disregarded: true)
@@ -111,6 +125,8 @@ class ShortUrlTest < ActiveSupport::TestCase
     assert_equal 1, counts[:pertinent]["Apple"]
     assert_equal 1, counts[:pertinent]["WCMC"]
     assert_equal 1, counts[:pertinent]["BT"]
+    assert_nil counts[:pertinent]["Virgin Media"]
+    assert_nil counts[:pertinent]["Plusnet"]
     assert_equal 1, counts[:non_pertinent]["Virgin Media"]
   end
 
@@ -143,16 +159,6 @@ class ShortUrlTest < ActiveSupport::TestCase
     assert !not_deleted.include?(deleted_url)
   end
 
-  test "should default not_a_robot to true" do
-    link = FactoryGirl.create(:short_url, url: 'http://envirobear.com')
-    assert_equal true, link.not_a_robot
-  end
-
-  test "should not be able to save if non_robot is false" do
-    link = FactoryGirl.build(:short_url, url: 'http://envirobear.com', not_a_robot: false)
-    refute link.valid?
-  end
-
   test "can create a ShortUrl with a User association" do
     user = FactoryGirl.create(:user)
     short_url = FactoryGirl.create(:short_url, user: user)
@@ -160,16 +166,15 @@ class ShortUrlTest < ActiveSupport::TestCase
     assert_equal user, short_url.user
   end
 
-  test "the short url belongs to the user" do
+  test ".owned_by? returns true if the ShortUrl is owned by the user" do
     user = FactoryGirl.create(:user)
     short_url = FactoryGirl.create(:short_url, user: user)
-    assert_equal short_url.does_url_belong_to_user?(user), true
+    assert_equal true, short_url.owned_by?(user)
   end
 
-  test "the short url does not belong to the user" do
+  test ".owned_by? returns false if the ShortUrl is not owned by the user" do
     user = FactoryGirl.create(:user)
     short_url = FactoryGirl.create(:short_url)
-    assert_equal short_url.does_url_belong_to_user?(user), false
+    assert_equal false, short_url.owned_by?(user)
   end
-
 end

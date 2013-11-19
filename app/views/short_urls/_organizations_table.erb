@@ -1,15 +1,10 @@
-<div>
-  <div id="organization-table-wrapper" class="multi-row-table-wrapper">
-    <table id="organization-table">
-      <thead>
-        <tr>
-          <td>
-            <%= title -%>
-          </td>
-          <td>
-          </td>
-        </tr>
-      </thead>
+<section>
+  <header>
+    <h4><%= title %></h4>
+  </header>
+
+  <div class="multi-row-table-wrapper">
+    <table>
       <tbody>
       <% @visits_by_organization.each_with_index do |organization, index| %>
         <tr class="<% if index > 7 %>all hidden<% end -%>">
@@ -17,13 +12,15 @@
             <%= organization.name %>
           </td>
           <td class="right">
-            <%= organization.value %>
+            <%= organization.visit_count %>
           </td>
+        </tr>
       <% end %>
       </tbody>
     </table>
   </div>
-    <% if@visits_by_organization.length > 8 %>
-      <button class="view-all">View All</button>
-    <% end %>
-</div>
+
+  <% if @visits_by_organization.length > 8 %>
+    <button class="view-all">View All</button>
+  <% end %>
+</section>

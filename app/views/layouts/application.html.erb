@@ -4,45 +4,72 @@
     <title>wcmc.io shorten // share // track</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
-    <script>
-      var visits_by_country_global = <%= @visits_by_country.to_json.html_safe %>;
-    </script>
     <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag "application" %>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag params[:controller] %>
-    <%= javascript_include_tag params[:controller] %>
-
-    <!-- enable HTML5 elements in IE7+8 -->
     <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
 
   <body>
-    <div class="container">
-      <header class="main">
-        <div id="home-banner">Home</div>
-        <div id="header-actions" class="<% if user_signed_in? %>signed-in<% end -%>">
+    <header>
+      <div class="inner">
+
+        <div class="left">
+          <h1>WCMC.io</h1>
+          <h2>Measure the impact of digital documents you care about</h2>
+        </div>
+
+        <div class="header-actions">
           <% if user_signed_in? %>
-            <div id="greetings">Hello
-              <%= truncate("#{current_user.email}", 
-                :length => 19, :omission => '...') %>
-            </div>
-            <div id="new-link"><button>+ New Link</button></div>
-            <div id="search-link">
-              <input type="text">
-            </div>
+            Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>,
+            <a href="<%= logout_path %>">sign out?</a>
+
+            <button class="new-link">+ New Link</button>
           <% else -%>
-            <div id="sign-in">Sign in or register</div>
+            <%= link_to "Sign up", new_user_registration_path, :class => 'sign-up' %> or
+            <%= link_to "sign in", new_user_session_path, :class => 'sign-in' %>
           <% end -%>
+        </div>
+
+      </div>
+    </header>
+
+    <div class="main">
+      <header>
+        <div class="inner">
+          <h3>
+            <%= yield(:title) %>
+          </h3>
         </div>
       </header>
 
-      <%= yield %>
+      <section id="map">
+      </section>
 
-      <footer>
-      </footer>
+      <div class="dashboard">
+        <%= yield %>
+      </div>
     </div>
+
+    <footer>
+    </footer>
+
+    <div class="sign-up-form popover">
+      <%= render "devise/registrations/new" %>
+    </div>
+    <div class="sign-in-form popover">
+      <%= render "devise/sessions/new" %>
+    </div>
+
+    <div class="new-link-form popover"></div>
+    <div class="modal-overlay"></div>
+
+    <script>
+      var pieChart = new PieChart(<%= @visits_by_country.to_json.html_safe %>);
+    </script>
+
   </body>
 </html>

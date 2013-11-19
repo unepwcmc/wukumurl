@@ -1,21 +1,22 @@
-<section>
+<% title "Your shared links" %>
 
-  <ul id="short-url-list" class="lists">
-    <% @short_urls.each do |short_url| %>
-      <li>
-        <div class="details ">
-          <%= link_to("wcmc.io/#{short_url.short_name}", visit_short_url_path(short_name: short_url.short_name)) %>
-          <div>
-            <span class='stats'><%= link_to("#{short_url.visit_count} visits", short_url_info_path(short_url.short_name)) %></span>
-            <%= link_to("view stats", short_url_info_path(short_url.short_name)) %>
-          </div>
-          <p><%= short_url.url %></p>
-        </div>
-        <div class='side-hover-action'>
-          <%= link_to 'Delete', short_url, :method => :delete, :data => {:confirm => "Are you sure?"} %>
-        </div>
-      </li>
-    <% end %>
-  </ul>
+<div class="left">
+  <%= render partial: "short_urls/headline_number", locals: {
+    title: "Total number of visits",
+    value: @total_visits
+  } %>
 
-</section>
+  <%= render partial: "short_urls/short_urls_table", locals: {
+    title: "Your links",
+    data: @short_urls
+  } %>
+</div>
+
+<div class="right">
+  <%= render partial: "short_urls/chart_block" %>
+  <%= render partial: "short_urls/organizations_table", locals: {
+    title: "Top organizations by number of visits"
+  } %>
+</div>
+
+<%= render partial: "short_urls/info_modal" %>
