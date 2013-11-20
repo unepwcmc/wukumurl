@@ -9,6 +9,13 @@ $(($)->
     maxZoom: 18
   }).addTo(map)
 
+  # Show/Hide full length table in dashboard
+  $('.view-all').click( ->
+    text = $(@).text()
+    $(@).text( if text == "View All" then "Hide" else "View All")
+    $(@).closest('div').find('tr.all').toggleClass('hidden')
+  )
+
   # modal section
   modalOverlay = $('.modal-overlay')
   modal = $('.modal')
