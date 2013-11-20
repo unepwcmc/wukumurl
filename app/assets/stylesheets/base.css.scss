@@ -146,7 +146,7 @@ button,
   padding: 3px 10px;
   @include transition(all 0.5s ease);
 
-  &:hover, &:active {
+  &.hover, &:hover, &:active {
     background-color: $blue;
     color: #fff;
     @include transition(all 0.5s ease);
@@ -285,6 +285,16 @@ button,
   top: 87px;
   left: 667px;
   width: 425px;
+
+  fieldset:last-child {
+    text-align: right;
+  }
+
+  .copied {
+    display: none;
+    margin-right: 10px;
+    line-height: 2em;
+  }
 }
 
 .edit-link-form {
