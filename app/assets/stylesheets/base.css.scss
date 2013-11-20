@@ -3,6 +3,12 @@
 @import "mixins";
 @import "variables";
 
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: #f7f7f7;
@@ -10,7 +16,7 @@ body {
 
   a {
     text-decoration:none;
-    color: $dark-grey;
+    color: $blue;
   }
 }
 
@@ -47,6 +53,10 @@ div.header {
     color: #fff;
     font-weight: 400;
     float: left;
+    a {
+      color: #fff;
+      font-weight: 400;
+    }
   }
 
   h2 {
@@ -143,19 +153,51 @@ header {
   overflow: hidden;
   background: none;
   color: black;
+  div.right {
+    margin-top: 3px;
+    button.edit-link {
+      margin-left: 10px;
+    }
+  }
 
   h3 {
     float: left;
     margin: 0;
     color: $grey-body;
     font-size: 1.75em;
+    a#back {
+      display: inline-block;
+      margin-right: 5px;
+      font-size: 0.75em;
+      line-height: 41px;
+      color: $grey-body;
+      opacity: 0.6;
+      &:hover {
+        color: $blue;
+        opacity: 1;
+        @include transition(all 0.5s ease);
+      }
+    }
   }
+  //span#back {
+  //    font-size: 0.85em;
+  //    display: inline-block;
+  //    margin-top: 15px;
+  //    padding-left: 15px;
+  //    &:hover, &:active {
+  //      text-decoration: underline;
+  //    }
+  //    i {
+  //      font-size: 0.9em;
+  //      padding-right: 3px;
+  //    }
+  //  }
 }
 
 #map {
   width: 100%;
   height: 400px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 button,
@@ -180,14 +222,14 @@ button,
 
   button {
     @include border-radius(5px);
-    border: 1px solid $orange;
-    color: $orange;
+    border: 1px solid $blue;
+    color: $blue;
     font-weight: 300;
     line-height: 1.75em;
     padding: 0 15px 3px 15px;
     float: right;
     &:hover {
-      background: $orange;
+      background: $blue;
       color: rgba(255,255,255,0.9);
       @include transition(all 0.5s ease);
     }
@@ -221,7 +263,7 @@ button,
         margin: 0;
         font-size: 1.25em;
         font-weight: 600;
-        color: $blue;
+        color: #bbb;
       }
     }
 
@@ -257,7 +299,7 @@ button,
         margin: 5px 8px;
         color: #fff;
         line-height: 20pt;
-        padding-left: 10px;
+        padding: 0 4px;
         float:left;
       }
 
@@ -283,15 +325,13 @@ button,
     }
 
     td.right {
-      padding-left: 5px;
       text-align: right;
+      position: relative;
+      top: 11px;
 
       &.time {
         color: $light-text;
         font-weight: 300;
-        padding-left: 0;
-        position: relative;
-        top: 11px;
       }
     }
   }
@@ -317,22 +357,39 @@ button,
 }
 
 .sign-in-form {
-  top: 70px;
-  left: 997px;
+  top: 62px;
+  left: 1038px;
   width: 205px;
 }
 
 .new-link-form {
-  top: 87px;
-  left: 667px;
-  width: 425px;
+  top: 64px;
+  left: 1015px;
+  div form {
+    margin-top: -18px;
+  }
 }
 
 .edit-link-form {
-  top: 150px;
-  left: 800px;
+  top: 140px;
+  left: 1015px;
+  div form {
+    margin-top: -18px;
+  }
 }
 
 ul.legend li div.legend-colour {
   @include border-radius (5px);
+}
+
+.header-actions button.new-link i {
+  margin-left: 0;
+}
+
+a.button, button {
+  font-size: 0.85em;
+}
+
+button.new-link{
+  font-size: 1em;
 }
