@@ -1,5 +1,4 @@
 class ShortUrlsController < ApplicationController
-
   before_filter :authenticate_user!, :only => [:update]
 
   def index
@@ -10,8 +9,15 @@ class ShortUrlsController < ApplicationController
     @total_urls   = ShortUrl.count
 
     @short_urls = ShortUrl.
-      ordered_by_visits_desc.
       not_deleted
+  end
+
+  def list
+    return redirect_to :root unless user_signed_in?
+
+    @short_urls = current_user.short_urls.not_deleted
+
+    render "_short_urls_table", layout: false
   end
 
   def create
