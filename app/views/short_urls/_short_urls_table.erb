@@ -11,8 +11,8 @@
           <%= index + 1 %>. <%= link_to short_url.short_name ,
             short_url_info_path(short_url.short_name) %>
         </td>
-        <td class="right time">
-          <%= short_url.created_at.strftime("%d %b. %Y") %>
+        <td>
+          <%= short_url.visit_count %>
         </td>
     <% end %>
     </tbody>
