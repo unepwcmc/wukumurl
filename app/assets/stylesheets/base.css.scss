@@ -6,6 +6,7 @@
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: #f7f7f7;
+  color: $grey-body;
 
   a {
     text-decoration:none;
@@ -41,10 +42,11 @@ div.header {
   }
 
   h1 {
-    line-height: 1em;
+    line-height: 37px;
     font-size: 1.5em;
     color: #fff;
     font-weight: 400;
+    float: left;
   }
 
   h2 {
@@ -53,15 +55,30 @@ div.header {
     color: $white-text;
     font-weight: 300;
   }
+  
+  span#tagline {
+    font-size: 0.85em;
+    font-weight: 300;
+    line-height: 30px;
+    color: rgba(255,255,255, 0.7);
+    float: left;
+    display: inline-block;
+    border-left: 1px solid rgba(255,255,255, 0.5);
+    padding-left: 10px;
+    margin-left: 10px;
+    margin-top: 7px;
+    margin-bottom: 4px;
+  }
 
   .header-actions {
-    margin-top: 21px;
-    width: 55%;
+    width: 40%;
     float: right;
     text-align: right;
     color: $white-text;
+    font-size: 0.85em;
     font-weight: 300;
-    line-height: .5em;
+    line-height: 37px;
+    padding-top: 4px;
 
     button {
       border: 1px solid white;
@@ -130,6 +147,8 @@ header {
   h3 {
     float: left;
     margin: 0;
+    color: $grey-body;
+    font-size: 1.75em;
   }
 }
 
@@ -160,13 +179,20 @@ button,
   padding: 0;
 
   button {
-    border: 1px solid $green;
-    color: $green;
+    @include border-radius(5px);
+    border: 1px solid $orange;
+    color: $orange;
+    font-weight: 300;
+    line-height: 1.75em;
+    padding: 0 15px 3px 15px;
     float: right;
-
-    &:hover, &:active {
-      color: white;
-      background-color: $green;
+    &:hover {
+      background: $orange;
+      color: rgba(255,255,255,0.9);
+      @include transition(all 0.5s ease);
+    }
+    &:active {
+      background: $darkOrange;
     }
   }
 
@@ -194,7 +220,7 @@ button,
       h4 {
         margin: 0;
         font-size: 1.25em;
-        font-weight: bold;
+        font-weight: 600;
         color: $blue;
       }
     }
@@ -212,6 +238,11 @@ button,
   }
 
   .pie-chart {
+    overflow: hidden;
+    canvas {
+      float: left;
+    }
+    
     ul {
       float: right;
       width: 16em;
@@ -258,6 +289,9 @@ button,
       &.time {
         color: $light-text;
         font-weight: 300;
+        padding-left: 0;
+        position: relative;
+        top: 11px;
       }
     }
   }
@@ -266,6 +300,11 @@ button,
     margin-bottom: 10px;
     height: 385px;
     overflow: auto;
+    tr td a:hover {
+      color: $blue;
+      text-decoration: underline;
+      @include transition(all 0.5s ease)
+    }
   }
 }
 
@@ -292,4 +331,8 @@ button,
 .edit-link-form {
   top: 150px;
   left: 800px;
+}
+
+ul.legend li div.legend-colour {
+  @include border-radius (5px);
 }

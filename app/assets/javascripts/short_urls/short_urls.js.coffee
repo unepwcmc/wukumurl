@@ -1,9 +1,11 @@
+
+
 $(($)->
   #map
-  map = L.map('map', scrollWheelZoom: false).setView([0, 0], 1)
-  L.tileLayer('http://a.tile.stamen.com/toner/{z}/{x}/{y}.png', {
-    attribution: 'stamen http://maps.stamen.com/'
-  }).addTo(map)
+  map = L.map('map', scrollWheelZoom: false).setView([15, 0], 2)
+  L.tileLayer('https://dnv9my2eseobd.cloudfront.net/v3/cartodb.map-4xtxp73f/{z}/{x}/{y}.png', {
+    attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms & Feedback</a>'
+  }).addTo(map);
 
   L.tileLayer("http://carbon-tool.cartodb.com/tiles/wcmc_io_organizations_visits_count/{z}/{x}/{y}.png", {
     maxZoom: 18
