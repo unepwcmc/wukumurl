@@ -3,21 +3,22 @@
     <h4><%= title %></h4>
   </header>
 
-  <div class="multi-row-table-wrapper">
-    <table>
-      <tbody>
-      <% @short_urls.each_with_index do |short_url, index| %>
-        <tr>
-          <td>
-            <%= index + 1 %>. <%= link_to short_url.short_name , 
-              short_url_info_path(short_url.short_name) %>
-          </td>
-          <td class="right time">
-            <%= short_url.created_at.strftime("%d %b. %Y") %>
-          </td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
+  <table>
+    <tbody>
+    <% @short_urls.each_with_index do |short_url, index| %>
+      <tr class="<% if index > 7 %>all hidden<% end -%>">
+        <td>
+          <%= index + 1 %>. <%= link_to short_url.short_name ,
+            short_url_info_path(short_url.short_name) %>
+        </td>
+        <td class="right time">
+          <%= short_url.created_at.strftime("%d %b. %Y") %>
+        </td>
+    <% end %>
+    </tbody>
+  </table>
+
+  <% if @short_urls.length > 8 %>
+    <button class="view-all">View All</button>
+  <% end %>
 </section>
