@@ -53,15 +53,15 @@
       <%= yield %>
     </div>
 
-    <footer>
-    </footer>
-
     <div class="sign-in-form popover">
       <%= render "devise/sessions/new" %>
     </div>
 
     <div class="new-link-form popover"></div>
-    <div class="modal-overlay"></div>
+
+    <% if current_user && current_user.no_urls? %>
+      <%= render partial: "short_urls/info_modal" %>
+    <% end %>
 
     <script>
       var pieChart = new PieChart(<%= @visits_by_country.to_json.html_safe %>);

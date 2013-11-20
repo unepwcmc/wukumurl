@@ -9,7 +9,5 @@ class UsersController < ApplicationController
       short_urls.
       ordered_by_visits_desc.
       not_deleted
-
-    @no_urls_yet = current_user.no_urls?
   end
 end
