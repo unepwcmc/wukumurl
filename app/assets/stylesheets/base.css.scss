@@ -118,7 +118,6 @@ div.header {
 }
 
 .modal-overlay {
-  display: none;
   z-index: 999999;
   background-color: black;
   opacity: 0.5;
@@ -131,7 +130,6 @@ div.header {
 }
 
 .modal {
-  display: none;
   z-index: 9999999;
   width: 600px;
   position:fixed;
@@ -209,7 +207,7 @@ button,
   padding: 3px 10px;
   @include transition(all 0.5s ease);
 
-  &:hover, &:active {
+  &.hover, &:hover, &:active {
     background-color: $blue;
     color: #fff;
     @include transition(all 0.5s ease);
@@ -312,6 +310,7 @@ button,
 
   section table {
     width: 100%;
+    margin-bottom: 10px;
 
     tbody tr {
       border-bottom: 1px solid $light-border;
@@ -324,6 +323,7 @@ button,
       height: 45px;
     }
 
+<<<<<<< HEAD
     td.right {
       text-align: right;
       position: relative;
@@ -346,6 +346,13 @@ button,
       @include transition(all 0.5s ease)
     }
   }
+=======
+    td:last-child {
+      padding-left: 5px;
+      text-align: right;
+    }
+  }
+>>>>>>> a4a1bf85e84891cf6685b0ece7cae26303c53090
 }
 
 @import "popover";
@@ -363,10 +370,25 @@ button,
 }
 
 .new-link-form {
+<<<<<<< HEAD
   top: 64px;
   left: 1015px;
   div form {
     margin-top: -18px;
+=======
+  top: 87px;
+  left: 667px;
+  width: 425px;
+
+  fieldset:last-child {
+    text-align: right;
+  }
+
+  .copied {
+    display: none;
+    margin-right: 10px;
+    line-height: 2em;
+>>>>>>> a4a1bf85e84891cf6685b0ece7cae26303c53090
   }
 }
 
