@@ -136,8 +136,8 @@ div.header {
   top:20%;
   left:50%;
   margin-left:-300px;
-  background-color: $dark-grey;
-  color: white;
+  background-color: $light-grey;
+  color: $grey-body;
   padding: 20px;
 }
 
@@ -222,7 +222,7 @@ button,
       @include transition(all 0.5s ease);
     }
     &:active {
-      background: $darkOrange;
+      background: $blue;
     }
   }
 
@@ -322,11 +322,15 @@ button,
     }
 
     td {
-      height: 45px;
+      padding: 10px 0;
     }
     
     td:last-child {
       text-align: right;
+    }
+    
+    td.org-disregard {
+      width: 115px;
     }
     
     td.right {
@@ -402,4 +406,11 @@ a.button, button {
 
 button.new-link{
   font-size: 1em;
+}
+
+button.disregard {
+  font-size: 0.75em;
+  padding: 1px 7px;
+  display: inline-block;
+  float: left;
 }
