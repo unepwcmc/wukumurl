@@ -91,7 +91,7 @@ class ShortUrlTest < ActiveSupport::TestCase
     country_stats = @short_url.visits_by_country
     counts = {}
     country_stats.each do |city|
-      counts[city.country] = city.visit_count.to_i
+      counts[city.country] = city.value.to_i
     end
 
     assert_equal 1, counts["Canada"]
