@@ -11,10 +11,15 @@
     value: @total_urls
   } %>
 
-  <%= render partial: "short_urls_table", locals: {
-    title: "Top links by number of visits",
-    data: @short_urls
-  } %>
+  <section>
+    <header>
+      <h4>Top links by number of visits</h4>
+    </header>
+
+    <%= render partial: "short_urls_table", locals: {
+      data: @short_urls
+    } %>
+  </section>
 </div>
 
 <div class="right">
