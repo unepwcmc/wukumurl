@@ -417,9 +417,14 @@ button.new-link{
   font-size: 1em;
 }
 
+tr:hover button.disregard {
+  visibility: visible;
+}
+
 button.disregard {
   font-size: 0.75em;
   padding: 0 7px;
   display: inline-block;
+  visibility: hidden;
   float: left;
 }
