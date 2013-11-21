@@ -1,24 +1,22 @@
-<section>
-  <header>
-    <h4><%= title %></h4>
-  </header>
+<table>
+  <tbody>
+  <% @short_urls.each_with_index do |short_url, index| %>
+    <tr class="<% if index > 7 %>all hidden<% end -%>">
+      <td>
+        <%= index + 1 %>. <%= link_to short_url.short_name ,
+          short_url_info_path(short_url.short_name) %>
 
-  <table>
-    <tbody>
-    <% @short_urls.each_with_index do |short_url, index| %>
-      <tr class="<% if index > 7 %>all hidden<% end -%>">
-        <td>
-          <%= index + 1 %>. <%= link_to short_url.short_name ,
-            short_url_info_path(short_url.short_name) %>
-        </td>
-        <td>
-          <%= short_url.visit_count %>
-        </td>
-    <% end %>
-    </tbody>
-  </table>
-
-  <% if @short_urls.length > 8 %>
-    <button class="view-all">View All</button>
+        <% if recently_added short_url %>
+          <span class="new-tag">new</span>
+        <% end %>
+      </td>
+      <td>
+        <%= short_url.visit_count %>
+      </td>
   <% end %>
-</section>
+  </tbody>
+</table>
+
+<% if @short_urls.length > 8 %>
+  <button class="view-all">View All</button>
+<% end %>

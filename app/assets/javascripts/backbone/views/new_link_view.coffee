@@ -47,8 +47,17 @@ class Backbone.Views.NewLinkView extends Backbone.View
     ))
 
     @renderCopyButton()
+    @renderShortUrlTable()
 
     return @
+
+  renderShortUrlTable: ->
+    $.ajax(
+      url: '/short_urls/list'
+      type: 'GET'
+    ).done( (tableBody) ->
+      $('#short_urls_table').replaceWith(tableBody)
+    )
 
   renderCopyButton: ->
     @clipboard = new ZeroClipboard(
