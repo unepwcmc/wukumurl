@@ -290,7 +290,7 @@ button,
     canvas {
       float: left;
     }
-    
+
     ul {
       float: right;
       width: 16em;
@@ -300,7 +300,8 @@ button,
       margin-top: 10px;
 
       li div {
-        width: 40px;
+        text-align: right;
+        width: 50px;
         height: 26px;
         margin: 5px 8px;
         color: #fff;
