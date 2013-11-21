@@ -3,17 +3,8 @@ class ShortUrlsController < ApplicationController
   before_filter :authenticate_user!, :only => [:update]
 
   def index
-    @visits_by_country = City.
-      select("country, count(*) as value").
-      joins(:visits).
-      group(:country).
-      order('value desc')
-
-    @visits_by_organization = Organization.
-      select("name, count(*) as visit_count").
-      joins(:visits).
-      group(:name).
-      order('visit_count desc')
+    @visits_by_country = City.all_visits_by_country
+    @visits_by_organization = Organization.all_visits_by_organization
 
     @total_visits = Visit.count
     @total_urls   = ShortUrl.count
