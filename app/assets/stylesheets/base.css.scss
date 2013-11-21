@@ -138,7 +138,16 @@ div.header {
   margin-left:-300px;
   background-color: $light-grey;
   color: $grey-body;
-  padding: 20px;
+  padding: 30px;
+  h2 {
+    margin-top: 0;
+  }
+  p {
+    margin: 0 0 20px 0;
+  }
+  button {
+    font-size: 1em;
+  }
 }
 
 .dashboard, header, .header .inner {
@@ -410,7 +419,7 @@ button.new-link{
 
 button.disregard {
   font-size: 0.75em;
-  padding: 1px 7px;
+  padding: 0 7px;
   display: inline-block;
   float: left;
 }
