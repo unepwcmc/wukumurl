@@ -2,27 +2,72 @@
 <html>
   <head>
     <title>wcmc.io shorten // share // track</title>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
     <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag "application" %>
     <%= csrf_meta_tags %>
 
-      <!-- enable HTML5 elements in IE7+8 -->
-      <!--[if lt IE 9]>
+    <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-      <![endif]-->
-    
+    <![endif]-->
   </head>
 
   <body>
-    <div class="container">
-      <%= link_to '', '/help', :class=>"nav", :id=>"help" %>  
-      <%= link_to '', '/', :class=>"nav", :id=>"home" %>
+    <div class="header">
+      <div class="inner">
 
-      <%= yield %>
+        <div class="left">
+          <h1><a href="/index.html">WCMC.io</a></h1>
+          <span id="tagline">Measure the impact of digital documents you care about</span>
+        </div>
 
-      <footer>
-      </footer>
+				<div class="header-actions-container">
+        <div class="header-actions">
+          <% if user_signed_in? %>
+            Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>,
+            <a href="<%= logout_path %>">sign out?</a>
+
+            <button class="new-link"><i class="fa fa-plus"></i> New Link</button>
+          <% else -%>
+            <%= link_to "Sign in", new_user_session_path, :class => 'sign-in' %>
+          <% end -%>
+        </div>
+				
+		    <div class="sign-in-form popover">
+		      <%= render "devise/sessions/new" %>
+		    </div>
+			</div>
+
+      </div>
     </div>
+
+    <header>
+      <h3>
+        <a id="back" href="/index.html"><i class="fa fa-chevron-circle-left"></i></a><%= yield(:title) %>
+      </h3>
+
+      <div class="right">
+        <%= yield(:page_actions) %>
+      </div>
+    </header>
+
+    <div id="map" class="leaflet-container leaflet-fade-anim">
+    </div>
+
+    <div class="dashboard">
+      <%= yield %>
+    </div>
+
+    <div class="new-link-form popover"></div>
+
+    <% if current_user && current_user.no_urls? %>
+      <%= render partial: "short_urls/info_modal" %>
+    <% end %>
+
+    <script>
+      var pieChart = new PieChart(<%= @visits_by_country.to_json.html_safe %>);
+    </script>
+
   </body>
 </html>

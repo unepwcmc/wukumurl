@@ -1,75 +1,50 @@
-  <%= stylesheet_link_tag params[:controller] %>
-  <%= javascript_include_tag params[:controller] %>
-  <header>
+<% title "http://wcmc.io/#{@short_url.short_name}" %>
 
-  <h1>wcmc.io<span>shorten // share // track</span></h1>
-  <h2>ShortUrl: wcmc.io/<%= @short_url.short_name %></h2>
-  <p>Original URL: <%= @short_url.url %></p>
- </header>
+<% if @short_url.owned_by? current_user %>
+  <% content_for :page_actions do %>
 
-  <section>
-    <ul class="stat-groups">
-      <li>
-        <div class="details">
-          Overall Clicks 
-          <span class="stat"><%= @visits %></span>
-        </div>
-        <ul class="lists">
-          <li>
-          <div class="details">
-            Today
-            <span class="stat"><%= @short_url.visits_today.count %></span>
-          </div>
-          </li>
-          <li>
-          <div class="details">
-            This Week
-            <span class="stat"><%= @short_url.visits_this_week.count %></span>
-          </div>
-          </li>
-          <li>
-          <div class="details">
-            This Month
-            <span class="stat"><%= @short_url.visits_this_month.count %></span>
-          </div>
-          </li>
-        </ul>
-      </li>
+    <%= link_to @short_url, :method => :delete,
+      :data => {:confirm => "Are you sure?"}, :class => 'button' do %>
+      <i class="fa fa-trash-o"></i> Delete link
+    <% end %>
 
-      <li>
-        <div class="details">
-          By Country
-        </div>
-        <ul class="lists">
-          <% @visits_by_country.each do |country| %>
-            <li>
-              <div class="details">
-                <%= country.country %>
-                <span class="stat"><%= country.visit_count %></span>
-              </div>
-            </li>
-          <% end %>
-        </ul>
-      </li>
+    <button class="edit-link"><i class="fa fa-pencil-square-o"></i> Edit link</button>
 
-      <li>
-        <div class="details">
-          By Organisation
-        </div>
-        <ul class="lists">
-          <% @visits_by_organization.each do |organization| %>
-            <li>
-              <div class="details">
-                <%= organization.name %>
-                <span class="stat"><%= organization.visit_count %></span>
-              </div>
-              <div class='side-hover-action'>
-                <%= link_to 'Disregard', organization, :method => :delete, :confirm => "Are you sure?" %>
-              </div>
-            </li>
-          <% end %>
-        </ul>
-      </li>
+  <% end %>
+<% end %>
 
-    </ul>
-  </section>
+<div class="left">
+  <%= render partial: "short_urls/headline_number", locals: {
+    title: "Total number of visits",
+    value: @total_visits
+  } %>
+
+  <%= render partial: "short_urls/chart_block" %>
+</div>
+
+<div class="right">
+  <%= render partial: "short_urls/organizations_table", locals: {
+    title: "Top organizations by number of visits"
+  } %>
+</div>
+
+<div class="edit-link-form popover"></div>
+
+<script>
+  var editLinkForm = $('.edit-link-form');
+  var editLinkView = null;
+
+  $('.edit-link').on('click', function (event) {
+    if (editLinkView) {
+      editLinkForm.hide();
+      editLinkView.close();
+      editLinkView = null;
+    } else {
+      editLinkView = new Backbone.Views.EditLinkView({
+        short_url: <%= @short_url.to_json.html_safe %>
+      });
+      editLinkForm.html(editLinkView.el);
+      editLinkForm.show();
+    }
+  });
+</script>
