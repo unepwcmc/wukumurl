@@ -371,8 +371,19 @@ button,
 .new-link-form {
   top: 64px;
   left: 1015px;
+
   div form {
     margin-top: -18px;
+  }
+
+  fieldset:last-child {
+    text-align: right;
+  }
+
+  .copied {
+    display: none;
+    margin-right: 10px;
+    line-height: 2em;
   }
 }
 
