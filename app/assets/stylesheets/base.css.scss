@@ -205,7 +205,8 @@ button,
 .dashboard {
   margin: 0 auto;
   padding: 0;
-
+  overflow: hidden;
+  margin-bottom: 80px;
   button {
     @include border-radius(5px);
     border: 1px solid $blue;
@@ -290,7 +291,7 @@ button,
 
       li div {
         text-align: right;
-        width: 50px;
+        width: 40px;
         height: 26px;
         margin: 5px 8px;
         color: #fff;
