@@ -132,3 +132,15 @@
   border-width: 9px;
   margin-left: -9px;
 }
+
+
+.new-link-form {
+  width: 400px;
+  input[type="text"] {
+    width: 368px;
+  }
+  fieldset#edit-before {
+    float: left;
+    margin-top: -10px;
+  }
+}
