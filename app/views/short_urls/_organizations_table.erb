@@ -10,8 +10,8 @@
         <td>
           <%= organization.name %>
         </td>
-        <td>
-          <%= organization.visit_count %>
+        <td class="org-disregard">
+          <button class="disregard">Disregard</button><%= organization.visit_count %>
         </td>
       </tr>
     <% end %>
