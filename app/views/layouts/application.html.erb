@@ -18,8 +18,8 @@
       <div class="inner">
 
         <div class="left">
-          <h1>WCMC.io</h1>
-          <h2>Measure the impact of digital documents you care about</h2>
+          <h1><a href="index.html">WCMC.io</a></h1>
+          <span id="tagline">Measure the impact of digital documents you care about</span>
         </div>
 
         <div class="header-actions">
@@ -27,7 +27,7 @@
             Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>,
             <a href="<%= logout_path %>">sign out?</a>
 
-            <button class="new-link">+ New Link</button>
+            <button class="new-link"><i class="fa fa-plus"></i> New Link</button>
           <% else -%>
             <%= link_to "Sign in", new_user_session_path, :class => 'sign-in' %>
           <% end -%>
@@ -38,8 +38,9 @@
 
     <header>
       <h3>
-        <%= yield(:title) %>
+        <a id="back" href="index.html"><i class="fa fa-chevron-circle-left"></i></a><%= yield(:title) %>
       </h3>
+      <!-- <span id="back"><a href="index.html"><i class="fa fa-chevron-left"></i>Back to Your shared links</a></span> -->
 
       <div class="right">
         <%= yield(:page_actions) %>

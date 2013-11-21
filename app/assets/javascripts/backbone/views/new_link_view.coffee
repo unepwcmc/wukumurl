@@ -31,6 +31,10 @@ class Backbone.Views.NewLinkView extends Backbone.View
       .parent()
       .toggle()
 
+  render: ->
+    @$el.html(@template())
+    return @
+
   renderFailure: (response) ->
     for field, error of $.parseJSON(response.responseText)
       $("##{field}, [for=#{field}]").addClass('error')
@@ -42,15 +46,25 @@ class Backbone.Views.NewLinkView extends Backbone.View
       url: shortUrl.short_name
     ))
 
-    new ZeroClipboard(
+    @renderCopyButton()
+
+    return @
+
+  renderCopyButton: ->
+    @clipboard = new ZeroClipboard(
       @$el.find(".copy-url"),
-      moviePath: "/assets/ZeroClipboard.swf"
+      moviePath: '/assets/ZeroClipboard.swf',
+      hoverClass: 'hover'
     )
 
-    return @
+    @clipboard.on('complete', =>
+      copiedText = @$el.find('.copied')
+      copiedText.fadeIn()
+
+      setTimeout( ->
+        copiedText.fadeOut()
+      , 2000)
+    )
 
   close: ->
-
-  render: ->
-    @$el.html(@template())
-    return @
+    @clipboard.off('complete')
