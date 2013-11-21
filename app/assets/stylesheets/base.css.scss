@@ -106,11 +106,11 @@ div.header {
     }
 
     a {
-      color: $white-text;
+      color: #fff;
       @include transition(all 0.5s ease);
 
       &:hover, &:active {
-        color: #fff;
+        text-decoration: underline;
         @include transition(all 0.5s ease);
       }
     }
@@ -152,9 +152,10 @@ header {
   background: none;
   color: black;
   div.right {
-    margin-top: 3px;
+    margin-top: 10px;
     button.edit-link {
       margin-left: 10px;
+      outline: none;
     }
   }
 
@@ -177,19 +178,6 @@ header {
       }
     }
   }
-  //span#back {
-  //    font-size: 0.85em;
-  //    display: inline-block;
-  //    margin-top: 15px;
-  //    padding-left: 15px;
-  //    &:hover, &:active {
-  //      text-decoration: underline;
-  //    }
-  //    i {
-  //      font-size: 0.9em;
-  //      padding-right: 3px;
-  //    }
-  //  }
 }
 
 #map {
@@ -226,6 +214,7 @@ button,
     line-height: 1.75em;
     padding: 0 15px 3px 15px;
     float: right;
+    outline: none;
     &:hover {
       background: $blue;
       color: rgba(255,255,255,0.9);
@@ -277,7 +266,7 @@ button,
       margin: 0;
       font-size: 3em;
       font-weight: 400;
-      text-align: right;
+      text-align: left;
     }
 
     &:last-child {
@@ -326,6 +315,9 @@ button,
       &.single-row {
         border-bottom: none;
       }
+      &:last-child {
+        border-bottom: none;
+      }
     }
 
     td {
@@ -333,7 +325,6 @@ button,
     }
     
     td:last-child {
-      padding-left: 5px;
       text-align: right;
     }
     
@@ -370,9 +361,8 @@ button,
 }
 
 .new-link-form {
-  top: 64px;
-  left: 1015px;
-
+  top: 65px;
+  left: 965px;
   div form {
     margin-top: -18px;
   }
@@ -389,7 +379,7 @@ button,
 }
 
 .edit-link-form {
-  top: 140px;
+  top: 146px;
   left: 1015px;
   div form {
     margin-top: -18px;
@@ -402,6 +392,7 @@ ul.legend li div.legend-colour {
 
 .header-actions button.new-link i {
   margin-left: 0;
+  outline: none;
 }
 
 a.button, button {
