@@ -233,6 +233,14 @@ button,
     @include span-columns($section-columns omega,$total-columns);
   }
 
+  .new-tag {
+    background-color: #4295d5;
+    color: white;
+    border-radius: 4px;
+    padding: 0 5px;
+    font-size: 0.7em;
+  }
+
   section {
     padding: 10px 20px;
     overflow: auto;
@@ -345,12 +353,6 @@ button,
 
 @import "popover";
 
-.sign-up-form {
-  top: 70px;
-  left: 923px;
-  width: 205px;
-}
-
 .sign-in-form {
   top: 62px;
   left: 1038px;
@@ -362,6 +364,16 @@ button,
   left: 965px;
   div form {
     margin-top: -18px;
+  }
+
+  fieldset:last-child {
+    text-align: right;
+  }
+
+  .copied {
+    display: none;
+    margin-right: 10px;
+    line-height: 2em;
   }
 }
 
