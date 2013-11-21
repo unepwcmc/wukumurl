@@ -3,7 +3,7 @@ development:
   encoding: unicode
   database: wukumurl_development
   pool: 5
-  username: blancatortajada
+  username: postgres
   password:
   host: localhost
 
@@ -12,6 +12,6 @@ test:
   encoding: unicode
   database: wukumurl_test
   pool: 5
-  username: blancatortajada
+  username: postgres
   password:
   host: localhost
