@@ -1,5 +1,5 @@
 class window.PieChart
-  colours: ["#777777", "#bbbbbb", "#dddddd", "#333333"]
+  colours: ["#317FCE", "#5D9EDB", "#8EBDE6", "#C5DDF2"]
   country_threshold: 3
 
   constructor: (visits) ->

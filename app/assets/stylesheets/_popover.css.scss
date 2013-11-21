@@ -7,13 +7,80 @@
   z-index: 9999999;
 
   margin: 0;
-  background: #ddd;
-  background-color: $lightish-grey;
-  border: 1px solid #bdbdbd;
+  background-color: $popover-grey;
   @include border-radius(5px);
-  padding: 10px;
+  padding: 15px;
+  font-size: 0.85em;
+  color: $darkBlue;
+  width: 300px;
+  box-shadow: 0 0 4px 1px rgba(0,0,0,0.15);
+  border: 1px solid #eee;
 
   form {
+    
+    overflow: hidden;
+    
+    div {
+      padding-bottom: 15px;
+    }
+    
+    div#remember {
+      float: left;
+      padding-bottom: 0;
+    }
+    
+    div#sign_button {
+      float: right;
+      padding-bottom: 0;
+    }
+    
+    button {
+      @include border-radius(5px);
+      background: $orange;
+      color: rgba(255,255,255,0.9);
+      font-weight: 300;
+      font-size: 1em;
+      line-height: 1.75em;
+      border: none;
+      padding: 0 15px 3px 15px;
+      &:hover, &:active {
+        background: $darkOrange;
+        @include transition(all 0.5s ease);
+      }
+    }
+    
+    input {
+      @include border-radius(3px);
+      &[type="email"], &[type="password"], &[type="text"] {
+        border: none;
+        line-height: 1.85em;
+        padding-left: 10px;
+        margin-top: 5px;
+        border: 1px solid #eee;
+      }
+      &[type="email"], &[type="password"] {
+        width: 269px;
+      }
+      &[type="submit"] {
+        @include border-radius(5px);
+        background: $orange;
+        color: rgba(255,255,255,0.9);
+        font-weight: 300;
+        line-height: 1.75em;
+        border: none;
+        padding: 0 15px 3px 15px;
+        &:hover, &:active {
+          background: $darkOrange;
+          @include transition(all 0.5s ease);
+        }
+      }
+    }
+    
+    input[type="checkbox"] {
+      border: none;
+      background: #fff;
+    }
+    
     fieldset {
       border: none;
       padding: 0;
@@ -53,15 +120,27 @@
 }
 
 .popover:after {
-  border-color: rgba(221, 221, 221, 0);
-  border-bottom-color: #ddd;
-  border-width: 14px;
-  margin-left: -14px;
+  border-color: rgba(48, 110, 157, 0);
+  border-bottom-color: $popover-grey;
+  border-width: 7px;
+  margin-left: -7px;
 }
 
 .popover:before {
-  border-color: rgba(189, 189, 189, 0);
-  border-bottom-color: #bdbdbd;
-  border-width: 16px;
-  margin-left: -16px;
+  border-color: rgba(48, 110, 157, 0);
+  border-bottom-color: $popover-grey;
+  border-width: 9px;
+  margin-left: -9px;
+}
+
+
+.new-link-form {
+  width: 400px;
+  input[type="text"] {
+    width: 368px;
+  }
+  fieldset#edit-before {
+    float: left;
+    margin-top: -10px;
+  }
 }
