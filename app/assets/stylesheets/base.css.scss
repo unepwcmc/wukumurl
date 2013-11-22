@@ -40,8 +40,8 @@ div.header {
   .inner {
     max-width: 61.4em;
     margin: auto;
-    overflow: hidden;
-  }
+		height: 40px;
+		}
 
   h1, h2 {
     margin: 0;
@@ -81,7 +81,7 @@ div.header {
   }
 
   .header-actions {
-    width: 40%;
+    width: 1000%;
     float: right;
     text-align: right;
     color: $white-text;
@@ -89,6 +89,7 @@ div.header {
     font-weight: 300;
     line-height: 37px;
     padding-top: 4px;
+		position: relative;
 
     button {
       border: 1px solid white;
@@ -115,6 +116,12 @@ div.header {
       }
     }
   }
+}
+
+div.header-actions-container{
+	float: right;
+	width: 40%;
+	position: relative;
 }
 
 .modal-overlay {
@@ -368,14 +375,16 @@ button,
 @import "popover";
 
 .sign-in-form {
-  top: 62px;
-  left: 1038px;
+	position: absolute;
+  top: 50px;
+  left: 225px;
   width: 205px;
 }
 
 .new-link-form {
-  top: 65px;
-  left: 965px;
+	position: absolute;	
+  top: 50px;
+  left: 130px;
   div form {
     margin-top: -18px;
   }

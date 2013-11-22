@@ -22,15 +22,23 @@
           <span id="tagline">Measure the impact of digital documents you care about</span>
         </div>
 
-        <div class="header-actions">
-          <% if user_signed_in? %>
-            Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>,
-            <a href="<%= logout_path %>">sign out?</a>
+        <div class="header-actions-container">
+          <div class="header-actions">
+            <% if user_signed_in? %>
+              Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>,
+              <a href="<%= logout_path %>">sign out?</a>
 
-            <button class="new-link"><i class="fa fa-plus"></i> New Link</button>
-          <% else -%>
-            <%= link_to "Sign in", new_user_session_path, :class => 'sign-in' %>
-          <% end -%>
+              <button class="new-link"><i class="fa fa-plus"></i> New Link</button>
+            <% else -%>
+              <%= link_to "Sign in", new_user_session_path, :class => 'sign-in' %>
+            <% end -%>
+          </div>
+
+          <div class="sign-in-form popover">
+            <%= render "devise/sessions/new" %>
+          </div>
+
+          <div class="new-link-form popover"></div>
         </div>
 
       </div>
@@ -53,11 +61,7 @@
       <%= yield %>
     </div>
 
-    <div class="sign-in-form popover">
-      <%= render "devise/sessions/new" %>
-    </div>
 
-    <div class="new-link-form popover"></div>
 
     <% if current_user && current_user.no_urls? %>
       <%= render partial: "short_urls/info_modal" %>
