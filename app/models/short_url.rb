@@ -23,8 +23,6 @@ class ShortUrl < ActiveRecord::Base
     order('visits_count DESC')
   }
 
-  default_scope order('created_at DESC')
-
   def owned_by? current_user
     return !current_user.blank? &&
       !current_user.short_urls.find_by_id(self.id).blank?
