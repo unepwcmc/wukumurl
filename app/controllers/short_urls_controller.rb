@@ -9,7 +9,7 @@ class ShortUrlsController < ApplicationController
     @total_urls   = ShortUrl.count
 
     @short_urls = ShortUrl.
-      not_deleted
+      ordered_by_visits_desc
   end
 
   def list
