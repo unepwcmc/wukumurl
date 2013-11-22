@@ -12,7 +12,7 @@ module Devise
           ldap.auth email, password
 
           if ldap.bind
-            user = User.where(email: email) || User.create(user_data)
+            user = User.where(email: email).first || User.create(user_data)
             success!(user)
           else
             fail(:invalid_login)
