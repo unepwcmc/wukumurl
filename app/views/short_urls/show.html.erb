@@ -47,4 +47,10 @@
       editLinkForm.show();
     }
   });
+
+  $(document).ready(function() {
+    L.tileLayer("http://carbon-tool.cartodb.com/tiles/wcmc_io_organizations_by_short_url/{z}/{x}/{y}.png?sql=SELECT * FROM wcmc_io_organizations_by_short_url WHERE short_url_id=<%=@short_url.id %>;", {
+      maxZoom: 18
+    }).addTo(map)
+  });
 </script>
