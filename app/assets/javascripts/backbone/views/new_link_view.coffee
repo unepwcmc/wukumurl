@@ -59,7 +59,7 @@ class Backbone.Views.NewLinkView extends Backbone.View
       $('#short_urls_table').replaceWith(tableBody)
     )
 
-  renderCopyButton: ->
+  renderCopyButton: =>
     @clipboard = new ZeroClipboard(
       @$el.find(".copy-url"),
       moviePath: '/assets/ZeroClipboard.swf',
@@ -76,4 +76,3 @@ class Backbone.Views.NewLinkView extends Backbone.View
     )
 
   close: ->
-    @clipboard.off('complete')
