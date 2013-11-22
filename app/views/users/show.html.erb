@@ -25,3 +25,11 @@
     title: "Top organizations by number of visits"
   } %>
 </div>
+
+<script>
+  $(document).ready(function() {
+    L.tileLayer("http://carbon-tool.cartodb.com/tiles/wcmc_io_organizations_by_user/{z}/{x}/{y}.png?sql=SELECT * FROM wcmc_io_organizations_by_user WHERE user_id=1;", {
+      maxZoom: 18
+    }).addTo(map)
+  });
+</script>
