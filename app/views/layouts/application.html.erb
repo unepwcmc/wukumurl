@@ -19,7 +19,7 @@
 
         <div class="left">
           <h1><a href="/index.html">WCMC.io</a></h1>
-          <span id="tagline">Measure the impact of digital documents you care about</span>
+          <span class="tagline">Measure the impact of digital documents you care about</span>
         </div>
 
         <div class="header-actions-container">
@@ -46,7 +46,8 @@
 
     <header>
       <h3>
-        <a id="back" href="/index.html"><i class="fa fa-chevron-circle-left"></i></a><%= yield(:title) %>
+        <%= back_button %>
+        <%= yield(:title) %>
       </h3>
 
       <div class="right">

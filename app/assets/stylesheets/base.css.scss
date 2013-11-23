@@ -40,8 +40,8 @@ div.header {
   .inner {
     max-width: 61.4em;
     margin: auto;
-		height: 40px;
-		}
+    height: 40px;
+    }
 
   h1, h2 {
     margin: 0;
@@ -65,8 +65,8 @@ div.header {
     color: $white-text;
     font-weight: 300;
   }
-  
-  span#tagline {
+
+  span.tagline {
     font-size: 0.85em;
     font-weight: 300;
     line-height: 30px;
@@ -89,7 +89,7 @@ div.header {
     font-weight: 300;
     line-height: 37px;
     padding-top: 4px;
-		position: relative;
+    position: relative;
 
     button {
       border: 1px solid white;
@@ -119,9 +119,9 @@ div.header {
 }
 
 div.header-actions-container{
-	float: right;
-	width: 40%;
-	position: relative;
+  float: right;
+  width: 40%;
+  position: relative;
 }
 
 .modal-overlay {
@@ -171,13 +171,16 @@ header {
     margin: 0;
     color: $grey-body;
     font-size: 1.75em;
-    a#back {
+
+    a.back {
       display: inline-block;
       margin-right: 5px;
       font-size: 0.75em;
       line-height: 41px;
       color: $grey-body;
       opacity: 0.6;
+      @include transition(all 0.5s ease);
+
       &:hover {
         color: $blue;
         opacity: 1;
@@ -330,11 +333,11 @@ button,
     td {
       height: 45px;
     }
-    
+
     td:last-child {
       text-align: right;
     }
-    
+
     td.right {
       text-align: right;
       position: relative;
@@ -362,14 +365,14 @@ button,
 @import "popover";
 
 .sign-in-form {
-	position: absolute;
+  position: absolute;
   top: 50px;
   left: 225px;
   width: 205px;
 }
 
 .new-link-form {
-	position: absolute;	
+  position: absolute;
   top: 50px;
   left: 130px;
   div form {
