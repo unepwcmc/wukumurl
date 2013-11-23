@@ -6,18 +6,30 @@ module Devise
     class LdapAuthenticatable < Authenticatable
       def authenticate!
         if params[:user]
-          ldap = Net::LDAP.new
-          ldap.host = "wcmc-dc-01.internal.wcmc"
-          ldap.port = 389
-          ldap.auth email, password
-
-          if ldap.bind
-            user = User.where(email: email).first || User.create(user_data)
-            success!(user)
-          else
+          begin
+            bind_to_ldap
+          rescue
             fail(:invalid_login)
           end
         end
+      end
+
+      def bind_to_ldap
+        if ldap.bind
+          user = User.where(email: email).first || User.create(user_data)
+          return success!(user)
+        else
+          fail(:invalid_login)
+        end
+      end
+
+      def ldap
+        ldap = Net::LDAP.new
+        ldap.host = "wcmc-dc-01.internal.wcmc"
+        ldap.port = 389
+        ldap.auth email, password
+
+        ldap
       end
 
       def email
