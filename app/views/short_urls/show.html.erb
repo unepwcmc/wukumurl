@@ -31,26 +31,11 @@
 <div class="edit-link-form popover"></div>
 
 <script>
-  var editLinkForm = $('.edit-link-form');
-  var editLinkView = null;
-
-  $('.edit-link').on('click', function (event) {
-    if (editLinkView) {
-      editLinkForm.hide();
-      editLinkView.close();
-      editLinkView = null;
-    } else {
-      editLinkView = new Backbone.Views.EditLinkView({
-        short_url: <%= @short_url.to_json.html_safe %>
-      });
-      editLinkForm.html(editLinkView.el);
-      editLinkForm.show();
-    }
-  });
+  <%= render('short_urls/edit_link').html_safe %>
 
   $(document).ready(function() {
     L.tileLayer("http://carbon-tool.cartodb.com/tiles/wcmc_io_organizations_by_short_url/{z}/{x}/{y}.png?sql=SELECT * FROM wcmc_io_organizations_by_short_url WHERE short_url_id=<%=@short_url.id %>;", {
       maxZoom: 18
     }).addTo(map)
-  });
+  })
 </script>

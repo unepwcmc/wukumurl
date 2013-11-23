@@ -19,4 +19,5 @@
 //= require backbone-min
 //= require_tree ./backbone
 //= require Chart.min.js
-//= require_tree ./short_urls
+//= require ./short_urls/pie_chart
+//= require ./short_urls/short_urls
