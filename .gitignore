@@ -22,3 +22,5 @@
 
 # Ignore database file as it's specific to me
 /config/database.yml
+
+config/cartodb.yml
