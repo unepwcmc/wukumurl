@@ -13,7 +13,7 @@ gem 'cartodb-rb-client', :git => 'https://github.com/unepwcmc/cartodb-rb-client.
 gem 'whenever', :require => false
 
 group :development do
-  gem 'capistrano'
+  gem 'capistrano', '~> 2.15.5'
   gem 'capistrano-ext'
   gem 'brightbox'
 
