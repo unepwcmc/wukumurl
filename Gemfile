@@ -10,7 +10,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'rvm-capistrano'
 gem 'geoip-c', '0.9.1'
 gem 'geocoder'
-gem 'cartodb-rb-client', :git => 'https://github.com/unepwcmc/cartodb-rb-client.git', :branch => 'wcmcio'
+# gem 'cartodb-rb-client', :git => 'https://github.com/unepwcmc/cartodb-rb-client.git', :branch => 'wcmcio'
 
 gem 'whenever', :require => false
 
