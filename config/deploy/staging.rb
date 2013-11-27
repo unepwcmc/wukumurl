@@ -9,6 +9,24 @@ set :server_name, "wukumurl.unepwcmc-011.vm.brightbox.net"
 set :sudo_user, "rails"
 set :app_port, "80" 
 
+# Choose a Ruby explicitly, or read from an environment variable.
+set :rvm_ruby_string, 'ruby-2.0.0-p353'
+
+# Add RVM's lib directory to the load path.
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+
+set :rvm_type, :user  # Literal ":user"
+
+# Load RVM's capistrano plugin.
+require 'rvm/capistrano'
+
+set :default_environment, {
+  'PATH' => "/home/rails/.rvm/gems/ruby-2.0.0-p353/bin:/home/rails/.rvm/bin:/home/rails/.rvm/rubies/ruby-2.0.0-p353/bin:$PATH",
+  'RUBY_VERSION' => 'ruby-2.0.0-p353',
+  'GEM_HOME' => '/home/rails/.rvm/gems/ruby-2.0.0-p353',
+  'GEM_PATH' => '/home/rails/.rvm/gems/ruby-2.0.0-p353',
+}
+
 desc "Configure VHost"
 task :config_vhost do
 vhost_config =<<-EOF
