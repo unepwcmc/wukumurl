@@ -102,14 +102,56 @@ namespace :geo_locate do
         end
       end
     end
+  end
 
-    #org_last_update = CartoDB::Connection.query("
-      #SELECT updated_at
-      #FROM wcmc_io_visits_by_organizations
-      #ORDER BY updated_at
-      #DESC LIMIT 1
-    #")[:rows].first.try(:updated_at)
+  task update_all_map: :environment do
+    org_last_update = CartoDB::Connection.query("
+      SELECT updated_at
+      FROM wcmc_io_visits_by_organization
+      ORDER BY updated_at
+      DESC LIMIT 1
+    ")[:rows].first.try(:updated_at)
 
-    #org_last_update = Date.parse("1 January 1970") if org_last_update.nil?
+    org_last_update = Date.parse("1 January 1970") if org_last_update.nil?
+    visits_since_last_update = Visit.where('created_at > ?', [org_last_update])
+
+    abort("nothing to do") if visits_since_last_update.length == 0
+
+    visits_since_last_update.each do |visit|
+      organization = visit.organization
+      location     = visit.location
+
+      next unless organization && location && location.lat && location.lon
+
+      visit_count = Visit.where(organization_id: organization.id).count
+
+      existing_org = CartoDB::Connection.query("
+        SELECT COUNT(*)
+        FROM wcmc_io_visits_by_organization
+        WHERE org_id=#{organization.id}
+      ")
+
+      if existing_org[:rows].first[:count] > 0
+        org_query = "
+          UPDATE wcmc_io_visits_by_organization
+          SET visits = #{visit_count}
+          WHERE org_id=#{organization.id}
+        "
+      else
+        org_query = "
+          INSERT INTO wcmc_io_visits_by_organization
+          (the_geom, org_id, org_name, visits)
+          VALUES (
+            ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326),
+            #{organization.id},
+            $$#{CGI.escape organization.name}$$,
+            #{visit_count}
+          )
+        "
+      end
+
+      puts org_query
+      CartoDB::Connection.query org_query
+    end
   end
 end
