@@ -1,18 +1,14 @@
 set :default_stage, 'staging'
 require 'capistrano/ext/multistage'
 
-require 'brightbox/recipes'
-require 'brightbox/passenger'
-
 load "deploy/assets"
 set :rake, 'bundle exec rake'
-
-require 'rvm/capistrano'
-set :rvm_ruby_string, '2.0.0'
 
 set :generate_webserver_config, false
 
 ssh_options[:forward_agent] = true
+
+set :user, 'ubuntu'
 
 #set :whenever_command, "bundle exec whenever"
 #require "whenever/capistrano"
@@ -56,6 +52,14 @@ set :local_shared_files, %w(config/database.yml config/max_mind.yml config/carto
 # don't need this if you are using a different SCM system. Note that
 # ptys stop shell startup scripts from running.
 default_run_options[:pty] = true
+
+after "deploy:update_code", "db:symlink"
+namespace :db do
+  desc "Make symlink for database yaml"
+  task :symlink do
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  end
+end
 
 task :setup_production_database_configuration do
   the_host = Capistrano::CLI.ui.ask("Database IP address: ")
