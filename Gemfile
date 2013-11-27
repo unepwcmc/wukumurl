@@ -32,6 +32,7 @@ gem "compass-rails", "~> 2.0.alpha.0"
 gem "susy"
 gem 'font-awesome-sass'
 
+gem 'therubyracer'
 gem 'ejs', '~> 1.1.1'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
