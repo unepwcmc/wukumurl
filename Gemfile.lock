@@ -239,6 +239,7 @@ DEPENDENCIES
   guard-minitest
   jquery-rails
   leaflet-rails
+  libv8 (= 3.11.8.13)
   net-ldap
   pg
   rack-cors
