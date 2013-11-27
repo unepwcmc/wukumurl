@@ -6,6 +6,8 @@ require 'brightbox/passenger'
 load "deploy/assets"
 set :rake, 'bundle exec rake'
 
+require 'rvm/capistrano'
+set :rvm_ruby_string, '2.0.0'
 
 set :generate_webserver_config, false
 
