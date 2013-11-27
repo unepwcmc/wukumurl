@@ -1,19 +1,10 @@
 class ShortUrl < ActiveRecord::Base
   require 'securerandom'
-  attr_accessible :short_name, :url
   validates_uniqueness_of :short_name
   validate :validate_url
 
-  attr_accessor :not_a_robot
-  attr_accessible :not_a_robot
-
   before_validation :create_short_name_if_blank
   before_validation :ensure_http_prepend
-
-  validates :not_a_robot, :inclusion => {
-    :in => [true],
-    :message => "must be checked"
-  }
 
   auto_strip_attributes :url
 
@@ -21,13 +12,20 @@ class ShortUrl < ActiveRecord::Base
   has_many :locations, :through => :visits
   has_many :cities, :through => :visits
   has_many :country_locations, :through => :cities
+  has_many :disregard_votes
 
-  def not_a_robot
-    if @not_a_robot.nil?
-      return true
-    end
+  belongs_to :user
 
-    @not_a_robot
+  scope :ordered_by_visits_desc, -> {
+    joins('LEFT JOIN visits ON visits.short_url_id = short_urls.id').
+    select('short_urls.*, count(visits.id) AS visits_count').
+    group('short_urls.id').
+    order('visits_count DESC')
+  }
+
+  def owned_by? current_user
+    return !current_user.blank? &&
+      !current_user.short_urls.find_by_id(self.id).blank?
   end
 
   def create_short_name_if_blank
@@ -43,7 +41,7 @@ class ShortUrl < ActiveRecord::Base
   def visit_count
     Visit.where(short_url_id: self.id).count
   end
-  
+
   def visits_location
     Visit.where(short_url_id: self.id).select([:id, :longitude, :latitude])
   end
@@ -62,7 +60,7 @@ class ShortUrl < ActiveRecord::Base
 
   # Returns a list of countries with a 'visit_count' attribute
   def visits_by_country
-    City.select("cities.country, COUNT(visits.id) as visit_count")
+    City.select("cities.country, COUNT(visits.id) as value")
     .group("cities.country")
     .joins(:visits)
     .where(visits: {short_url_id: self.id})
@@ -75,17 +73,87 @@ class ShortUrl < ActiveRecord::Base
     .where(visits: {short_url_id: self.id})
   end
 
+  def visits_by_organization_query
+    "
+      SELECT organizations.*, visit_count
+      FROM organizations
+      INNER JOIN
+        (
+          SELECT
+            COUNT(visits.id) as visit_count, visits.organization_id
+          FROM visits
+          WHERE visits.short_url_id = #{self.id}
+          GROUP BY organization_id
+        ) AS visits_for_orgs
+      ON visits_for_orgs.organization_id = organizations.id
+    "
+  end
+
+  def pertinent_organization_query threshold = 5
+    "
+      INNER JOIN
+        (
+          SELECT
+            COUNT(organization_id) as count, organizations.id AS org_id
+          FROM organizations
+          LEFT OUTER JOIN
+            disregard_votes
+          ON
+            disregard_votes.organization_id = organizations.id
+          GROUP BY organizations.id
+        ) AS globally_pertinent_organizations
+      ON
+        globally_pertinent_organizations.org_id = organizations.id
+        AND globally_pertinent_organizations.count < #{threshold}
+      LEFT OUTER JOIN
+        (
+          SELECT organization_id
+          FROM disregard_votes
+          WHERE short_url_id = #{self.id}
+          GROUP BY organization_id
+        ) AS disregarded_for_short_url_organizations
+      ON
+        disregarded_for_short_url_organizations.organization_id = globally_pertinent_organizations.org_id
+      WHERE
+        disregarded_for_short_url_organizations.organization_id IS NULL
+      ORDER BY visit_count DESC
+    "
+  end
+
+  def non_pertinent_organization_query without: {}
+    ignore_ids = without.map(&:id).join(', ')
+    if ignore_ids.length > 0
+      return " WHERE organizations.id NOT IN (#{ignore_ids})"
+    end
+
+    return ""
+  end
 
   # Returns a list of countries with a 'visit_count' attribute
-  def visits_by_organization include_disregarded = false
-    orgs = Organization.
-      select("organizations.id, organizations.name, COUNT(visits.id) as visit_count").
-      group("organizations.id, organizations.name").
-      joins(:visits).
-      where(visits: {short_url_id: self.id})
+  def visits_by_organization group_by_disregarded: true, disregard_threshold: 5
+    organizations_query = visits_by_organization_query
 
-    unless include_disregarded
-      orgs = orgs.where("disregard = false OR disregard IS NULL")
+    if group_by_disregarded
+      pertinent_organizations = Organization.find_by_sql(
+        [organizations_query, pertinent_organization_query].join(" ")
+      )
+
+      non_pertinent_organizations = Organization.find_by_sql(
+        [
+          organizations_query,
+          non_pertinent_organization_query(without: pertinent_organizations)
+        ].join(" ")
+      )
+
+      orgs = {
+        pertinent: pertinent_organizations,
+        non_pertinent: non_pertinent_organizations
+      }
+    else
+      orgs = Organization.find_by_sql([
+        organizations_query,
+        "ORDER BY visit_count DESC"
+      ].join(" "))
     end
 
     orgs

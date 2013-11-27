@@ -1,0 +1,416 @@
+@import "susy";
+
+@import "mixins";
+@import "variables";
+
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #f7f7f7;
+  color: $grey-body;
+
+  a {
+    text-decoration:none;
+    color: $blue;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+div.header {
+  margin: 0 auto;
+  padding: 20px 0;
+  background: $blue;
+
+  .inner {
+    max-width: 61.4em;
+    margin: auto;
+    height: 40px;
+    }
+
+  h1, h2 {
+    margin: 0;
+  }
+
+  h1 {
+    line-height: 37px;
+    font-size: 1.5em;
+    color: #fff;
+    font-weight: 400;
+    float: left;
+    a {
+      color: #fff;
+      font-weight: 400;
+    }
+  }
+
+  h2 {
+    font-size: 1em;
+    border: none;
+    color: $white-text;
+    font-weight: 300;
+  }
+
+  span.tagline {
+    font-size: 0.85em;
+    font-weight: 300;
+    line-height: 30px;
+    color: rgba(255,255,255, 0.7);
+    float: left;
+    display: inline-block;
+    border-left: 1px solid rgba(255,255,255, 0.5);
+    padding-left: 10px;
+    margin-left: 10px;
+    margin-top: 7px;
+    margin-bottom: 4px;
+  }
+
+  .header-actions {
+    width: 1000%;
+    float: right;
+    text-align: right;
+    color: $white-text;
+    font-size: 0.85em;
+    font-weight: 300;
+    line-height: 37px;
+    padding-top: 4px;
+    position: relative;
+
+    button {
+      border: 1px solid white;
+      color: white;
+
+      &:hover, &:active {
+        color: $blue;
+        background-color: white;
+      }
+    }
+
+    * {
+      display: inline;
+      margin-left: 5px;
+    }
+
+    a {
+      color: #fff;
+      @include transition(all 0.5s ease);
+
+      &:hover, &:active {
+        text-decoration: underline;
+        @include transition(all 0.5s ease);
+      }
+    }
+  }
+}
+
+div.header-actions-container{
+  float: right;
+  width: 40%;
+  position: relative;
+}
+
+.modal-overlay {
+  z-index: 999999;
+  background-color: black;
+  opacity: 0.5;
+  position:absolute;
+  top: 0;
+  width:100%;
+  height:200%;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter:alpha(opacity=50);
+}
+
+.modal {
+  z-index: 9999999;
+  width: 600px;
+  position:fixed;
+  top:20%;
+  left:50%;
+  margin-left:-300px;
+  background-color: $dark-grey;
+  color: white;
+  padding: 20px;
+}
+
+.dashboard, header, .header .inner {
+  max-width: 61.4em;
+}
+
+header {
+  max-width: 61.4em;
+  margin: 20px auto;
+  overflow: hidden;
+  background: none;
+  color: black;
+  div.right {
+    margin-top: 10px;
+    button.edit-link {
+      margin-left: 10px;
+      outline: none;
+    }
+  }
+
+  h3 {
+    float: left;
+    margin: 0;
+    color: $grey-body;
+    font-size: 1.75em;
+
+    a.back {
+      display: inline-block;
+      margin-right: 5px;
+      font-size: 0.75em;
+      line-height: 41px;
+      color: $grey-body;
+      opacity: 0.6;
+      @include transition(all 0.5s ease);
+
+      &:hover {
+        color: $blue;
+        opacity: 1;
+        @include transition(all 0.5s ease);
+      }
+    }
+  }
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+  margin-bottom: 20px;
+}
+
+button,
+.button {
+  @include border-radius (5px);
+  border: 1px solid $blue;
+  color: $blue;
+  background: none;
+  padding: 3px 10px;
+  @include transition(all 0.5s ease);
+
+  &.hover, &:hover, &:active {
+    background-color: $blue;
+    color: #fff;
+    @include transition(all 0.5s ease);
+  }
+}
+
+.dashboard {
+  margin: 0 auto;
+  padding: 0;
+
+  button {
+    @include border-radius(5px);
+    border: 1px solid $blue;
+    color: $blue;
+    font-weight: 300;
+    line-height: 1.75em;
+    padding: 0 15px 3px 15px;
+    float: right;
+    outline: none;
+    &:hover {
+      background: $blue;
+      color: rgba(255,255,255,0.9);
+      @include transition(all 0.5s ease);
+    }
+    &:active {
+      background: $darkOrange;
+    }
+  }
+
+  div.left {
+    @include span-columns($section-columns,$total-columns);
+  }
+
+  div.right {
+    @include span-columns($section-columns omega,$total-columns);
+  }
+
+  .new-tag {
+    background-color: #4295d5;
+    color: white;
+    border-radius: 4px;
+    padding: 0 5px;
+    font-size: 0.7em;
+  }
+
+  section {
+    padding: 10px 20px;
+    overflow: auto;
+    background-color: #fff;
+    margin-bottom: 20px;
+    @include border-radius(5px);
+
+    header {
+      padding: 10px 0;
+      margin: 0;
+      margin-bottom: 10px;
+      border-bottom: 1px solid $header-border;
+
+      h4 {
+        margin: 0;
+        font-size: 1.25em;
+        font-weight: 600;
+        color: #bbb;
+      }
+    }
+
+    p {
+      margin: 0;
+      font-size: 3em;
+      font-weight: 400;
+      text-align: left;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .pie-chart {
+    overflow: hidden;
+    canvas {
+      float: left;
+    }
+
+    ul {
+      float: right;
+      width: 16em;
+      padding: 0;
+      list-style-type: none;
+      margin: 0;
+      margin-top: 10px;
+
+      li div {
+        text-align: right;
+        width: 50px;
+        height: 26px;
+        margin: 5px 8px;
+        color: #fff;
+        line-height: 20pt;
+        padding: 0 4px;
+        float:left;
+      }
+
+      li span {
+        line-height: 29pt;
+        font-size: 0.9em;
+      }
+    }
+  }
+
+  section table {
+    width: 100%;
+    margin-bottom: 10px;
+
+    tbody tr {
+      border-bottom: 1px solid $light-border;
+      &.single-row {
+        border-bottom: none;
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    td {
+      height: 45px;
+    }
+
+    td:last-child {
+      text-align: right;
+    }
+
+    td.right {
+      text-align: right;
+      position: relative;
+      top: 11px;
+
+      &.time {
+        color: $light-text;
+        font-weight: 300;
+      }
+    }
+  }
+
+  .multi-row-table-wrapper {
+    margin-bottom: 10px;
+    height: 385px;
+    overflow: auto;
+    tr td a:hover {
+      color: $blue;
+      text-decoration: underline;
+      @include transition(all 0.5s ease)
+    }
+  }
+}
+
+@import "popover";
+
+.sign-in-form {
+  position: absolute;
+  top: 50px;
+  left: 225px;
+  width: 205px;
+}
+
+.new-link-form {
+  position: absolute;
+  top: 50px;
+  left: 130px;
+  div form {
+    margin-top: -18px;
+  }
+
+  fieldset:last-child {
+    text-align: right;
+  }
+
+  .copied {
+    display: none;
+    margin-right: 10px;
+    line-height: 2em;
+  }
+}
+
+.edit-link-form {
+  top: 146px;
+  left: 1015px;
+  div form {
+    margin-top: -18px;
+  }
+}
+
+ul.legend li div.legend-colour {
+  @include border-radius (5px);
+}
+
+.header-actions button.new-link i {
+  margin-left: 0;
+  outline: none;
+}
+
+a.button, button {
+  font-size: 0.85em;
+}
+
+button.new-link{
+  font-size: 1em;
+}

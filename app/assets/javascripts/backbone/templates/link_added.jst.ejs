@@ -1,0 +1,13 @@
+<form accept-charset="UTF-8">
+   <fieldset>
+      <dl>
+        <dt><label for="url">Done! Now you can copy this link and share it</label></dt>
+        <dd><input id="url" name="url" type="text" value="http://wcmc.io/<%= url %>"></dd>
+      </dl>
+    </fieldset>
+
+    <fieldset>
+      <span class="copied">Copied!</span>
+      <button class="copy-url" data-clipboard-text="http://wcmc.io/<%= url %>">Copy to clipboard</button>
+    </fieldset>
+</form>

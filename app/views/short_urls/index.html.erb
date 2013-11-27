@@ -1,0 +1,38 @@
+<% title "Shared documents by WCMC" %>
+
+<div class="left">
+  <%= render partial: "headline_number", locals: {
+    title: "Total number of visits",
+    value: @total_visits
+  } %>
+
+  <%= render partial: "headline_number", locals: {
+    title: "Number of links shared",
+    value: @total_urls
+  } %>
+
+  <section>
+    <header>
+      <h4>Top links by number of visits</h4>
+    </header>
+
+    <%= render partial: "short_urls_table", locals: {
+      data: @short_urls
+    } %>
+  </section>
+</div>
+
+<div class="right">
+  <%= render partial: "chart_block" %>
+  <%= render partial: "organizations_table", locals: {
+    title: "Top organizations by number of visits"
+  } %>
+</div>
+
+<script>
+  $(document).ready(function() {
+    L.tileLayer("http://carbon-tool.cartodb.com/tiles/wcmc_io_visits_by_organization/{z}/{x}/{y}.png", {
+      maxZoom: 18
+    }).addTo(map)
+  });
+</script>

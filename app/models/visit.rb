@@ -1,7 +1,4 @@
 class Visit < ActiveRecord::Base
-  attr_accessible :ip_address, :short_url_id, :short_name, :latitude,
-    :longitude, :location_source
-
   belongs_to :short_url
   belongs_to :country
   belongs_to :organization

@@ -1,0 +1,35 @@
+<% title "Your shared links" %>
+
+<div class="left">
+  <%= render partial: "short_urls/headline_number", locals: {
+    title: "Total number of visits",
+    value: @total_visits
+  } %>
+
+  <section>
+    <header>
+      <h4>Your links</h4>
+    </header>
+
+    <div id="short_urls_table">
+      <%= render partial: "short_urls/short_urls_table", locals: {
+        data: @short_urls
+      } %>
+    </div>
+  </section>
+</div>
+
+<div class="right">
+  <%= render partial: "short_urls/chart_block" %>
+  <%= render partial: "short_urls/organizations_table", locals: {
+    title: "Top organizations by number of visits"
+  } %>
+</div>
+
+<script>
+  $(document).ready(function() {
+    L.tileLayer("http://carbon-tool.cartodb.com/tiles/wcmc_io_organizations_by_user/{z}/{x}/{y}.png?sql=SELECT * FROM wcmc_io_organizations_by_user WHERE user_id=1;", {
+      maxZoom: 18
+    }).addTo(map)
+  });
+</script>
