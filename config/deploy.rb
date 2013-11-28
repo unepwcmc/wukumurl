@@ -52,11 +52,24 @@ set :local_shared_files, %w(config/database.yml config/max_mind.yml config/carto
 # ptys stop shell startup scripts from running.
 default_run_options[:pty] = true
 
-after "deploy:update_code", "db:symlink"
-namespace :db do
+after "deploy:update_code", "config:db_symlink"
+after "deploy:update_code", "config:cartodb_symlink"
+after "deploy:update_code", "config:max_mind_symlink"
+
+namespace :config do
   desc "Make symlink for database yaml"
-  task :symlink do
+  task :db_symlink do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  end
+
+  desc "Make symlink for cartodb config"
+  task :cartodb_symlink do
+    run "ln -nfs #{shared_path}/config/cartodb_config.yml #{release_path}/config/cartodb_config.yml"
+  end
+
+  desc "Make symlink for max_mind config"
+  task :max_mind_symlink do
+    run "ln -nfs #{shared_path}/config/max_mind.yml #{release_path}/config/max_mind.yml"
   end
 end
 
