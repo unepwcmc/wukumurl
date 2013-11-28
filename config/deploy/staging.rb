@@ -10,7 +10,13 @@ set :sudo_user, "rails"
 set :app_port, "80" 
 
 # Choose a Ruby explicitly, or read from an environment variable.
-set :rvm_ruby_string, 'ruby-2.0.0-p353'
+
+
+require 'rvm/capistrano'
+set :rvm_ruby_string, '2.0.0'
+
+
+
 
 # Add RVM's lib directory to the load path.
 $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
