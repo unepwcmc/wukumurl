@@ -1,13 +1,14 @@
 set :default_stage, 'staging'
 require 'capistrano/ext/multistage'
 
+require 'brightbox/recipes'
+require 'brightbox/passenger'
+
 set :rake, 'bundle exec rake'
 
 set :generate_webserver_config, false
 
 ssh_options[:forward_agent] = true
-
-set :user, 'ubuntu'
 
 #set :whenever_command, "bundle exec whenever"
 #require "whenever/capistrano"
@@ -20,10 +21,6 @@ set :application, "wukumurl"
 
 # Target directory for the application on the web and app servers.
 set(:deploy_to) { File.join("", "home", user, application) }
-
-# URL of your source repository. By default this will just upload
-# the local directory.  You should probably change this if you use
-# another repository, like git or subversion.
 
 set :repository,  "git@github.com:unepwcmc/wukumurl.git"
 set :scm, :git
@@ -52,49 +49,30 @@ set :local_shared_files, %w(config/database.yml config/max_mind.yml config/carto
 # ptys stop shell startup scripts from running.
 default_run_options[:pty] = true
 
-after "deploy:update_code", "config:db_symlink"
-after "deploy:update_code", "config:cartodb_symlink"
-after "deploy:update_code", "config:max_mind_symlink"
+namespace :db do
+  task :setup do
+    the_host = Capistrano::CLI.ui.ask("Database IP address: ")
+    database_name = Capistrano::CLI.ui.ask("Database name: ")
+    database_user = Capistrano::CLI.ui.ask("Database username: ")
+    pg_password = Capistrano::CLI.password_prompt("Database user password: ")
 
-namespace :config do
-  desc "Make symlink for database yaml"
-  task :db_symlink do
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-  end
+    require 'yaml'
 
-  desc "Make symlink for cartodb config"
-  task :cartodb_symlink do
-    run "ln -nfs #{shared_path}/config/cartodb_config.yml #{release_path}/config/cartodb_config.yml"
-  end
-
-  desc "Make symlink for max_mind config"
-  task :max_mind_symlink do
-    run "ln -nfs #{shared_path}/config/max_mind.yml #{release_path}/config/max_mind.yml"
-  end
-end
-
-task :setup_production_database_configuration do
-  the_host = Capistrano::CLI.ui.ask("Database IP address: ")
-  database_name = Capistrano::CLI.ui.ask("Database name: ")
-  database_user = Capistrano::CLI.ui.ask("Database username: ")
-  pg_password = Capistrano::CLI.password_prompt("Database user password: ")
-
-  require 'yaml'
-
-  spec = {
-    "#{rails_env}" => {
-      "adapter" => "postgresql",
-      "database" => database_name,
-      "username" => database_user,
-      "host" => the_host,
-      "password" => pg_password
+    spec = {
+      "#{rails_env}" => {
+        "adapter" => "postgresql",
+        "database" => database_name,
+        "username" => database_user,
+        "host" => the_host,
+        "password" => pg_password
+      }
     }
-  }
 
-  run "mkdir -p #{shared_path}/config"
-  put(spec.to_yaml, "#{shared_path}/config/database.yml")
+    run "mkdir -p #{shared_path}/config"
+    put(spec.to_yaml, "#{shared_path}/config/database.yml")
+  end
 end
-after "deploy:setup", :setup_production_database_configuration
+after "deploy:setup", 'db:setup'
 
 # run like: cap staging rake_invoke task=a_certain_task
 task :rake_invoke do
