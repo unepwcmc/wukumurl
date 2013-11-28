@@ -34,7 +34,7 @@
             <% end -%>
           </div>
 
-          <div class="sign-in-form popover">
+          <div class="sign-in-form popover <% if flash[:errors] && flash[:errors][:user] %>show<% end %>">
             <%= render "devise/sessions/new" %>
           </div>
 
@@ -61,8 +61,6 @@
     <div class="dashboard">
       <%= yield %>
     </div>
-
-
 
     <% if current_user && current_user.no_urls? %>
       <%= render partial: "short_urls/info_modal" %>
