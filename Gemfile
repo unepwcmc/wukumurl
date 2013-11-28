@@ -11,6 +11,7 @@ gem 'geoip-c', '0.9.1'
 gem 'geocoder'
 gem 'cartodb-rb-client', :git => 'https://github.com/unepwcmc/cartodb-rb-client.git', :branch => 'wcmcio'
 
+gem 'rvm-capistrano'
 gem 'whenever', :require => false
 
 group :development do
