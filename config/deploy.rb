@@ -1,7 +1,6 @@
 set :default_stage, 'staging'
 require 'capistrano/ext/multistage'
 
-load "deploy/assets"
 set :rake, 'bundle exec rake'
 
 set :generate_webserver_config, false
