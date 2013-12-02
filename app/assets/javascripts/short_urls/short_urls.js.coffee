@@ -36,8 +36,8 @@ $(($)->
 
   $('.new-link').on('click', toggleNewLink)
 
-  $('.sign-in').on('click', (event) ->
+  $('.sign-in, .sign-up').on('click', (event) ->
     event.preventDefault()
-    $(".sign-in-form").toggle()
+    $(".#{event.target.className}-form").toggle()
   )
 )

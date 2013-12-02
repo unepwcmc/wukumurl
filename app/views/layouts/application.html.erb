@@ -30,12 +30,16 @@
 
               <button class="new-link"><i class="fa fa-plus"></i> New Link</button>
             <% else -%>
+              <%= link_to "Sign up", new_user_registration_path, :class => 'sign-up' %> or
               <%= link_to "Sign in", new_user_session_path, :class => 'sign-in' %>
             <% end -%>
           </div>
 
           <div class="sign-in-form popover <% if flash[:errors] && flash[:errors][:user] %>show<% end %>">
             <%= render "devise/sessions/new" %>
+          </div>
+          <div class="sign-up-form popover <% if flash[:errors] && flash[:errors][:user] %>show<% end %>">
+            <%= render "devise/registrations/new" %>
           </div>
 
           <div class="new-link-form popover"></div>

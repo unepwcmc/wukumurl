@@ -103,7 +103,6 @@ div.header {
 
     * {
       display: inline;
-      margin-left: 5px;
     }
 
     a {
@@ -370,6 +369,14 @@ button,
   left: 225px;
   width: 205px;
 }
+
+.sign-up-form {
+  position: absolute;
+  top: 50px;
+  left: 155px;
+  width: 205px;
+}
+
 
 .new-link-form {
   position: absolute;
