@@ -12,6 +12,15 @@ class UserTest < ActiveSupport::TestCase
     assert_equal short_urls, user.short_urls
   end
 
+  test "Only users with @unep-wcmc.org emails can be created" do
+    user = User.create(email: "test@not-wcmc.org", password: 'password')
+
+    refute user.errors.messages.empty?,
+      "Expected creating a user with a non WCMC email to fail"
+
+    assert_equal "is invalid", user.errors.messages[:email].first
+  end
+
   test '.no_urls? returns false if the user has short urls' do
     user = FactoryGirl.create(:user)
     FactoryGirl.create(:short_url, user: user)
