@@ -36,9 +36,19 @@ $(($)->
 
   $('.new-link').on('click', toggleNewLink)
 
+  closePopover = ->
+    $(".popover").hide()
+    $('.popover .error').removeClass('error')
+
   $('.sign-in, .sign-up').on('click', (event) ->
     event.preventDefault()
-    $(".#{event.target.className}-form").toggle()
+
+    # If the selected popover is currently visible
+    if new RegExp("#{this.className}").test $('.popover:visible').attr('class')
+      closePopover()
+    else
+      closePopover()
+      $(".#{this.className}-form").show()
   )
 
   $('.alert').fadeIn( ->
