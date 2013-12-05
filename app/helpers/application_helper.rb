@@ -16,6 +16,14 @@ module ApplicationHelper
 
   ### Devise
 
+  def user_input_has_error? field_name
+    if flash[:errors] && flash[:errors][:user]
+      return !flash[:errors][:user][field_name].blank?
+    end
+
+    return false
+  end
+
   def resource_name
     :user
   end

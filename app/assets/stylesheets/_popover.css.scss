@@ -17,23 +17,22 @@
   border: 1px solid #eee;
 
   form {
-    
     overflow: hidden;
-    
+
     div {
       padding-bottom: 15px;
     }
-    
+
     div#remember {
       float: left;
       padding-bottom: 0;
     }
-    
+
     div#sign_button {
       float: right;
       padding-bottom: 0;
     }
-    
+
     button {
       @include border-radius(5px);
       background: $orange;
@@ -48,7 +47,11 @@
         @include transition(all 0.5s ease);
       }
     }
-    
+
+    label.error {
+      color: #ff5a5a;
+    }
+
     input {
       @include border-radius(3px);
       &[type="email"], &[type="password"], &[type="text"] {
@@ -57,10 +60,16 @@
         padding-left: 10px;
         margin-top: 5px;
         border: 1px solid #eee;
+
+        &.error {
+          border: 1px solid #ff5a5a;
+        }
       }
+
       &[type="email"], &[type="password"] {
-        width: 269px;
+        width: 268px;
       }
+
       &[type="submit"] {
         @include border-radius(5px);
         background: $orange;
@@ -75,12 +84,12 @@
         }
       }
     }
-    
+
     input[type="checkbox"] {
       border: none;
       background: #fff;
     }
-    
+
     fieldset {
       border: none;
       padding: 0;
@@ -89,16 +98,10 @@
         margin: 0;
       }
 
-      input[type="text"] {
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
         width: 99%;
-
-        &.error {
-          border: 1px solid #ff5a5a;
-        }
-      }
-
-      label.error {
-        color: #ff5a5a;
       }
 
       input[type="submit"], button {

@@ -1,11 +1,17 @@
 <%= form_for("user", :url => user_session_path) do |f| %>
   <div>
-    <%= f.label :email %><br />
-    <%= f.email_field :email, :autofocus => true, :placeholder => "your.name@unep-wcmc.org" %>
+    <%= f.label :email, :class => if user_input_has_error? :email then 'error' end %><br />
+    <%= f.email_field(:email,
+          :autofocus => true,
+          :placeholder => 'your.name@unep-wcmc.org',
+          :class => if user_input_has_error? :email then 'error' end) %>
   </div>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+  <div>
+    <%= f.label :password, :class => if user_input_has_error? :password then 'error' end %><br />
+    <%= f.password_field(:password,
+          :class => if user_input_has_error? :password then 'error' end) %>
+  </div>
 
   <div id="remember"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
 

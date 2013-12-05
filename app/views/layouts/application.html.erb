@@ -35,23 +35,17 @@
             <% end -%>
           </div>
 
-          <div class="sign-in-form popover <% if flash[:errors] && flash[:errors][:user] %>show<% end %>">
+          <div class="sign-in-form popover <% if flash[:errors] && flash[:errors][:session] %>show<% end %>">
             <%= render "devise/sessions/new" %>
           </div>
-          <div class="sign-up-form popover <% if flash[:errors] && flash[:errors][:user] %>show<% end %>">
+          <div class="sign-up-form popover <% if flash[:errors] && flash[:errors][:registration] %>show<% end %>">
             <%= render "devise/registrations/new" %>
           </div>
 
           <div class="new-link-form popover"></div>
         </div>
 
-        <% flash.each do |name, msg| %>
-          <% if msg.is_a?(String) %>
-            <div class="alert <%= name == :notice ? "info" : "error" %>">
-              <%= content_tag :div, msg, :id => "flash_#{name}" %>
-            </div>
-          <% end %>
-        <% end %>
+        <%= render "flash_messages" %>
 
       </div>
     </div>

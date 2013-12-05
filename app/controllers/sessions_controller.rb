@@ -19,7 +19,8 @@ class SessionsController < Devise::SessionsController
 
   def failure
     flash[:errors] ||= {}
-    flash[:errors][:user] = ["Incorrect username or password"]
+    flash[:errors][:session] = "Incorrect username or password"
+
     return redirect_to :back
   end
 end
