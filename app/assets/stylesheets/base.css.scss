@@ -425,3 +425,26 @@ button.new-link{
 .show {
   display: block !important;
 }
+
+.alert {
+  position: absolute;
+  top: 27px;
+  left: 250px;
+  width: 700px;
+  padding: 3px;
+  text-align: center;
+  display: none;
+  @include border-radius (4px);
+
+  &.info {
+    color: #468847;
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+  }
+
+  &.error {
+    color: #b94a48;
+    background-color: #f2dede;
+    border: 1px solid #eed3d7;
+  }
+}

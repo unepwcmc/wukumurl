@@ -45,6 +45,14 @@
           <div class="new-link-form popover"></div>
         </div>
 
+        <% flash.each do |name, msg| %>
+          <% if msg.is_a?(String) %>
+            <div class="alert <%= name == :notice ? "info" : "error" %>">
+              <%= content_tag :div, msg, :id => "flash_#{name}" %>
+            </div>
+          <% end %>
+        <% end %>
+
       </div>
     </div>
 

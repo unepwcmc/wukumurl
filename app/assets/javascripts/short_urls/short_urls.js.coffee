@@ -40,4 +40,10 @@ $(($)->
     event.preventDefault()
     $(".#{event.target.className}-form").toggle()
   )
+
+  $('.alert').fadeIn( ->
+    setTimeout( =>
+      $(this).fadeOut()
+    ,4000)
+  )
 )
