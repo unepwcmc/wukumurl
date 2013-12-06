@@ -49,6 +49,32 @@ set :local_shared_files, %w(config/database.yml config/max_mind.yml config/carto
 # ptys stop shell startup scripts from running.
 default_run_options[:pty] = true
 
+namespace :config do
+  task :cartodb do
+    the_host = Capistrano::CLI.ui.ask("CartoDB Host:")
+    oauth_key = Capistrano::CLI.ui.ask("CartoDB OAuth Key:")
+    oauth_secret = Capistrano::CLI.ui.ask("CartoDB OAuth Secret:")
+    username = Capistrano::CLI.ui.ask("CartoDB Username:")
+    password = Capistrano::CLI.ui.ask("CartoDB Password:")
+    api_key = Capistrano::CLI.ui.ask("CartoDB API Key:")
+
+    require 'yaml'
+
+    spec = {
+      host: the_host,
+      oauth_key: oauth_key,
+      oauth_secret: oauth_secret,
+      username: username,
+      password: password,
+      api_key: api_key
+    }
+
+    run "mkdir -p #{shared_path}/config"
+    put(spec.to_yaml, "#{shared_path}/config/cartodb_config.yml")
+  end
+end
+after "db:setup", 'config:cartodb'
+
 namespace :db do
   task :setup do
     the_host = Capistrano::CLI.ui.ask("Database IP address: ")
