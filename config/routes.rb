@@ -1,7 +1,8 @@
 Wukumurl::Application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'sessions',
-    registrations: 'registrations'
+    registrations: 'registrations',
+    confirmations: 'confirmations'
   }
 
   devise_scope :user do
