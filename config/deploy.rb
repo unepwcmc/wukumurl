@@ -42,7 +42,7 @@ set :deploy_via, :remote_cache
 #
 # The shared area is prepared with 'deploy:setup' and all the shared
 # items are symlinked in when the code is updated.
-set :local_shared_files, %w(config/database.yml config/max_mind.yml config/cartodb_config.yml)
+set :local_shared_files, %w(config/database.yml config/max_mind.yml config/cartodb_config.yml config/environments/production.rb)
 
 # Forces a Pty so that svn+ssh repository access will work. You
 # don't need this if you are using a different SCM system. Note that
