@@ -246,6 +246,7 @@ DEPENDENCIES
   pg
   rack-cors
   rails (~> 4.0.0)
+  rake (~> 10.1.0)
   rb-fsevent (~> 0.9)
   rvm-capistrano
   sass-rails (~> 4.0.0.rc1)
