@@ -9,6 +9,10 @@
         <% if recently_added short_url %>
           <span class="new-tag">new</span>
         <% end %>
+
+        <small title="<%= short_url.url %>">
+          <%= truncate pretty_url(short_url.url), length: 25, omission: '...' %>
+        </small>
       </td>
       <td>
         <%= short_url.visit_count %>

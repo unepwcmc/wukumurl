@@ -331,6 +331,10 @@ button,
 
     td {
       height: 45px;
+
+      small {
+        color: #bbb;
+      }
     }
 
     td:last-child {
