@@ -58,6 +58,8 @@
 
     input {
       @include border-radius(3px);
+      outline: none;
+
       &[type="email"], &[type="password"], &[type="text"] {
         border: none;
         line-height: 1.85em;
