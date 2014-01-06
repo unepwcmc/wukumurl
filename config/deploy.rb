@@ -10,6 +10,11 @@ set :generate_webserver_config, false
 
 ssh_options[:forward_agent] = true
 
+set :rvm_ruby_string, '2.0.0'
+
+# Load RVM's capistrano plugin.
+require 'rvm/capistrano'
+
 #set :whenever_command, "bundle exec whenever"
 #require "whenever/capistrano"
 # so unfortunately the whenever task is fired before bundling takes place
@@ -99,6 +104,60 @@ namespace :db do
   end
 end
 after "deploy:setup", 'db:setup'
+
+namespace :deploy do
+  desc "Tell Passenger to restart the app."
+  task :restart do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
+end
+
+desc "Configure VHost"
+task :config_vhost do
+  vhost_config = <<-EOF
+    server {
+      server_name #{server_name};
+      listen 80;
+
+      client_max_body_size 4G;
+      gzip on;
+      keepalive_timeout 5;
+      root #{deploy_to}/public;
+
+      passenger_enabled on;
+      rails_env #{rails_env};
+
+      add_header 'Access-Control-Allow-Origin' *;
+      add_header 'Access-Control-Allow-Methods' "GET, POST, PUT, DELETE, OPTIONS";
+      add_header 'Access-Control-Allow-Headers' "X-Requested-With, X-Prototype-Version";
+      add_header 'Access-Control-Max-Age' 1728000;
+
+      location ^~ /assets/ {
+        expires max;
+        add_header Cache-Control public;
+      }
+
+      if (-f $document_root/system/maintenance.html) {
+        return 503;
+      }
+
+      error_page 500 502 504 /500.html;
+      location = /500.html {
+        root #{deploy_to}/public;
+      }
+
+      error_page 503 @maintenance;
+      location @maintenance {
+        rewrite  ^(.*)$  /system/maintenance.html break;
+      }
+    }
+  EOF
+
+  put vhost_config, "/tmp/vhost_config"
+  sudo "mv /tmp/vhost_config /etc/nginx/sites-available/#{application}"
+  sudo "ln -s /etc/nginx/sites-available/#{application} /etc/nginx/sites-enabled/#{application}"
+end
+after "deploy:setup", :config_vhost
 
 # run like: cap staging rake_invoke task=a_certain_task
 task :rake_invoke do
