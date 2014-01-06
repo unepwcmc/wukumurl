@@ -168,23 +168,34 @@ header {
   h3 {
     float: left;
     margin: 0;
+    margin-left: 5px;
     color: $grey-body;
     font-size: 1.75em;
 
-    a.back {
-      display: inline-block;
-      margin-right: 5px;
-      font-size: 0.75em;
-      line-height: 41px;
-      color: $grey-body;
-      opacity: 0.6;
-      @include transition(all 0.5s ease);
+    small {
+      display: block;
+      font-size: 0.5em;
+      font-weight: normal;
+      color: #bbb;
+    }
+  }
 
-      &:hover {
-        color: $blue;
-        opacity: 1;
-        @include transition(all 0.5s ease);
-      }
+  a.back {
+    display: inline-block;
+    position: relative;
+    top: 14px;
+    float: left;
+
+    margin-right: 5px;
+    font-size: 1.3em;
+    line-height: 41px;
+    color: #A0A0A0;
+    @include transition(all 0.5s ease);
+
+    &:hover {
+      color: $blue;
+      opacity: 1;
+      @include transition(all 0.5s ease);
     }
   }
 }
