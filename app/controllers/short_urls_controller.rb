@@ -15,7 +15,10 @@ class ShortUrlsController < ApplicationController
   def list
     return redirect_to :root unless user_signed_in?
 
-    @short_urls = current_user.short_urls.not_deleted
+    @short_urls = current_user.short_urls.
+      ordered_by_visits_desc.
+      order('created_at DESC').
+      not_deleted
 
     render "_short_urls_table", layout: false
   end
