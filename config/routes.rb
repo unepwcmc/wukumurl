@@ -23,8 +23,6 @@ Wukumurl::Application.routes.draw do
   get "map/cities", :controller => 'map', :action => :city_list
   get "map/countries", :controller => 'map', :action => :country_list
 
-  get '/help' => 'help#index'
-
   match '/' => 'short_urls#create', :controller => 'short_urls', :via => :post
 
   get "/short_urls/list",
