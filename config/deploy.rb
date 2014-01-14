@@ -15,8 +15,8 @@ set :rvm_ruby_string, '2.0.0'
 # Load RVM's capistrano plugin.
 require 'rvm/capistrano'
 
-#set :whenever_command, "bundle exec whenever"
-#require "whenever/capistrano"
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"
 # so unfortunately the whenever task is fired before bundling takes place
 # because of this commit: https://github.com/javan/whenever/commit/7ae1009c31deb03c5db4a68f5fc99ea099ce5655
 
