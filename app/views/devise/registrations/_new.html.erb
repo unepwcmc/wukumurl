@@ -3,7 +3,7 @@
     <%= f.label :email, :class => if user_input_has_error? :email then 'error' end %><br />
     <%= f.email_field(:email,
           :autofocus => true,
-          :placeholder => 'your.name@unep-wcmc.org',
+          :placeholder => 'Your UNEP Email Address',
           :class => if user_input_has_error? :email then 'error' end) %>
   </div>
 
