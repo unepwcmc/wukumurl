@@ -15,7 +15,7 @@ namespace :geo_locate do
   task update_map: :environment do
     last_update = CartoDB::Connection.query("
       SELECT updated_at
-      FROM wcmc_io_organizations_by_short_url
+      FROM #{CARTODB_CONFIG['organizations_by_short_url']}
       ORDER BY updated_at
       DESC LIMIT 1
     ")[:rows].first.try(:updated_at)
@@ -39,21 +39,21 @@ namespace :geo_locate do
       if location.lat && location.lon
         existing_short_url = CartoDB::Connection.query("
           SELECT COUNT(*)
-          FROM wcmc_io_organizations_by_short_url
+          FROM #{CARTODB_CONFIG['organizations_by_short_url']}
           WHERE short_url_id=#{short_url.id}
           AND org_id=#{organization.id}
         ")
 
         if existing_short_url[:rows].first[:count] > 0
           short_url_query = "
-            UPDATE wcmc_io_organizations_by_short_url
+            UPDATE #{CARTODB_CONFIG['organizations_by_short_url']}
             SET visits=#{visit_count}
             WHERE short_url_id = #{short_url.id}
             AND org_id=#{organization.id}
           "
         else
           short_url_query = "
-            INSERT INTO wcmc_io_organizations_by_short_url
+            INSERT INTO #{CARTODB_CONFIG['organizations_by_short_url']}
             (the_geom, org_id, org_name, short_url_id, visits)
             VALUES (
               ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326),
@@ -71,21 +71,21 @@ namespace :geo_locate do
         if short_url.user_id
           existing_user = CartoDB::Connection.query("
             SELECT COUNT(*)
-            FROM wcmc_io_organizations_by_user
+            FROM #{CARTODB_CONFIG['organizations_by_user']}
             WHERE user_id=#{short_url.user_id}
             AND org_id=#{organization.id}
           ")
 
           if existing_user[:rows].first[:count] > 0
             user_query = "
-              UPDATE wcmc_io_organizations_by_user
+              UPDATE #{CARTODB_CONFIG['organizations_by_user']}
               SET visits=#{visit_count}
               WHERE user_id = #{short_url.user_id}
               AND org_id=#{organization.id}
             "
           else
             user_query = "
-              INSERT INTO wcmc_io_organizations_by_user
+              INSERT INTO #{CARTODB_CONFIG['organizations_by_user']}
               (the_geom, org_id, org_name, user_id, visits)
               VALUES (
                 ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326),
@@ -107,7 +107,7 @@ namespace :geo_locate do
   task update_all_map: :environment do
     org_last_update = CartoDB::Connection.query("
       SELECT updated_at
-      FROM wcmc_io_visits_by_organization
+      FROM #{CARTODB_CONFIG['visits_by_organization']}
       ORDER BY updated_at
       DESC LIMIT 1
     ")[:rows].first.try(:updated_at)
@@ -127,19 +127,19 @@ namespace :geo_locate do
 
       existing_org = CartoDB::Connection.query("
         SELECT COUNT(*)
-        FROM wcmc_io_visits_by_organization
+        FROM #{CARTODB_CONFIG['visits_by_organization']}
         WHERE org_id=#{organization.id}
       ")
 
       if existing_org[:rows].first[:count] > 0
         org_query = "
-          UPDATE wcmc_io_visits_by_organization
+          UPDATE #{CARTODB_CONFIG['visits_by_organization']}
           SET visits = #{visit_count}
           WHERE org_id=#{organization.id}
         "
       else
         org_query = "
-          INSERT INTO wcmc_io_visits_by_organization
+          INSERT INTO #{CARTODB_CONFIG['visits_by_organization']}
           (the_geom, org_id, org_name, visits)
           VALUES (
             ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326),
