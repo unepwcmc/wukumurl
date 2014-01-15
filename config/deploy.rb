@@ -27,6 +27,8 @@ set :application, "unepio"
 # Target directory for the application on the web and app servers.
 set(:deploy_to) { File.join("", "home", user, application) }
 
+set :branch, 'unepio'
+
 set :repository,  "git@github.com:unepwcmc/wukumurl.git"
 set :scm, :git
 set :scm_username, "unepwcmc-read"
