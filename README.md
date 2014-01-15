@@ -53,17 +53,6 @@ Normal rails setup:
 * `rake db:create`
 * `rake db:migrate`
 
-### LDAP
-
-Users are primarily authenticated via LDAP, but the application will use
-Users in the local database first if they exist.
-
-In development, `rake db:seed` will create a non-LDAP user to test the
-application with:
-
-    * **Email**: dev@wcmc.io
-    * **Password**: password
-
 ### Countries
 
 The map view requires a list of countries to function. You can seed
