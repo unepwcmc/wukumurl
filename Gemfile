@@ -18,7 +18,7 @@ gem 'whenever', :require => false
 group :development do
   gem 'capistrano', '~> 2.15.5'
   gem 'capistrano-ext'
-  gem 'brightbox'
+  gem 'brightbox', '2.3.9'
 
   gem 'guard'
   gem 'guard-minitest'
