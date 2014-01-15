@@ -1,0 +1,10 @@
+host: 'https://<app>.cartodb.com'
+oauth_key: ''
+oauth_secret: ''
+username: ''
+password: ''
+api_key: ''
+tables:
+  organizations_by_user: 'wcmc_io_organizations_by_user'
+  organizations_by_short_url: 'wcmc_io_organizations_by_short_url'
+  visits_by_organizations: 'wcmc_io_visits_by_organization'

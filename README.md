@@ -16,6 +16,15 @@ You will then need to setup a `config/max_mind.yml` file with the
 locations of your MaxMind DBs. An example of this is in
 `config/max_mind.yml.example`.
 
+### CartoDB
+
+CartoDB stores a copy of the geolocated Visits so that we can generate
+styled map tiles on the fly. You'll need to fill-in and move the example
+CartoDB config file `config/cartodb_config.yml.example`.
+
+The `geo_locate:update_map` and `geo_locate:update_all_map` tasks keep
+the geolocated Visits in sync with CartoDB.
+
 #### Ubuntu setup
 
 Install the geoip from apt:
@@ -67,6 +76,11 @@ these using:
 Geolocate your visits with:
 
     rake geo_locate:visits
+
+To sync the geolocated visits with CartoDB, you can use:
+
+    rake geo_locate:update_map
+    rake geo_locate:update_all_map
 
 You can use the `cap rake_invoke task=<task_name>` to invoke this task on
 the server:
