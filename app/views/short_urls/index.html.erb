@@ -31,7 +31,7 @@
 
 <script>
   $(document).ready(function() {
-    L.tileLayer("http://carbon-tool.cartodb.com/tiles/<%= CARTODB_CONFIG['tables']['visits_by_organizations'] %>/{z}/{x}/{y}.png", {
+    L.tileLayer("http://carbon-tool.cartodb.com/tiles/<%= CARTODB_CONFIG['tables']['visits_by_organization'] %>/{z}/{x}/{y}.png", {
       maxZoom: 18
     }).addTo(map)
   });
