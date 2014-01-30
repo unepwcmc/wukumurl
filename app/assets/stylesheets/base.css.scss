@@ -180,6 +180,14 @@ header {
       font-size: 0.5em;
       font-weight: normal;
       color: #bbb;
+
+      a {
+        color: #bbb;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
 
@@ -346,8 +354,12 @@ button,
     td {
       height: 45px;
 
-      small {
+      small a {
         color: #bbb;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
 
