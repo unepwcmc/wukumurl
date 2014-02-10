@@ -13,7 +13,7 @@ gem 'geocoder'
 gem 'cartodb-rb-client', :git => 'https://github.com/unepwcmc/cartodb-rb-client.git', :branch => 'wcmcio'
 
 gem 'rvm-capistrano'
-gem 'whenever', :require => false
+gem 'sidekiq'
 
 group :development do
   gem 'capistrano', '~> 2.15.5'

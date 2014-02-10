@@ -62,7 +62,18 @@ these using:
 
 ## Geolocating
 
-Geolocate your visits with:
+### Sidekiq
+
+Sidekiq is used to automatically geolocate Visits. When a short url is
+visited, a job will be created to geolocate it and pushed on to the
+Sidekiq queue.
+
+Make sure `redis-server` is running and then run `bundle exec sidekiq`
+to process the job queue.
+
+### Manual
+
+You can manually batch geolocate your visits with:
 
     rake geo_locate:visits
 

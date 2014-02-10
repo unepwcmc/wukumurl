@@ -19,10 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 3.minutes do
-  rake "geo_locate:visits"
-end
-
 every :hour do
   rake "geo_locate:update_map"
   rake "geo_locate:update_all_map"
