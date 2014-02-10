@@ -28,10 +28,10 @@
               Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>,
               <a href="<%= logout_path %>">sign out?</a>
 
-              <button class="new-link"><i class="fa fa-plus"></i> New Link</button>
+              <button class="new-link" data-toggle="popover"><i class="fa fa-plus"></i> New Link</button>
             <% else -%>
-              <%= link_to "Sign up", new_user_registration_path, :class => 'sign-up' %> or
-              <%= link_to "Sign in", new_user_session_path, :class => 'sign-in' %>
+              <%= link_to "Sign up", new_user_registration_path, :class => 'sign-up', :data => {'toggle' => 'popover'} %> or
+              <%= link_to "Sign in", new_user_session_path, :class => 'sign-in', :data => {'toggle' => 'popover'} %>
             <% end -%>
           </div>
 

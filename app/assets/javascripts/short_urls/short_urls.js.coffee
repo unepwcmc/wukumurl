@@ -34,6 +34,19 @@ $(($)->
       newLinkForm.html(newLinkView.el)
       newLinkForm.show()
 
+  $('body').on('click', (event) ->
+    el = event.target
+    $el = $(el)
+
+    clickedInPopover = $el.parents('.popover').length > 0
+
+    popoverToggles = $.find('[data-toggle="popover"]')
+    clickedOnButton = $.inArray(el, popoverToggles) > -1
+
+    unless clickedInPopover or clickedOnButton
+      closePopover()
+  )
+
   $('.new-link').on('click', toggleNewLink)
 
   closePopover = ->
