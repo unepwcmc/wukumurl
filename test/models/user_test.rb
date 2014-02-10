@@ -70,7 +70,13 @@ class UserTest < ActiveSupport::TestCase
 
     visits_by_organization = user.visits_by_organization
 
-    assert_equal 2, visits_by_organization.length
-    assert_equal bt.id, visits_by_organization.first.id
+    assert_equal 2, visits_by_organization.length,
+      "Expected there to be two organizations with visits"
+
+    assert_equal virgin.id, visits_by_organization.first.id,
+      "Expected Virgin to be the first organization"
+
+    assert_equal bt.id, visits_by_organization.last.id,
+      "Expected BT to be the last organization"
   end
 end
