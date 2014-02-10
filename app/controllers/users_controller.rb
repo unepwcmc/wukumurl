@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @total_visits = current_user.visits.length
 
     @short_urls = current_user.short_urls.
-      ordered_by_visits_desc.
+      with_visits.
       order('created_at DESC')
   end
 end

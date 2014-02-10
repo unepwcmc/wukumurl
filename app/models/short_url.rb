@@ -16,10 +16,14 @@ class ShortUrl < ActiveRecord::Base
 
   belongs_to :user
 
-  scope :ordered_by_visits_desc, -> {
+  scope :with_visits, -> {
     joins('LEFT JOIN visits ON visits.short_url_id = short_urls.id').
     select('short_urls.*, count(visits.id) AS visits_count').
-    group('short_urls.id').
+    group('short_urls.id')
+  }
+
+  scope :ordered_by_visits_desc, -> {
+    with_visits.
     order('visits_count DESC')
   }
 
