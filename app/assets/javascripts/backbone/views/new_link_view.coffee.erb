@@ -62,7 +62,7 @@ class Backbone.Views.NewLinkView extends Backbone.View
   renderCopyButton: =>
     @clipboard = new ZeroClipboard(
       @$el.find(".copy-url"),
-      moviePath: "<%= asset_path "ZeroClipBoard.swf" %>",
+      moviePath: "<%= asset_path "ZeroClipboard.swf" %>",
       hoverClass: 'hover'
     )
 
