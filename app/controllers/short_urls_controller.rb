@@ -3,7 +3,9 @@ class ShortUrlsController < ApplicationController
 
   def index
     @visits_by_country = City.all_visits_by_country
+    @visits_by_country_count = @visits_by_country.length
     @visits_by_organization = Organization.all_visits_by_organization
+    @visits_by_organization_count = @visits_by_organization.length
 
     @total_visits = Visit.count
     @total_urls   = ShortUrl.count

@@ -3,7 +3,7 @@
     <h4><%= title %></h4>
   </header>
 
-  <% if @visits_by_organization.length > 0 %>
+  <% if @visits_by_organization_count > 0 %>
     <table>
       <tbody>
       <% @visits_by_organization.each_with_index do |organization, index| %>
