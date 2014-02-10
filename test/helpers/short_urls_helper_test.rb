@@ -28,4 +28,11 @@ class ShortUrlsHelperTest < ActionView::TestCase
 
     assert_equal expected_url, pretty_url(url)
   end
+
+  test '#pretty_url does not change the original URL variable' do
+    url = 'www.hatsandboats.com'
+    prettified_url = pretty_url(url)
+
+    refute_equal url, prettified_url
+  end
 end

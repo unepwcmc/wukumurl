@@ -3,9 +3,11 @@ module ShortUrlsHelper
     return short_url.created_at > 1.minute.ago
   end
 
-  def pretty_url url
-    url.gsub!(/https{0,1}:\/\//, '')
-    url.gsub!(/^www\./, '')
-    return url
+  def pretty_url ugly_url
+    pretty_url = ugly_url.dup
+    pretty_url.gsub!(/https{0,1}:\/\//, '')
+    pretty_url.gsub!(/^www\./, '')
+
+    return pretty_url
   end
 end
