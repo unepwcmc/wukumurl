@@ -54,6 +54,7 @@ module Wukumurl
     config.assets.version = '1.0'
 
     config.assets.paths << Rails.root.join('vendor', 'assets', 'flash')
+    config.assets.precompile << Rails.root.join('vendor', 'assets', 'flash')
 
     config.middleware.use Rack::Cors do
       allow do
