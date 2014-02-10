@@ -2,7 +2,7 @@
    <fieldset>
       <dl>
         <dt><label for="url">Insert the URL you want to share</label></dt>
-        <dd><input id="url" name="url" type="text"></dd>
+        <dd><input id="url" name="url" type="text" placeholder="http://google.com"></dd>
       </dl>
     </fieldset>
 
@@ -12,11 +12,14 @@
           <input type="checkbox" id="edit_name" name="edit_name">
           <label for="edit_name">Edit the URL name before sharing</label>
         </dt>
-        <dd class="hidden"><input id="short_name" name="short_name" type="text"></dd>
       </dl>
     </fieldset>
 
     <fieldset>
       <button class="create">Create</button>
     </fieldset>
+
+    <div class="hidden">
+      <input id="short_name" name="short_name" type="text" placeholder="a_new_short_name">
+    </div>
 </form>

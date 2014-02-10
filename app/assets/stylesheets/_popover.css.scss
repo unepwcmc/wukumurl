@@ -27,6 +27,14 @@
       padding-bottom: 15px;
     }
 
+    div.hidden {
+      padding: 0;
+
+      input {
+        margin-top: 0;
+      }
+    }
+
     div#remember {
       float: left;
       padding-bottom: 0;
