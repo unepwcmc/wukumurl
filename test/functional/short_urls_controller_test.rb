@@ -35,11 +35,6 @@ class ShortUrlsControllerTest < ActionController::TestCase
     assert_redirected_to :root
   end
 
-  test "GET /short_urls/list returns a rendered list of Short URLs" do
-    get :list
-    assert_response :success
-  end
-
   test "POST create fails when no url to shorten is supplied" do
     post :create
     assert_response :unprocessable_entity
