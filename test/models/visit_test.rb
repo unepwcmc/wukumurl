@@ -18,9 +18,9 @@ class VisitTest < ActiveSupport::TestCase
     wcmc_visit.geo_locate @country_db, @organisation_db
 
     assert_equal "World Conservation Monitoring Centre", wcmc_visit.organization.name
-    assert_equal "Cambridge", wcmc_visit.city.name
+    assert_equal "United Kingdom", wcmc_visit.city.country
     assert_equal 52.22, wcmc_visit.location.lat.round(2)
-    assert_equal 2.1, wcmc_visit.location.lon.round(2)
+    assert_equal 0.1, wcmc_visit.location.lon.round(2)
   end
 
   test "Visit.un_geolocated should return only visits which have no country set" do
