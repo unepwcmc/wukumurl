@@ -66,12 +66,13 @@ these using:
 
 Sidekiq is used to automatically geolocate Visits. When a short url is
 visited, a job will be created to geolocate it and pushed on to the
-Sidekiq queue.
+Sidekiq queue. The visit stats will also be synced with CartoDB at this
+time.
 
 Make sure `redis-server` is running and then run `bundle exec sidekiq`
 to process the job queue.
 
-### Manual
+### Manually
 
 You can manually batch geolocate your visits with:
 
