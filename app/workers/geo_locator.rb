@@ -7,6 +7,8 @@ class GeoLocator
   def perform(visit_id)
     visit = Visit.find(visit_id)
 
+    return if visit.geolocated?
+
     cdb = GeoIP::City.new(GEO_IP_CONFIG['city_db'])
     orgdb = GeoIP::Organization.new(GEO_IP_CONFIG['org_db'])
 
