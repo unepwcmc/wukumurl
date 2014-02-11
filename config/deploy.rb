@@ -4,6 +4,8 @@ require 'capistrano/ext/multistage'
 require 'brightbox/recipes'
 require 'brightbox/passenger'
 
+require "sidekiq/capistrano"
+
 set :rake, 'bundle exec rake'
 
 set :generate_webserver_config, false
