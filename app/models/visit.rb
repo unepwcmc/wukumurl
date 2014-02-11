@@ -23,6 +23,10 @@ class Visit < ActiveRecord::Base
     end
   end
 
+  def geolocated?
+    location && location.lat && location.lon
+  end
+
   def self.un_geolocated
     self.where(city_id: nil)
   end

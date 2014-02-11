@@ -32,4 +32,14 @@ class VisitTest < ActiveSupport::TestCase
     refute Visit.un_geolocated.to_a.include?(geolocated_visit),
       "Expected ungeolocated Visits to not contain geolocated Visit"
   end
+
+  test ".geolocated? returns true if the visit is geolocated" do
+    visit = FactoryGirl.create(:visit, location: FactoryGirl.build(:location))
+    assert visit.geolocated?
+  end
+
+  test ".geolocated? returns false if the visit is not geolocated" do
+    visit = FactoryGirl.create(:visit)
+    refute visit.geolocated?
+  end
 end
