@@ -98,9 +98,21 @@ class ShortUrlsControllerTest < ActionController::TestCase
     assert_redirected_to '/users/sign_in'
   end
 
-  test "POST update should update the URLs short_name if user is signed in" do
+  test "POST update should not update the URLs short_name if user is not the owner" do
     sign_in FactoryGirl.create(:user)
     short_url = FactoryGirl.create(:short_url, short_name: "xxx")
+
+    post( :update, id: short_url.id, short_url: {short_name: 'zzz'} )
+
+    short_url.reload
+    assert_equal short_url.short_name, "xxx"
+  end
+
+  test "POST update should update the URLs short_name if user is the owner" do
+    user = FactoryGirl.create(:user)
+    sign_in user
+
+    short_url = FactoryGirl.create(:short_url, short_name: "xxx", user: user)
 
     post( :update, id: short_url.id, short_url: {short_name: 'zzz'} )
 

@@ -83,6 +83,8 @@ class ShortUrlsController < ApplicationController
   def update
     short_url = ShortUrl.find(params[:id])
 
+    return redirect_to :root unless short_url.user == current_user
+
     if short_url.update_attributes(short_url_params)
       redirect_to :action => "show", :short_name => short_url.short_name
     else
