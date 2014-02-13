@@ -49,7 +49,11 @@ set :deploy_via, :remote_cache
 #
 # The shared area is prepared with 'deploy:setup' and all the shared
 # items are symlinked in when the code is updated.
-set :local_shared_files, %w(config/database.yml config/max_mind.yml config/cartodb_config.yml config/environments/production.rb)
+set :local_shared_files, %w(config/database.yml config/max_mind.yml config/cartodb_config.yml config/environments/production.rb .env)
+
+# If you are not using the brightbox gem, uncomment out the following so
+# that the dotenv file is symlinked correctly.
+#require "dotenv/capistrano"
 
 # Forces a Pty so that svn+ssh repository access will work. You
 # don't need this if you are using a different SCM system. Note that
@@ -81,13 +85,14 @@ namespace :config do
   end
 
   task :dotenv do
-    secret_key = Capistrano::CLI.ui.ask("Secret key (can be generated with `rake secret`):")
+    secret_token = Capistrano::CLI.ui.ask("Secret key (can be generated with `rake secret`):")
 
-    dotenv_file = """
-      SECRET_TOKEN=#{secret_key}
-    """
+    configs = {
+      SECRET_TOKEN: secret_token
+    }
 
-    put(dotenv_file, "#{shared_path}/.env")
+    require 'yaml'
+    put(configs.to_yaml, "#{shared_path}/.env")
   end
 end
 after "db:setup", 'config:cartodb'
