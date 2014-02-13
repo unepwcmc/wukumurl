@@ -58,6 +58,7 @@ class ShortUrlsControllerTest < ActionController::TestCase
   end
 
   test "POST create should add URLs using short_name if present" do
+    sign_in FactoryGirl.create(:user)
     post(
       :create, url: "http://envirobear.com", short_name: "xxx"
     )
