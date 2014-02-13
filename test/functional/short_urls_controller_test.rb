@@ -66,10 +66,22 @@ class ShortUrlsControllerTest < ActionController::TestCase
   end
 
   test "DELETE deletes the short URL if the user is signed in" do
+    user = FactoryGirl.create(:user)
+    sign_in user
+    short_url = FactoryGirl.create(:short_url, user: user)
+
+    assert_difference('ShortUrl.count', -1) do
+      delete :destroy, id: short_url.id
+    end
+
+    assert_redirected_to :root
+  end
+
+  test "DELETE does not delete the short URL if the user is not the owner" do
     sign_in FactoryGirl.create(:user)
     short_url = FactoryGirl.create(:short_url)
 
-    assert_difference('ShortUrl.count', -1) do
+    assert_difference('ShortUrl.count', 0) do
       delete :destroy, id: short_url.id
     end
 

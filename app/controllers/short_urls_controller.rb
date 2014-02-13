@@ -73,9 +73,11 @@ class ShortUrlsController < ApplicationController
   def destroy
     short_url = ShortUrl.find(params[:id])
 
-    if short_url.destroy
-      redirect_to :root
+    if short_url.user == current_user
+      short_url.destroy
     end
+
+    redirect_to :root
   end
 
   def update
