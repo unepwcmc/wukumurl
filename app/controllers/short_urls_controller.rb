@@ -86,7 +86,7 @@ class ShortUrlsController < ApplicationController
     return redirect_to :root unless short_url.user == current_user
 
     if short_url.update_attributes(short_url_params)
-      redirect_to :action => "show", :short_name => short_url.short_name
+      render json: short_url
     else
       render json: short_url.errors, status: :unprocessable_entity
     end
