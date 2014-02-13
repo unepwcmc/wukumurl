@@ -1,5 +1,5 @@
 class ShortUrlsController < ApplicationController
-  before_filter :authenticate_user!, :only => [:update]
+  before_filter :authenticate_user!, :only => [:create, :update, :destroy]
 
   def index
     @visits_by_country = City.all_visits_by_country

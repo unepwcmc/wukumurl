@@ -36,8 +36,14 @@ class ShortUrlsControllerTest < ActionController::TestCase
   end
 
   test "POST create fails when no url to shorten is supplied" do
+    sign_in FactoryGirl.create(:user)
     post :create
     assert_response :unprocessable_entity
+  end
+
+  test "POST create fails when no user is signed in" do
+    post :create
+    assert_response :redirect
   end
 
   test "POST create associates the logged in user with the ShortUrl" do
@@ -51,7 +57,15 @@ class ShortUrlsControllerTest < ActionController::TestCase
     assert_equal user.id, short_url.user.id
   end
 
-  test "DELETE deletes" do
+  test "POST create should add URLs using short_name if present" do
+    post(
+      :create, url: "http://envirobear.com", short_name: "xxx"
+    )
+    assert_equal ShortUrl.last.short_name, "xxx"
+  end
+
+  test "DELETE deletes the short URL if the user is signed in" do
+    sign_in FactoryGirl.create(:user)
     short_url = FactoryGirl.create(:short_url)
 
     assert_difference('ShortUrl.count', -1) do
@@ -61,11 +75,14 @@ class ShortUrlsControllerTest < ActionController::TestCase
     assert_redirected_to :root
   end
 
-  test "POST create should add URLs using short_name if present" do
-    post(
-      :create, url: "http://envirobear.com", short_name: "xxx"
-    )
-    assert_equal ShortUrl.last.short_name, "xxx"
+  test "DELETE does not delete the short URL if the user is not signed in" do
+    short_url = FactoryGirl.create(:short_url)
+
+    assert_difference('ShortUrl.count', 0) do
+      delete :destroy, id: short_url.id
+    end
+
+    assert_redirected_to '/users/sign_in'
   end
 
   test "POST update should update the URLs short_name if user is signed in" do
