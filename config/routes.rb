@@ -18,11 +18,6 @@ Wukumurl::Application.routes.draw do
     post "forgot_password", to: "devise/passwords#create"
   end
 
-  get "map", :controller => 'map', :action => :index
-  get "map/locations", :controller => 'map', :action => :location_list
-  get "map/cities", :controller => 'map', :action => :city_list
-  get "map/countries", :controller => 'map', :action => :country_list
-
   match '/' => 'short_urls#create', :controller => 'short_urls', :via => :post
 
   get "/short_urls/list",
