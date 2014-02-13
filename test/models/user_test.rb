@@ -73,10 +73,11 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 2, visits_by_organization.length,
       "Expected there to be two organizations with visits"
 
-    assert_equal virgin.id, visits_by_organization.first.id,
-      "Expected Virgin to be the first organization"
+    org_ids = visits_by_organization.map(&:id)
 
-    assert_equal bt.id, visits_by_organization.last.id,
-      "Expected BT to be the last organization"
+    assert org_ids.include?(virgin.id),
+      "Expected organisations to contain Virgin"
+    assert org_ids.include?(bt.id),
+      "Expected organisations to contain BT"
   end
 end
