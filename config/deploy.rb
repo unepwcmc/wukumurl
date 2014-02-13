@@ -79,6 +79,16 @@ namespace :config do
     run "mkdir -p #{shared_path}/config"
     put(spec.to_yaml, "#{shared_path}/config/cartodb_config.yml")
   end
+
+  task :dotenv do
+    secret_key = Capistrano::CLI.ui.ask("Secret key (can be generated with `rake secret`):")
+
+    dotenv_file = """
+      SECRET_TOKEN=#{secret_key}
+    """
+
+    put(dotenv_file, "#{shared_path}/.env")
+  end
 end
 after "db:setup", 'config:cartodb'
 

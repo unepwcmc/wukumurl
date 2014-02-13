@@ -25,3 +25,6 @@
 
 config/cartodb_config.yml
 vendor/ruby
+
+# dotenv config
+.env

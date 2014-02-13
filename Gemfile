@@ -46,3 +46,4 @@ gem "auto_strip_attributes", "~> 1.0"
 
 gem 'devise'
 gem 'net-ldap'
+gem 'dotenv-rails', '~> 0.9.0'

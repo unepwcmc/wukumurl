@@ -53,6 +53,14 @@ Normal rails setup:
 * `rake db:create`
 * `rake db:migrate`
 
+### Production
+
+In production, the `SECRET_TOKEN` env variable must be set for the
+`secret_key_base` config initializer. We use
+[dotenv](https://github.com/bkeepers/dotenv) for managing
+environment variables. This should be setup automatically by the deploy
+scripts.
+
 ### Countries
 
 The map view requires a list of countries to function. You can seed
