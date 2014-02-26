@@ -5,6 +5,7 @@ username: ''
 password: ''
 api_key: ''
 tables:
-  organizations_by_user: 'wcmc_io_organizations_by_user'
-  organizations_by_short_url: 'wcmc_io_organizations_by_short_url'
-  visits_by_organizations: 'wcmc_io_visits_by_organization'
+  development:
+    organizations_by_user: 'wcmc_io_organizations_by_user_development'
+    organizations_by_short_url: 'wcmc_io_organizations_by_short_url_development'
+    visits_by_organizations: 'wcmc_io_visits_by_organization_development'
