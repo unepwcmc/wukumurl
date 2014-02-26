@@ -28,8 +28,18 @@
 
 <script>
   $(document).ready(function() {
-    L.tileLayer("http://carbon-tool.cartodb.com/tiles/<%= CARTODB_CONFIG['tables'][Rails.env]['organizations_by_user'] %>/{z}/{x}/{y}.png?sql=SELECT * FROM wcmc_io_organizations_by_user WHERE user_id=<%= current_user.id %>;", {
-      maxZoom: 18
-    }).addTo(map)
+    cartodb.createLayer(map, "<%= CARTODB_CONFIG['tables'][Rails.env]['organizations_by_user'] %>")
+      .addTo(map)
+      .on('done', function(layer) {
+        layer.setInteraction(true);
+        layer.on('featureOver', function(e, pos, latlng, data) {
+          cartodb.log.log(e, pos, latlng, data);
+        });
+        layer.on('error', function(err) {
+          cartodb.log.log('error: ' + err);
+        });
+    }).on('error', function() {
+      cartodb.log.log("some error occurred");
+    });
   });
 </script>

@@ -31,7 +31,7 @@
 
 <script>
   $(document).ready(function() {
-    cartodb.createLayer(map, "http://carbon-tool.cartodb.com/api/v2/viz/34dd3c30-9ed0-11e3-808f-0ed66c7bc7f3/viz.json")
+    cartodb.createLayer(map, "<%= CARTODB_CONFIG['tables'][Rails.env]['visits_by_organizations'] %>")
       .addTo(map)
       .on('done', function(layer) {
         layer.setInteraction(true);
