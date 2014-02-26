@@ -31,8 +31,18 @@
 
 <script>
   $(document).ready(function() {
-    L.tileLayer("http://carbon-tool.cartodb.com/tiles/<%= CARTODB_CONFIG['tables'][Rails.env]['visits_by_organization'] %>/{z}/{x}/{y}.png", {
-      maxZoom: 18
-    }).addTo(map)
+    cartodb.createLayer(map, "http://carbon-tool.cartodb.com/api/v2/viz/34dd3c30-9ed0-11e3-808f-0ed66c7bc7f3/viz.json")
+      .addTo(map)
+      .on('done', function(layer) {
+        layer.setInteraction(true);
+        layer.on('featureOver', function(e, pos, latlng, data) {
+          cartodb.log.log(e, pos, latlng, data);
+        });
+        layer.on('error', function(err) {
+          cartodb.log.log('error: ' + err);
+        });
+    }).on('error', function() {
+      cartodb.log.log("some error occurred");
+    });
   });
 </script>
