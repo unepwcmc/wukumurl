@@ -77,8 +77,6 @@
 
   div.cartodb-popup div.cartodb-popup-content-wrapper {
     position:relative;
-    width:190px;
-    max-width: 190px;
     padding:12px 19px 12px 19px;
     overflow-x: hidden;
     background:url('light.png') repeat-y -452px 0;
@@ -303,8 +301,6 @@
 
   div.cartodb-popup p {
     display:block;
-    width:190px;
-    max-width: 190px;
     margin: 0;
     padding:0 0 7px;
     font:normal 13px "Helvetica",Arial;
