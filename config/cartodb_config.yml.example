@@ -11,6 +11,6 @@ visualizations:
     visits_by_organizations: 'http://carbon-tool.cartodb.com/api/v2/viz/34dd3c30-9ed0-11e3-808f-0ed66c7bc7f3/viz.json'
 tables:
   development:
-    organizations_by_user: 'organizations_by_user'
+    organizations_by_user: 'wcmc_io_organizations_by_user'
     organizations_by_short_url: 'wcmc_io_organizations_by_short_url'
-    visits_by_organizations: 'visits_by_organizations'
+    visits_by_organizations: 'wcmc_io_visits_by_organizations'
