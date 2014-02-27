@@ -31,16 +31,10 @@
 
 <script>
   $(document).ready(function() {
-    cartodb.createLayer(map, "<%= CARTODB_CONFIG['tables'][Rails.env]['visits_by_organizations'] %>")
+    cartodb.createLayer(map, "<%= CARTODB_CONFIG['visualizations'][Rails.env]['visits_by_organizations'] %>")
       .addTo(map)
       .on('done', function(layer) {
         layer.setInteraction(true);
-        layer.on('featureOver', function(e, pos, latlng, data) {
-          cartodb.log.log(e, pos, latlng, data);
-        });
-        layer.on('error', function(err) {
-          cartodb.log.log('error: ' + err);
-        });
     }).on('error', function() {
       cartodb.log.log("some error occurred");
     });
