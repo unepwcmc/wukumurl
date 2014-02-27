@@ -44,7 +44,10 @@
     })
     .addTo(map)
     .on('done', function(layer) {
-      layer.getSubLayer(0).setInteraction(true);
+      var sublayer = layer.getSubLayer(0);
+      sublayer.setInteractivity('visits');
+      sublayer.setInteractivity('org_name');
+      sublayer.setInteraction(true);
     }).on('error', function() {
       cartodb.log.log("some error occurred");
     });
