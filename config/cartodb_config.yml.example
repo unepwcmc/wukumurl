@@ -7,7 +7,7 @@ api_key: ''
 visualizations:
   development:
     organizations_by_user: 'http://carbon-tool.cartodb.com/api/v2/viz/39012ce0-9f0c-11e3-919c-0e625a1c94a6/viz.json'
-    organizations_by_short_url: 'wcmc_io_organizations_by_short_url'
+    organizations_by_short_url: 'http://carbon-tool.cartodb.com/api/v2/viz/f17c0670-9fa0-11e3-892d-0e625a1c94a6/viz.json'
     visits_by_organizations: 'http://carbon-tool.cartodb.com/api/v2/viz/34dd3c30-9ed0-11e3-808f-0ed66c7bc7f3/viz.json'
 tables:
   development:
