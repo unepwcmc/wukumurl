@@ -34,8 +34,22 @@
   <%= render('short_urls/edit_link').html_safe %>
 
   $(document).ready(function() {
-    L.tileLayer("http://carbon-tool.cartodb.com/tiles/<%= CARTODB_CONFIG['tables'][Rails.env]['organizations_by_short_url'] %>/{z}/{x}/{y}.png?sql=SELECT * FROM wcmc_io_organizations_by_short_url WHERE short_url_id=<%=@short_url.id %>;", {
-      maxZoom: 18
-    }).addTo(map)
-  })
+    cartodb.createLayer(map, {
+      user_name: 'carbon-tool',
+      type: 'cartodb',
+      sublayers: [{
+        sql: "SELECT * FROM <%= CARTODB_CONFIG['tables'][Rails.env]['organizations_by_short_url'] %> WHERE short_url_id=<%=@short_url.id %>;",
+        cartocss: "<%= raw CARTO_CSS %>"
+      }]
+    })
+    .addTo(map)
+    .on('done', function(layer) {
+      var sublayer = layer.getSubLayer(0);
+      sublayer.setInteractivity('visits');
+      sublayer.setInteractivity('org_name');
+      sublayer.setInteraction(true);
+    }).on('error', function() {
+      cartodb.log.log("some error occurred");
+    });
+  });
 </script>

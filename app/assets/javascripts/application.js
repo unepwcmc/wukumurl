@@ -15,7 +15,7 @@
 //= require jquery_ujs
 //= require lodash.min.js
 //= require ZeroClipboard.min
-//= require leaflet
+//= require cartodb.js
 //= require backbone-min
 //= require_tree ./backbone
 //= require Chart.min.js
