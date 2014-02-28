@@ -71,15 +71,15 @@
     width:226px;
     height:auto;
     padding:7px 0 0 0;
+    background:image-url('light.png') no-repeat -226px 0;
     margin:0;
-    background:url('light.png') no-repeat -226px 0;
   }
 
   div.cartodb-popup div.cartodb-popup-content-wrapper {
     position:relative;
     padding:12px 19px 12px 19px;
+    background: image-url('light.png') repeat-y -452px 0;
     overflow-x: hidden;
-    background:url('light.png') repeat-y -452px 0;
   }
 
   div.cartodb-popup div.cartodb-popup-content {
@@ -132,7 +132,7 @@
   div.cartodb-popup div.cartodb-popup-tip-container {
     width:226px;
     height:20px;
-    background:url('light.png') no-repeat 0 0;
+    background:image-url('light.png') no-repeat 0 0;
   }
 
   div.cartodb-popup a.cartodb-popup-close-button {
@@ -142,7 +142,7 @@
     width:26px;
     height:26px;
     padding:0;
-    background:url('light.png') no-repeat 0 -23px;
+    background:image-url('light.png') no-repeat 0 -23px;
     text-indent:-9999px;
     font-size:0;
     line-height:0;
