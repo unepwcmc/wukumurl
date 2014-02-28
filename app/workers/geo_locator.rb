@@ -28,21 +28,21 @@ class GeoLocator
 
     existing_short_url = CartoDB::Connection.query("
       SELECT COUNT(*)
-      FROM #{CARTODB_CONFIG['tables'][Rails.env]['organizations_by_short_url']}
+      FROM #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_short_url']}
       WHERE short_url_id=#{short_url.id}
       AND org_id=#{organization.id}
     ")
 
     if existing_short_url[:rows].first[:count] > 0
       short_url_query = "
-        UPDATE #{CARTODB_CONFIG['tables'][Rails.env]['organizations_by_short_url']}
+        UPDATE #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_short_url']}
         SET visits=visits+1
         WHERE short_url_id = #{short_url.id}
         AND org_id=#{organization.id}
       "
     else
       short_url_query = "
-        INSERT INTO #{CARTODB_CONFIG['tables'][Rails.env]['organizations_by_short_url']}
+        INSERT INTO #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_short_url']}
         (the_geom, org_id, org_name, short_url_id, visits)
         VALUES (
           ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326),
@@ -65,21 +65,21 @@ class GeoLocator
     if short_url.user_id
       existing_user = CartoDB::Connection.query("
         SELECT COUNT(*)
-        FROM #{CARTODB_CONFIG['tables'][Rails.env]['organizations_by_user']}
+        FROM #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_user']}
         WHERE user_id=#{short_url.user_id}
         AND org_id=#{organization.id}
       ")
 
       if existing_user[:rows].first[:count] > 0
         user_query = "
-          UPDATE #{CARTODB_CONFIG['tables'][Rails.env]['organizations_by_user']}
+          UPDATE #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_user']}
           SET visits=visits+1
           WHERE user_id = #{short_url.user_id}
           AND org_id=#{organization.id}
         "
       else
         user_query = "
-          INSERT INTO #{CARTODB_CONFIG['tables'][Rails.env]['organizations_by_user']}
+          INSERT INTO #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_user']}
           (the_geom, org_id, org_name, user_id, visits)
           VALUES (
             ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326),
@@ -101,19 +101,19 @@ class GeoLocator
 
     existing_org = CartoDB::Connection.query("
       SELECT COUNT(*)
-      FROM #{CARTODB_CONFIG['tables'][Rails.env]['visits_by_organization']}
+      FROM #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['visits_by_organization']}
       WHERE org_id=#{organization.id}
     ")
 
     if existing_org[:rows].first[:count] > 0
       org_query = "
-        UPDATE #{CARTODB_CONFIG['tables'][Rails.env]['visits_by_organization']}
+        UPDATE #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['visits_by_organization']}
         SET visits = visits + 1
         WHERE org_id=#{organization.id}
       "
     else
       org_query = "
-        INSERT INTO #{CARTODB_CONFIG['tables'][Rails.env]['visits_by_organization']}
+        INSERT INTO #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['visits_by_organization']}
         (the_geom, org_id, org_name, visits)
         VALUES (
           ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326),
