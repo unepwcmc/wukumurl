@@ -40,17 +40,13 @@
       type: 'cartodb',
       sublayers: [{
         sql: "SELECT * FROM " + carto_table + " WHERE short_url_id=<%=@short_url.id %>;",
-        cartocss: "#" + carto_table + "<%= raw CARTODB_LAYERS_CONFIG['css'] %>",
-        interactivity: ['org_name', 'visits']
+        cartocss: "#" + carto_table + "<%= raw CARTODB_LAYERS_CONFIG['css'] %>"
       }]
     })
     .addTo(map)
     .on('done', function(layer) {
-      // TODO: set this to true once solved problem with Javier.
-      layer.setInteraction(false);
-      layer.on('featureClick', function(e, pos, latlng, data) {
-        // Show data! Waiting on Javier Álvarez...
-      });
+      layer.setInteraction(true);
+      cdb.vis.Vis.addInfowindow(map, layer.getSubLayer(0), ['org_name', 'visits']);
     }).on('error', function() {
       cartodb.log.log("some error occurred");
     });
