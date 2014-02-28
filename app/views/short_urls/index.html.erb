@@ -31,7 +31,7 @@
 
 <script>
   $(document).ready(function() {
-    cartodb.createLayer(map, "<%= CARTODB_CONFIG['visualizations'][Rails.env]['visits_by_organizations'] %>")
+    cartodb.createLayer(map, "<%= CARTODB_LAYERS_CONFIG['visualizations'][Rails.env]['visits_by_organizations'] %>")
       .addTo(map)
       .on('done', function(layer) {
         layer.setInteraction(true);

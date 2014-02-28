@@ -28,17 +28,19 @@
 
 <script>
   $(document).ready(function() {
+    var carto_table = "<%= CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_short_url'] %>";
     cartodb.createLayer(map, {
-      user_name: 'carbon-tool',
+      user_name: '<%= CARTODB_CONFIG['username'] %>',
       type: 'cartodb',
       sublayers: [{
-        sql: "SELECT * FROM <%= CARTODB_CONFIG['tables'][Rails.env]['organizations_by_user'] %> WHERE short_url_id=<%=@short_url.id %>;",
-        cartocss: "<%= raw CARTO_CSS %>"
+        sql: "SELECT * FROM " + carto_table + " WHERE short_url_id=<%=@short_url.id %>;",
+        cartocss: "#" + carto_table + "<%= raw CARTODB_LAYERS_CONFIG['css'] %>",
+        interactivity: ['org_name', 'visits']
       }]
     })
     .addTo(map)
     .on('done', function(layer) {
-      layer.getSubLayer(0).setInteraction(true);
+      // TODO: set interactivity once solved problem with Javier.
     }).on('error', function() {
       cartodb.log.log("some error occurred");
     });
