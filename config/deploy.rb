@@ -17,7 +17,9 @@ set :rvm_ruby_string, '2.0.0'
 # Load RVM's capistrano plugin.
 require 'rvm/capistrano'
 
-require 'whenever/capistrano'
+set :whenever_command, 'bundle exec whenever'
+
+require 'whenever/capistrano/recipes'
 
 # got sick of "gem X not found in any of the sources" when using the default whenever recipe
 # probable source of issue:
@@ -33,6 +35,7 @@ namespace :deploy do
 end
 
 after :deploy, "whenever:update_crontab"
+after "deploy:rollback", "whenever:update_crontab"
 
 # The name of your application.  Used for deployment directory and filenames
 # and Apache configs. Should be unique on the Brightbox
