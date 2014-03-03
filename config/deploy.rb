@@ -17,10 +17,20 @@ set :rvm_ruby_string, '2.0.0'
 # Load RVM's capistrano plugin.
 require 'rvm/capistrano'
 
-#set :whenever_command, "bundle exec whenever"
-#require "whenever/capistrano"
-# so unfortunately the whenever task is fired before bundling takes place
-# because of this commit: https://github.com/javan/whenever/commit/7ae1009c31deb03c5db4a68f5fc99ea099ce5655
+# got sick of "gem X not found in any of the sources" when using the default whenever recipe
+# probable source of issue:
+# https://github.com/javan/whenever/commit/7ae1009c31deb03c5db4a68f5fc99ea099ce5655
+namespace :deploy do
+
+  task :default do
+    update
+    assets.precompile
+    restart
+    cleanup
+    # etc
+  end
+
+end
 
 # The name of your application.  Used for deployment directory and filenames
 # and Apache configs. Should be unique on the Brightbox
