@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131203204426) do
+ActiveRecord::Schema.define(version: 20140303102432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,10 +61,11 @@ ActiveRecord::Schema.define(version: 20131203204426) do
   create_table "short_urls", force: true do |t|
     t.string   "short_name"
     t.text     "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.boolean  "deleted"
     t.integer  "user_id"
+    t.string   "dasboard_metric_name"
   end
 
   create_table "users", force: true do |t|

@@ -19,7 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every :hour do
-  rake "geo_locate:update_map"
-  rake "geo_locate:update_all_map"
+every 1.hour do
+  rake "dasboard:post:visit_count"
 end
