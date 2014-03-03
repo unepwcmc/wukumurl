@@ -33,7 +33,7 @@
       user_name: '<%= CARTODB_CONFIG['username'] %>',
       type: 'cartodb',
       sublayers: [{
-        sql: "SELECT * FROM " + carto_table + " WHERE short_url_id=<%=@short_url.id %>;",
+        sql: "SELECT * FROM " + carto_table + " WHERE user_id=<%= current_user.id %>;",
         cartocss: "#" + carto_table + "<%= raw CARTODB_LAYERS_CONFIG['css'] %>"
       }]
     })
