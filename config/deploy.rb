@@ -32,6 +32,8 @@ namespace :deploy do
   end
 end
 
+after :deploy, "whenever:update_crontab"
+
 # The name of your application.  Used for deployment directory and filenames
 # and Apache configs. Should be unique on the Brightbox
 set :application, "wukumurl"
