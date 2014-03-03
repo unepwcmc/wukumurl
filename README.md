@@ -95,3 +95,24 @@ You can use the `cap rake_invoke task=<task_name>` to invoke this task on
 the server:
 
     cap rake_invoke task=geo_locate:visits
+
+## DasBoard Metrics
+
+Wukumurl has beta integration with [Dasboard](unepwcmc/DasBoard). Visit
+counts for specified `ShortUrl`s will be automatically posted to
+DasBoard every hour.
+
+### Configuring a ShortUrl to post automatically
+
+`ShortUrl` models have a `dasboard_metric_name` attribute, which should
+match to a configuration option in `config/dasboard.yml`:
+
+    production:
+      metrics:
+        wdpa_release_downloads: 3
+
+The corresponding number is the metric ID from your DasBoard instance.
+
+Add your metric name and ID to this config file, and set the
+`dasboard_metric_name` on your `ShortUrl` to the matching name in the
+config.
