@@ -76,5 +76,7 @@
       var pieChart = new PieChart(<%= @visits_by_country.to_json.html_safe %>);
     </script>
 
+    <%= render partial: "google_analytics" %>
+
   </body>
 </html>
