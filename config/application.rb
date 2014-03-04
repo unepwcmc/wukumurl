@@ -62,5 +62,7 @@ module Wukumurl
         resource '*', headers: :any, methods: [:get, :post, :options]
       end
     end
+
+    config.i18n.enforce_available_locales = false
   end
 end
