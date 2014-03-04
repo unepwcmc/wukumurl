@@ -5,8 +5,8 @@ class window.PieChart
   constructor: (visits) ->
     topThreeCountries = @topThreeCountries(visits)
     @visits = @populateColor(topThreeCountries)
-
-    @render()
+    if @visits.length > 0
+      @render()
 
   calculateTotalVisits: ->
     totalVisits = 0
