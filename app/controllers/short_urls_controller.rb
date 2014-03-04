@@ -51,7 +51,11 @@ class ShortUrlsController < ApplicationController
 
     # Don't record stats for clicks via the link list on wcmc.io
     unless request.referrer =~ /#{root_url}(.*)/
-      visit = Visit.create(short_url_id: short_url.id, ip_address: request.remote_ip)
+      visit = Visit.create(
+        short_url_id: short_url.id, 
+        ip_address: request.remote_ip, 
+        domain: request.domain
+      )
       GeoLocator.perform_async(visit.id)
     end
 
