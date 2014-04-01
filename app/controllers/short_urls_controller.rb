@@ -11,7 +11,8 @@ class ShortUrlsController < ApplicationController
     @total_urls   = ShortUrl.count
 
     @short_urls = ShortUrl.
-      ordered_by_visits_desc
+      ordered_by_visits_desc.
+      not_deleted
   end
 
   def list
@@ -52,8 +53,8 @@ class ShortUrlsController < ApplicationController
     # Don't record stats for clicks via the link list on wcmc.io
     unless request.referrer =~ /#{root_url}(.*)/
       visit = Visit.create(
-        short_url_id: short_url.id, 
-        ip_address: request.remote_ip, 
+        short_url_id: short_url.id,
+        ip_address: request.remote_ip,
         domain: request.domain
       )
       GeoLocator.perform_async(visit.id)

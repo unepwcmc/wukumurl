@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
     @short_urls = current_user.short_urls.
       with_visits.
-      order('created_at DESC')
+      order('created_at DESC').
+      not_deleted
   end
 end
