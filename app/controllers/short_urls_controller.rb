@@ -8,7 +8,7 @@ class ShortUrlsController < ApplicationController
     @visits_by_organization_count = @visits_by_organization.length
 
     @total_visits = Visit.count
-    @total_urls   = ShortUrl.count
+    @total_urls   = ShortUrl.not_deleted.count
 
     @short_urls = ShortUrl.
       ordered_by_visits_desc.
