@@ -4,7 +4,6 @@ class window.PieChart
 
   constructor: (visits) ->
     topThreeCountries = @topThreeCountries(visits)
-    debugger
     @visits = @populateColor(topThreeCountries)
     if @visits.length > 0
       @render()
