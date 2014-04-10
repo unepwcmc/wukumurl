@@ -4,6 +4,7 @@ class window.PieChart
 
   constructor: (visits) ->
     topThreeCountries = @topThreeCountries(visits)
+    debugger
     @visits = @populateColor(topThreeCountries)
     if @visits.length > 0
       @render()
@@ -24,9 +25,10 @@ class window.PieChart
     )
 
   topThreeCountries: (visits) ->
-    mainCountries = visits[0..@country_threshold - 1]
+    sortedVisits = _.sortBy(visits, 'value').reverse()
+    mainCountries = sortedVisits[0..@country_threshold - 1]
 
-    otherCountriesData = visits[@country_threshold..visits.length]
+    otherCountriesData = sortedVisits[@country_threshold..sortedVisits.length]
     otherCountries = _.reduce(otherCountriesData, (result, item, index) ->
       result.value += item.value
       result.country = "other" if result.country != "other"
