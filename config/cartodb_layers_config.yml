@@ -1,25 +1,25 @@
 visualizations:
   development: &development_viz
-    visits_by_organizations: 'http://carbon-tool.cartodb.com/api/v2/viz/34dd3c30-9ed0-11e3-808f-0ed66c7bc7f3/viz.json'
+    visits_by_organization: 'http://carbon-tool.cartodb.com/api/v2/viz/34dd3c30-9ed0-11e3-808f-0ed66c7bc7f3/viz.json'
   test:
     <<: *development_viz
   staging:
-    visits_by_organizations: 'http://carbon-tool.cartodb.com/api/v2/viz/d35dafa6-9fcb-11e3-b8c7-0e49973114de/viz.json'
+    visits_by_organization: 'http://carbon-tool.cartodb.com/api/v2/viz/d35dafa6-9fcb-11e3-b8c7-0e49973114de/viz.json'
   production:
-    visits_by_organizations: 'http://carbon-tool.cartodb.com/api/v2/viz/34dd3c30-9ed0-11e3-808f-0ed66c7bc7f3/viz.json'
+    visits_by_organization: 'http://carbon-tool.cartodb.com/api/v2/viz/34dd3c30-9ed0-11e3-808f-0ed66c7bc7f3/viz.json'
 tables:
   development: &development_tables
     organizations_by_user: 'wcmc_io_organizations_by_user_development'
     organizations_by_short_url: 'wcmc_io_organizations_by_short_url_development'
-    visits_by_organizations: 'wcmc_io_visits_by_organizations_development'
+    visits_by_organization: 'wcmc_io_visits_by_organizations_development'
   test:
     <<: *development_tables
   staging:
     organizations_by_user: 'wcmc_io_organizations_by_user_staging'
     organizations_by_short_url: 'wcmc_io_organizations_by_short_url_staging'
-    visits_by_organizations: 'wcmc_io_visits_by_organizations_staging'
+    visits_by_organization: 'wcmc_io_visits_by_organizations_staging'
   production:
     organizations_by_user: 'wcmc_io_organizations_by_user'
     organizations_by_short_url: 'wcmc_io_organizations_by_short_url'
-    visits_by_organizations: 'wcmc_io_visits_by_organizations'
+    visits_by_organization: 'wcmc_io_visits_by_organizations'
 css: '{marker-fill:#75B036;marker-opacity:0.5;marker-allow-overlap:true;marker-placement:point;marker-type:ellipse;marker-line-width:0;marker-line-opacity:1;polygon-comp-op:lighten;[zoom>=1][zoom<=2]{marker-width:2;}[zoom>=3]{marker-width:4;}[zoom>=4][zoom<=5]{marker-width:7;}[zoom>=6][zoom<=8]{marker-width:10;}[zoom>=9][zoom<=10]{marker-width:12;}[zoom >= 11]{marker-width: 14;}}'
