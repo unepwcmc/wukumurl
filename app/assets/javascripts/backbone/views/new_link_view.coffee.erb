@@ -33,6 +33,7 @@ class Backbone.Views.NewLinkView extends Backbone.View
 
   render: ->
     @$el.html(@template())
+    @renderDropboxButton()
     return @
 
   renderFailure: (response) ->
@@ -74,5 +75,12 @@ class Backbone.Views.NewLinkView extends Backbone.View
         copiedText.fadeOut()
       , 2000)
     )
+
+  renderDropboxButton: =>
+    button = Dropbox.createChooseButton({
+      linkType: "direct",
+      success: (files) => @$el.find('#url').val(files[0].link)
+    })
+    @$el.find("#dropbox-button").append(button);
 
   close: ->
