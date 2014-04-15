@@ -3,7 +3,10 @@ class window.PieChart
   country_threshold: 3
 
   constructor: (visits) ->
-    topThreeCountries = @topThreeCountries(visits)
+    visitsList = _.map(visits, (visitsPerCountry, country) ->
+      {country: country, value: visitsPerCountry}
+    )
+    topThreeCountries = @topThreeCountries(visitsList)
     @visits = @populateColor(topThreeCountries)
     if @visits.length > 0
       @render()

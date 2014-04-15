@@ -96,17 +96,15 @@ class UserTest < ActiveSupport::TestCase
     FactoryGirl.create(:visit, city: samoa, short_url: hacker_news)
     FactoryGirl.create(:visit, city: samoa, short_url: bbc)
 
-    visits_by_country = user.visits_by_country.to_a
-
-    puts visits_by_country
+    visits_by_country = user.visits_by_country
 
     assert_equal 2, visits_by_country.length,
       "Expected there to be two countries with visits"
 
-    assert_equal 2, visits_by_country[:samoa],
+    assert_equal 2, visits_by_country["Samoa"],
       "Expected Samoa to have a country visit count of 2"
 
-    assert_equal 1, visits_by_country[:st_lucia],
+    assert_equal 1, visits_by_country["St Lucia"],
       "Expected St Lucia to have a country visit count of 1"
   end
 end
