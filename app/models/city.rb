@@ -13,10 +13,7 @@ class City < ActiveRecord::Base
   end
 
   def self.all_visits_by_country
-    select("country, count(*) as value").
-      joins(:visits).
-      group(:country).
-      order('value desc')
+    joins(:visits).group(:country).count
   end
 
   def city_urls
