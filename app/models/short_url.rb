@@ -4,6 +4,7 @@ class ShortUrl < ActiveRecord::Base
   validate :validate_url
 
   before_validation :create_short_name_if_blank
+  before_validation :sanitise_short_name
   before_validation :ensure_http_prepend
 
   auto_strip_attributes :url
@@ -27,20 +28,19 @@ class ShortUrl < ActiveRecord::Base
     order('visits_count DESC')
   }
 
+  def self.not_deleted
+    where("deleted = false OR deleted IS NULL")
+  end
+
   def owned_by? current_user
     return !current_user.blank? &&
       !current_user.short_urls.find_by_id(self.id).blank?
   end
 
-  def create_short_name_if_blank
-    unless self.short_name?
-      self.short_name = ShortUrl.generate_short_name
-    end
-  end
-
   def self.generate_short_name
     SecureRandom.hex(2)
   end
+
 
   def visit_count
     Visit.where(short_url_id: self.id).count
@@ -163,6 +163,18 @@ class ShortUrl < ActiveRecord::Base
     orgs
   end
 
+  private
+
+  def create_short_name_if_blank
+    unless self.short_name?
+      self.short_name = ShortUrl.generate_short_name
+    end
+  end
+
+  def sanitise_short_name
+    self.short_name.gsub!(/[^\_\-[:alnum:]]+/, "_")
+  end
+
   def ensure_http_prepend
     unless /https{0,1}:\/\/.*/.match self.url
       self.url = "http://#{self.url}"
@@ -178,9 +190,5 @@ class ShortUrl < ActiveRecord::Base
     rescue URI::InvalidURIError
       self.errors.add(:url, "does not appear to be valid")
     end
-  end
-
-  def self.not_deleted
-    where("deleted = false OR deleted IS NULL")
   end
 end
