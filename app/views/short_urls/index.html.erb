@@ -22,9 +22,11 @@
       <h4>Top links by number of visits</h4>
     </header>
 
-    <%= render partial: "short_urls_table", locals: {
-      data: @short_urls
-    } %>
+    <div id="short_urls_table">
+      <%= render partial: "short_urls_table", locals: {
+          data: @short_urls
+        } %>
+    </div>
   </section>
 </div>
 
