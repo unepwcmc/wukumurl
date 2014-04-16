@@ -1,5 +1,11 @@
 <% title "Shared documents by WCMC" %>
 
+<% if user_signed_in? %>
+  <% content_for :page_actions do %>
+    <%= link_to 'Go to my links', user_links_path %>
+  <% end %>
+<% end %>
+
 <div class="left">
   <%= render partial: "headline_number", locals: {
     title: "Total number of visits",

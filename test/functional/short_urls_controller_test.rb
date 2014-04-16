@@ -95,7 +95,7 @@ class ShortUrlsControllerTest < ActionController::TestCase
       delete :destroy, id: short_url.id
     end
 
-    assert_redirected_to '/users/sign_in'
+    assert_redirected_to '/'
   end
 
   test "PUT update should not update the URLs short_name if user is not the owner" do

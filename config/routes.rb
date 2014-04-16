@@ -25,7 +25,7 @@ Wukumurl::Application.routes.draw do
     :action => :list
   resources :short_urls
 
-  get "/:short_name", :controller => 'short_urls', :action => :visit, 
+  get "/:short_name", :controller => 'short_urls', :action => :visit,
     :as => 'visit_short_url'
   get "/:short_name/info",
     :controller => 'short_urls',
@@ -34,8 +34,8 @@ Wukumurl::Application.routes.draw do
 
   resources :organizations, only: [:destroy]
 
-  authenticated :user do
-    root to: 'users#show', as: :authenticated_root
+  authenticate :user do
+    get "/users/my_links", to: 'users#show', as: 'user_links'
   end
 
   root to: 'short_urls#index', as: :root
