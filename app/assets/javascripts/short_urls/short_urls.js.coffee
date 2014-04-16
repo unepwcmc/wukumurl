@@ -52,6 +52,7 @@ $(($)->
   closePopover = ->
     $(".popover").hide()
     $('.popover .error').removeClass('error')
+    newLinkView = null
 
   $('.sign-in, .sign-up').on('click', (event) ->
     event.preventDefault()
