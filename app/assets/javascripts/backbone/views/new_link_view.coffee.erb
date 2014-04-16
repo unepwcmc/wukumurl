@@ -56,7 +56,7 @@ class Backbone.Views.NewLinkView extends Backbone.View
       url: '/short_urls/list'
       type: 'GET'
     ).done( (tableBody) ->
-      $('#short_urls_table').replaceWith(tableBody)
+      $('#short_urls_table').html(tableBody)
     )
 
   renderCopyButton: =>
