@@ -150,6 +150,14 @@ class ShortUrlTest < ActiveSupport::TestCase
     refute not_a_website.valid?
   end
 
+  test "should sanitise a custom short_name on save" do
+    original_short_name = "this  is a ??very_bad@£$^/short.,.name cinématographique"
+    sanitised_short_name = "this_is_a_very_bad_short_name_cinématographique"
+
+    custom_short_url = FactoryGirl.create(:short_url, short_name: original_short_name)
+    assert_equal sanitised_short_name, custom_short_url.short_name
+  end
+
   test "not_deleted scope should only return short_urls where deleted isn't true" do
     not_deleted_url = FactoryGirl.create(:short_url)
     deleted_url     = FactoryGirl.create(:short_url, deleted: true)
