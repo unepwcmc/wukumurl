@@ -80,4 +80,31 @@ class UserTest < ActiveSupport::TestCase
     assert org_ids.include?(bt.id),
       "Expected organisations to contain BT"
   end
+
+  test ".visits_by_country should return all countries with visit counts
+    for short urls owned by user" do
+    user = FactoryGirl.create(:user)
+
+    st_lucia = FactoryGirl.create(:city, country: 'St Lucia')
+    samoa = FactoryGirl.create(:city, country: 'Samoa')
+
+    hacker_news = FactoryGirl.create(:short_url,
+      url: 'http://news.ycombinator.com', user: user)
+    bbc = FactoryGirl.create(:short_url, url: 'http://bbc.co.uk', user: user)
+
+    FactoryGirl.create(:visit, city: st_lucia, short_url: hacker_news)
+    FactoryGirl.create(:visit, city: samoa, short_url: hacker_news)
+    FactoryGirl.create(:visit, city: samoa, short_url: bbc)
+
+    visits_by_country = user.visits_by_country
+
+    assert_equal 2, visits_by_country.length,
+      "Expected there to be two countries with visits"
+
+    assert_equal 2, visits_by_country["Samoa"],
+      "Expected Samoa to have a country visit count of 2"
+
+    assert_equal 1, visits_by_country["St Lucia"],
+      "Expected St Lucia to have a country visit count of 1"
+  end
 end

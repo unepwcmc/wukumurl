@@ -44,9 +44,7 @@ class User < ActiveRecord::Base
   end
 
   def visits_by_country
-    result = ActiveRecord::Base.connection.execute("
-      SELECT cities.country, value
-      FROM cities
+    City.joins("
       INNER JOIN
         (
           SELECT
@@ -55,6 +53,7 @@ class User < ActiveRecord::Base
           GROUP BY city_id, short_url_id
         ) AS visits_for_orgs
       ON visits_for_orgs.city_id = cities.id
+    ").joins("
       INNER JOIN
         (
           SELECT short_urls.id
@@ -63,9 +62,7 @@ class User < ActiveRecord::Base
           GROUP BY id
         ) AS short_urls_for_visits
       ON visits_for_orgs.short_url_id = short_urls_for_visits.id
-    ")
-
-    result
+    ").group("cities.country").count
   end
 
   def no_urls?
