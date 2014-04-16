@@ -3,19 +3,38 @@ require 'test_helper'
 class UserFlowsTest < ActionDispatch::IntegrationTest
   include Warden::Test::Helpers
 
-  test 'log in' do
-    get "/login"
+  test 'log in from homepage redirects to my links' do
+    get "/users/sign_in"
     assert_response :success
 
     user = FactoryGirl.create(:user)
 
-    post_via_redirect "/login",
+    post_via_redirect "/users/sign_in", {
       user: {
         email: user.email,
         password: FactoryGirl.attributes_for(:user)[:password]
       }
+    }, {
+      HTTP_REFERER: root_url
+    }
 
-    assert_equal '/', path
+    assert_equal user_links_path, path
+  end
+
+  test 'log in from whatever page redirects to whatever page' do
+    user = FactoryGirl.create(:user)
+    short_url = FactoryGirl.create(:short_url)
+
+    post_via_redirect "/users/sign_in", {
+      user: {
+        email: user.email,
+        password: FactoryGirl.attributes_for(:user)[:password]
+      }
+    }, {
+      HTTP_REFERER: short_url_info_path(short_url.short_name)
+    }
+
+    assert_equal short_url_info_path(short_url.short_name), path
   end
 
   test 'log out' do
