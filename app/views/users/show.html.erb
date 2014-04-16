@@ -11,10 +11,8 @@
       <h4>Your links</h4>
     </header>
 
-    <div id="short_urls_table">
-      <%= render partial: "short_urls/short_urls_table", locals: {
-        data: @short_urls
-      } %>
+    <div id="short_urls_table" class="expandable-table">
+      <%= render partial: "short_urls/short_urls_table" %>
     </div>
   </section>
 </div>

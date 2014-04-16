@@ -5,7 +5,7 @@ $(($)->
   }).addTo(map)
 
   # Show/Hide full length table in dashboard
-  $('#short_urls_table').on('click', '.view-all', ->
+  $('.expandable-table').on('click', '.view-all', ->
     text = $(@).text()
     $(@).text( if text == "View All" then "Hide" else "View All")
     $(@).closest('div').find('tr.all').toggleClass('hidden')
