@@ -86,15 +86,12 @@ class ShortUrlTest < ActiveSupport::TestCase
   end
 
   test "visits_by_country should return stats correctly" do
-    FactoryGirl.create(:visit, short_url: @short_url, city: FactoryGirl.create(:city))
-
-    country_stats = @short_url.visits_by_country
-    counts = {}
-    country_stats.each do |city|
-      counts[city.country] = city.value.to_i
+    2.times do
+      FactoryGirl.create(:visit, short_url: @short_url, city: FactoryGirl.create(:city))
     end
 
-    assert_equal 1, counts["Canada"]
+    country_stats = @short_url.visits_by_country
+    assert_equal 2, country_stats["Canada"]
   end
 
   test "visits_by_organization should return stats correctly with grouping disabled" do

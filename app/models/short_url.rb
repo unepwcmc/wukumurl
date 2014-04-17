@@ -64,10 +64,9 @@ class ShortUrl < ActiveRecord::Base
 
   # Returns a list of countries with a 'visit_count' attribute
   def visits_by_country
-    City.select("cities.country, COUNT(visits.id) as value")
-    .group("cities.country")
-    .joins(:visits)
+    City.joins(:visits)
     .where(visits: {short_url_id: self.id})
+    .group("cities.country").count
   end
 
   def visits_by_city
