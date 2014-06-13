@@ -55,9 +55,10 @@ namespace :geo_locate do
         else
           short_url_query = "
             INSERT INTO #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_short_url']}
-            (the_geom, org_id, org_name, short_url_id, visits)
+            (the_geom, the_geom_webmercator, org_id, org_name, short_url_id, visits)
             VALUES (
               ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326),
+              ST_Transform(ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326), 3857),
               #{organization.id},
               $$#{CGI.escape organization.name}$$,
               #{short_url.id},
@@ -87,9 +88,10 @@ namespace :geo_locate do
           else
             user_query = "
               INSERT INTO #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_user']}
-              (the_geom, org_id, org_name, user_id, visits)
+              (the_geom, the_geom_webmercator, org_id, org_name, user_id, visits)
               VALUES (
                 ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326),
+                ST_Transform(ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326), 3857),
                 #{organization.id},
                 $$#{CGI.escape organization.name}$$,
                 #{short_url.user_id},
@@ -141,9 +143,10 @@ namespace :geo_locate do
       else
         org_query = "
           INSERT INTO #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['visits_by_organization']}
-          (the_geom, org_id, org_name, visits)
+          (the_geom, the_geom_webmercator, org_id, org_name, visits)
           VALUES (
             ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326),
+            ST_Transform(ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326), 3857),
             #{organization.id},
             $$#{CGI.escape organization.name}$$,
             #{visit_count}
