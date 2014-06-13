@@ -22,3 +22,8 @@
 every 1.hour do
   rake "dasboard:post:visit_count"
 end
+
+every 3.hours do
+  rake "geo_locate:update_map"
+  rake "geo_locate:update_all_map"
+end
