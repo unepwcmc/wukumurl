@@ -116,3 +116,14 @@ The corresponding number is the metric ID from your DasBoard instance.
 Add your metric name and ID to this config file, and set the
 `dasboard_metric_name` on your `ShortUrl` to the matching name in the
 config.
+
+
+## Useful to know
+
+If needed, directly on cartodb:
+```sql
+UPDATE wcmc_io_organizations_by_short_url
+SET the_geom_webmercator = ST_Transform(the_geom, 3857)
+WHERE
+the_geom_webmercator is null;
+```
