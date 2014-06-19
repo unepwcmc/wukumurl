@@ -38,6 +38,7 @@
 
           <div class="sign-in-form popover <% if flash[:errors] && flash[:errors][:session] %>show<% end %>">
             <%= render "devise/sessions/new" %>
+            <p><a href="<%= forgot_password_path %>">Forgot password?</a></p>
           </div>
           <div class="sign-up-form popover <% if flash[:errors] && flash[:errors][:registration] %>show<% end %>">
             <%= render "devise/registrations/new" %>
