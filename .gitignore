@@ -28,3 +28,6 @@ vendor/ruby
 
 # dotenv config
 .env
+
+# Ignore because of sensitive password!
+config/environments/production.rb
