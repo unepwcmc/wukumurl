@@ -481,3 +481,23 @@ button.new-link{
     border: 1px solid #eed3d7;
   }
 }
+
+.devise-submit input {
+  margin-top: 15px;
+  @include border-radius(5px);
+  background: $orange;
+  color: rgba(255,255,255,0.9);
+  font-weight: 300;
+  font-size: 1em;
+  line-height: 1.75em;
+  border: none;
+  padding: 0 15px 3px 15px;
+  &:hover, &:active {
+    background: $darkOrange;
+    @include transition(all 0.5s ease);
+  }
+}
+
+.devise-email {
+  width: 225px;
+}
