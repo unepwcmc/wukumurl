@@ -483,7 +483,7 @@ button.new-link{
 }
 
 .devise-submit input {
-  margin-top: 15px;
+  margin: 15px 0 25px 0;
   @include border-radius(5px);
   background: $orange;
   color: rgba(255,255,255,0.9);
