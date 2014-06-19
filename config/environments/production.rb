@@ -8,6 +8,16 @@ Wukumurl::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'wcmc.io' }
 
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,
+    :address => "pod51017.outlook.com",
+    :port => 587,
+    :domain => "unep-wcmc.org",
+    :authentication => :login,
+    :user_name => 'no-reply@unep-wcmc.org',
+    :password => 'GuF3t5eC',
+  }
+
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
