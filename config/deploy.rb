@@ -64,7 +64,7 @@ set :deploy_via, :remote_cache
 #
 # The shared area is prepared with 'deploy:setup' and all the shared
 # items are symlinked in when the code is updated.
-set :local_shared_files, %w(config/database.yml config/max_mind.yml config/cartodb_config.yml .env)
+set :local_shared_files, %w(config/database.yml config/max_mind.yml config/cartodb_config.yml .env config/environments/production.rb)
 
 # If you are not using the brightbox gem, uncomment out the following so
 # that the dotenv file is symlinked correctly.
