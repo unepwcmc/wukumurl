@@ -5,7 +5,6 @@
 
 # Example:
 #
-set :output, "/home/rails/wukumurl/current/log/cron_log.log"
 #
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
@@ -18,6 +17,8 @@ set :output, "/home/rails/wukumurl/current/log/cron_log.log"
 # end
 
 # Learn more: http://github.com/javan/whenever
+
+#set :output, "/home/rails/wukumurl/current/log/cron_log.log"
 
 every 1.hour do
   rake "dasboard:post:visit_count"
