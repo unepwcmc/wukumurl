@@ -6,7 +6,10 @@ Wukumurl::Application.configure do
 
   config.eager_load = true
 
-  config.action_mailer.default_url_options = { :host => 'wcmc.io' }
+  config.action_mailer.default_url_options = { 
+    :host => 'wcmc.io',
+    :openssl_verify_mode => 'none'
+  }
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
