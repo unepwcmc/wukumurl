@@ -26,6 +26,11 @@ class GeoLocator
     organization = visit.organization
     location     = visit.location
 
+    if !short_url or !organization or !location
+      logger.info "update_orgs_by_short_url - Not enough information to update CartoDB"
+      return
+    end
+
     existing_short_url = CartoDB::Connection.query("
       SELECT COUNT(*)
       FROM #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_short_url']}
@@ -43,9 +48,10 @@ class GeoLocator
     else
       short_url_query = "
         INSERT INTO #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_short_url']}
-        (the_geom, org_id, org_name, short_url_id, visits)
+        (the_geom, the_geom_webmercator, org_id, org_name, short_url_id, visits)
         VALUES (
           ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326),
+          ST_Transform(ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326), 3857),
           #{organization.id},
           $$#{CGI.escape organization.name}$$,
           #{short_url.id},
@@ -62,42 +68,53 @@ class GeoLocator
     organization = visit.organization
     location     = visit.location
 
-    if short_url.user_id
-      existing_user = CartoDB::Connection.query("
-        SELECT COUNT(*)
-        FROM #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_user']}
-        WHERE user_id=#{short_url.user_id}
-        AND org_id=#{organization.id}
-      ")
-
-      if existing_user[:rows].first[:count] > 0
-        user_query = "
-          UPDATE #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_user']}
-          SET visits=visits+1
-          WHERE user_id = #{short_url.user_id}
-          AND org_id=#{organization.id}
-        "
-      else
-        user_query = "
-          INSERT INTO #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_user']}
-          (the_geom, org_id, org_name, user_id, visits)
-          VALUES (
-            ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326),
-            #{organization.id},
-            $$#{CGI.escape organization.name}$$,
-            #{short_url.user_id},
-            1
-          )
-        "
-      end
-
-      CartoDB::Connection.query CGI.escape(user_query)
+    if !short_url or !organization or !location
+      logger.info "update_orgs_by_user - Not enough information to update CartoDB"
+      return
     end
+
+    q = "
+      SELECT COUNT(*)
+      FROM #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_user']}
+      WHERE user_id=#{short_url.user_id}
+      AND org_id=#{organization.id}
+    "
+
+    organizations_by_user = CartoDB::Connection.query(q)
+
+    if organizations_by_user[:rows].first[:count] > 0
+      user_query = "
+        UPDATE #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_user']}
+        SET visits=visits+1
+        WHERE user_id = #{short_url.user_id}
+        AND org_id=#{organization.id}
+      "
+    else
+      user_query = "
+        INSERT INTO #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_user']}
+        (the_geom, the_geom_webmercator, org_id, org_name, user_id, visits)
+        VALUES (
+          ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326),
+          ST_Transform(ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326), 3857),
+          #{organization.id},
+          $$#{CGI.escape organization.name}$$,
+          #{short_url.user_id},
+          1
+        )
+      "
+    end
+
+    CartoDB::Connection.query CGI.escape(user_query)
   end
 
   def update_orgs visit
     organization = visit.organization
     location     = visit.location
+
+    if !organization or !location
+      logger.info "update_orgs - Not enough information to update CartoDB"
+      return
+    end
 
     existing_org = CartoDB::Connection.query("
       SELECT COUNT(*)
@@ -114,9 +131,10 @@ class GeoLocator
     else
       org_query = "
         INSERT INTO #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['visits_by_organization']}
-        (the_geom, org_id, org_name, visits)
+        (the_geom, the_geom_webmercator, org_id, org_name, visits)
         VALUES (
           ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326),
+          ST_Transform(ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326), 3857),
           #{organization.id},
           $$#{CGI.escape organization.name}$$,
           1
