@@ -208,6 +208,9 @@ header {
       opacity: 1;
       @include transition(all 0.5s ease);
     }
+    &.users {
+      top: 0;
+    }
   }
 }
 

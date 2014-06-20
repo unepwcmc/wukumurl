@@ -1,11 +1,13 @@
 module ApplicationHelper
   def back_button
-    if controller.controller_name == 'short_urls' &&
+    users = if controller.controller_name == 'users' then 'users' end
+    if (controller.controller_name == 'short_urls' || 
+      controller.controller_name == 'users') &&
       controller.action_name == 'show'
       return link_to(
         '<i class="fa fa-chevron-circle-left"></i>'.html_safe,
         "/",
-        class: 'back'
+        class: "back #{users}"
       )
     end
   end
