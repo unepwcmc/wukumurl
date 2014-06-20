@@ -26,7 +26,7 @@ class GeoLocator
     organization = visit.organization
     location     = visit.location
 
-    if !short_url or !organization or !location
+    if !short_url or !organization or !organization.id or !location
       logger.info "update_orgs_by_short_url - Not enough information to update CartoDB"
       return
     end
@@ -68,7 +68,7 @@ class GeoLocator
     organization = visit.organization
     location     = visit.location
 
-    if !short_url or !organization or !location
+    if !short_url or !organization or !organization.id or !location
       logger.info "update_orgs_by_user - Not enough information to update CartoDB"
       return
     end
@@ -111,7 +111,7 @@ class GeoLocator
     organization = visit.organization
     location     = visit.location
 
-    if !organization or !location
+    if !organization or !organization.id or !location
       logger.info "update_orgs - Not enough information to update CartoDB"
       return
     end
