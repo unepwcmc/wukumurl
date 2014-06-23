@@ -53,14 +53,14 @@ class GeoLocator
           ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326),
           ST_Transform(ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326), 3857),
           #{organization.id},
-          $$#{CGI.escape organization.name}$$,
+          '#{organization.name}',
           #{short_url.id},
           1
         )
       "
     end
 
-    CartoDB::Connection.query CGI.escape(short_url_query)
+    CartoDB::Connection.query ERB::Util.url_encode(short_url_query)
   end
 
   def update_orgs_by_user visit
@@ -97,14 +97,13 @@ class GeoLocator
           ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326),
           ST_Transform(ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326), 3857),
           #{organization.id},
-          $$#{CGI.escape organization.name}$$,
+          '#{organization.name}',
           #{short_url.user_id},
           1
         )
       "
     end
-
-    CartoDB::Connection.query CGI.escape(user_query)
+    CartoDB::Connection.query ERB::Util.url_encode(user_query)
   end
 
   def update_orgs visit
@@ -125,7 +124,7 @@ class GeoLocator
     if existing_org[:rows].first[:count] > 0
       org_query = "
         UPDATE #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['visits_by_organization']}
-        SET visits = visits + 1
+        SET visits = #{visits + 1}
         WHERE org_id=#{organization.id}
       "
     else
@@ -136,12 +135,12 @@ class GeoLocator
           ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326),
           ST_Transform(ST_GeomFromText('POINT(#{location.lon} #{location.lat})', 4326), 3857),
           #{organization.id},
-          $$#{CGI.escape organization.name}$$,
+          '#{organization.name}',
           1
         )
       "
     end
 
-    CartoDB::Connection.query CGI.escape(org_query)
+    CartoDB::Connection.query ERB::Util.url_encode(org_query)
   end
 end
