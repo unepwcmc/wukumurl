@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 
+//= require pubsub
 //= require jquery
 //= require jquery_ujs
 //= require lodash.min.js

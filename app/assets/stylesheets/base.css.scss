@@ -504,3 +504,10 @@ button.new-link{
 .devise-email {
   width: 225px;
 }
+
+#short_urls_table table.open-popup tr {
+  opacity: .2;
+  &.active {
+    opacity: 1;
+  }
+}

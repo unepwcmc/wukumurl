@@ -24832,7 +24832,13 @@ cdb.geo.ui.Infowindow = cdb.core.View.extend({
    *  Toggle infowindow visibility
    */
   toggle: function() {
-    this.model.get("visibility") ? this.show() : this.hide();
+    if (this.model.get("visibility")) {
+      PubSub.publish('ON_POPUP_OPEN', this.model);
+      this.show();
+    } else {
+      PubSub.publish('ON_POPUP_CLOSE');
+      this.hide();
+    }
   },
 
   /**
