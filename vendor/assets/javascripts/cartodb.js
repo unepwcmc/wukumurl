@@ -24836,7 +24836,7 @@ cdb.geo.ui.Infowindow = cdb.core.View.extend({
       PubSub.publish('ON_POPUP_OPEN', this.model);
       this.show();
     } else {
-      PubSub.publish('ON_POPUP_CLOSE');
+      PubSub.publish('ON_POPUP_CLOSE', this.model);
       this.hide();
     }
   },
