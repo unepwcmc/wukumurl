@@ -18,40 +18,6 @@ class ShortUrlTest < ActiveSupport::TestCase
       short_url: @short_url,
       created_at: 2.month.ago.to_s(:db)
     )
-
-    FactoryGirl.create(:visit,
-      short_url: @short_url,
-      organization: FactoryGirl.create(:organization, name: 'Apple')
-    )
-
-    FactoryGirl.create(:visit,
-      short_url: @short_url,
-      organization: FactoryGirl.create(:organization, name: 'WCMC')
-    )
-
-    bt = FactoryGirl.create(:organization, name: 'BT')
-    FactoryGirl.create(:visit,
-      short_url: @short_url,
-      organization: bt
-    )
-
-    create_disregard_votes(bt)
-
-    virgin_media = FactoryGirl.create(:organization, name: 'Virgin Media')
-    FactoryGirl.create(:visit,
-      short_url: @short_url,
-      organization: virgin_media
-    )
-
-    FactoryGirl.create(:organization, name: 'Plusnet')
-
-    create_disregard_votes(virgin_media, 5)
-  end
-
-  def create_disregard_votes(organization, count=1)
-    (1..count).each do
-      FactoryGirl.create(:disregard_vote, organization: organization)
-    end
   end
 
   test "ordered_by_visits_desc scope orders by visit count" do
@@ -83,48 +49,6 @@ class ShortUrlTest < ActiveSupport::TestCase
     assert visits_this_month.to_a.include?(@visit_yesterday)
     assert visits_this_month.to_a.include?(@visit_last_week)
     assert !visits_this_month.to_a.include?(@visit_last_month)
-  end
-
-  test "visits_by_country should return stats correctly" do
-    2.times do
-      FactoryGirl.create(:visit, short_url: @short_url, city: FactoryGirl.create(:city))
-    end
-
-    country_stats = @short_url.visits_by_country
-    assert_equal 2, country_stats["Canada"]
-  end
-
-  test "visits_by_organization should return stats correctly with grouping disabled" do
-    organization_stats = @short_url.visits_by_organization group_by_disregarded: false
-
-    counts = {}
-    organization_stats.each do |organization|
-      counts[organization.name] = organization.visit_count.to_i
-    end
-
-    assert_equal 1, counts["Apple"]
-    assert_equal 1, counts["WCMC"]
-  end
-
-  test "visits_by_organization with group_by_disregarded = true
-    separates the visits in to pertinent and non-pertinent depending on
-    the Organization's disregard count" do
-    organization_stats = @short_url.visits_by_organization(group_by_disregarded: true)
-
-    counts = {}
-    organization_stats.each do |pertinence, organizations|
-      organizations.each do |organization|
-        counts[pertinence] ||= {}
-        counts[pertinence][organization.name] = organization.visit_count.to_i
-      end
-    end
-
-    assert_equal 1, counts[:pertinent]["Apple"]
-    assert_equal 1, counts[:pertinent]["WCMC"]
-    assert_equal 1, counts[:pertinent]["BT"]
-    assert_nil counts[:pertinent]["Virgin Media"]
-    assert_nil counts[:pertinent]["Plusnet"]
-    assert_equal 1, counts[:non_pertinent]["Virgin Media"]
   end
 
   test "saving a link with no http:// in front should have it inserted" do
