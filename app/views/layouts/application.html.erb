@@ -62,9 +62,6 @@
       </div>
     </header>
 
-    <div id="map" class="leaflet-container leaflet-fade-anim">
-    </div>
-
     <div class="dashboard">
       <%= yield %>
     </div>
@@ -72,10 +69,6 @@
     <% if current_user && current_user.no_urls? %>
       <%= render partial: "short_urls/info_modal" %>
     <% end %>
-
-    <script>
-      var pieChart = new PieChart(<%= @visits_by_country.to_json.html_safe %>);
-    </script>
 
     <%= render partial: "google_analytics" %>
 

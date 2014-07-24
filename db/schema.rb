@@ -11,31 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140304110432) do
+ActiveRecord::Schema.define(version: 20140724074645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "cities", force: true do |t|
-    t.string   "iso2"
-    t.string   "iso3"
-    t.string   "country"
-    t.string   "region"
-    t.string   "name"
-    t.float    "lat"
-    t.float    "lon"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "country_locations", force: true do |t|
-    t.float    "lat"
-    t.float    "lon"
-    t.string   "iso2"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "name"
-  end
 
   create_table "disregard_votes", force: true do |t|
     t.integer  "short_url_id"
@@ -44,25 +23,11 @@ ActiveRecord::Schema.define(version: 20140304110432) do
     t.datetime "updated_at"
   end
 
-  create_table "locations", force: true do |t|
-    t.float    "lat"
-    t.float    "lon"
-    t.string   "source"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "organizations", force: true do |t|
-    t.text     "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "short_urls", force: true do |t|
     t.string   "short_name"
     t.text     "url"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "deleted"
     t.integer  "user_id"
     t.string   "dasboard_metric_name"
@@ -93,11 +58,8 @@ ActiveRecord::Schema.define(version: 20140304110432) do
   create_table "visits", force: true do |t|
     t.string   "ip_address"
     t.integer  "short_url_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "organization_id"
-    t.integer  "city_id"
-    t.integer  "location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "domain"
   end
 

@@ -1,9 +1,4 @@
 $(($)->
-  window.map = L.map('map', scrollWheelZoom: false).setView([55, 0], 3)
-  L.tileLayer('https://dnv9my2eseobd.cloudfront.net/v3/cartodb.map-4xtxp73f/{z}/{x}/{y}.png', {
-    attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms & Feedback</a>'
-  }).addTo(map)
-
   # Show/Hide full length table in dashboard
   $('.expandable-table').on('click', '.view-all', ->
     text = $(@).text()

@@ -110,11 +110,9 @@ div.header {
 
     a {
       color: #fff;
-      @include transition(all 0.5s ease);
 
       &:hover, &:active {
         text-decoration: underline;
-        @include transition(all 0.5s ease);
       }
     }
   }
@@ -201,12 +199,10 @@ header {
     font-size: 1.3em;
     line-height: 41px;
     color: #A0A0A0;
-    @include transition(all 0.5s ease);
 
     &:hover {
       color: $blue;
       opacity: 1;
-      @include transition(all 0.5s ease);
     }
   }
 }
@@ -224,12 +220,10 @@ button,
   color: $blue;
   background: none;
   padding: 3px 10px;
-  @include transition(all 0.5s ease);
 
   &.hover, &:hover, &:active {
     background-color: $blue;
     color: #fff;
-    @include transition(all 0.5s ease);
   }
 }
 

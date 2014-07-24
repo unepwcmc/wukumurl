@@ -2,11 +2,7 @@ class ShortUrlsController < ApplicationController
   before_filter :authenticate_user!, :only => [:create, :update, :destroy]
 
   def index
-    @visits_by_country = City.all_visits_by_country
-    @visits_by_country_count = @visits_by_country.length
-    @visits_by_organization = Organization.all_visits_by_organization
-    @visits_by_organization_count = @visits_by_organization.length
-
+    @visits = Visit.all
     @total_visits = Visit.count
     @total_urls   = ShortUrl.not_deleted.count
 
@@ -52,12 +48,11 @@ class ShortUrlsController < ApplicationController
 
     # Don't record stats for clicks via the link list on wcmc.io
     unless request.referrer =~ /#{root_url}(.*)/
-      visit = Visit.create(
+      Visit.create(
         short_url_id: short_url.id,
         ip_address: request.remote_ip,
         domain: request.domain
       )
-      GeoLocator.perform_async(visit.id)
     end
 
     redirect_to short_url.url
@@ -69,10 +64,6 @@ class ShortUrlsController < ApplicationController
 
     @url_belongs_to_user = @short_url.owned_by? current_user
     @total_visits = @short_url.visit_count
-    @visits_by_country = @short_url.visits_by_country
-    @visits_by_country_count = @visits_by_country.length
-    @visits_by_organization = @short_url.visits_by_organization group_by_disregarded: false
-    @visits_by_organization_count = @visits_by_organization.length
   end
 
   def destroy

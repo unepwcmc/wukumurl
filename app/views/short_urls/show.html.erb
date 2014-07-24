@@ -18,37 +18,10 @@
     title: "Total number of visits",
     value: @total_visits
   } %>
-
-  <%= render partial: "short_urls/chart_block" %>
-</div>
-
-<div class="right">
-  <%= render partial: "short_urls/organizations_table", locals: {
-    title: "Top organizations by number of visits"
-  } %>
 </div>
 
 <div class="edit-link-form popover"></div>
 
 <script>
   <%= render('short_urls/edit_link').html_safe %>
-
-  $(document).ready(function() {
-    var carto_table = "<%= CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_short_url'] %>";
-    cartodb.createLayer(map, {
-      user_name: '<%= CARTODB_CONFIG['username'] %>',
-      type: 'cartodb',
-      sublayers: [{
-        sql: "SELECT * FROM " + carto_table + " WHERE short_url_id=<%=@short_url.id %>;",
-        cartocss: "#" + carto_table + "<%= raw CARTODB_LAYERS_CONFIG['css'] %>"
-      }]
-    })
-    .addTo(map)
-    .on('done', function(layer) {
-      layer.setInteraction(true);
-      cdb.vis.Vis.addInfowindow(map, layer.getSubLayer(0), ['org_name', 'visits']);
-    }).on('error', function() {
-      cartodb.log.log("some error occurred");
-    });
-  });
 </script>

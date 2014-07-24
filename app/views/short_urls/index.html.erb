@@ -16,7 +16,9 @@
     title: "Number of links shared",
     value: @total_urls
   } %>
+</div>
 
+<div class="right">
   <section>
     <header>
       <h4>Top links by number of visits</h4>
@@ -27,22 +29,3 @@
     </div>
   </section>
 </div>
-
-<div class="right">
-  <%= render partial: "chart_block" %>
-  <%= render partial: "organizations_table", locals: {
-    title: "Top organizations by number of visits"
-  } %>
-</div>
-
-<script>
-  $(document).ready(function() {
-    cartodb.createLayer(map, "<%= CARTODB_LAYERS_CONFIG['visualizations'][Rails.env]['visits_by_organization'] %>")
-      .addTo(map)
-      .on('done', function(layer) {
-        layer.setInteraction(true);
-    }).on('error', function() {
-      cartodb.log.log("some error occurred");
-    });
-  });
-</script>
