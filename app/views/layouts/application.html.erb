@@ -30,6 +30,9 @@
               <a href="<%= logout_path %>">sign out?</a>
 
               <button class="new-link" data-toggle="popover"><i class="fa fa-plus"></i> New Link</button>
+              <% if current_user.admin? %>
+                <%= link_to 'Admin', admin_dashboard_index_path, class: 'new-link' %>
+              <% end %>
             <% else -%>
               <%= link_to "Sign up", new_user_registration_path, :class => 'sign-up', :data => {'toggle' => 'popover'} %> or
               <%= link_to "Sign in", new_user_session_path, :class => 'sign-in', :data => {'toggle' => 'popover'} %>

@@ -1,0 +1,25 @@
+<table class="table" id="dataTable">
+  <% @short_urls.each do |short_url| %>
+    <thead>
+      <tr>
+        <th>Short Name</th>
+        <th>URL</th>
+        <th>Owner</th>
+        <th>Deleted?</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= short_url.short_name %></td>
+        <td><%= short_url.url %></td>
+        <td><%= short_url.user.email %></td>
+        <td><%= short_url.deleted ? 'Yes' : 'No' %></td>
+        <td><%= link_to 'Edit', edit_short_url_path(short_url) %></td>
+        <td><%= link_to 'Delete', short_url_path(short_url), method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    </tbody>
+  <% end %>
+</table>
