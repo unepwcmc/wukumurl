@@ -10,7 +10,7 @@
         <% @visits_by_team.each_with_index do |team, index| %>
           <tr class="<% if index > 7 %>all hidden<% end -%>">
             <td>
-              <%= team.name %>
+              <%= link_to team.name,team_path(team.name) %>
             </td>
             <td>
               <%= team.visit_count %>

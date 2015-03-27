@@ -1,12 +1,4 @@
 
-<% if user_signed_in? %>
-  <% content_for :page_actions do %>
-    <%= link_to "WCMC", root_path, class: controller.class == ShortUrlsController ? 'current' : '' %>  | 
-    <%= link_to "My Team", user_links_path, class: controller.class == UsersController ? 'current' : '' %> | 
-    <%= link_to "My Links", user_links_path, class: controller.class == UsersController ? 'current' : '' %>
-  <% end %>
-<% end %>
-
 <% title "Shared documents by WCMC" %>
 
 <div class="left">

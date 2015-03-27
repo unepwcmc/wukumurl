@@ -57,10 +57,15 @@
 
     <header>
         <% if user_signed_in? %>
-          <%= link_to "WCMC", root_path, class: controller.class == ShortUrlsController ? 'current' : '' %>  | 
-          <%= link_to "My Team", user_links_path, class: controller.class == TeamsController ? 'current' : '' %> | 
-          <%= link_to "My Links", user_links_path, class: controller.class == UsersController ? 'current' : '' %>
+          <div class="left">
+            <%= link_to "WCMC", root_path, class: controller.class == ShortUrlsController ? 'current' : '' %>  | 
+            <%= link_to "My Team", user_links_path, class: controller.class == TeamsController ? 'current' : '' %> | 
+            <%= link_to "My Links", user_links_path, class: controller.class == UsersController ? 'current' : '' %>
+          </div>
         <% end %>
+        <div class="right">
+          <%= yield(:page_actions) %>
+        </div>
     </header>
 
     <div id="map" class="leaflet-container leaflet-fade-anim">
