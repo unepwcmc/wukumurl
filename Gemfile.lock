@@ -103,6 +103,8 @@ GEM
     foreigner (1.7.2)
       activerecord (>= 3.0.0)
     formatador (0.2.5)
+    friendly_id (5.1.0)
+      activerecord (>= 4.0.0)
     fssm (0.2.10)
     geocoder (1.2.7)
     geoip-c (0.9.1)
@@ -255,6 +257,7 @@ DEPENDENCIES
   factory_girl_rails (= 4.2.1)
   font-awesome-sass
   foreigner
+  friendly_id (~> 5.1.0)
   geocoder
   geoip-c (= 0.9.1)
   guard
