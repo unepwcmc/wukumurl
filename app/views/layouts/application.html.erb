@@ -26,10 +26,13 @@
         <div class="header-actions-container">
           <div class="header-actions">
             <% if user_signed_in? %>
-              Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>,
+              Hello <%= current_user.first_name %>!
               <a href="<%= logout_path %>">sign out?</a>
 
               <button class="new-link" data-toggle="popover"><i class="fa fa-plus"></i> New Link</button>
+              <% if current_user.admin? %>
+                <%= link_to 'Admin', admin_dashboard_index_path, class: 'new-link' %>
+              <% end %>
             <% else -%>
               <%= link_to "Sign up", new_user_registration_path, :class => 'sign-up', :data => {'toggle' => 'popover'} %> or
               <%= link_to "Sign in", new_user_session_path, :class => 'sign-in', :data => {'toggle' => 'popover'} %>
@@ -53,20 +56,27 @@
     </div>
 
     <header>
-      <%= back_button %>
-      <h3>
-        <%= yield(:title) %>
-      </h3>
-
-      <div class="right">
-        <%= yield(:page_actions) %>
-      </div>
+        <% if user_signed_in? %>
+          <div class="left">
+            <%= link_to "WCMC", root_path, class: controller.class == ShortUrlsController &&action_name == 'index' ? 'current' : '' %>  | 
+            <%= link_to "My Team", teams_index_path, class: controller.class == TeamsController ? 'current' : '' %> | 
+            <%= link_to "My Links", user_links_path, class: controller.class == UsersController ? 'current' : '' %>
+          </div>
+        <% end %>
+        <div class="right">
+          <%= yield(:page_actions) %>
+        </div>
     </header>
 
     <div id="map" class="leaflet-container leaflet-fade-anim">
     </div>
 
     <div class="dashboard">
+      <div class="left">
+        <h3>
+          <%= yield(:title) %>
+        </h3>
+      </div>
       <%= yield %>
     </div>
 

@@ -1,4 +1,5 @@
 Wukumurl::Application.routes.draw do
+  get "teams/index"
   devise_for :users, controllers: {
     sessions: 'sessions',
     registrations: 'registrations',
@@ -20,6 +21,10 @@ Wukumurl::Application.routes.draw do
   end
 
   match '/' => 'short_urls#create', :controller => 'short_urls', :via => :post
+
+  namespace :admin do
+    resources :dashboard, :only => [:index]
+  end
 
   get "/short_urls/list",
     :controller => 'short_urls',
