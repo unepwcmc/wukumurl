@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20150327105216) do
   end
 
   create_table "teams", force: true do |t|
-    t.text     "name"
+    t.text     "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
