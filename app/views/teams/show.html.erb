@@ -1,0 +1,25 @@
+<% title @team.name %>
+
+<div class="left">
+  <%= render partial: "short_urls/headline_number", locals: {
+    title: "Total number of visits",
+    value: @total_visits
+  } %>
+
+  <section>
+    <header>
+      <h4>All links for <%= @team.name %></h4>
+    </header>
+
+    <div id="short_urls_table" class="expandable-table">
+      <%= render partial: "short_urls/short_urls_table" %>
+    </div>
+  </section>
+</div>
+
+<div class="right">
+  <%= render partial: "short_urls/chart_block" %>
+  <%= render partial: "short_urls/organizations_table", locals: {
+    title: "Top organizations by number of visits"
+  } %>
+</div>
