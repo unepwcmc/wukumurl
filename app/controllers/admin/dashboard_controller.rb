@@ -1,6 +1,6 @@
 class Admin::DashboardController < ApplicationController
   before_filter :authenticate_admin
-  layout 'admin'
+  before_filter :dont_show_map
 
   def index
     @short_urls = ShortUrl.all
