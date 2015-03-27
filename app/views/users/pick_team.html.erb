@@ -1,0 +1,8 @@
+<div class="pick-team-container">
+  <h1>Select a team for your account</h1>
+
+  <%= form_for current_user do |f| %>
+    <%= f.collection_select :team_id, Team.all.order(:name), :id, :name, {}, class: 'team-select' %>
+    <button class="new-link" id="pick-team-submit">Confirm</button>
+  <% end %>
+</div>

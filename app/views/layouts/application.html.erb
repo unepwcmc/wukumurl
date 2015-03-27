@@ -3,9 +3,7 @@
   <head>
     <title>wcmc.io shorten // share // track</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="<%= ENV["DROPBOX_API_KEY"] %>"></script>
 
-    <%= javascript_include_tag "application" %>
     <%= stylesheet_link_tag "application" %>
     <%= csrf_meta_tags %>
 
@@ -15,65 +13,18 @@
   </head>
 
   <body>
-    <div class="header">
-      <div class="inner">
+    <%= render partial: 'shared/header' %>
 
-        <div class="left">
-          <h1><a href="/">WCMC.io</a></h1>
-          <span class="tagline">Measure the impact of digital documents you care about</span>
-        </div>
-
-        <div class="header-actions-container">
-          <div class="header-actions">
-            <% if user_signed_in? %>
-              Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>,
-              <a href="<%= logout_path %>">sign out?</a>
-
-              <button class="new-link" data-toggle="popover"><i class="fa fa-plus"></i> New Link</button>
-              <% if current_user.admin? %>
-                <%= link_to 'Admin', admin_dashboard_index_path, class: 'button' %>
-              <% end %>
-            <% else -%>
-              <%= link_to "Sign up", new_user_registration_path, :class => 'sign-up', :data => {'toggle' => 'popover'} %> or
-              <%= link_to "Sign in", new_user_session_path, :class => 'sign-in', :data => {'toggle' => 'popover'} %>
-            <% end -%>
-          </div>
-
-          <div class="sign-in-form popover <% if flash[:errors] && flash[:errors][:session] %>show<% end %>">
-            <%= render "devise/sessions/new" %>
-            <p><a href="<%= forgot_password_path %>">Forgot password?</a></p>
-          </div>
-          <div class="sign-up-form popover <% if flash[:errors] && flash[:errors][:registration] %>show<% end %>">
-            <%= render "devise/registrations/new" %>
-          </div>
-
-          <div class="new-link-form popover"></div>
-        </div>
-
-        <%= render "flash_messages" %>
-
-      </div>
-    </div>
-
-    <header>
-      <%= back_button %>
-      <h3>
-        <%= yield(:title) %>
-      </h3>
-
-      <div class="right">
-        <%= yield(:page_actions) %>
-      </div>
-    </header>
-
-    <div id="map" class="leaflet-container leaflet-fade-anim">
-    </div>
+    <% unless @no_map %>
+      <div id="map" class="leaflet-container leaflet-fade-anim"></div>
+    <% end %>
 
     <div class="dashboard">
       <%= yield %>
     </div>
 
-    <% if current_user && current_user.no_urls? %>
+    <%# TODO not really nice to show this all the time, if user has no links %>
+    <% if current_user.try(:no_urls?) && current_user.team.present? %>
       <%= render partial: "short_urls/info_modal" %>
     <% end %>
 
@@ -81,7 +32,11 @@
       var pieChart = new PieChart(<%= @visits_by_country.to_json.html_safe %>);
     </script>
 
-    <%= render partial: "google_analytics" %>
+    <%= javascript_include_tag "application" %>
+    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="<%= ENV["DROPBOX_API_KEY"] %>"></script>
 
+    <% if Rails.env == 'production' %>
+      <%= render partial: "google_analytics" %>
+    <% end %>
   </body>
 </html>
