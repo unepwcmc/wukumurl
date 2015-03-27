@@ -9,7 +9,7 @@
     <div class="header-actions-container">
       <div class="header-actions">
         <% if user_signed_in? %>
-          Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>,
+          Hello <%= current_user.first_name %>!
           <a href="<%= logout_path %>">sign out?</a>
 
           <button class="new-link" data-toggle="popover"><i class="fa fa-plus"></i> New Link</button>
@@ -39,13 +39,9 @@
 </div>
 
 <header>
-  <%= back_button %>
-  <h3>
-    <%= yield(:title) %>
-  </h3>
-
-  <div class="right">
-    <%= yield(:page_actions) %>
-  </div>
+  <% if user_signed_in? %>
+    <%= link_to "WCMC", root_path, class: controller.class == ShortUrlsController ? 'current' : '' %>  |
+    <%= link_to "My Team", team_path(current_user.team.slug), class: controller.class == UsersController ? 'current' : '' %> |
+    <%= link_to "My Links", user_links_path, class: controller.class == UsersController ? 'current' : '' %>
+  <% end %>
 </header>
-

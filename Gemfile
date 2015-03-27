@@ -50,3 +50,4 @@ gem 'net-ldap'
 gem 'dotenv-rails', '~> 0.9.0'
 
 gem 'dasboard_client', require: false
+gem 'byebug'
