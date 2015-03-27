@@ -56,20 +56,22 @@
     </div>
 
     <header>
-      <%= back_button %>
-      <h3>
-        <%= yield(:title) %>
-      </h3>
-
-      <div class="right">
-        <%= yield(:page_actions) %>
-      </div>
+        <% if user_signed_in? %>
+          <%= link_to "WCMC", root_path, class: controller.class == ShortUrlsController ? 'current' : '' %>  | 
+          <%= link_to "My Team", user_links_path, class: controller.class == UsersController ? 'current' : '' %> | 
+          <%= link_to "My Links", user_links_path, class: controller.class == UsersController ? 'current' : '' %>
+        <% end %>
     </header>
 
     <div id="map" class="leaflet-container leaflet-fade-anim">
     </div>
 
     <div class="dashboard">
+      <div class="left">
+        <h3>
+          <%= yield(:title) %>
+        </h3>
+      </div>
       <%= yield %>
     </div>
 
