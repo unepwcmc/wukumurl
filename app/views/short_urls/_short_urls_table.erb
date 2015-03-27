@@ -13,11 +13,11 @@
         <small title="<%= short_url.url %>">
           <%= link_to short_url.url do %>
             <%= truncate pretty_url(short_url.url), length: 40, omission: '...' %>
-          <% end %>
+          <% end %> <i>created by <%= short_url.user.full_name %></i>
         </small>
       </td>
       <td>
-        <%= short_url.visits_count %>
+        <%= short_url.visit_count %>
       </td>
   <% end %>
   </tbody>
