@@ -1,0 +1,22 @@
+$pick-team-container--bg-color: #eeeeee;
+
+.pick-team-container {
+  padding: 25px;
+  border-radius: 5px;
+  background-color: $pick-team-container--bg-color;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+
+  h1 { margin-bottom: 40px; }
+
+  .new-link {
+    float: none;
+  }
+}
+
+.team-select {
+  padding: 0px 15px;
+  display: block;
+  margin: 20px auto;
+}
