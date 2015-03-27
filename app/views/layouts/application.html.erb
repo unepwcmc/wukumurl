@@ -15,6 +15,9 @@
   <body>
     <%= render partial: 'shared/header' %>
 
+    <% unless @no_map %>
+      <div id="map" class="leaflet-container leaflet-fade-anim"></div>
+    <% end %>
 
     <div class="dashboard">
       <%= yield %>
