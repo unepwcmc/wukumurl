@@ -24,8 +24,6 @@ group :development do
   gem 'guard'
   gem 'guard-minitest'
   gem 'rb-fsevent', '~> 0.9'
-
-  gem 'debugger'
 end
 
 gem 'factory_girl_rails', '4.2.1'
@@ -35,7 +33,7 @@ gem "compass-rails", "~> 2.0.alpha.0"
 gem "susy"
 gem 'font-awesome-sass'
 
-gem 'libv8', '3.11.8.13'
+gem 'libv8'#, '3.11.8.13'
 gem 'therubyracer'
 gem 'ejs', '~> 1.1.1'
 gem 'coffee-rails', '~> 4.0.0'

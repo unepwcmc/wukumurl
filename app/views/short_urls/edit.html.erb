@@ -1,0 +1,37 @@
+<h1>Edit Short URL</h1>
+
+<%= form_for @short_url do |f| %>
+<% if @short_url.errors.any? %>
+  <div class="alert-message block-message error">
+    <p><%= pluralize(@short_url.errors.count, "error") %> prohibited this short url from being saved:</p>
+
+    <ul>
+    <% @short_url.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<p>
+  <%= f.label :short_name %>
+  <%= f.text_field :short_name %>
+</p>
+
+<p>
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+<p>
+
+<p>
+  <%= f.label :deleted %>
+  <%= f.check_box :deleted %>
+<p>
+
+<p>
+  <%= f.label :user_id %>
+  <%= f.collection_select :user_id, User.order(:email), :id, :email, {prompt: "Select the master project"} %>
+<p>
+
+  <%= f.submit 'Submit' %>
+<% end %>
