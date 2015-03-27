@@ -45,7 +45,7 @@
       padding-bottom: 0;
     }
 
-    button {
+    button, .button {
       @include border-radius(5px);
       background: $orange;
       color: rgba(255,255,255,0.9);

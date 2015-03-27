@@ -1,10 +1,12 @@
 Wukumurl::Application.routes.draw do
-  get "teams/index"
+ 
+  resources :teams, only: [:show]
+
   devise_for :users, controllers: {
     sessions: 'sessions',
     registrations: 'registrations',
     confirmations: 'confirmations',
-    :passwords => "passwords"
+    passwords: 'passwords'
   }
 
   devise_scope :user do
@@ -39,9 +41,11 @@ Wukumurl::Application.routes.draw do
     :as => 'short_url_info'
 
   resources :organizations, only: [:destroy]
+  resources :users, only: [:update]
 
   authenticate :user do
-    get "/users/my_links", to: 'users#show', as: 'user_links'
+    get '/users/my_links', to: 'users#show', as: 'user_links'
+    get '/users/pick_team', to: 'users#pick_team', as: 'pick_team'
   end
 
   root to: 'short_urls#index', as: :root

@@ -8,7 +8,20 @@ csv.each do |row|
   CountryLocation.create!(row.to_hash)
 end
 
-['Informatics', 'Protected Areas', 'Species', 'EAP'].each do |team|
+
+['Informatics',
+ 'Protected Areas',
+ 'Species',
+ 'EAP',
+ 'Business and Biodiversity',
+ 'Climate Change and Biodiversity',
+ 'Conventions and Policy Support',
+ 'Development',
+ 'Directorate',
+ 'Ecosystems Assessment',
+ 'Marine',
+ 'Science'
+].each do |team|
   Team.create(name: team)
 end
 
