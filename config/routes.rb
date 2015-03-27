@@ -1,4 +1,5 @@
 Wukumurl::Application.routes.draw do
+  get "teams/index"
   devise_for :users, controllers: {
     sessions: 'sessions',
     registrations: 'registrations',

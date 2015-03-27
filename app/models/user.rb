@@ -5,6 +5,20 @@ class User < ActiveRecord::Base
   has_many :short_urls
   belongs_to :team
 
+  def first_name
+    name = self.email.partition('@').first
+    name.partition('.').first.titleize
+  end
+
+  def last_name
+    name = self.email.partition('@').first
+    name.partition('.').last.titleize
+  end
+
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
+
   def visits
     Visit.find_by_sql("
       SELECT visits.*, COUNT(visits.id) as count
