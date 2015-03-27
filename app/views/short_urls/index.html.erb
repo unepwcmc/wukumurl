@@ -33,6 +33,9 @@
 
 <div class="right">
   <%= render partial: "chart_block" %>
+    <%= render partial: "teams_table", locals: {
+    title: "Top teams by number of visits"
+  } %>
   <%= render partial: "organizations_table", locals: {
     title: "Top organizations by number of visits"
   } %>

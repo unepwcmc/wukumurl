@@ -58,7 +58,7 @@
     <header>
         <% if user_signed_in? %>
           <%= link_to "WCMC", root_path, class: controller.class == ShortUrlsController ? 'current' : '' %>  | 
-          <%= link_to "My Team", user_links_path, class: controller.class == UsersController ? 'current' : '' %> | 
+          <%= link_to "My Team", user_links_path, class: controller.class == TeamsController ? 'current' : '' %> | 
           <%= link_to "My Links", user_links_path, class: controller.class == UsersController ? 'current' : '' %>
         <% end %>
     </header>
