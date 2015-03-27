@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable
 
   has_many :short_urls
+  belongs_to :team
 
   def visits
     Visit.find_by_sql("

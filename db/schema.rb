@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318165315) do
+ActiveRecord::Schema.define(version: 20150327105216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,12 @@ ActiveRecord::Schema.define(version: 20150318165315) do
     t.string   "dasboard_metric_name"
   end
 
+  create_table "teams", force: true do |t|
+    t.text     "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -85,6 +91,7 @@ ActiveRecord::Schema.define(version: 20150318165315) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.boolean  "admin",                  default: false
+    t.integer  "team_id"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
@@ -101,5 +108,7 @@ ActiveRecord::Schema.define(version: 20150318165315) do
     t.integer  "location_id"
     t.string   "domain"
   end
+
+  add_foreign_key "users", "teams", name: "users_team_id_fk"
 
 end

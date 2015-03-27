@@ -5,6 +5,7 @@ gem 'rails', '~> 4.0.0'
 gem 'rake', '~> 10.1.0'
 
 gem 'pg'
+gem 'foreigner'
 
 gem 'rack-cors', :require => 'rack/cors'
 
