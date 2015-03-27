@@ -21,6 +21,10 @@ Wukumurl::Application.routes.draw do
 
   match '/' => 'short_urls#create', :controller => 'short_urls', :via => :post
 
+  namespace :admin do
+    resources :dashboard, :only => [:index]
+  end
+
   get "/short_urls/list",
     :controller => 'short_urls',
     :action => :list

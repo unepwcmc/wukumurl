@@ -1,5 +1,6 @@
 class ShortUrlsController < ApplicationController
   before_filter :authenticate_user!, :only => [:create, :update, :destroy]
+  before_filter :authenticate_admin, :only => [:edit]
 
   def index
     @visits_by_country = City.all_visits_by_country
@@ -83,6 +84,10 @@ class ShortUrlsController < ApplicationController
     end
 
     redirect_to :root
+  end
+
+  def edit
+    @short_url = ShortUrl.find(params[:id])
   end
 
   def update
