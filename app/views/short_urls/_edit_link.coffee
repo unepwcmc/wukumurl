@@ -8,7 +8,7 @@ $('.edit-link').on('click', (event) ->
     editLinkView = null
   else
     editLinkView = new Backbone.Views.EditLinkView({
-      short_url: <%= @short_url.to_json.html_safe %>
+      short_url: <%= short_url.to_json.html_safe %>
     })
     editLinkForm.html(editLinkView.el)
     editLinkForm.show()

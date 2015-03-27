@@ -16,6 +16,16 @@
           <% end %> <i>created by <%= short_url.user.full_name %></i>
         </small>
       </td>
+      <% if controller_name == 'users' && short_url.owned_by?(current_user) %>
+      <script><%= render(partial: 'short_urls/edit_link', locals: {short_url: short_url}).html_safe %></script>
+      <td>
+        <%= link_to short_url, :method => :delete,
+          :data => {:confirm => "Are you sure?"}, :class => 'button' do %>
+          <i class="fa fa-trash-o"></i>
+        <% end %>
+        <button class="edit-link" data-toggle="popover"><i class="fa fa-pencil-square-o"></i> Edit link</button>
+      </td>
+      <% end %>
       <td>
         <%= short_url.visit_count %>
       </td>
