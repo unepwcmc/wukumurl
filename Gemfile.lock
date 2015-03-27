@@ -100,6 +100,8 @@ GEM
     ffi (1.9.8)
     font-awesome-sass (4.3.2)
       sass (~> 3.2)
+    foreigner (1.7.2)
+      activerecord (>= 3.0.0)
     formatador (0.2.5)
     fssm (0.2.10)
     geocoder (1.2.7)
@@ -252,6 +254,7 @@ DEPENDENCIES
   ejs (~> 1.1.1)
   factory_girl_rails (= 4.2.1)
   font-awesome-sass
+  foreigner
   geocoder
   geoip-c (= 0.9.1)
   guard
