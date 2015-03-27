@@ -1,6 +1,6 @@
 Wukumurl::Application.routes.draw do
  
-  resources :teams, only: [:index, :show]
+  resources :teams, only: [:show]
 
   devise_for :users, controllers: {
     sessions: 'sessions',
