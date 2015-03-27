@@ -26,7 +26,7 @@
         <div class="header-actions-container">
           <div class="header-actions">
             <% if user_signed_in? %>
-              Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>,
+              Hello <%= current_user.first_name %>!
               <a href="<%= logout_path %>">sign out?</a>
 
               <button class="new-link" data-toggle="popover"><i class="fa fa-plus"></i> New Link</button>
