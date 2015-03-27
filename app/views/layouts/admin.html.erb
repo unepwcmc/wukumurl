@@ -28,9 +28,7 @@
             <% if user_signed_in? %>
               Hello <%= truncate("#{current_user.email}", :length => 19, :omission => '...') %>,
               <a href="<%= logout_path %>">sign out?</a>
-
-              <%= link_to 'Home', root_path %>
-              <%= link_to 'Admin', admin_dashboard_index_path %>
+              <%= link_to 'Admin', admin_dashboard_index_path, class: 'button' %>
             <% else -%>
               <%= link_to "Sign up", new_user_registration_path, :class => 'sign-up', :data => {'toggle' => 'popover'} %> or
               <%= link_to "Sign in", new_user_session_path, :class => 'sign-in', :data => {'toggle' => 'popover'} %>
