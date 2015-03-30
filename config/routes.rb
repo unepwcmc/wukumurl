@@ -1,7 +1,4 @@
 Wukumurl::Application.routes.draw do
- 
-  resources :teams, only: [:show]
-
   devise_for :users, controllers: {
     sessions: 'sessions',
     registrations: 'registrations',
@@ -42,6 +39,7 @@ Wukumurl::Application.routes.draw do
 
   resources :organizations, only: [:destroy]
   resources :users, only: [:update]
+  resources :teams, only: [:show]
 
   authenticate :user do
     get '/users/my_links', to: 'users#show', as: 'user_links'
