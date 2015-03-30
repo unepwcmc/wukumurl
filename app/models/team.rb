@@ -11,6 +11,7 @@ class Team < ActiveRecord::Base
   end
 
   def visits_by_country
+    return [] if users.count.zero?
     City.joins("
       INNER JOIN
         (
@@ -33,6 +34,7 @@ class Team < ActiveRecord::Base
   end
 
   def all_visits_by_organization
+    return [] if users.count.zero?
     Organization.find_by_sql("
       SELECT organizations.*, visit_count
       FROM organizations
@@ -56,6 +58,7 @@ class Team < ActiveRecord::Base
   end
 
   def total_visits
+    return [] if users.count.zero?
     Visit.find_by_sql("
       SELECT visits.*, COUNT(visits.id) as count
       FROM visits
