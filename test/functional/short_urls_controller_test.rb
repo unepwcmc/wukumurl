@@ -9,7 +9,7 @@ class ShortUrlsControllerTest < ActionController::TestCase
       FactoryGirl.create(:short_url)
     ]
 
-    (1..20).each do
+    (1..5).each do
       FactoryGirl.create(:visit, short_url: short_urls[1])
     end
 
