@@ -10,6 +10,7 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <%= javascript_include_tag "application" %>
   </head>
 
   <body>
@@ -37,7 +38,6 @@
       var pieChart = new PieChart(<%= @visits_by_country.to_json.html_safe %>);
     </script>
 
-    <%= javascript_include_tag "application" %>
     <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="<%= ENV["DROPBOX_API_KEY"] %>"></script>
 
     <% if Rails.env == 'production' %>
