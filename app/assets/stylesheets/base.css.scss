@@ -32,6 +32,12 @@ body {
   float: left;
 }
 
+.navigation-links a {
+  float: left;
+  padding: 0px 10px;
+  &:not(:last-child) { border-right: solid 1px $dark-grey; }
+}
+
 .current {
   font-weight: bold;
 }

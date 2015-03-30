@@ -21,6 +21,11 @@ module ApplicationHelper
     content_for :title, page_title.html_safe
   end
 
+  def link_with_class_on_path title, path, class_name
+    active_class = current_page?(path) ? class_name : ''
+    link_to title, path, class: active_class
+  end
+
   ### Devise
 
   def user_input_has_error? field_name

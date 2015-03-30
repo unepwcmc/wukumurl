@@ -40,10 +40,10 @@
 
 <header>
   <% if user_signed_in? && current_user.team.present? %>
-    <div class="left">
-      <%= link_to "WCMC", root_path, class: controller.class == ShortUrlsController &&action_name == 'index' ? 'current' : '' %>  |
-      <%= link_to "My Team", team_path(current_user.team.slug), class: controller.class == TeamsController ? 'current' : '' %> |
-      <%= link_to "My Links", user_links_path, class: controller.class == UsersController ? 'current' : '' %>
+    <div class="left navigation-links">
+      <%= link_with_class_on_path 'WCMC', root_path, 'current' %>
+      <%= link_with_class_on_path 'My Team', team_path(current_user.team.slug), 'current' %>
+      <%= link_with_class_on_path 'My Links', user_links_path, 'current' %>
     </div>
   <% end %>
   <div class="right">
