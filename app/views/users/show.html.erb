@@ -24,7 +24,11 @@
   } %>
 </div>
 
+<div class="edit-link-form popover"></div>
+
 <script>
+  var ShortUrlsCollection = <%= @short_urls.to_json.html_safe %>;
+  <%= render('short_urls/edit_link').html_safe %>
   $(document).ready(function() {
     var carto_table = "<%= CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_user'] %>";
     cartodb.createLayer(map, {
