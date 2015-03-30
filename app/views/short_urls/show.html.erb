@@ -31,7 +31,7 @@
 <div class="edit-link-form popover"></div>
 
 <script>
-  <%= render('short_urls/edit_link').html_safe %>
+  <%= render(partial: 'short_urls/edit_link', locals: {short_url: @short_url}).html_safe %>
 
   $(document).ready(function() {
     var carto_table = "<%= CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_short_url'] %>";
