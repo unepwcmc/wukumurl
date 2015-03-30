@@ -2,6 +2,7 @@ class ShortUrl < ActiveRecord::Base
   require 'securerandom'
   validates_uniqueness_of :short_name
   validate :validate_url
+  validate :user, presence: true
 
   before_validation :create_short_name_if_blank
   before_validation :sanitise_short_name
