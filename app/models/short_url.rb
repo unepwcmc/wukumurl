@@ -33,9 +33,9 @@ class ShortUrl < ActiveRecord::Base
     where("deleted = false OR deleted IS NULL")
   end
 
-  def owned_by? current_user
-    return !current_user.blank? &&
-      !current_user.short_urls.find_by_id(self.id).blank?
+  def owned_by? current_user_or_team
+    return false unless current_user_or_team
+    !!current_user_or_team.short_urls.find_by_id(id)
   end
 
   def self.generate_short_name

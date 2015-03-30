@@ -25,7 +25,7 @@ class Team < ActiveRecord::Base
         (
           SELECT short_urls.id
           FROM short_urls
-          WHERE user_id IN (#{self.users.pluck(:id).join(',')})
+          WHERE user_id IN (#{users.pluck(:id).join(',')})
           GROUP BY id
         ) AS short_urls_for_visits
       ON visits_for_orgs.short_url_id = short_urls_for_visits.id
@@ -48,7 +48,7 @@ class Team < ActiveRecord::Base
         (
           SELECT short_urls.id
           FROM short_urls
-          WHERE user_id IN (#{self.users.pluck(:id).join(',')})
+          WHERE user_id IN (#{users.pluck(:id).join(',')})
           GROUP BY id
         ) AS short_urls_for_visits
       ON visits_for_orgs.short_url_id = short_urls_for_visits.id
@@ -63,7 +63,7 @@ class Team < ActiveRecord::Base
         (
           SELECT id
           FROM short_urls
-          WHERE user_id IN (#{self.users.pluck(:id).join(',')})
+          WHERE user_id IN (#{users.pluck(:id).join(',')})
           GROUP BY id
         ) AS short_urls_for_visits
         ON visits.short_url_id = short_urls_for_visits.id
@@ -72,26 +72,26 @@ class Team < ActiveRecord::Base
   end
 
   def total_urls
-    self.users.each_with_object(0) {|user, sum| sum += user.short_urls.count}
+    users.each_with_object(0) {|user, sum| sum += user.short_urls.count}
   end
 
   def self.visits_by_team
-    teams = Team.find_by_sql([
-        visits_by_team_query,
-        "ORDER BY visit_count DESC"
-      ].join(" "))
-    teams
+    Team.find_by_sql(
+      "#{visits_by_team_query} ORDER BY visit_count DESC"
+    )
   end
 
   def self.visits_by_team_query
-    "SELECT teams.name, count(*) as visit_count
+    """
+      SELECT teams.name, count(*) as visit_count
         FROM short_urls
         INNER JOIN users ON
-        users.id= user_id
+        users.id = user_id
         INNER JOIN teams ON
         teams.id = team_id
         INNER JOIN visits ON
         short_urls.id = short_url_id
-      GROUP BY teams.name"
+      GROUP BY teams.name
+    """.squish
   end
 end
