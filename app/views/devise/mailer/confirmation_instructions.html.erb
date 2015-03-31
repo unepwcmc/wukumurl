@@ -1,5 +1,11 @@
-<p>Welcome <%= @email %>!</p>
+<p>Welcome to <a href="http://wcmc.io">WCMC.io</a>,</p>
 
-<p>We've introduced teams to <a href="http://wcmc.io">wcmc.io</a>! Please follow the link below to update your profile:</p>
+<p>To finalise your registration please click on the following link:</p>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+<p>Once the page has opened, please select and confirm the WCMC Programme you currently work for and you’re all set!</p>
+
+<p>Thanks,</p>
+
+<p>The <a href="http://wcmc.io">WCMC.io</a> Admin Team</p>
