@@ -26,6 +26,7 @@ group :development do
   gem 'guard'
   gem 'guard-minitest'
   gem 'rb-fsevent', '~> 0.9'
+  gem 'letter_opener'
 end
 
 gem 'factory_girl_rails', '4.2.1'
