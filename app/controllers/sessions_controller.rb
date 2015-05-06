@@ -23,4 +23,9 @@ class SessionsController < Devise::SessionsController
 
     return redirect_to :back
   end
+
+  def hide_info_modal
+    session[:hide_info_modal] = true
+    redirect_to root_path
+  end
 end

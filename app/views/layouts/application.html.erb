@@ -29,8 +29,7 @@
       <%= yield %>
     </div>
 
-    <%# TODO not really nice to show this all the time, if user has no links %>
-    <% if current_user.try(:no_urls?) && current_user.team.present? %>
+    <% if current_user.try(:no_urls?) && current_user.team.present? && session[:hide_info_modal].nil? %>
       <%= render partial: "short_urls/info_modal" %>
     <% end %>
 
