@@ -17,7 +17,7 @@
     <%= render partial: 'shared/header' %>
 
     <% unless @no_map %>
-      <div id="map" class="leaflet-container leaflet-fade-anim"></div>
+      <div id="map" class="leaflet-container leaflet-fade-anim"></div>§
     <% end %>
 
     <div class="dashboard">
@@ -29,7 +29,7 @@
       <%= yield %>
     </div>
 
-    <% if current_user.try(:no_urls?) && current_user.team.present? && session[:hide_info_modal].nil? %>
+    <% if current_user.try(:no_urls?) && current_user.team.present? && !cookies[:hide_info_modal] %>
       <%= render partial: "short_urls/info_modal" %>
     <% end %>
 

@@ -7,7 +7,6 @@ Wukumurl::Application.routes.draw do
   }
 
   devise_scope :user do
-    get "/hide_welcome", to: "sessions#hide_info_modal", :as => 'hide_info_modal'
     get "login", to: "devise/sessions#new"
     post "login", to: "devise/sessions#create"
 
