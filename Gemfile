@@ -17,6 +17,7 @@ gem 'rvm-capistrano'
 gem 'whenever', '~> 0.8.2'
 gem 'sidekiq'
 gem 'friendly_id', '~> 5.1.0'
+gem "capistrano-sidekiq"
 
 group :development do
   gem 'capistrano', '~> 2.15.5'

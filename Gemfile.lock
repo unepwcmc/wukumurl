@@ -61,6 +61,9 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
+    capistrano-sidekiq (0.4.0)
+      capistrano
+      sidekiq
     celluloid (0.16.0)
       timers (~> 4.0.0)
     chronic (0.10.2)
@@ -256,6 +259,7 @@ DEPENDENCIES
   byebug
   capistrano (~> 2.15.5)
   capistrano-ext
+  capistrano-sidekiq
   cartodb-rb-client!
   coffee-rails (~> 4.0.0)
   compass-rails (~> 2.0.alpha.0)
