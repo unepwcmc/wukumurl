@@ -4,10 +4,10 @@ require 'capistrano/ext/multistage'
 require 'brightbox/recipes'
 require 'brightbox/passenger'
 
-require "sidekiq/capistrano"
+require "capistrano/sidekiq"
 
 set :rake, 'bundle exec rake'
-
+set :bundle_flags, "--quiet"
 set :generate_webserver_config, false
 
 ssh_options[:forward_agent] = true
