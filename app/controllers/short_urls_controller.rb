@@ -81,7 +81,8 @@ class ShortUrlsController < ApplicationController
   def destroy
     short_url = ShortUrl.find(params[:id])
 
-    if short_url.user == current_user
+    if short_url.user == current_user ||
+      short_url.user.try(:team) == current_user.team
       short_url.destroy
     end
 
@@ -95,7 +96,8 @@ class ShortUrlsController < ApplicationController
   def update
     short_url = ShortUrl.find(params[:id])
 
-    return redirect_to :root unless short_url.user == current_user
+    return redirect_to :root unless short_url.user == current_user ||
+      short_url.user.try(:team) == current_user.team
 
     if short_url.update_attributes(short_url_params)
       render json: short_url
