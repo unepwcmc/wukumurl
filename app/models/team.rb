@@ -86,7 +86,7 @@ class Team < ActiveRecord::Base
 
   def self.visits_by_team_query
     """
-      SELECT teams.name, count(*) as visit_count
+      SELECT teams.name, teams.slug, count(*) as visit_count
         FROM short_urls
         INNER JOIN users ON
         users.id = user_id
