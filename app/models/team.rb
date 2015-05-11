@@ -94,7 +94,7 @@ class Team < ActiveRecord::Base
         teams.id = team_id
         INNER JOIN visits ON
         short_urls.id = short_url_id
-      GROUP BY teams.name
+      GROUP BY teams.name, teams.slug
     """.squish
   end
 end
