@@ -11,6 +11,6 @@ class TeamsController < ApplicationController
     @total_visits = @team.total_visits.length
     @total_urls   = @team.total_urls
 
-    @short_urls = @team.short_urls
+    @short_urls = @team.short_urls.ordered_by_visits_desc.not_deleted
   end
 end

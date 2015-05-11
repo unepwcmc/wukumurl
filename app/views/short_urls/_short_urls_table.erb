@@ -11,7 +11,7 @@
         <% end %>
 
         <small title="<%= short_url.url %>">
-          <%= link_to short_url.url do %>
+          <%= link_to short_url.url, target: :_blank do %>
             <%= truncate pretty_url(short_url.url), length: 40, omission: '...' %>
           <% end %>
           <% if controller_name != 'users' && short_url.user %>
