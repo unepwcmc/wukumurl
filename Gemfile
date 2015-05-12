@@ -15,7 +15,7 @@ gem 'cartodb-rb-client', :git => 'https://github.com/unepwcmc/cartodb-rb-client.
 
 gem 'rvm-capistrano'
 gem 'whenever', '~> 0.8.2'
-gem 'sidekiq'
+gem 'sidekiq', '~> 2.17.4'
 gem 'friendly_id', '~> 5.1.0'
 gem "capistrano-sidekiq"
 
