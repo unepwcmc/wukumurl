@@ -42,7 +42,6 @@ class ShortUrl < ActiveRecord::Base
     SecureRandom.hex(2)
   end
 
-
   def visit_count
     Visit.where(short_url_id: self.id).count
   end
