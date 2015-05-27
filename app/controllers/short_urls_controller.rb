@@ -1,11 +1,14 @@
 class ShortUrlsController < ApplicationController
   before_filter :authenticate_user!, :only => [:create, :update, :destroy]
+  before_filter :authenticate_admin, :only => [:edit]
 
   def index
     @visits_by_country = City.all_visits_by_country
     @visits_by_country_count = @visits_by_country.length
     @visits_by_organization = Organization.all_visits_by_organization
     @visits_by_organization_count = @visits_by_organization.length
+    @visits_by_team = Team.visits_by_team
+    @visits_by_team_count = @visits_by_team.length
 
     @total_visits = Visit.count
     @total_urls   = ShortUrl.not_deleted.count
@@ -78,17 +81,20 @@ class ShortUrlsController < ApplicationController
   def destroy
     short_url = ShortUrl.find(params[:id])
 
-    if short_url.user == current_user
-      short_url.destroy
-    end
-
+    short_url.destroy if current_user.can_manage?(short_url)
     redirect_to :root
+  end
+
+  def edit
+    @short_url = ShortUrl.find(params[:id])
   end
 
   def update
     short_url = ShortUrl.find(params[:id])
 
-    return redirect_to :root unless short_url.user == current_user
+    unless current_user.can_manage?(short_url)
+      return redirect_to :root
+    end
 
     if short_url.update_attributes(short_url_params)
       render json: short_url

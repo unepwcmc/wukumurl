@@ -11,13 +11,26 @@
         <% end %>
 
         <small title="<%= short_url.url %>">
-          <%= link_to short_url.url do %>
+          <%= link_to short_url.url, target: :_blank do %>
             <%= truncate pretty_url(short_url.url), length: 40, omission: '...' %>
           <% end %>
+          <% if controller_name != 'users' && short_url.user %>
+            <i>created by <%= short_url.user.full_name %></i>
+          <% end %>
         </small>
+        <% if controller_name == 'users' && short_url.owned_by?(current_user) %>
+          <%= link_to short_url, :method => :delete,
+          :data => {:confirm => "Are you sure?"}, :class => 'button' do %>
+            <i class="fa fa-trash-o"></i>
+          <% end %>
+          <%= link_to short_url_info_path(short_url.short_name),
+            :class => 'button edit-link', 'data-toggle' => 'popover', 'data-short-url-id' => short_url.id do %>
+            <i class="fa fa-pencil-square-o"></i>
+          <% end %>
+        <% end %>
       </td>
       <td>
-        <%= short_url.visits_count %>
+        <%= short_url.visit_count %>
       </td>
   <% end %>
   </tbody>

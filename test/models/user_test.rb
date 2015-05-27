@@ -107,4 +107,20 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 1, visits_by_country["St Lucia"],
       "Expected St Lucia to have a country visit count of 1"
   end
+
+  test '#can_manage?, given a short url, returns true when it is owned by the user' do
+    user = FactoryGirl.build(:user)
+    short_url = FactoryGirl.build(:short_url, user: user)
+
+    assert_equal true, user.can_manage?(short_url)
+  end
+
+  test '#can_manage?, given a short url, returns true when its from the users team' do
+    team = FactoryGirl.build(:team)
+    user = FactoryGirl.build(:user, team: team)
+    user_2 = FactoryGirl.build(:user, team: team)
+    short_url = FactoryGirl.build(:short_url, user: user_2)
+
+    assert_equal true, user.can_manage?(short_url)
+  end
 end

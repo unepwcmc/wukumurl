@@ -55,6 +55,7 @@ module Wukumurl
 
     config.assets.paths << Rails.root.join('vendor', 'assets', 'flash')
     config.assets.precompile << Rails.root.join('vendor', 'assets', 'flash')
+    config.assets.precompile += %w(admin.js)
 
     config.middleware.use Rack::Cors do
       allow do

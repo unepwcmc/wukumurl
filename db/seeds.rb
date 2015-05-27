@@ -8,10 +8,28 @@ csv.each do |row|
   CountryLocation.create!(row.to_hash)
 end
 
+
+['Informatics',
+ 'Protected Areas',
+ 'Species',
+ 'EAP',
+ 'Business and Biodiversity',
+ 'Climate Change and Biodiversity',
+ 'Conventions and Policy Support',
+ 'Development',
+ 'Directorate',
+ 'Ecosystems Assessment',
+ 'Marine',
+ 'Science'
+].each do |team|
+  Team.create(name: team)
+end
+
 if Rails.env == 'development'
   User.create(
     email: 'dev@wcmc.io',
     password: 'password',
-    password_confirmation: 'password'
+    password_confirmation: 'password',
+    team: Team.where(name: 'Informatics').first
   )
 end

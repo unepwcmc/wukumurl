@@ -1,6 +1,6 @@
 <% title "wcmc.io/#{@short_url.short_name} <small>#{link_to @short_url.url, @short_url.url}</small>" %>
 
-<% if @short_url.owned_by? current_user %>
+<% if user_signed_in? && @short_url.owned_by?(current_user.team) %>
   <% content_for :page_actions do %>
 
     <%= link_to @short_url, :method => :delete,
@@ -24,7 +24,7 @@
 
 <div class="right">
   <%= render partial: "short_urls/organizations_table", locals: {
-    title: "Top organizations by number of visits"
+    title: "Top organisations by number of visits"
   } %>
 </div>
 

@@ -18,7 +18,7 @@ $(($)->
   modal.find("button").click( (e) ->
     modal.hide()
     modalOverlay.hide()
-
+    document.cookie="hide_info_modal=true;path=/";
     toggleNewLink()
   )
 

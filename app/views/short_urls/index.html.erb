@@ -1,10 +1,5 @@
-<% title "Shared documents by WCMC" %>
 
-<% if user_signed_in? %>
-  <% content_for :page_actions do %>
-    <%= link_to 'Go to my links', user_links_path %>
-  <% end %>
-<% end %>
+<% title "Shared documents by WCMC" %>
 
 <div class="left">
   <%= render partial: "headline_number", locals: {
@@ -30,8 +25,11 @@
 
 <div class="right">
   <%= render partial: "chart_block" %>
+    <%= render partial: "teams_table", locals: {
+    title: "Top teams by number of visits"
+  } %>
   <%= render partial: "organizations_table", locals: {
-    title: "Top organizations by number of visits"
+    title: "Top organisations by number of visits"
   } %>
 </div>
 

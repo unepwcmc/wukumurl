@@ -1,8 +1,24 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable
+    :recoverable, :rememberable, :trackable, :validatable,
+    :confirmable
 
   has_many :short_urls
+  belongs_to :team
+
+  def first_name
+    name = self.email.partition('@').first
+    name.partition('.').first.titleize
+  end
+
+  def last_name
+    name = self.email.partition('@').first
+    name.partition('.').last.titleize
+  end
+
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
 
   def visits
     Visit.find_by_sql("
@@ -67,5 +83,10 @@ class User < ActiveRecord::Base
 
   def no_urls?
     self.short_urls.count == 0
+  end
+
+  def can_manage? short_url
+    same_team = (team.present? && team == short_url.user.team)
+    short_url.user == self || same_team
   end
 end

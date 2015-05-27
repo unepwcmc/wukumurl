@@ -3,7 +3,7 @@ Wukumurl::Application.routes.draw do
     sessions: 'sessions',
     registrations: 'registrations',
     confirmations: 'confirmations',
-    :passwords => "passwords"
+    passwords: 'passwords'
   }
 
   devise_scope :user do
@@ -21,6 +21,10 @@ Wukumurl::Application.routes.draw do
 
   match '/' => 'short_urls#create', :controller => 'short_urls', :via => :post
 
+  namespace :admin do
+    resources :dashboard, :only => [:index]
+  end
+
   get "/short_urls/list",
     :controller => 'short_urls',
     :action => :list
@@ -34,9 +38,12 @@ Wukumurl::Application.routes.draw do
     :as => 'short_url_info'
 
   resources :organizations, only: [:destroy]
+  resources :users, only: [:update]
+  resources :teams, only: [:show]
 
   authenticate :user do
-    get "/users/my_links", to: 'users#show', as: 'user_links'
+    get '/users/my_links', to: 'users#show', as: 'user_links'
+    get '/users/pick_team', to: 'users#pick_team', as: 'pick_team'
   end
 
   root to: 'short_urls#index', as: :root

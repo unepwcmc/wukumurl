@@ -32,6 +32,16 @@ body {
   float: left;
 }
 
+.navigation-links a {
+  float: left;
+  padding: 0px 10px;
+  &:not(:last-child) { border-right: solid 1px $dark-grey; }
+}
+
+.current {
+  font-weight: bold;
+}
+
 .right {
   float: right;
 }
@@ -94,7 +104,7 @@ div.header {
     padding-top: 4px;
     position: relative;
 
-    button {
+    button, .button {
       border: 1px solid white;
       color: white;
 
@@ -458,8 +468,8 @@ a.button, button {
 }
 
 button.new-link{
-  font-size: 1em;
-  margin-left: 10px;
+  /*font-size: 1em;*/
+  margin-left: 5px;
 }
 
 .alert {
@@ -509,5 +519,11 @@ button.new-link{
   opacity: .2;
   &.active {
     opacity: 1;
+  }
+}
+
+.short-urls {
+  .edit-link {
+    margin: 1px;
   }
 }
