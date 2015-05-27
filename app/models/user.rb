@@ -84,4 +84,9 @@ class User < ActiveRecord::Base
   def no_urls?
     self.short_urls.count == 0
   end
+
+  def can_manage? short_url
+    same_team = (team.present? && team == short_url.user.team)
+    short_url.user == self || same_team
+  end
 end
