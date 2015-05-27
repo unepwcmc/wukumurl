@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def update
     if current_user.update_attributes(user_params)
+      notify_slack
       redirect_to root_path
     else
       flash[:errors] ||= {}
@@ -33,5 +34,17 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:team_id)
+  end
+
+  def notify_slack
+    uri = URI(ENV['SLACK_WEBHOOK_URL'])
+    res = Net::HTTP.post_form(uri, 'payload' => {
+      username: 'wcmc-io-counter',
+      icon_emoji: ':wave:',
+      text: """
+        A user has chosen their team, and it's #{current_user.team.name}!
+        #{User.where(team_id: nil).count} more to go! :)
+      """
+    }.to_json)
   end
 end

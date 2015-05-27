@@ -124,7 +124,7 @@ class GeoLocator
     if existing_org[:rows].first[:count] > 0
       org_query = "
         UPDATE #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['visits_by_organization']}
-        SET visits = visits + 1 
+        SET visits = visits + 1
         WHERE org_id=#{organization.id}
       "
     else
