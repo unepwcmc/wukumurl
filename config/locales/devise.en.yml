@@ -19,7 +19,7 @@ en:
       unconfirmed: "You have to confirm your account before continuing."
     mailer:
       confirmation_instructions:
-        subject: "WCMC.io Account Activation Required"
+        subject: "Important changes to your WCMC.io account"
       reset_password_instructions:
         subject: "Reset password instructions"
       unlock_instructions:

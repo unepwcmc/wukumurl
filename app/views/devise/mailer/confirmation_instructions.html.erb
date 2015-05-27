@@ -1,11 +1,26 @@
-<p>Welcome to <a href="http://wcmc.io">WCMC.io</a>,</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <style>
+      * { font-family: 'Open Sans', sans-serif; }
+    </style>
+  </head>
 
-<p>To finalise your registration please click on the following link:</p>
+  <body>
+    <h2>Hello WCMC.io users,</h2>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+    <p>The informatics team have recently added some great new features to wcmc.io which require your input.</p>
 
-<p>Once the page has opened, please select and confirm the WCMC Programme you currently work for and you’re all set!</p>
+    <p>We've introduced a ‘teams’ functionality so users of WCMC.io can now be grouped by programme, and have the ability to edit and delete links from other members of their ‘team’. This looks to solve issues around the updating and administration of WCMC.io short links when the original creator of the link is unavailable.</p>
 
-<p>Thanks,</p>
+    <p>To get started, you need to choose join your programme by <%= link_to('clicking here.', confirmation_url(@resource, confirmation_token: @token)) %></p>
 
-<p>The <a href="http://wcmc.io">WCMC.io</a> Admin Team</p>
+    <p>Users can also now see which other members of their Programme (or 'team'), are signed up to WCMC.io, as well as seeing what links have been shared by other individuals and teams, and how many times these links have been visited.</p>
+
+    <p>Remember, to get started you need to join your programme by <%= link_to('clicking here.', confirmation_url(@resource, confirmation_token: @token)) %>  Once that's done, you’re all set!</p>
+
+    <p>Many thanks,</p>
+    <p>The WCMC.io Admin Team</p>
+  </body>
+</html>
