@@ -38,13 +38,16 @@ class UsersController < ApplicationController
 
   def notify_slack
     uri = URI(ENV['SLACK_WEBHOOK_URL'])
-    res = Net::HTTP.post_form(uri, 'payload' => {
+    payload = {
       username: 'wcmc-io-counter',
       icon_emoji: ':wave:',
+      channel: '@andrea',
       text: """
         A user has chosen their team, and it's #{current_user.team.name}!
         #{User.where(team_id: nil).count} more to go! :)
       """
-    }.to_json)
+    }.to_json
+
+    Net::HTTP.post_form(uri, payload: payload)
   end
 end
