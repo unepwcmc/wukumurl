@@ -27,9 +27,9 @@ end
 
 if Rails.env == 'development'
   User.create(
-    email: 'dev@wcmc.io',
+    email: 'dev@unep-wcmc.org',
     password: 'password',
     password_confirmation: 'password',
-    team: Team.where(name: 'Informatics').first
+    team_id: Team.where(name: 'Informatics').first.id
   )
 end
