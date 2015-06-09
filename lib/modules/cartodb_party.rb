@@ -7,7 +7,7 @@ class CartodbParty
 
   def self.build_url path, opts={}
     uri = URI::HTTPS.build(
-      host: "carbon-tool.cartodb.com",
+      host: "#{CARTODB_CONFIG['username']}.cartodb.com",
       path: path,
       query: opts.to_query
     )
