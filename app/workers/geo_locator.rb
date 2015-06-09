@@ -31,14 +31,16 @@ class GeoLocator
       return
     end
 
-    existing_short_url = CartoDB::Connection.query("
+    existing_short_url_query = "
       SELECT COUNT(*)
       FROM #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_short_url']}
       WHERE short_url_id=#{short_url.id}
       AND org_id=#{organization.id}
-    ")
+    "
 
-    if existing_short_url[:rows].first[:count] > 0
+    existing_short_url = CartodbParty.query(existing_short_url_query)
+
+    if existing_short_url["rows"].first["count"] > 0
       short_url_query = "
         UPDATE #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_short_url']}
         SET visits=visits+1
@@ -60,7 +62,7 @@ class GeoLocator
       "
     end
 
-    CartoDB::Connection.query ERB::Util.url_encode(short_url_query)
+    CartodbParty.query(short_url_query)
   end
 
   def update_orgs_by_user visit
@@ -80,9 +82,9 @@ class GeoLocator
       AND org_id=#{organization.id}
     "
 
-    organizations_by_user = CartoDB::Connection.query(q)
+    organizations_by_user = CartodbParty.query(q)
 
-    if organizations_by_user[:rows].first[:count] > 0
+    if organizations_by_user["rows"].first["count"] > 0
       user_query = "
         UPDATE #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_user']}
         SET visits=visits+1
@@ -103,7 +105,7 @@ class GeoLocator
         )
       "
     end
-    CartoDB::Connection.query ERB::Util.url_encode(user_query)
+    CartodbParty.query(user_query)
   end
 
   def update_orgs visit
@@ -115,13 +117,13 @@ class GeoLocator
       return
     end
 
-    existing_org = CartoDB::Connection.query("
+    existing_org = CartodbParty.query("
       SELECT COUNT(*)
       FROM #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['visits_by_organization']}
       WHERE org_id=#{organization.id}
     ")
 
-    if existing_org[:rows].first[:count] > 0
+    if existing_org["rows"].first["count"] > 0
       org_query = "
         UPDATE #{CARTODB_LAYERS_CONFIG['tables'][Rails.env]['visits_by_organization']}
         SET visits = visits + 1
@@ -141,6 +143,6 @@ class GeoLocator
       "
     end
 
-    CartoDB::Connection.query ERB::Util.url_encode(org_query)
+    CartodbParty.query(org_query)
   end
 end
