@@ -1,19 +1,3 @@
-GIT
-  remote: https://github.com/unepwcmc/cartodb-rb-client.git
-  revision: 3652f7ebcf5309d481f85a6bc64b4850360573e2
-  branch: wcmcio
-  specs:
-    cartodb-rb-client (0.4.3)
-      activesupport (>= 3.0.0)
-      i18n (>= 0.5.0)
-      json (>= 1.5.3)
-      mime-types (>= 1.16)
-      oauth (= 0.4.5)
-      pg (>= 0.11.0)
-      rgeo (>= 0.3.2)
-      rgeo-geojson (>= 0.2.1)
-      typhoeus (= 0.3.3)
-
 GEM
   remote: https://rubygems.org/
   remote: http://gems.github.com/
@@ -131,6 +115,9 @@ GEM
     highline (1.7.1)
     hike (1.2.3)
     hitimes (1.2.2)
+    httparty (0.13.3)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
@@ -153,6 +140,7 @@ GEM
     mime-types (2.4.3)
     minitest (4.7.5)
     multi_json (1.11.0)
+    multi_xml (0.5.5)
     nenv (0.2.0)
     net-ldap (0.11)
     net-scp (1.2.1)
@@ -165,7 +153,6 @@ GEM
     notiffany (0.0.6)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    oauth (0.4.5)
     orm_adapter (0.5.0)
     pg (0.18.1)
     pry (0.10.1)
@@ -199,9 +186,6 @@ GEM
     ref (1.0.5)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
-    rgeo (0.3.20)
-    rgeo-geojson (0.3.1)
-      rgeo (~> 0.3)
     rvm-capistrano (1.5.6)
       capistrano (~> 2.15.4)
     sass (3.2.19)
@@ -238,8 +222,6 @@ GEM
     tilt (1.4.1)
     timers (4.0.1)
       hitimes
-    typhoeus (0.3.3)
-      mime-types
     tzinfo (0.3.43)
     uglifier (2.7.1)
       execjs (>= 0.3.0)
@@ -260,7 +242,6 @@ DEPENDENCIES
   capistrano (~> 2.15.5)
   capistrano-ext
   capistrano-sidekiq
-  cartodb-rb-client!
   coffee-rails (~> 4.0.0)
   compass-rails (~> 2.0.alpha.0)
   dasboard_client
@@ -275,6 +256,7 @@ DEPENDENCIES
   geoip-c (= 0.9.1)
   guard
   guard-minitest
+  httparty
   jquery-rails
   leaflet-rails
   letter_opener
