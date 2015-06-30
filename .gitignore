@@ -24,6 +24,7 @@
 /config/database.yml
 
 config/cartodb_config.yml
+/coverage/*
 vendor/ruby
 
 # dotenv config

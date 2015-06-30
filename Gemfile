@@ -53,3 +53,7 @@ gem 'dotenv-rails', '~> 0.9.0'
 
 gem 'dasboard_client', require: false
 gem 'byebug'
+
+group :test do
+  gem 'simplecov', '>=0.9', :require => false
+end
