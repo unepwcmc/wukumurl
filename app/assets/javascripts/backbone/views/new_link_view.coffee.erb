@@ -15,8 +15,10 @@ class Backbone.Views.NewLinkView extends Backbone.View
     event.preventDefault()
 
     data =
-      url: @$el.find('#url').val()
-      short_name: @$el.find('#short_name').val()
+      short_url:
+        url: @$el.find('#url').val()
+        short_name: @$el.find('#short_name').val()
+        private: @$el.find('#private').is(':checked')
 
     $.ajax(
       url: '/'

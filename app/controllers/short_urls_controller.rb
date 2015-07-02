@@ -30,12 +30,9 @@ class ShortUrlsController < ApplicationController
   end
 
   def create
-    if params[:url].present?
-      short_url = ShortUrl.new(
-        url: params[:url],
-        short_name: params[:short_name],
-        user: current_user
-      )
+    if params[:short_url].present?
+      short_url = ShortUrl.new(short_url_params)
+      short_url.user = current_user
 
       if short_url.save
         render json: short_url, status: :created
@@ -106,6 +103,6 @@ class ShortUrlsController < ApplicationController
   private
 
   def short_url_params
-    params.require(:short_url).permit(:url, :short_name)
+    params.require(:short_url).permit(:url, :short_name, :private)
   end
 end
