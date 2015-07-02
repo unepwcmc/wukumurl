@@ -1,4 +1,4 @@
-<% title "wcmc.io/#{@short_url.short_name} <small>#{link_to @short_url.url, @short_url.url}</small>" %>
+<% title "wcmc.io/#{@short_url.short_name} " + "<small>(" + (@short_url.private ? "Private" : "#{link_to @short_url.url, @short_url.url}") + ")</small>" %>
 
 <% if user_signed_in? && @short_url.owned_by?(current_user.team) %>
   <% content_for :page_actions do %>
