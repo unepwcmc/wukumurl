@@ -17,6 +17,7 @@ class Backbone.Views.EditLinkView extends Backbone.View
     data =
       url: @$el.find('#url').val()
       short_name: @$el.find('#short_name').val()
+      private: @$el.find('#private').is(':checked')
 
     $.ajax(
       url: "/short_urls/#{@short_url.id}"
@@ -29,6 +30,7 @@ class Backbone.Views.EditLinkView extends Backbone.View
     @$el.html(@template(
       url: @short_url.url
       short_name: @short_url.short_name
+      private: @short_url.private
     ))
     return @
 
@@ -39,9 +41,16 @@ class Backbone.Views.EditLinkView extends Backbone.View
   renderSuccess: (shortUrl) =>
     template = JST['backbone/templates/link_added']
 
+    @short_url = shortUrl
+
     @$el.html(template(
       url: shortUrl.short_name
     ))
+
+    if(shortUrl.private)
+      $('#short_link_url').html('Private')
+    else
+      $('#short_link_url').html("<a href='#{shortUrl.url}' target='blank'>#{shortUrl.url}</a>")
 
     new ZeroClipboard(
       @$el.find(".copy-url"),

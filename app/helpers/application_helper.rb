@@ -17,8 +17,12 @@ module ApplicationHelper
     end
   end
 
-  def title page_title
-    content_for :title, page_title.html_safe
+  def title page_title=nil, &block
+    if block_given?
+      content_for :title, &block
+    else
+      content_for :title, page_title.html_safe
+    end
   end
 
   def link_with_class_on_path title, path, class_name
