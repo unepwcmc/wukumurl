@@ -1,5 +1,6 @@
 window.Backbone ||= {}
 window.Backbone.Views ||= {}
+window.Backbone.View.prototype.eventAggregator = _.extend({}, Backbone.Events);
 
 class Backbone.Views.EditLinkView extends Backbone.View
   template: JST['backbone/templates/edit_link']
@@ -32,6 +33,7 @@ class Backbone.Views.EditLinkView extends Backbone.View
       short_name: @short_url.short_name
       private: @short_url.private
     ))
+
     return @
 
   renderFailure: (response) ->
@@ -47,6 +49,7 @@ class Backbone.Views.EditLinkView extends Backbone.View
       url: shortUrl.short_name
     ))
 
+    @eventAggregator.trigger('link_updated', shortUrl)
     if(shortUrl.private)
       $('#short_link_url').html('Private')
     else
@@ -56,8 +59,6 @@ class Backbone.Views.EditLinkView extends Backbone.View
       @$el.find(".copy-url"),
       moviePath: "<%= asset_path "ZeroClipboard.swf" %>"
     )
-
-    @renderShortUrlTable()
 
     return @
 

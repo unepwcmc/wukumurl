@@ -1,7 +1,14 @@
 editLinkForm = $('.edit-link-form')
 editLinkView = null
+theShortUrl = null
 
 $('.edit-link').on('click', (event) ->
+  # if(<%= @short_url.private? %>)
+  #   $('#private').prop('checked', true)
+  # else
+  #   $('#private').prop('checked', false)
+
+
   event.preventDefault()
   event.stopPropagation()
   buttonEl = $(event.target).closest('.edit-link').first()
@@ -11,18 +18,22 @@ $('.edit-link').on('click', (event) ->
     editLinkView.close()
     editLinkView = null
   else
-    if ShortUrlsCollection?
-      id = buttonEl.data('shortUrlId')
-      shortUrl = $.grep(ShortUrlsCollection, (e) ->
-        e.id == id
-      )[0]
-    else
-      shortUrl = <%= @short_url.to_json.html_safe %>
-    return false unless shortUrl
+    unless theShortUrl
+      if ShortUrlsCollection?
+        id = buttonEl.data('shortUrlId')
+        theShortUrl = $.grep(ShortUrlsCollection, (e) ->
+          e.id == id
+        )[0]
+      else
+        theShortUrl = <%= @short_url.to_json.html_safe %>
+      return false unless theShortUrl
 
     editLinkView = new Backbone.Views.EditLinkView({
-      short_url: shortUrl
+      short_url: theShortUrl
     })
+    editLinkView.eventAggregator.on('link_updated', (new_short_url) ->
+      theShortUrl = new_short_url
+    )
     editLinkForm.html(editLinkView.el)
     buttonPosition = buttonEl.position()
     formPositionTop = buttonPosition.top + buttonEl.height() + 20
