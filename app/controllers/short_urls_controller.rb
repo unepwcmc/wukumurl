@@ -100,6 +100,14 @@ class ShortUrlsController < ApplicationController
     end
   end
 
+  def organizations_table
+    @short_url = ShortUrl.where(short_name: params[:short_name]).first
+    @visits_by_organization = @short_url.visits_by_organization group_by_disregarded: false
+    @visits_by_organization_count = @visits_by_organization.length
+
+    render partial: "organizations_table", locals: {title: "Top organisations by number of visits"}
+  end
+
   private
 
   def short_url_params

@@ -30,6 +30,7 @@ Wukumurl::Application.routes.draw do
     :action => :list
   resources :short_urls
 
+  get "/:short_name/organizations_table", to: "short_urls#organizations_table"
   get "/:short_name", :controller => 'short_urls', :action => :visit,
     :as => 'visit_short_url'
   get "/:short_name/info",

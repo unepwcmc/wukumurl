@@ -50,6 +50,7 @@ class Backbone.Views.EditLinkView extends Backbone.View
     ))
 
     @eventAggregator.trigger('link_updated', shortUrl)
+    @updateOrganizationsTable(shortUrl.short_name)
     if(shortUrl.private)
       $('#short_link_url').html('Private')
     else
@@ -63,3 +64,8 @@ class Backbone.Views.EditLinkView extends Backbone.View
     return @
 
   close: ->
+
+  updateOrganizationsTable: (short_url) ->
+    $.get("/#{short_url}/organizations_table", (data)->
+      $('.organizations_table_container').replaceWith(data)
+    )
