@@ -3,12 +3,6 @@ editLinkView = null
 theShortUrl = null
 
 $('.edit-link').on('click', (event) ->
-  # if(<%= @short_url.private? %>)
-  #   $('#private').prop('checked', true)
-  # else
-  #   $('#private').prop('checked', false)
-
-
   event.preventDefault()
   event.stopPropagation()
   buttonEl = $(event.target).closest('.edit-link').first()
