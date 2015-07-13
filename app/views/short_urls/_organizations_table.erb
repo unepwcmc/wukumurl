@@ -4,7 +4,7 @@
   </header>
 
   <div id="organizations_table" class="expandable-table">
-    <% if current_user && !@short_url.private? %>
+
       <% if @visits_by_organization_count > 0 %>
         <table>
           <tbody>
@@ -27,8 +27,5 @@
       <% else %>
         <big>No visits yet</big>
       <% end %>
-    <% else %>
-      <big>Organisations are not shown for private links</big>
-    <% end %>
   </div>
 </section>

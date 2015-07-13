@@ -29,9 +29,22 @@
 </div>
 
 <div class="right">
-  <%= render partial: "short_urls/organizations_table", locals: {
-    title: "Top organisations by number of visits"
-  } %>
+  <% if !@short_url.private? || (!current_user.nil? && current_user.is_beta? && current_user.is_owner?(@short_url))%>
+    <%= render partial: "short_urls/organizations_table", locals: {
+      title: "Top organisations by number of visits"
+    } %>
+  <% else %>
+    <section class="organizations_table_container">
+      <header>
+        <h4>Top organisations by number of visits</h4>
+      </header>
+
+      <div id="organizations_table" class="expandable-table">
+        <big>Organisations are not shown for private links,<br>
+        Only the owner of this link can view this information</big>
+      </div>
+    </section>
+  <% end %>
 </div>
 
 <div class="edit-link-form popover"></div>

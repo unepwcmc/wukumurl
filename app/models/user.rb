@@ -89,4 +89,12 @@ class User < ActiveRecord::Base
     same_team = (team.present? && team == short_url.user.team)
     short_url.user == self || same_team
   end
+
+  def is_beta?
+    self.team_id == 5 # Business and Biodiversity
+  end
+
+  def is_owner? short_url
+    short_url.user_id == self.id
+  end
 end
