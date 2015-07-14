@@ -14,7 +14,7 @@
       <i class="fa fa-trash-o"></i> Delete link
     <% end %>
 
-    <button class="edit-link" data-toggle="popover"><i class="fa fa-pencil-square-o"></i> Edit link</button>
+    <button class="edit-link" data-beta="<%= current_user.is_beta? %>" data-toggle="popover"><i class="fa fa-pencil-square-o"></i> Edit link</button>
 
   <% end %>
 <% end %>

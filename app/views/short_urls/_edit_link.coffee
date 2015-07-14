@@ -5,7 +5,8 @@ theShortUrl = null
 $('.edit-link').on('click', (event) ->
   event.preventDefault()
   event.stopPropagation()
-  buttonEl = $(event.target).closest('.edit-link').first()
+  target = $(event.target)
+  buttonEl = target.closest('.edit-link').first()
 
   if editLinkView
     editLinkForm.hide()
@@ -24,6 +25,7 @@ $('.edit-link').on('click', (event) ->
 
     editLinkView = new Backbone.Views.EditLinkView({
       short_url: theShortUrl
+      is_beta: !!target.data('beta')
     })
     editLinkView.eventAggregator.on('link_updated', (new_short_url) ->
       theShortUrl = new_short_url

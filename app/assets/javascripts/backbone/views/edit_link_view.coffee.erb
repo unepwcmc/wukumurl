@@ -10,6 +10,7 @@ class Backbone.Views.EditLinkView extends Backbone.View
 
   initialize: (options = {}) ->
     @short_url = options.short_url
+    @is_beta = options.is_beta
     @render()
 
   saveLink: (event) =>
@@ -32,6 +33,7 @@ class Backbone.Views.EditLinkView extends Backbone.View
       url: @short_url.url
       short_name: @short_url.short_name
       private: @short_url.private
+      is_beta: @is_beta
     ))
 
     return @

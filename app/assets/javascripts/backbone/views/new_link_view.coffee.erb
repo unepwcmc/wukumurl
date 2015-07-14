@@ -8,7 +8,8 @@ class Backbone.Views.NewLinkView extends Backbone.View
     'click #edit_name': 'toggleEditName'
     'click .create': 'saveLink'
 
-  initialize: ->
+  initialize: (options={}) ->
+    @is_beta = options.is_beta
     @render()
 
   saveLink: (event) =>
@@ -34,7 +35,7 @@ class Backbone.Views.NewLinkView extends Backbone.View
       .toggle()
 
   render: ->
-    @$el.html(@template())
+    @$el.html(@template(is_beta: @is_beta))
     @renderDropboxButton()
     return @
 
