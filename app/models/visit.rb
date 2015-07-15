@@ -1,6 +1,5 @@
 class Visit < ActiveRecord::Base
   belongs_to :short_url
-  belongs_to :country
   belongs_to :organization
   belongs_to :city
   belongs_to :location
