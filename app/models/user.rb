@@ -91,7 +91,7 @@ class User < ActiveRecord::Base
   end
 
   def is_beta?
-    self.team_id == 5 # Business and Biodiversity
+    self.team_id == (Rails.env.staging? ? 1 : 5) # Informatics on staging, Business and Biodiversity in production
   end
 
   def is_owner? short_url
