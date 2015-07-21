@@ -1,8 +1,5 @@
 <% title do %>
  wcmc.io/<%= @short_url.short_name %>
- <!--small class='<%= "hidden" unless @short_url.private %>' id='private'>(Private)</small-->
- <!--small class='<%= "hidden" if @short_url.private %>' id='public'>(<%= link_to @short_url.url, @short_url.url %>)</small-->
-
  <small id="short_link_url"><%= @short_url.private? ? 'Private' : (link_to @short_url.url, @short_url.url) %></small>
 <% end %>
 

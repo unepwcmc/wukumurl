@@ -91,7 +91,7 @@ class User < ActiveRecord::Base
   end
 
   def is_beta?
-    self.team_id == Rails.application.secrets.beta_team
+    self.team.name == Rails.application.secrets.beta_team
   end
 
   def is_owner? short_url
