@@ -31,3 +31,6 @@ vendor/ruby
 
 # Ignore because of sensitive password!
 config/environments/production.rb
+
+# Ignore secrets.yml
+/config/secrets.yml
