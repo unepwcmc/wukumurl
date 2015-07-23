@@ -30,7 +30,9 @@ $(($)->
       newLinkView.close()
       newLinkView = null
     else
-      newLinkView = new Backbone.Views.NewLinkView()
+      newLinkView = new Backbone.Views.NewLinkView({
+        is_beta: !!new_link.data('beta')
+      })
       newLinkForm.html(newLinkView.el)
       newLinkForm.show()
 
@@ -47,7 +49,9 @@ $(($)->
       closePopover()
   )
 
-  $('.new-link').on('click', toggleNewLink)
+  new_link = $('.new-link')
+  new_link.on('click', toggleNewLink)
+
 
   closePopover = ->
     $(".popover").hide()

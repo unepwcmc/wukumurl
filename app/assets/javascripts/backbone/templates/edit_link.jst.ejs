@@ -12,6 +12,13 @@
           <label for="short_name">Edit the URL name before sharing</label>
         </dt>
         <dd><input id="short_name" name="short_name" type="text" value="<%= short_name %>"></dd>
+
+        <% if(is_beta){ %>
+        <dt>
+          <input type="checkbox" id="private" name="private" <%= private ? "checked" : "" %>>
+          <label for="private">Make this link private</label>
+        </dt>
+        <% } %>
       </dl>
     </fieldset>
 

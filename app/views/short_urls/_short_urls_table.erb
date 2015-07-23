@@ -9,10 +9,15 @@
           <span class="new-tag">new</span>
         <% end %>
 
-        <small title="<%= short_url.url %>">
-          <%= link_to short_url.url, target: :_blank do %>
-            <%= truncate pretty_url(short_url.url), length: 40, omission: '...' %>
+        <small title="<%= short_url.url unless short_url.private? %>">
+          <% if short_url.private? %>
+            <a href="">Private</a>
+          <% else %>
+            <%= link_to short_url.url, target: :_blank do %>
+              <%= truncate pretty_url(short_url.url), length: 40, omission: '...' %>
+            <% end %>
           <% end %>
+
           <% if controller_name != 'users' && short_url.user %>
             <i>created by <%= short_url.user.full_name %></i>
           <% end %>

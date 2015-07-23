@@ -30,12 +30,9 @@ class ShortUrlsController < ApplicationController
   end
 
   def create
-    if params[:url].present?
-      short_url = ShortUrl.new(
-        url: params[:url],
-        short_name: params[:short_name],
-        user: current_user
-      )
+    if params[:short_url].present?
+      short_url = ShortUrl.new(short_url_params)
+      short_url.user = current_user
 
       if short_url.save
         render json: short_url, status: :created
@@ -103,9 +100,17 @@ class ShortUrlsController < ApplicationController
     end
   end
 
+  def organizations_table
+    @short_url = ShortUrl.where(short_name: params[:short_name]).first
+    @visits_by_organization = @short_url.visits_by_organization group_by_disregarded: false
+    @visits_by_organization_count = @visits_by_organization.length
+
+    render partial: "organizations_table", locals: {title: "Top organisations by number of visits"}
+  end
+
   private
 
   def short_url_params
-    params.require(:short_url).permit(:url, :short_name)
+    params.require(:short_url).permit(:url, :short_name, :private)
   end
 end

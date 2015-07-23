@@ -12,7 +12,7 @@
           Hello <%= current_user.first_name %>!
           <a href="<%= logout_path %>">sign out?</a>
 
-          <button class="new-link" data-toggle="popover"><i class="fa fa-plus"></i> New Link</button>
+          <button class="new-link" data-beta="<%= current_user.is_beta? %>" data-toggle="popover"><i class="fa fa-plus"></i> New Link</button>
           <% if current_user.admin? %>
             <%= link_to 'Admin', admin_dashboard_index_path, class: 'button' %>
           <% end %>
