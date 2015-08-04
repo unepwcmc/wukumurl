@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  require 'yaml'
+
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable,
     :confirmable
@@ -91,7 +93,7 @@ class User < ActiveRecord::Base
   end
 
   def is_beta?
-    self.team.name == Rails.application.secrets.beta_team
+    self.team.name == YAML.load(File.open("#{Rails.root}/config/secrets.yml"))[Rails.env]["beta_team"]
   end
 
   def is_owner? short_url
