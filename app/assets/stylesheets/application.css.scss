@@ -11,8 +11,8 @@
  *= require_self
  *= require normalize
  *= require cartodb
- *= require base
- *= require_tree .
+ *= require colors
+ *= require typography
  */
 
 @import "font-awesome-sprockets";

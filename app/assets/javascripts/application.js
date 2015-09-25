@@ -17,7 +17,6 @@
 //= require lodash.min.js
 //= require ZeroClipboard.min
 //= require cartodb.js
-//= require backbone-min
 //= require_tree ./backbone
 //= require Chart.min.js
 //= require ./short_urls/pie_chart

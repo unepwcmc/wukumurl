@@ -1,0 +1,39 @@
+// Typography
+
+@import 'colors';
+@import url(https://fonts.googleapis.com/css?family=Cabin:400,500|Open+Sans);
+
+h1,h2,h3,h4,h5,p { color: $grey-44; }
+h1 {
+  font: 400 4.714em/4.714em 'Cabin', san-serif;
+  margin: 3.143em 0 1.571em 0;
+}
+
+h2 {
+  font: 400 3.571em/4.714em 'Cabin', san-serif;
+  margin: 3.143em 0 1.571em 0;
+}
+
+h3 {
+  font: 400 2.714em/3.929em 'Cabin', san-serif;
+  margin: 3.143em 0 1.23em 0;
+}
+
+h4 {
+  font: 400 2em/1.93em 'Cabin', san-serif;
+  margin: 3.143em 0 1.571em 0;
+}
+
+h5 {
+  font: 500 1.5em/1.571em 'Cabin', san-serif;
+  margin: 1.571em 0 3.143em 0;
+}
+
+p {
+  font: 400 1em/1.571em 'Open Sans', san-serif;
+}
+
+p.headline {
+  font-size: 1.143em;
+  margin: 1.571em 0 1.571em 0;
+}
