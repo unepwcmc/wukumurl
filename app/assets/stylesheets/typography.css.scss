@@ -37,3 +37,18 @@ p.headline {
   font-size: 1.143em;
   margin: 1.571em 0 1.571em 0;
 }
+
+// Links
+
+a:link { color: $blue-dark-24; }
+
+a:visited { color: $blue-dark-48; }
+
+a:hover {
+  color: $blue-dark-12;
+  text-decoration: underline;
+}
+
+a.external {
+  //Add external icon here
+}
