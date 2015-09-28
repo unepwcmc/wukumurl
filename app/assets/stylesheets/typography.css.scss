@@ -40,6 +40,8 @@ p.headline {
 
 // Links
 
+a { text-decoration: none; }
+
 a:link { color: $blue-dark-24; }
 
 a:visited { color: $blue-dark-48; }

@@ -1,0 +1,10 @@
+<% if user_signed_in? && current_user.team.present? %>
+  <nav class="container">
+    <%= link_with_class_on_path 'WCMC', root_path, 'current' %>
+    <%= link_with_class_on_path 'My Team', team_path(current_user.team.slug), 'current' %>
+    <%= link_with_class_on_path 'My Links', user_links_path, 'current' %>
+    <%= link_to root_path, class: "btn btn-primary" do %>
+      <%= fa_icon "share-alt" %> Share a link
+    <% end %>
+  </nav>
+<% end %>

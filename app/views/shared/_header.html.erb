@@ -1,52 +1,22 @@
 <div class="header">
-  <div class="inner">
+  <ul class="nav">
+    <li><%= image_tag "unep-wcmc.png" %></li>
+  </ul>
 
-    <div class="left">
-      <h1><a href="/">WCMC.io</a></h1>
-      <span class="tagline">Measure the impact of digital documents you care about</span>
-    </div>
+  <ul>
+    <li><%= image_tag "logo.png" %></li>
+    <li><p>WCMC.io<p></li>
+    <li><p>Measure the impact of digital documents you care about</p></li>
 
-    <div class="header-actions-container">
-      <div class="header-actions">
-        <% if user_signed_in? %>
-          Hello <%= current_user.first_name %>!
-          <a href="<%= logout_path %>">sign out?</a>
-
-          <button class="new-link" data-beta="<%= current_user.is_beta? %>" data-toggle="popover"><i class="fa fa-plus"></i> New Link</button>
-          <% if current_user.admin? %>
-            <%= link_to 'Admin', admin_dashboard_index_path, class: 'button' %>
-          <% end %>
-        <% else -%>
-          <%= link_to "Sign up", new_user_registration_path, :class => 'sign-up', :data => {'toggle' => 'popover'} %> or
-          <%= link_to "Sign in", new_user_session_path, :class => 'sign-in', :data => {'toggle' => 'popover'} %>
-        <% end -%>
-      </div>
-
-      <div class="sign-in-form popover <% if flash[:errors] && flash[:errors][:session] %>show<% end %>">
-        <%= render "devise/sessions/new" %>
-        <p><a href="<%= forgot_password_path %>">Forgot password?</a></p>
-      </div>
-      <div class="sign-up-form popover <% if flash[:errors] && flash[:errors][:registration] %>show<% end %>">
-        <%= render "devise/registrations/new" %>
-      </div>
-
-      <div class="new-link-form popover"></div>
-    </div>
-
-    <%= render "flash_messages" %>
-
-  </div>
+    <li>
+      <%= link_to new_user_registration_path do %>
+        <%= fa_icon 'user' %> Sign Up
+      <% end %>
+    </li>
+    <li>
+      <%= link_to new_user_session_path do %>
+        <%= fa_icon 'sign-in' %> Sign In
+      <% end %>
+    </li>
+  </ul>
 </div>
-
-<header>
-  <% if user_signed_in? && current_user.team.present? %>
-    <div class="left navigation-links">
-      <%= link_with_class_on_path 'WCMC', root_path, 'current' %>
-      <%= link_with_class_on_path 'My Team', team_path(current_user.team.slug), 'current' %>
-      <%= link_with_class_on_path 'My Links', user_links_path, 'current' %>
-    </div>
-  <% end %>
-  <div class="right">
-    <%= yield(:page_actions) %>
-  </div>
-</header>

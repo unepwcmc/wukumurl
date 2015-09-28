@@ -1,0 +1,49 @@
+@import 'colors';
+
+// Buttons
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  text-align: center;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  white-space: nowrap;
+  padding: 15px 40px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &:hover { text-decoration: none; }
+}
+
+.btn-primary {
+  background-color: $blue-dark-24;
+}
+
+.btn-primary:hover {
+  background-color: $blue-dark-12;
+}
+
+.btn-secondary {
+  background-color: $white;
+  border: 2px solid $blue-dark-24;
+}
+
+a.btn-primary { color: $white;}
+
+.content {
+  height: 100%;
+  min-height: 100%;
+}
+
+footer {
+  background-color: $blue-dark-24;
+  padding: 20px;
+  position: relative;
+  bottom: 0px;
+}

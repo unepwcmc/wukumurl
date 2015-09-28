@@ -11,33 +11,19 @@
     <%= javascript_include_tag "application" %>
   </head>
   <body>
-    <%= render partial: 'shared/header' %>
+    <%= render 'shared/header' %>
+    <%= render 'shared/navbar' %>
 
-    <% unless @no_map %>
-      <div id="map" class="leaflet-container leaflet-fade-anim"></div>
-    <% end %>
-
-    <div class="dashboard">
-      <div class="left">
-        <h3>
-          <%= yield(:title) %>
-        </h3>
-      </div>
-      <%= yield %>
+    <div class="container content">
     </div>
 
-    <% if current_user.try(:no_urls?) && current_user.team.present? && !cookies[:hide_info_modal] %>
-      <%= render partial: "short_urls/info_modal" %>
-    <% end %>
+    <%= render 'shared/footer' %>
 
-    <script>
-      var pieChart = new PieChart(<%= @visits_by_country.to_json.html_safe %>);
-    </script>
-
-    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="<%= ENV["DROPBOX_API_KEY"] %>"></script>
+    <!-- Scripts -->
 
     <% if Rails.env == 'production' %>
-      <%= render partial: "google_analytics" %>
+      <%= render "google_analytics" %>
     <% end %>
+    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="<%= ENV["DROPBOX_API_KEY"] %>"></script>
   </body>
 </html>

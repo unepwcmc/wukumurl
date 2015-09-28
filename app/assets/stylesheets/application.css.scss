@@ -10,10 +10,11 @@
  *
  *= require_self
  *= require normalize
+ *= require font-awesome
  *= require cartodb
  *= require colors
+ *= require grid
  *= require typography
+ *= require layout
+ *= require components
  */
-
-@import "font-awesome-sprockets";
-@import "font-awesome";

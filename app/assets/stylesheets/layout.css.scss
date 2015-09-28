@@ -1,0 +1,42 @@
+@import 'colors';
+
+div.header {
+  background-color: $blue-dark-24;
+  margin: 0;
+  overflow: hidden;
+  color: $white;
+  height: 20%;
+
+
+
+  ul {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+
+    p { color: $white; }
+
+    li {
+      /* This allow us to arrange list items in a row, without using float */
+      display: inline-block;
+      list-style-type: none;
+
+      a {
+        color: $white;
+        display: block;
+        line-height: 2em;
+        padding: 0.5em 0.5em;
+        text-decoration: none;
+      }
+      a:hover { text-decoration: underline; }
+    }
+  }
+
+  ul.left { background-color: $blue; }
+}
+
+
+nav {
+  padding: 25px 0;
+  border-bottom: 1px solid $grey-cb;
+}
