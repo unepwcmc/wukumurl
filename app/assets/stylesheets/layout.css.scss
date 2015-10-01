@@ -1,40 +1,66 @@
 @import 'colors';
+$breakpoint: 600px;
+
+body { height: 100%; }
+
+div.content {
+  overflow: auto;
+  padding-bottom: 60px;
+}
+
+footer {
+  position: relative;
+  margin-top: -60px;
+  height: 60px;
+  clear: both;
+}
 
 div.header {
-  background-color: $blue-dark-24;
-  margin: 0;
-  overflow: hidden;
-  color: $white;
-  height: 20%;
-
-
-
   ul {
-    margin: 0;
+    list-style: none;
+    background-color: $blue-dark-24;
+    text-align: center;
     padding: 0;
-    display: inline-block;
-
-    p { color: $white; }
+    margin: 0;
 
     li {
-      /* This allow us to arrange list items in a row, without using float */
-      display: inline-block;
-      list-style-type: none;
+      line-height: 40px;
+      color: $white;
+      border-bottom: 1px solid $blue-dark-36;
+      @media screen and (min-width: $breakpoint) {
+        border-bottom: none;
+        display: inline-block;
+        margin-right: -4px;
+      }
+
+      &.strapline, &.unep-logo, &.wcmcio-logo {
+        @media screen and (max-width: $breakpoint) {
+          display: none;
+        }
+      }
+
+      &.unep-logo {
+        background-color: $blue;
+        background-image: image-url("triangle.png") no-repeat right center;
+      }
 
       a {
         color: $white;
         display: block;
-        line-height: 2em;
-        padding: 0.5em 0.5em;
-        text-decoration: none;
+        transition: .3s background-color;
+        @media screen and (min-width: $breakpoint) {
+          padding: 10px 20px;
+        }
+
+        &:hover {
+          text-decoration: none;
+          background-color: $blue;
+        }
       }
-      a:hover { text-decoration: underline; }
+
     }
   }
-
-  ul.left { background-color: $blue; }
 }
-
 
 nav {
   padding: 25px 0;

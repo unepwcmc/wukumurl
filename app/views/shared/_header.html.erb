@@ -1,13 +1,9 @@
 <div class="header">
-  <ul class="nav">
-    <li><%= image_tag "unep-wcmc.png" %></li>
-  </ul>
-
   <ul>
-    <li><%= image_tag "logo.png" %></li>
-    <li><p>WCMC.io<p></li>
-    <li><p>Measure the impact of digital documents you care about</p></li>
-
+    <li class="unep-logo"><%= image_tag 'unep-wcmc.png' %></li>
+    <li class="wcmcio-logo"><%= image_tag 'unep-wcmc.png' %></li>
+    <li class="title">WCMC.io</li>
+    <li class="strapline">Measure the impact of digital documents you care about</li>
     <li>
       <%= link_to new_user_registration_path do %>
         <%= fa_icon 'user' %> Sign Up

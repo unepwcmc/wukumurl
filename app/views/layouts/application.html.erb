@@ -11,13 +11,16 @@
     <%= javascript_include_tag "application" %>
   </head>
   <body>
-    <%= render 'shared/header' %>
-    <%= render 'shared/navbar' %>
+    <div class="wrapper">
+      <%= render 'shared/header' %>
+      <%= render 'shared/navbar' %>
 
-    <div class="container content">
+      <div class="content">
+        <%= yield %>
+      </div>
+
+      <%= render 'shared/footer' %>
     </div>
-
-    <%= render 'shared/footer' %>
 
     <!-- Scripts -->
 
