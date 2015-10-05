@@ -42,6 +42,7 @@ gem 'therubyracer'
 gem 'ejs', '~> 1.1.1'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'leaflet-rails'
 gem 'uglifier', '>= 1.0.3'
 

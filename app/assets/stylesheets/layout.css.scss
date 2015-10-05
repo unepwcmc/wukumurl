@@ -15,52 +15,37 @@ footer {
 }
 
 div.header {
-  ul {
-    list-style: none;
-    background-color: $blue-dark-24;
-    text-align: center;
-    padding: 0;
-    margin: 0;
-    @media screen and (min-width: $breakpoint){
-    }
-
-    li {
-      line-height: 40px;
-      color: $white;
-      border-bottom: 1px solid $blue-dark-36;
-      @media screen and (min-width: $breakpoint) {
-        border-bottom: none;
-        display: inline-block;
+  background: linear-gradient(to right, $blue, $blue-dark-24);
+  overflow: hidden;
+  color: $white;
+  div.container {
+    div {
+      display: inline-block;
+      line-height: 60px;
+      &.left {
+        float: left;
+        background-image: image-url('triangle-background.png');
+        background-postition: right center;
       }
-
-      &.strapline, &.unep-logo, &.wcmcio-logo, &.welcome {
-        @media screen and (max-width: $breakpoint) {
-          display: none;
+      &.right {
+        float:right;
+      }
+      &.strapline {
+        background: $blue-dark-24;
+        padding: 0 2em;
+        span {
+          font-size: 1.5em;
         }
       }
-
-      &.unep-logo {
-        background-color: $blue;
-        background-image: image-url("triangle.png") no-repeat right center;
-      }
-      &.devise {
-        align: right;
-      }
-
-      a {
-        color: $white;
-        display: block;
-        transition: .3s background-color;
-        @media screen and (min-width: $breakpoint) {
-          padding: 10px 20px;
-        }
-
-        &:hover {
-          text-decoration: none;
-          background-color: $blue;
-        }
+      &.divider {
+        position:absolute;
+        left:50%;
+        top:10%;
+        bottom:10%;
+        border-left:1px solid white;
       }
 
+      a { color: $white; }
     }
   }
 }
