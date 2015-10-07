@@ -17,12 +17,14 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  border: none;
 
   &:hover { text-decoration: none; }
 }
 
 .btn-primary {
   background-color: $blue-dark-24;
+  color: $white;
 }
 
 .btn-primary:hover {
@@ -38,7 +40,7 @@ a.btn-primary { color: $white;}
 
 footer {
   background-color: $blue-dark-24;
-  padding: 20px;
+  padding: 10px;
 }
 
 // Modal
@@ -50,6 +52,11 @@ footer {
 
 .ui-dialog {
   padding: 1.25em;
+
+  .ui-dialog-titlebar-close {
+    border:none;
+    background: none;
+  }
 
   .ui-dialog-titlebar, .ui-dialog-content {
     padding: 0 0 0.5em 0;
@@ -78,9 +85,23 @@ footer {
   font: 400 1.143em/1.571em 'Open Sans', san-serif;
 }
 
+// Bits
+
+hr {
+  display: block;
+  height: 1px;
+  background-color: $grey-cb;
+  margin-top: 1.143em;
+  margin-bottom: 1.143em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border: none;
+}
+
 // Form Elements
 
-input:not([type=submit]):not([type=file]) {
+input:not([type=submit]):not([type=file]):not([type=checkbox]) {
   width: 90%;
   border: 1px solid $grey-cb;
   padding: 0.55em;

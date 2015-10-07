@@ -14,7 +14,7 @@
 //= require pubsub
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui/dialog
+//= require jquery-ui
 //= require lodash.min.js
 //= require ZeroClipboard.min
 //= require cartodb.js

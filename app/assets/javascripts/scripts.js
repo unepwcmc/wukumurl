@@ -1,11 +1,17 @@
 $(document).ready(function() {
-  $( "#dialog-1" ).dialog({
+  $(".modal").dialog({
     autoOpen: false,
     resizeable: false,
     draggable: false,
-    modal: true
+    modal: true,
+    show: { effect: "slide", direction: "up" },
   });
-  $( "#sign-in" ).click(function() {
-    $( "#dialog-1" ).dialog( "open" );
+
+  $("#sign-in-link").click(function() {
+    $("#sign-in-modal").dialog('open');
+  });
+
+  $("#sign-up-link").click(function(){
+    $("#sign-up-modal").dialog('open');
   });
 })
