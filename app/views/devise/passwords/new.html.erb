@@ -1,13 +1,15 @@
-<h2>Forgot your password?</h2>
+<div class="page-header">
+  <p class="headline">Forgot your password?</p>
+</div>
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
+  <%= f.label :email %><br />
   <%= f.email_field(:email,
           :autofocus => true,
           :placeholder => 'your.name@unep-wcmc.org',
           :class => if user_input_has_error? :email then 'devise-email error' else 'devise-email' end) %>
 
-  <div class='devise-submit'><%= f.submit "Send me reset password instructions" %></div>
+  <div class='devise-submit'><%= f.submit "Send me reset password instructions", class: "btn btn-primary" %></div>
 <% end %>

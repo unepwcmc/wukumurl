@@ -61,6 +61,11 @@ footer {
   .ui-dialog-titlebar, .ui-dialog-content {
     padding: 0 0 0.5em 0;
     color: $grey-44;
+
+    input:not([type=submit]):not([type=file]):not([type=checkbox]) {
+      box-sizing: border-box;
+      width: 100%;
+    }
   }
 }
 
@@ -99,10 +104,15 @@ hr {
   border: none;
 }
 
+.page-header {
+  width: 100%;
+  border-bottom: 1px solid $grey-cb;
+  margin: 1em 0 2em 0;
+}
+
 // Form Elements
 
 input:not([type=submit]):not([type=file]):not([type=checkbox]) {
-  width: 90%;
   border: 1px solid $grey-cb;
   padding: 0.55em;
 }
