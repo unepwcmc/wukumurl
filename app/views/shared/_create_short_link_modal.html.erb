@@ -1,0 +1,17 @@
+<div id="create-link-modal" class="modal" title="Share a link" style="display:none;">
+<%= form_for ShortUrl.new, url: { controller: "short_urls", action: "create" } do |f| %>
+  <%= f.label :url, "Paste your link" %>
+  <%= f.text_field :url %>
+  <div class="divider"><span>Or</span></div>
+  <%= f.label "Select a file from your dropbox" %>
+  <%= link_to "#", class: "btn btn-secondary stretch" do %>
+    <%= fa_icon "dropbox" %> Choose from Dropbox
+  <% end %>
+  <hr>
+  <%= f.label :user_id, "Owner" %>
+  <%= f.collection_select :user_id, User.all, :id, :full_name %>
+  <%= f.label :description, "Add a description" %>
+  <% # Toggle Switch %>
+  <%= f.text_area :description %>
+  <% end %>
+</div>

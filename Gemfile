@@ -47,6 +47,7 @@ gem 'leaflet-rails'
 gem 'uglifier', '>= 1.0.3'
 
 gem "auto_strip_attributes", "~> 1.0"
+gem 'jquery-datatables-rails', '~> 3.3.0'
 
 gem 'devise'
 gem 'net-ldap'

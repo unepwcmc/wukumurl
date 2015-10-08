@@ -6,7 +6,7 @@
         <%= link_to 'My Team', team_path(current_user.team.slug), class: 'text' %>
         <%= link_to 'My Links', user_links_path, class: 'text' %>
       </div>
-      <%= link_to root_path, class: "btn btn-primary" do %>
+      <%= link_to "#", id: "create-link", class: "btn btn-primary" do %>
         <%= fa_icon "share-alt" %> Share a link
       <% end %>
     </div>

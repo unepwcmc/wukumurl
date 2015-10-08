@@ -47,5 +47,9 @@ Wukumurl::Application.routes.draw do
     get '/users/pick_team', to: 'users#pick_team', as: 'pick_team'
   end
 
-  root to: 'short_urls#index', as: :root
+  authenticated :user do
+    root to: 'short_urls#index', as: :authenticated_root
+  end
+
+  root to: 'static_pages#index', as: :root
 end

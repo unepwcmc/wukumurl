@@ -2,6 +2,8 @@
   <p class="headline">Forgot your password?</p>
 </div>
 
+<p>Enter the email address of your account below to send email instructions on changing your password.</p>
+
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= devise_error_messages! %>
 

@@ -1,11 +1,11 @@
 <% flash.each do |name, msg| %>
   <div class="alert <%= name == :notice ? "info" : "error" %>">
     <% if msg.is_a?(String) %>
-      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <%= content_tag :p, msg, :id => "flash_#{name}" %>
     <% elsif msg.is_a?(Hash) %>
       <% msg.each do |name, message| %>
         <% if message.is_a?(String) %>
-          <%= content_tag :div, message, :id => "flash_#{name}" %>
+          <%= content_tag :p, message, :id => "flash_#{name}" %>
         <% end %>
       <% end %>
     <% end %>

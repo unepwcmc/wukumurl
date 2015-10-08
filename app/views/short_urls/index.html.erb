@@ -17,7 +17,7 @@
       <h4>Top links by number of visits</h4>
     </header>
 
-    <div id="short_urls_table" class="expandable-table">
+    <div id="short_urls_table" class="expandable-table datatable">
       <%= render partial: "short_urls_table" %>
     </div>
   </section>
@@ -49,11 +49,11 @@
         sql,
         org_name;
     org_name = content.data.org_name;
-    
+
     sql = "SELECT u.short_url_id FROM <%= CARTODB_LAYERS_CONFIG['tables'][Rails.env]['visits_by_organization'] %> o " +
           "inner join <%= CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_short_url'] %> u " +
           "on o.org_id = u.org_id " +
-          "and o.org_name = '" + 
+          "and o.org_name = '" +
           org_name + "' group by u.short_url_id";
     $(".short-urls").addClass('open-popup');
     $.getJSON('http://'+"<%=CARTODB_CONFIG['username']%>"+'.cartodb.com/api/v2/sql/?q='+sql, function(data) {

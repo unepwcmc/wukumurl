@@ -1,0 +1,15 @@
+<div class="page-header">
+  <p class="headline">Resend confirmation instructions</p>
+</div>
+
+<p>Didn't receive the confirmation instructions? Enter your email address below and we will resend the email to you.</p>
+
+<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :email %><br />
+    <%= f.email_field :email, :autofocus => true %></div>
+
+  <div><%= f.submit "Resend confirmation instructions", class: "btn btn-primary" %></div>
+<% end %>
+

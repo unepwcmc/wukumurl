@@ -1,13 +1,15 @@
 @import 'colors';
+
 $breakpoint: 600px;
 
-body {
+html, body {
   height: 100%;
   min-height: 100%;
 }
 
 div.content {
   padding-bottom: 40px;
+  min-height: 630px;
 }
 
 footer {
@@ -40,12 +42,14 @@ div.header {
           font-size: 1.5em;
         }
       }
-      &.divider {
-        position:absolute;
-        left:50%;
-        top:10%;
-        bottom:10%;
-        border-left:1px solid white;
+      &.vertical-divider {
+        display: inline-block;
+        content: "";
+        border-left:1px solid $white;
+        height: 30px;
+        position: relative;
+        top: 10px;
+        margin: 0 0.5em;
       }
 
       a { color: $white; }

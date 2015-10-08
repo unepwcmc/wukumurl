@@ -1,5 +1,17 @@
-<% title "Your shared links" %>
-
+<div class="row group">
+  <div class="col col-3">
+    <div class="page-header"><p class="headline">Number of Visits</p></div>
+  </div>
+  <div class="col col-3">
+    <div class="page-header"><p class="headline">Unique Visits</p></div>
+  </div>
+  <div class="col col-3">
+    <div class="page-header"><p class="headline">Number of Links Shared</p></div>
+  </div>
+  <div class="col col-3">
+    <div class="page-header"><p class="headline">Countries Reached</p></div>
+  </div>
+</div>
 <div class="left">
   <%= render partial: "short_urls/headline_number", locals: {
     title: "Total number of visits",
@@ -58,7 +70,7 @@
       sql = "SELECT u.short_url_id FROM <%= CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_user'] %> o " +
             "inner join <%= CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_short_url'] %> u " +
             "on o.org_id = u.org_id " +
-            "where o.user_id = <%= current_user.id %> and o.org_name = '" + 
+            "where o.user_id = <%= current_user.id %> and o.org_name = '" +
             org_name + "' group by u.short_url_id";
 
       $(".short-urls").addClass('open-popup');

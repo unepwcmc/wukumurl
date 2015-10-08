@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150702085115) do
+ActiveRecord::Schema.define(version: 20151008102110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20150702085115) do
     t.integer  "user_id"
     t.string   "dasboard_metric_name"
     t.boolean  "private",              default: false
+    t.text     "description"
   end
 
   create_table "teams", force: true do |t|

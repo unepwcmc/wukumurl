@@ -16,6 +16,7 @@
       <%= render 'shared/navbar' %>
 
       <div class="container content">
+        <%= render 'flash_messages' %>
         <%= yield =%>
       </div>
 
@@ -85,6 +86,8 @@
           </div>
         <% end %>
       </div>
+
+      <%= render 'shared/create_short_link_modal' %>
 
       <%= render 'shared/footer' %>
     </div>
