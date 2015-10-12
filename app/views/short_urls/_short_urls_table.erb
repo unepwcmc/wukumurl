@@ -1,4 +1,4 @@
-<table class="short-urls">
+<table class="short-urls datatable">
   <tbody>
   <% @short_urls.each_with_index do |short_url, index| %>
     <tr class="<% if index > 7 %>all hidden<% end -%>" data-short-url-id="<%= short_url.id %>">

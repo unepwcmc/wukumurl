@@ -1,17 +1,29 @@
 <div class="row group">
   <div class="col col-3">
     <div class="page-header"><p class="headline">Number of Visits</p></div>
+    <h1 class="text-primary">150</h1>
   </div>
   <div class="col col-3">
     <div class="page-header"><p class="headline">Unique Visits</p></div>
+    <h1 class="text-primary">30</h1>
   </div>
   <div class="col col-3">
     <div class="page-header"><p class="headline">Number of Links Shared</p></div>
+    <h1 class="text-primary">53</h1>
   </div>
   <div class="col col-3">
     <div class="page-header"><p class="headline">Countries Reached</p></div>
+    <h1 class="text-primary">85</h1>
   </div>
 </div>
+
+<div class="page-header">
+  <h5>Links list</h5>
+</div>
+
+<%= render partial: "short_urls/short_urls_table" %>
+
+
 <div class="left">
   <%= render partial: "short_urls/headline_number", locals: {
     title: "Total number of visits",

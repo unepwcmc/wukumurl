@@ -20,24 +20,36 @@ footer {
 }
 
 div.header {
-  background: linear-gradient(to right, $blue, $blue-dark-24);
+  background: linear-gradient(to right, $blue 40%, $blue-dark-24  40%, $blue-dark-24 100%);
   overflow: hidden;
   color: $white;
   div.container {
     div {
       display: inline-block;
-      line-height: 60px;
+      line-height: 65px;
+      img {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin: -8px 10px 0 10px;
+      }
       &.left {
         float: left;
-        background-image: image-url('triangle-background.png');
         background-postition: right center;
+      }
+      &.triangle {
+        margin-right:-6px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent $blue-dark-24 transparent transparent;
       }
       &.right {
         float:right;
       }
       &.strapline {
         background: $blue-dark-24;
-        padding: 0 2em;
         span {
           font-size: 1.5em;
         }
@@ -74,11 +86,12 @@ nav {
     }
 
     a.text {
-      color: $grey-44;
+      color: $grey-66;
       padding: 30px 20px;
 
       &:hover {
         padding-bottom: 26px;
+        color: $grey-44;
         text-decoration: none;
         border-bottom: 4px solid $turquoise;
         @media screen and (max-width: $breakpoint){

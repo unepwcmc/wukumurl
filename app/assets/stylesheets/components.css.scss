@@ -60,7 +60,7 @@ footer {
 
   .ui-dialog-titlebar, .ui-dialog-content {
     padding: 0 0 0.5em 0;
-    color: $grey-44;
+    color: $grey-66;
 
     input:not([type=submit]):not([type=file]):not([type=checkbox]), select, textarea, .stretch {
       box-sizing: border-box;
@@ -71,7 +71,7 @@ footer {
 
 
 .ui-widget-overlay {
-  background-color: $grey-44;
+  background-color: $grey-66;
   background-image: none;
   opacity: 0.8;
   z-index: 1040;
