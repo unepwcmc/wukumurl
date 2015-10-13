@@ -1,46 +1,27 @@
-<table class="short-urls datatable">
+<table class="short-urls stripe" id="datatable">
+  <thead>
+    <th>Name</th>
+    <th>Link</th>
+    <th>Visits</th>
+    <th>Publication</th>
+    <th>Edit</th>
+  </thead>
   <tbody>
-  <% @short_urls.each_with_index do |short_url, index| %>
-    <tr class="<% if index > 7 %>all hidden<% end -%>" data-short-url-id="<%= short_url.id %>">
-      <td>
-        <%= index + 1 %>. <%= link_to short_url.short_name, short_url_info_path(short_url.short_name) %>
-
-        <% if recently_added short_url %>
-          <span class="new-tag">new</span>
-        <% end %>
-
-        <small title="<%= short_url.url unless short_url.private? %>">
+    <% @short_urls.each do |short_url| %>
+      <tr>
+        <td><%= short_url.short_name %></td>
+        <td>
           <% if short_url.private? %>
-            <a href="">Private</a>
+            Private
           <% else %>
-            <%= link_to short_url.url, target: :_blank do %>
-              <%= truncate pretty_url(short_url.url), length: 40, omission: '...' %>
-            <% end %>
+            <%= link_to short_url.url, short_url.url %>
           <% end %>
-
-          <% if controller_name != 'users' && short_url.user %>
-            <i>created by <%= short_url.user.full_name %></i>
-          <% end %>
-        </small>
-
-        <% if ['users', 'teams'].include?(controller_name) && short_url.owned_by?(current_user) %>
-          <%= link_to short_url, method: :delete, data: {confirm: 'Are you sure?'}, class: 'button' do %>
-            <i class="fa fa-trash-o"></i>
-          <% end %>
-
-          <%= link_to short_url_info_path(short_url.short_name), class: 'button edit-link', 'data-toggle' => 'popover', 'data-short-url-id' => short_url.id do %>
-            <i class="fa fa-pencil-square-o"></i>
-          <% end %>
-        <% end %>
-
-      </td>
-      <td>
-        <%= short_url.visits_count %>
-      </td>
-  <% end %>
+        </td>
+        <td><%= short_url.visits_count %></td>
+        <td><%= short_url.created_at.strftime("%d/%m/%Y") %></td>
+        <td><%= link_to "Info", short_url_info_path(short_url.short_name) %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 
-<% if @short_urls.length > 8 %>
-  <button class="view-all">View All</button>
-<% end %>

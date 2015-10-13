@@ -20,8 +20,15 @@
 <div class="page-header">
   <h5>Links list</h5>
 </div>
-
 <%= render partial: "short_urls/short_urls_table" %>
+
+<div class="page-header">
+  <h5>Overview</h5>
+</div>
+<% #= line_chart current_user.visits.group_by_day(:created_at).count %>
+
+
+
 
 
 <div class="left">
@@ -29,16 +36,6 @@
     title: "Total number of visits",
     value: @total_visits
   } %>
-
-  <section>
-    <header>
-      <h4>Your links</h4>
-    </header>
-
-    <div id="short_urls_table" class="expandable-table">
-      <%= render partial: "short_urls/short_urls_table" %>
-    </div>
-  </section>
 </div>
 
 <div class="right">

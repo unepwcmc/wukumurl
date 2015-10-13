@@ -172,3 +172,18 @@ input:not([type=submit]), select, textarea {
 select {
   display: block;
 }
+
+// Datatables
+
+table {
+  color: $grey-66;
+}
+
+.dataTables_length, .dataTables_filter, dataTables_info, dataTables_paginate {
+  color: $grey_66;
+}
+
+.paginate-button {
+  border: 1px solid $blue-dark-24 !important;
+  background-color: none;
+}

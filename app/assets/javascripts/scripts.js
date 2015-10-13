@@ -7,7 +7,7 @@ $(document).ready(function() {
     show: { effect: "slide", direction: "up" },
   });
 
-  $('.datatable').DataTable();
+  $('#datatable').DataTable();
 
   $("#sign-in-link").click(function() {
     $("#sign-in-modal").dialog('open');
