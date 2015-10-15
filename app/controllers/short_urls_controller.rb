@@ -79,7 +79,7 @@ class ShortUrlsController < ApplicationController
     short_url = ShortUrl.find(params[:id])
 
     short_url.destroy if current_user.can_manage?(short_url)
-    redirect_to :root
+    redirect_to :root, notice: "Link deleted successfully"
   end
 
   def edit
