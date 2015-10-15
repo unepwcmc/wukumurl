@@ -158,6 +158,57 @@ hr {
   p.headline { color: $white; margin: 0; }
 }
 
+.tooltip {
+  position: relative;
+}
+
+.tooltip-trigger {
+  background-color: $blue-dark-24;
+  padding: 5px 12px;
+  border-radius: 3px;
+}
+
+.tooltip-panel {
+  display: none;
+  width: 500px;
+  position: absolute;
+  left: -466px;
+  top: 32px;
+  z-index: 999;
+  border: 1px solid $grey-cb;
+  background-color: $white;
+  padding: 1em;
+  box-shadow: 0px 0px 5px $grey-cb;
+
+  .tooltip-action {
+    display: block;
+    margin: 1em;
+  }
+
+  &:after, &:before {
+    bottom: 100%;
+    left: 90%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  &:after {
+    border-color: rgba(238, 238, 238, 0);
+    border-bottom-color: $white;
+    border-width: 15px;
+    margin-left: -15px;
+  }
+  &:before {
+    border-color: rgba(204, 204, 204, 0);
+    border-bottom-color: $grey-cb;
+    border-width: 16px;
+    margin-left: -16px;
+  }
+}
 // Form Elements
 
 input:not([type=submit]):not([type=file]):not([type=checkbox]), select, textarea {
@@ -170,17 +221,24 @@ input:not([type=submit]), select, textarea {
 }
 
 select {
-  display: block;
+  //display: block;
 }
 
 // Datatables
 
 table {
   color: $grey-66;
+  thead {
+    text-align: left;
+  }
 }
 
-.dataTables_length, .dataTables_filter, dataTables_info, dataTables_paginate {
-  color: $grey_66;
+#datatable_length, #datatable_filter, #datatable_info, #datatable_paginate {
+  color: $grey-66;
+}
+
+table.dataTable thead th, table.dataTable thead td, table.dataTable.no-footer {
+  border-bottom: 1px solid $grey-cb;
 }
 
 .paginate-button {

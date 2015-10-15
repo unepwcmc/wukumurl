@@ -4,22 +4,45 @@
     <th>Link</th>
     <th>Visits</th>
     <th>Publication</th>
-    <th>Edit</th>
+    <th>Actions</th>
   </thead>
   <tbody>
     <% @short_urls.each do |short_url| %>
       <tr>
-        <td><%= short_url.short_name %></td>
+        <td><%= link_to short_url.short_name, short_url_info_path(short_url.short_name) %></td>
         <td>
           <% if short_url.private? %>
-            Private
+            (Private)
           <% else %>
             <%= link_to short_url.url, short_url.url %>
           <% end %>
         </td>
         <td><%= short_url.visits_count %></td>
         <td><%= short_url.created_at.strftime("%d/%m/%Y") %></td>
-        <td><%= link_to "Info", short_url_info_path(short_url.short_name) %></td>
+        <td>
+          <span class="tooltip">
+            <i class="fa fa-ellipsis-v fa-inverse tooltip-trigger"></i>
+            <div class="tooltip-panel">
+              <div class="row group">
+                <div class="col col-9">
+                  <p><strong>Description</strong></p>
+                  <p><%= short_url.description ? short_url.description : "No description for this link" %>
+                </div>
+                <div class="col col-3">
+                  <%= link_to short_url_info_path(short_url.short_name), class: "tooltip-action" do %>
+                    <%= fa_icon "cog" %> Edit
+                  <% end %>
+                  <%= link_to short_url_info_path(short_url.short_name), class: "tooltip-action" do %>
+                    <%= fa_icon "trash" %> Delete
+                  <% end %>
+                  <%= link_to short_url_info_path(short_url.short_name), class: "tooltip-action" do %>
+                    <%= fa_icon "history" %> History
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </span>
+        </td>
       </tr>
     <% end %>
   </tbody>

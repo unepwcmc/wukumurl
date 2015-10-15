@@ -35,9 +35,9 @@ class ShortUrlsController < ApplicationController
       short_url.user = current_user
 
       if short_url.save
-        render json: short_url, status: :created
+        redirect_to user_links_path, notice: "Link created successfully!"
       else
-        render json: short_url.errors, status: :unprocessable_entity
+        redirect_to user_links_path, alert: "There was a problem creating your link, please try again"
       end
     else
       render json: {

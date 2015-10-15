@@ -2,16 +2,31 @@
 <%= form_for ShortUrl.new, url: { controller: "short_urls", action: "create" } do |f| %>
   <%= f.label :url, "Paste your link" %>
   <%= f.text_field :url %>
+
   <div class="divider"><span>Or</span></div>
+
   <%= f.label "Select a file from your dropbox" %>
   <%= link_to "#", class: "btn btn-secondary stretch" do %>
     <%= fa_icon "dropbox" %> Choose from Dropbox
   <% end %>
+
   <hr>
+
   <%= f.label :user_id, "Owner" %>
   <%= f.collection_select :user_id, User.all, :id, :full_name %>
+
   <%= f.label :description, "Add a description" %>
   <% # Toggle Switch %>
   <%= f.text_area :description %>
+
+  <%= f.label :short_name, "Edit the URL name before sharing" %>
+  <%= f.text_field :short_name %>
+
+  <%= f.label :private, "Make this link private" %>
+  <%= f.check_box :private %>
+
+  <br>
+
+  <%= f.submit class: "btn btn-primary" %>
   <% end %>
 </div>
