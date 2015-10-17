@@ -5,6 +5,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application" %>
+    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="<%= ENV["DROPBOX_KEY"]%>"></script>
     <%= csrf_meta_tags %>
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

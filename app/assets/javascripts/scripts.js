@@ -27,4 +27,20 @@ $(document).ready(function() {
   }, function() {
     $(this).find('.tooltip-panel').fadeToggle(200);
   });
+
+  // Dropbox
+  $('.dropbox-button').click(function(){
+    var options = {
+      success: function(files) {
+        alert("Here's the file link: " + files[0].link)
+      },
+      cancel: function() {
+      },
+      linkType: "direct",
+      multiselect: false,
+      extensions: ['.pdf', '.doc', '.docx'],
+    };
+
+    Dropbox.choose(options);
+  });
 })
