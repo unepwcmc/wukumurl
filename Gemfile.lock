@@ -166,6 +166,10 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
+    paper_trail (4.0.0)
+      activerecord (>= 3.0, < 6.0)
+      activesupport (>= 3.0, < 6.0)
+      request_store (~> 1.1)
     pg (0.18.1)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -196,6 +200,7 @@ GEM
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
     ref (1.0.5)
+    request_store (1.2.0)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     rvm-capistrano (1.5.6)
@@ -279,6 +284,7 @@ DEPENDENCIES
   letter_opener
   libv8
   net-ldap
+  paper_trail (~> 4.0.0)
   pg
   rack-cors
   rails (~> 4.0.0)

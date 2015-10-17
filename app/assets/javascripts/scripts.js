@@ -28,6 +28,10 @@ $(document).ready(function() {
     $(this).closest(".edit-link-modal").dialog('open');
   });
 
+  $(".history-link").click(function(){
+    alert("NOOOO");
+  });
+
   // Tooltips
   $('.tooltip').hover(function() {
     $(this).find('.tooltip-panel').fadeToggle(200);

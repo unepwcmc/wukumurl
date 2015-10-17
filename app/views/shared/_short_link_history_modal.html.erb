@@ -1,0 +1,18 @@
+<div id="change-history-modal" class="modal" title="Change History" style="display:none;">
+  <table>
+    <thead>
+      <th>Change</th>
+      <th>Author</th>
+      <th>Date</th>
+    </thead>
+    <tbody>
+      <% short_url.versions.last(10).each do |v| %>
+        <tr>
+          <td><%= v.event %></td>
+          <td><%= v.whodunnit.email %></td>
+          <td><%= v.created_at.strftime("%d/%m/%Y") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

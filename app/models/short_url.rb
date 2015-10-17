@@ -29,6 +29,8 @@ class ShortUrl < ActiveRecord::Base
     order('visits_count DESC')
   }
 
+  has_paper_trail
+
   def self.not_deleted
     where("deleted = false OR deleted IS NULL")
   end

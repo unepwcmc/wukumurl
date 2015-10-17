@@ -11,6 +11,9 @@
       <tr>
         <td><%= link_to short_url.short_name, short_url_info_path(short_url.short_name) %></td>
         <td>
+                  <%= render partial: 'shared/short_link_history_modal', locals: { short_url: short_url } %>
+        </td>
+        <td>
           <% if short_url.private? %>
             (Private)
           <% else %>
@@ -33,20 +36,20 @@
                     <%= link_to '', class: "tooltip-action edit-link" do %>
                       <%= fa_icon "cog" %> Edit
                     <% end %>
+                    <%= render partial: 'shared/edit_short_link_modal', locals: { short_url: short_url } %>
                     <%= link_to short_url_path(short_url), data: {confirm: "Are you sure you want to delete this link? You will not be able to recover it or its data"}, method: :delete, class: "tooltip-action" do %>
                       <%= fa_icon "trash" %> Delete
                     <% end %>
                   <% end %>
-                  <%= link_to short_url_info_path(short_url.short_name), class: "tooltip-action" do %>
+                  <%= link_to '', class: "tooltip-action history-link" do %>
                     <%= fa_icon "history" %> History
                   <% end %>
-
+                  <%= render partial: 'shared/short_link_history_modal', locals: { short_url: short_url } %>
                 </div>
               </div>
             </div>
           </span>
         </td>
-        <td><%= render partial: 'shared/edit_short_link_modal', locals: { short_url: short_url } %></td>
       </tr>
     <% end %>
   </tbody>

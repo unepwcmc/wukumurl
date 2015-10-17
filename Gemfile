@@ -20,6 +20,7 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'capistrano-sidekiq'
 gem 'chartkick'
 gem 'groupdate'
+gem 'paper_trail', '~> 4.0.0'
 
 group :development do
   gem 'capistrano', '~> 2.15.5'
