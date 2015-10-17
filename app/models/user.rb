@@ -88,8 +88,13 @@ class User < ActiveRecord::Base
   end
 
   def can_manage? short_url
+    # Can manage a link if
+    # - it is private and they own it
+    # - it is not private but they are in the same team
+
     same_team = (team.present? && team == short_url.user.team)
-    short_url.user == self || same_team
+    (short_url.private? && short_url.user == self) ||
+    (!short_url.private? && (short_url.user == self || same_team))
   end
 
   def is_beta?

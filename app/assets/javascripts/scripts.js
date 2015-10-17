@@ -1,4 +1,8 @@
 $(document).ready(function() {
+  // Datatables
+  $('#datatable').DataTable();
+
+  // Modal windows
   $(".modal").dialog({
     autoOpen: false,
     resizeable: false,
@@ -6,8 +10,6 @@ $(document).ready(function() {
     modal: true,
     show: { effect: "slide", direction: "up" },
   });
-
-  $('#datatable').DataTable();
 
   $("#sign-in-link").click(function() {
     $("#sign-in-modal").dialog('open');
@@ -19,6 +21,11 @@ $(document).ready(function() {
 
   $("#create-link").click(function(){
     $("#create-link-modal").dialog('open');
+  });
+
+  $(".edit-link").click(function(){
+    alert("hello");
+    $(this).closest(".edit-link-modal").dialog('open');
   });
 
   // Tooltips
