@@ -17,12 +17,16 @@ class UsersController < ApplicationController
   end
 
   def show
-    @visits_by_country = current_user.visits_by_country
-    @visits_by_country_count = @visits_by_country.count
+    visits = current_user.visits
+
+    @number_of_links_shared = current_user.short_urls.count
+    @number_of_visits = visits.length
+    @countries_reached = current_user.visits_by_country.count
+    @unique_visits = visits.uniq { |a| a.ip_address }.count
+
     @visits_by_organization = current_user.visits_by_organization
     @visits_by_organization_count = @visits_by_organization.count
 
-    @total_visits = current_user.visits.length
 
     @short_urls = current_user.short_urls.
       with_visits.

@@ -297,6 +297,3 @@ DEPENDENCIES
   therubyracer
   uglifier (>= 1.0.3)
   whenever (~> 0.8.2)
-
-BUNDLED WITH
-   1.10.5

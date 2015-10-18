@@ -1,48 +1,39 @@
+<%= render partial: "shared/summary_stats", locals: { number_of_visits: @number_of_visits, unique_visits: @unique_visits, number_of_links_shared: @number_of_links_shared, countries_reached: @countries_reached } %>
+
+<div class="row">
+  <div class="page-header">
+    <h5>Links list</h5>
+  </div>
+  <%= render partial: "short_urls/short_urls_table" %>
+</div>
+
+<div class="row">
+  <div class="page-header">
+    <h5>Overview</h5>
+  </div>
+  <%= line_chart current_user.visits_per_day %>
+</div>
+
+<div class="row">
+  <div class="page-header">
+    <h5>Geographical origin</h5>
+  </div>
+  Map goes here...
+</div>
+
 <div class="row group">
-  <div class="col col-3">
-    <div class="page-header"><p class="headline">Number of Visits</p></div>
-    <h1 class="text-primary">150</h1>
+  <div class="col col-6">
+    <div class="page-header">
+      <h5>Top organisations</h5>
+    </div>
   </div>
-  <div class="col col-3">
-    <div class="page-header"><p class="headline">Unique Visits</p></div>
-    <h1 class="text-primary">30</h1>
+
+  <div class="col col-6">
+    <div class="page-header">
+      <h5>Top referrals<h5>
+    </div>
+    <%= bar_chart User.group(:created_at).count %>
   </div>
-  <div class="col col-3">
-    <div class="page-header"><p class="headline">Number of Links Shared</p></div>
-    <h1 class="text-primary">53</h1>
-  </div>
-  <div class="col col-3">
-    <div class="page-header"><p class="headline">Countries Reached</p></div>
-    <h1 class="text-primary">85</h1>
-  </div>
-</div>
-
-<div class="page-header">
-  <h5>Links list</h5>
-</div>
-<%= render partial: "short_urls/short_urls_table" %>
-
-<div class="page-header">
-  <h5>Overview</h5>
-</div>
-<% #= line_chart current_user.visits.group_by_day(:created_at).count %>
-
-
-
-
-
-<div class="left">
-  <%= render partial: "short_urls/headline_number", locals: {
-    title: "Total number of visits",
-    value: @total_visits
-  } %>
-</div>
-
-<div class="right">
-  <%= render partial: "short_urls/chart_block" %>
-  <%= render partial: "short_urls/organizations_table", locals: {
-    title: "Top organisations by number of visits"
-  } %>
 </div>
 
 <div class="edit-link-form popover"></div>

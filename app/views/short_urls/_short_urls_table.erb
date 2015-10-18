@@ -11,9 +11,6 @@
       <tr>
         <td><%= link_to short_url.short_name, short_url_info_path(short_url.short_name) %></td>
         <td>
-                  <%= render partial: 'shared/short_link_history_modal', locals: { short_url: short_url } %>
-        </td>
-        <td>
           <% if short_url.private? %>
             (Private)
           <% else %>

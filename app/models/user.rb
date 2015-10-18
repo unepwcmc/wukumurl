@@ -38,6 +38,11 @@ class User < ActiveRecord::Base
     ")
   end
 
+  def visits_per_day
+    array = self.visits.group_by &:created_at
+    array.map {|k,v| [k, v = v.length]}.to_h
+  end
+
   def visits_by_organization
     Organization.find_by_sql("
       SELECT organizations.*, visit_count
