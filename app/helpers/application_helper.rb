@@ -25,9 +25,9 @@ module ApplicationHelper
     end
   end
 
-  def link_with_class_on_path title, path, class_name
-    active_class = current_page?(path) ? class_name : ''
-    link_to title, path, class: active_class
+  def nav_link_with_class title, path
+    classes = current_page?(path) ? 'current text' : 'text'
+    link_to title, path, class: classes
   end
 
   ### Devise

@@ -89,7 +89,7 @@ nav {
       color: $grey-66;
       padding: 30px 20px;
 
-      &:hover {
+      &:hover, &.current {
         padding-bottom: 26px;
         color: $grey-44;
         text-decoration: none;
