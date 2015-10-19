@@ -1,21 +1,12 @@
-<% title @team.name %>
+<%= render partial: "shared/summary_stats", locals: { number_of_visits: @number_of_visits, unique_visits: @unique_visits, number_of_links_shared: @number_of_links_shared, countries_reached: @countries_reached } %>
 
-<div class="left">
-  <%= render partial: "short_urls/headline_number", locals: {
-    title: "Total number of visits for #{@team.name}",
-    value: @total_visits
-  } %>
-
-  <section>
-    <header>
-      <h4>All links for <%= @team.name %></h4>
-    </header>
-
-    <div id="short_urls_table" class="expandable-table">
-      <%= render partial: "short_urls/short_urls_table" %>
-    </div>
-  </section>
+<div class="row">
+  <div class="page-header">
+    <h5>Team links list</h5>
+  </div>
+  <%= render partial: "short_urls/short_urls_table", locals: { short_urls: @short_urls } %>
 </div>
+
 
 <div class="right">
   <%= render partial: "short_urls/chart_block" %>

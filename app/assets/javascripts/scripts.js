@@ -24,12 +24,13 @@ $(document).ready(function() {
   });
 
   $(".edit-link").click(function(){
-    alert("hello");
-    $(this).closest(".edit-link-modal").dialog('open');
+    var short_url_id = $(this).data("id");
+    $("#edit-link-modal-" + short_url_id).dialog('open');
   });
 
   $(".history-link").click(function(){
-    alert("NOOOO");
+    var short_url_id = $(this).data("id");
+    $("#change-history-modal-" + short_url_id).dialog('open');
   });
 
   // Tooltips

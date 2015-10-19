@@ -1,4 +1,4 @@
-<div id="edit-link-modal" class="modal edit-link-modal" title="Edit this link" style="display:none;">
+<div id="edit-link-modal-<%= short_url.id %>" class="modal edit-link-modal" title="Edit this link" style="display:none;">
 <%= form_for short_url, as: :put do |f| %>
   <%= f.label :url, "Paste your link" %>
   <%= f.text_field :url %>

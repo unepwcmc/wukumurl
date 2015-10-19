@@ -4,7 +4,7 @@
   <div class="page-header">
     <h5>Links list</h5>
   </div>
-  <%= render partial: "short_urls/short_urls_table" %>
+  <%= render partial: "short_urls/short_urls_table", locals: {short_urls: @short_urls} %>
 </div>
 
 <div class="row">
