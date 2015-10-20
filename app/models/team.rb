@@ -10,6 +10,11 @@ class Team < ActiveRecord::Base
     new_record?
   end
 
+  def visits_per_day
+    array = self.total_visits.group_by &:created_at
+    array.map {|k,v| [k, v = v.length]}.to_h
+  end
+
   def visits_by_country
     return [] if users.count.zero?
     City.joins("

@@ -8,7 +8,7 @@ class TeamsController < ApplicationController
     @number_of_links_shared = @team.short_urls.count
     @countries_reached = @team.visits_by_country.length
 
-    # REmove these
+    # Remove these
     @visits_by_country = @team.visits_by_country
     @visits_by_country_count = @visits_by_country.length
     @visits_by_organization = @team.all_visits_by_organization

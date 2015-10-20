@@ -1,0 +1,371 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+AddAdminToUsersTable	./db/migrate/20150318165315_add_admin_to_users_table.rb	/^class AddAdminToUsersTable < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddCityIdToVisits	./db/migrate/20130522161700_add_city_id_to_visits.rb	/^class AddCityIdToVisits < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddConfirmableToUsers	./db/migrate/20131104172019_add_confirmable_to_users.rb	/^class AddConfirmableToUsers < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddCountryAssociationToVisit	./db/migrate/20130124115708_add_country_association_to_visit.rb	/^class AddCountryAssociationToVisit < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddCountryNameToCountryLocation	./db/migrate/20130603140034_add_country_name_to_country_location.rb	/^class AddCountryNameToCountryLocation < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddDasboardMetricId	./db/migrate/20140303102432_add_dasboard_metric_id.rb	/^class AddDasboardMetricId < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddDescriptionToShortUrlsTable	./db/migrate/20151008102110_add_description_to_short_urls_table.rb	/^class AddDescriptionToShortUrlsTable < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddDisregardToOrganization	./db/migrate/20130204162414_add_disregard_to_organization.rb	/^class AddDisregardToOrganization < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddDomainToVisits	./db/migrate/20140304110432_add_domain_to_visits.rb	/^class AddDomainToVisits < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddLatitudeLongitudeToVisits	./db/migrate/20130524102427_add_latitude_longitude_to_visits.rb	/^class AddLatitudeLongitudeToVisits < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddLocationAssociationToVisits	./db/migrate/20130528133242_add_location_association_to_visits.rb	/^class AddLocationAssociationToVisits < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddLocationSourceToVisits	./db/migrate/20130524103617_add_location_source_to_visits.rb	/^class AddLocationSourceToVisits < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddOrganizationAssociationToVisit	./db/migrate/20130125161221_add_organization_association_to_visit.rb	/^class AddOrganizationAssociationToVisit < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddPrivateBooleanToShortUrlsTable	./db/migrate/20150702085115_add_private_boolean_to_short_urls_table.rb	/^class AddPrivateBooleanToShortUrlsTable < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddReferrerToVisit	./db/migrate/20151020143657_add_referrer_to_visit.rb	/^class AddReferrerToVisit < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddSlugToTeams	./db/migrate/20150327150554_add_slug_to_teams.rb	/^class AddSlugToTeams < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddSoftDeleteBoolToShortUrl	./db/migrate/20130201144241_add_soft_delete_bool_to_short_url.rb	/^class AddSoftDeleteBoolToShortUrl < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddTeamIdToUsers	./db/migrate/20150327105216_add_team_id_to_users.rb	/^class AddTeamIdToUsers < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddUnconfirmableEmailToUsers	./db/migrate/20131104172147_add_unconfirmable_email_to_users.rb	/^class AddUnconfirmableEmailToUsers < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddUserIdToShortUrl	./db/migrate/20131104080255_add_user_id_to_short_url.rb	/^class AddUserIdToShortUrl < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+Application	./config/application.rb	/^  class Application < Rails::Application$/;"	c	class:Wukumurl	inherits:Rails.Application
+ApplicationController	./app/controllers/application_controller.rb	/^class ApplicationController < ActionController::Base$/;"	c	inherits:ActionController.Base
+ApplicationHelper	./app/helpers/application_helper.rb	/^module ApplicationHelper$/;"	m
+CARTODB_CONFIG	./config/initializers/cartodb.rb	/^CARTODB_CONFIG = YAML.load_file(Rails.root.join('config\/cartodb_config.yml'))$/;"	C	class:
+CARTODB_LAYERS_CONFIG	./config/initializers/cartodb.rb	/^CARTODB_LAYERS_CONFIG = YAML.load_file(Rails.root.join('config\/cartodb_layers_config.yml'))$/;"	C	class:
+CartodbParty	./lib/modules/cartodb_party.rb	/^class CartodbParty$/;"	c
+ChangeDisregardToInteger	./db/migrate/20131104113535_change_disregard_to_integer.rb	/^class ChangeDisregardToInteger < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+City	./app/models/city.rb	/^class City < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+CityTest	./test/models/city_test.rb	/^class CityTest < ActiveSupport::TestCase$/;"	c	inherits:ActiveSupport.TestCase
+ConfirmationsController	./app/controllers/confirmations_controller.rb	/^class ConfirmationsController < Devise::ConfirmationsController$/;"	c	inherits:Devise.ConfirmationsController
+CountryLocation	./app/models/country_location.rb	/^class CountryLocation < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+CountryLocationTest	./test/models/country_location_test.rb	/^class CountryLocationTest < ActiveSupport::TestCase$/;"	c	inherits:ActiveSupport.TestCase
+CreateCities	./db/migrate/20130522112823_create_cities.rb	/^class CreateCities < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreateCountries	./db/migrate/20130124115203_create_countries.rb	/^class CreateCountries < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreateCountryLocations	./db/migrate/20130531112437_create_country_locations.rb	/^class CreateCountryLocations < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreateDisregardVotes	./db/migrate/20131104145719_create_disregard_votes.rb	/^class CreateDisregardVotes < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreateFriendlyIdSlugs	./db/migrate/20150327151506_create_friendly_id_slugs.rb	/^class CreateFriendlyIdSlugs < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreateLocations	./db/migrate/20130528133028_create_locations.rb	/^class CreateLocations < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreateOrganizations	./db/migrate/20130125160728_create_organizations.rb	/^class CreateOrganizations < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreateShortUrls	./db/migrate/20130122154121_create_short_urls.rb	/^class CreateShortUrls < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreateTeams	./db/migrate/20150327103039_create_teams.rb	/^class CreateTeams < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreateUrlLocations	./db/migrate/20130522115054_create_url_locations.rb	/^class CreateUrlLocations < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreateVersions	./db/migrate/20151017161414_create_versions.rb	/^class CreateVersions < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreateVisits	./db/migrate/20130122165900_create_visits.rb	/^class CreateVisits < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CustomFailureApp	./config/initializers/devise.rb	/^class CustomFailureApp < Devise::FailureApp$/;"	c	inherits:Devise.FailureApp
+DashboardController	./app/controllers/admin/dashboard_controller.rb	/^class Admin::DashboardController < ApplicationController$/;"	c	class:Admin	inherits:ApplicationController
+Devise	./config/initializers/ldap_authenticatable.rb	/^module Devise$/;"	m
+DeviseCreateUsers	./db/migrate/20131029174213_devise_create_users.rb	/^class DeviseCreateUsers < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+DeviseHelper	./app/helpers/devise_helper.rb	/^module DeviseHelper$/;"	m
+DisregardVote	./app/models/disregard_vote.rb	/^class DisregardVote < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+DisregardVoteTest	./test/models/disregard_vote_test.rb	/^class DisregardVoteTest < ActiveSupport::TestCase$/;"	c	inherits:ActiveSupport.TestCase
+DropUrlsLocation	./db/migrate/20131022203029_drop_urls_location.rb	/^class DropUrlsLocation < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+FixColumnLatitudeLongitudeFromCities	./db/migrate/20130530092507_fix_column_latitude_longitude_from_cities.rb	/^class FixColumnLatitudeLongitudeFromCities < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+FixColumnNameFromCountryLocations	./db/migrate/20130603144445_fix_column_name_from_country_locations.rb	/^class FixColumnNameFromCountryLocations < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+FixShortUrlFields	./db/migrate/20130122162422_fix_short_url_fields.rb	/^class FixShortUrlFields < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+GEO_IP_CONFIG	./config/initializers/max_mind.rb	/^GEO_IP_CONFIG = YAML.load_file("#{Rails.root}\/config\/max_mind.yml")$/;"	C	class:
+GeoLocator	./app/workers/geo_locator.rb	/^class GeoLocator$/;"	c
+GeoLocatorTest	./test/models/geo_locator_test.rb	/^class GeoLocatorTest < ActiveSupport::TestCase$/;"	c	inherits:ActiveSupport.TestCase
+LdapAuthenticatable	./config/initializers/ldap_authenticatable.rb	/^    class LdapAuthenticatable < Authenticatable$/;"	c	class:Devise.Strategies	inherits:Authenticatable
+Location	./app/models/location.rb	/^class Location < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+LocationTest	./test/models/location_test.rb	/^class LocationTest < ActiveSupport::TestCase$/;"	c	inherits:ActiveSupport.TestCase
+MapController	./app/controllers/map_controller.rb	/^class MapController < ApplicationController$/;"	c	inherits:ApplicationController
+MaxMindMappings	./app/models/city.rb	/^  MaxMindMappings = {country_name: :country, country_code: :iso2, country_code3: :iso3, latitude: :lat, longitude: :lon, city: :name, region: :region}$/;"	C	class:City
+Organization	./app/models/organization.rb	/^class Organization < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+OrganizationsController	./app/controllers/organizations_controller.rb	/^class OrganizationsController < ApplicationController$/;"	c	inherits:ApplicationController
+OrganizationsControllerTest	./test/functional/organizations_controller_test.rb	/^class OrganizationsControllerTest < ActionController::TestCase$/;"	c	inherits:ActionController.TestCase
+PasswordsController	./app/controllers/passwords_controller.rb	/^class PasswordsController < Devise::PasswordsController$/;"	c	inherits:Devise.PasswordsController
+ReAddConfirmationToUsers	./db/migrate/20131203204426_re_add_confirmation_to_users.rb	/^class ReAddConfirmationToUsers < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+RegistrationsController	./app/controllers/registrations_controller.rb	/^class RegistrationsController < Devise::RegistrationsController$/;"	c	inherits:Devise.RegistrationsController
+RemoveCountriesTable	./db/migrate/20131023070734_remove_countries_table.rb	/^class RemoveCountriesTable < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+RemoveCountryIdFromVisit	./db/migrate/20131023070616_remove_country_id_from_visit.rb	/^class RemoveCountryIdFromVisit < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+RemoveDisregardFromOrganization	./db/migrate/20131104152033_remove_disregard_from_organization.rb	/^class RemoveDisregardFromOrganization < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+RemoveEmailConfirmation	./db/migrate/20131119104237_remove_email_confirmation.rb	/^class RemoveEmailConfirmation < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+RemoveLatitudeLongitudeLocationsourceFromVisits	./db/migrate/20130529104310_remove_latitude_longitude_locationsource_from_visits.rb	/^class RemoveLatitudeLongitudeLocationsourceFromVisits < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+SessionsController	./app/controllers/sessions_controller.rb	/^class SessionsController < Devise::SessionsController$/;"	c	inherits:Devise.SessionsController
+ShortUrl	./app/models/short_url.rb	/^class ShortUrl < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+ShortUrlTest	./test/models/short_url_test.rb	/^class ShortUrlTest < ActiveSupport::TestCase$/;"	c	inherits:ActiveSupport.TestCase
+ShortUrlsController	./app/controllers/short_urls_controller.rb	/^class ShortUrlsController < ApplicationController$/;"	c	inherits:ApplicationController
+ShortUrlsControllerTest	./test/functional/short_urls_controller_test.rb	/^class ShortUrlsControllerTest < ActionController::TestCase$/;"	c	inherits:ActionController.TestCase
+ShortUrlsHelper	./app/helpers/short_urls_helper.rb	/^module ShortUrlsHelper$/;"	m
+ShortUrlsHelperTest	./test/helpers/short_urls_helper_test.rb	/^class ShortUrlsHelperTest < ActionView::TestCase$/;"	c	inherits:ActionView.TestCase
+StaticPagesController	./app/controllers/static_pages_controller.rb	/^class StaticPagesController < ApplicationController$/;"	c	inherits:ApplicationController
+StaticPagesControllerTest	./test/controllers/static_pages_controller_test.rb	/^class StaticPagesControllerTest < ActionController::TestCase$/;"	c	inherits:ActionController.TestCase
+StaticPagesHelper	./app/helpers/static_pages_helper.rb	/^module StaticPagesHelper$/;"	m
+StaticPagesHelperTest	./test/helpers/static_pages_helper_test.rb	/^class StaticPagesHelperTest < ActionView::TestCase$/;"	c	inherits:ActionView.TestCase
+Strategies	./config/initializers/ldap_authenticatable.rb	/^  module Strategies$/;"	m	class:Devise
+TEXT_BYTES	./db/migrate/20151017161414_create_versions.rb	/^  TEXT_BYTES = 1_073_741_823$/;"	C	class:CreateVersions
+Team	./app/models/team.rb	/^class Team < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+TeamTest	./test/models/team_test.rb	/^class TeamTest < ActiveSupport::TestCase$/;"	c	inherits:ActiveSupport.TestCase
+TeamsController	./app/controllers/teams_controller.rb	/^class TeamsController < ApplicationController$/;"	c	inherits:ApplicationController
+TeamsControllerTest	./test/controllers/teams_controller_test.rb	/^class TeamsControllerTest < ActionController::TestCase$/;"	c	inherits:ActionController.TestCase
+TeamsHelper	./app/helpers/teams_helper.rb	/^module TeamsHelper$/;"	m
+TeamsHelperTest	./test/helpers/teams_helper_test.rb	/^class TeamsHelperTest < ActionView::TestCase$/;"	c	inherits:ActionView.TestCase
+TestCase	./test/test_helper.rb	/^class ActiveSupport::TestCase$/;"	c	class:ActiveSupport
+User	./app/models/user.rb	/^class User < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+UserFlowsTest	./test/integration/user_flows_test.rb	/^class UserFlowsTest < ActionDispatch::IntegrationTest$/;"	c	inherits:ActionDispatch.IntegrationTest
+UserTest	./test/models/user_test.rb	/^class UserTest < ActiveSupport::TestCase$/;"	c	inherits:ActiveSupport.TestCase
+UsersController	./app/controllers/users_controller.rb	/^class UsersController < ApplicationController$/;"	c	inherits:ApplicationController
+UsersControllerTest	./test/functional/users_controller_test.rb	/^class UsersControllerTest < ActionController::TestCase$/;"	c	inherits:ActionController.TestCase
+Visit	./app/models/visit.rb	/^class Visit < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+VisitTest	./test/models/visit_test.rb	/^class VisitTest < ActiveSupport::TestCase$/;"	c	inherits:ActiveSupport.TestCase
+Wukumurl	./config/application.rb	/^module Wukumurl$/;"	m
+after_confirmation_path_for	./app/controllers/confirmations_controller.rb	/^  def after_confirmation_path_for(resource_name, resource)$/;"	f	class:ConfirmationsController
+after_sending_reset_password_instructions_path_for	./app/controllers/passwords_controller.rb	/^  def after_sending_reset_password_instructions_path_for(resource_name)$/;"	f	class:PasswordsController
+all_visits_by_country	./app/models/city.rb	/^  def self.all_visits_by_country$/;"	F	class:City
+all_visits_by_organization	./app/models/organization.rb	/^  def self.all_visits_by_organization$/;"	F	class:Organization
+all_visits_by_organization	./app/models/team.rb	/^  def all_visits_by_organization$/;"	f	class:Team
+authenticate!	./config/initializers/ldap_authenticatable.rb	/^      def authenticate!$/;"	f	class:Devise.Strategies.LdapAuthenticatable
+authenticate_admin	./app/controllers/application_controller.rb	/^  def authenticate_admin$/;"	f	class:ApplicationController
+back_button	./app/helpers/application_helper.rb	/^  def back_button$/;"	f	class:ApplicationHelper
+bind_to_ldap	./config/initializers/ldap_authenticatable.rb	/^      def bind_to_ldap$/;"	f	class:Devise.Strategies.LdapAuthenticatable
+build_city	./app/models/visit.rb	/^  belongs_to :city$/;"	F	class:Visit
+build_country_location	./app/models/city.rb	/^  belongs_to :country_location, :foreign_key => "iso2", :primary_key => "id"$/;"	F	class:City
+build_location	./app/models/visit.rb	/^  belongs_to :location$/;"	F	class:Visit
+build_organization	./app/models/disregard_vote.rb	/^  belongs_to :organization$/;"	F	class:DisregardVote
+build_organization	./app/models/visit.rb	/^  belongs_to :organization$/;"	F	class:Visit
+build_short_url	./app/models/disregard_vote.rb	/^  belongs_to :short_url$/;"	F	class:DisregardVote
+build_short_url	./app/models/visit.rb	/^  belongs_to :short_url$/;"	F	class:Visit
+build_team	./app/models/user.rb	/^  belongs_to :team$/;"	F	class:User
+build_url	./lib/modules/cartodb_party.rb	/^  def self.build_url path, opts={}$/;"	F	class:CartodbParty
+build_user	./app/models/short_url.rb	/^  belongs_to :user$/;"	F	class:ShortUrl
+can_manage?	./app/models/user.rb	/^  def can_manage? short_url$/;"	f	class:User
+change	./db/migrate/20130122154121_create_short_urls.rb	/^  def change$/;"	f	class:CreateShortUrls
+change	./db/migrate/20130122162422_fix_short_url_fields.rb	/^  def change$/;"	f	class:FixShortUrlFields
+change	./db/migrate/20130122165900_create_visits.rb	/^  def change$/;"	f	class:CreateVisits
+change	./db/migrate/20130124115203_create_countries.rb	/^  def change$/;"	f	class:CreateCountries
+change	./db/migrate/20130124115708_add_country_association_to_visit.rb	/^  def change$/;"	f	class:AddCountryAssociationToVisit
+change	./db/migrate/20130125160728_create_organizations.rb	/^  def change$/;"	f	class:CreateOrganizations
+change	./db/migrate/20130125161221_add_organization_association_to_visit.rb	/^  def change$/;"	f	class:AddOrganizationAssociationToVisit
+change	./db/migrate/20130201144241_add_soft_delete_bool_to_short_url.rb	/^  def change$/;"	f	class:AddSoftDeleteBoolToShortUrl
+change	./db/migrate/20130204162414_add_disregard_to_organization.rb	/^  def change$/;"	f	class:AddDisregardToOrganization
+change	./db/migrate/20130522112823_create_cities.rb	/^  def change$/;"	f	class:CreateCities
+change	./db/migrate/20130522115054_create_url_locations.rb	/^  def change$/;"	f	class:CreateUrlLocations
+change	./db/migrate/20130522161700_add_city_id_to_visits.rb	/^  def change$/;"	f	class:AddCityIdToVisits
+change	./db/migrate/20130524102427_add_latitude_longitude_to_visits.rb	/^  def change$/;"	f	class:AddLatitudeLongitudeToVisits
+change	./db/migrate/20130524103617_add_location_source_to_visits.rb	/^  def change$/;"	f	class:AddLocationSourceToVisits
+change	./db/migrate/20130528133028_create_locations.rb	/^  def change$/;"	f	class:CreateLocations
+change	./db/migrate/20130528133242_add_location_association_to_visits.rb	/^  def change$/;"	f	class:AddLocationAssociationToVisits
+change	./db/migrate/20130531112437_create_country_locations.rb	/^  def change$/;"	f	class:CreateCountryLocations
+change	./db/migrate/20130603140034_add_country_name_to_country_location.rb	/^  def change$/;"	f	class:AddCountryNameToCountryLocation
+change	./db/migrate/20131022203029_drop_urls_location.rb	/^  def change$/;"	f	class:DropUrlsLocation
+change	./db/migrate/20131023070616_remove_country_id_from_visit.rb	/^  def change$/;"	f	class:RemoveCountryIdFromVisit
+change	./db/migrate/20131023070734_remove_countries_table.rb	/^  def change$/;"	f	class:RemoveCountriesTable
+change	./db/migrate/20131029174213_devise_create_users.rb	/^  def change$/;"	f	class:DeviseCreateUsers
+change	./db/migrate/20131104080255_add_user_id_to_short_url.rb	/^  def change$/;"	f	class:AddUserIdToShortUrl
+change	./db/migrate/20131104113535_change_disregard_to_integer.rb	/^  def change$/;"	f	class:ChangeDisregardToInteger
+change	./db/migrate/20131104145719_create_disregard_votes.rb	/^  def change$/;"	f	class:CreateDisregardVotes
+change	./db/migrate/20131104152033_remove_disregard_from_organization.rb	/^  def change$/;"	f	class:RemoveDisregardFromOrganization
+change	./db/migrate/20131104172019_add_confirmable_to_users.rb	/^  def change$/;"	f	class:AddConfirmableToUsers
+change	./db/migrate/20131104172147_add_unconfirmable_email_to_users.rb	/^  def change$/;"	f	class:AddUnconfirmableEmailToUsers
+change	./db/migrate/20131119104237_remove_email_confirmation.rb	/^  def change$/;"	f	class:RemoveEmailConfirmation
+change	./db/migrate/20131203204426_re_add_confirmation_to_users.rb	/^  def change$/;"	f	class:ReAddConfirmationToUsers
+change	./db/migrate/20140303102432_add_dasboard_metric_id.rb	/^  def change$/;"	f	class:AddDasboardMetricId
+change	./db/migrate/20140304110432_add_domain_to_visits.rb	/^  def change$/;"	f	class:AddDomainToVisits
+change	./db/migrate/20150318165315_add_admin_to_users_table.rb	/^  def change$/;"	f	class:AddAdminToUsersTable
+change	./db/migrate/20150327103039_create_teams.rb	/^  def change$/;"	f	class:CreateTeams
+change	./db/migrate/20150327105216_add_team_id_to_users.rb	/^  def change$/;"	f	class:AddTeamIdToUsers
+change	./db/migrate/20150327150554_add_slug_to_teams.rb	/^  def change$/;"	f	class:AddSlugToTeams
+change	./db/migrate/20150327151506_create_friendly_id_slugs.rb	/^  def change$/;"	f	class:CreateFriendlyIdSlugs
+change	./db/migrate/20150702085115_add_private_boolean_to_short_urls_table.rb	/^  def change$/;"	f	class:AddPrivateBooleanToShortUrlsTable
+change	./db/migrate/20151008102110_add_description_to_short_urls_table.rb	/^  def change$/;"	f	class:AddDescriptionToShortUrlsTable
+change	./db/migrate/20151017161414_create_versions.rb	/^  def change$/;"	f	class:CreateVersions
+change	./db/migrate/20151020143657_add_referrer_to_visit.rb	/^  def change$/;"	f	class:AddReferrerToVisit
+citie_ids	./app/models/short_url.rb	/^  has_many :cities, :through => :visits$/;"	F	class:ShortUrl
+citie_ids=	./app/models/short_url.rb	/^  has_many :cities, :through => :visits$/;"	F	class:ShortUrl
+cities	./app/models/short_url.rb	/^  has_many :cities, :through => :visits$/;"	F	class:ShortUrl
+cities=	./app/models/short_url.rb	/^  has_many :cities, :through => :visits$/;"	F	class:ShortUrl
+city	./app/models/country_location.rb	/^  has_many :city, :foreign_key => "iso2", :primary_key => "iso2"$/;"	F	class:CountryLocation
+city	./app/models/visit.rb	/^  belongs_to :city$/;"	F	class:Visit
+city=	./app/models/country_location.rb	/^  has_many :city, :foreign_key => "iso2", :primary_key => "iso2"$/;"	F	class:CountryLocation
+city=	./app/models/visit.rb	/^  belongs_to :city$/;"	F	class:Visit
+city_list	./app/controllers/map_controller.rb	/^  def city_list$/;"	f	class:MapController
+city_urls	./app/models/city.rb	/^  def city_urls$/;"	f	class:City
+country_list	./app/controllers/map_controller.rb	/^  def country_list$/;"	f	class:MapController
+country_location	./app/models/city.rb	/^  belongs_to :country_location, :foreign_key => "iso2", :primary_key => "id"$/;"	F	class:City
+country_location=	./app/models/city.rb	/^  belongs_to :country_location, :foreign_key => "iso2", :primary_key => "id"$/;"	F	class:City
+country_location_ids	./app/models/short_url.rb	/^  has_many :country_locations, :through => :cities$/;"	F	class:ShortUrl
+country_location_ids=	./app/models/short_url.rb	/^  has_many :country_locations, :through => :cities$/;"	F	class:ShortUrl
+country_locations	./app/models/short_url.rb	/^  has_many :country_locations, :through => :cities$/;"	F	class:ShortUrl
+country_locations=	./app/models/short_url.rb	/^  has_many :country_locations, :through => :cities$/;"	F	class:ShortUrl
+country_urls	./app/models/country_location.rb	/^  def country_urls$/;"	f	class:CountryLocation
+create	./app/controllers/registrations_controller.rb	/^  def create$/;"	f	class:RegistrationsController
+create	./app/controllers/sessions_controller.rb	/^  def create$/;"	f	class:SessionsController
+create	./app/controllers/short_urls_controller.rb	/^  def create$/;"	f	class:ShortUrlsController
+create_city	./app/models/visit.rb	/^  belongs_to :city$/;"	F	class:Visit
+create_city!	./app/models/visit.rb	/^  belongs_to :city$/;"	F	class:Visit
+create_country_location	./app/models/city.rb	/^  belongs_to :country_location, :foreign_key => "iso2", :primary_key => "id"$/;"	F	class:City
+create_country_location!	./app/models/city.rb	/^  belongs_to :country_location, :foreign_key => "iso2", :primary_key => "id"$/;"	F	class:City
+create_disregard_votes	./test/models/short_url_test.rb	/^  def create_disregard_votes(organization, count=1)$/;"	f	class:ShortUrlTest
+create_location	./app/models/visit.rb	/^  belongs_to :location$/;"	F	class:Visit
+create_location!	./app/models/visit.rb	/^  belongs_to :location$/;"	F	class:Visit
+create_organization	./app/models/disregard_vote.rb	/^  belongs_to :organization$/;"	F	class:DisregardVote
+create_organization	./app/models/visit.rb	/^  belongs_to :organization$/;"	F	class:Visit
+create_organization!	./app/models/disregard_vote.rb	/^  belongs_to :organization$/;"	F	class:DisregardVote
+create_organization!	./app/models/visit.rb	/^  belongs_to :organization$/;"	F	class:Visit
+create_short_name_if_blank	./app/models/short_url.rb	/^  def create_short_name_if_blank$/;"	f	class:ShortUrl
+create_short_url	./app/models/disregard_vote.rb	/^  belongs_to :short_url$/;"	F	class:DisregardVote
+create_short_url	./app/models/visit.rb	/^  belongs_to :short_url$/;"	F	class:Visit
+create_short_url!	./app/models/disregard_vote.rb	/^  belongs_to :short_url$/;"	F	class:DisregardVote
+create_short_url!	./app/models/visit.rb	/^  belongs_to :short_url$/;"	F	class:Visit
+create_team	./app/models/user.rb	/^  belongs_to :team$/;"	F	class:User
+create_team!	./app/models/user.rb	/^  belongs_to :team$/;"	F	class:User
+create_user	./app/models/short_url.rb	/^  belongs_to :user$/;"	F	class:ShortUrl
+create_user!	./app/models/short_url.rb	/^  belongs_to :user$/;"	F	class:ShortUrl
+destroy	./app/controllers/organizations_controller.rb	/^  def destroy$/;"	f	class:OrganizationsController
+destroy	./app/controllers/short_urls_controller.rb	/^  def destroy$/;"	f	class:ShortUrlsController
+devise_error_messages!	./app/helpers/devise_helper.rb	/^  def devise_error_messages!$/;"	f	class:DeviseHelper
+devise_error_messages?	./app/helpers/devise_helper.rb	/^  def devise_error_messages?$/;"	f	class:DeviseHelper
+devise_mapping	./app/helpers/application_helper.rb	/^  def devise_mapping$/;"	f	class:ApplicationHelper
+disregard_vote_ids	./app/models/organization.rb	/^  has_many :disregard_votes$/;"	F	class:Organization
+disregard_vote_ids	./app/models/short_url.rb	/^  has_many :disregard_votes$/;"	F	class:ShortUrl
+disregard_vote_ids=	./app/models/organization.rb	/^  has_many :disregard_votes$/;"	F	class:Organization
+disregard_vote_ids=	./app/models/short_url.rb	/^  has_many :disregard_votes$/;"	F	class:ShortUrl
+disregard_votes	./app/models/organization.rb	/^  has_many :disregard_votes$/;"	F	class:Organization
+disregard_votes	./app/models/short_url.rb	/^  has_many :disregard_votes$/;"	F	class:ShortUrl
+disregard_votes=	./app/models/organization.rb	/^  has_many :disregard_votes$/;"	F	class:Organization
+disregard_votes=	./app/models/short_url.rb	/^  has_many :disregard_votes$/;"	F	class:ShortUrl
+dont_show_map	./app/controllers/application_controller.rb	/^  def dont_show_map$/;"	f	class:ApplicationController
+down	./db/migrate/20130529104310_remove_latitude_longitude_locationsource_from_visits.rb	/^  def down$/;"	f	class:RemoveLatitudeLongitudeLocationsourceFromVisits
+down	./db/migrate/20130530092507_fix_column_latitude_longitude_from_cities.rb	/^  def down$/;"	f	class:FixColumnLatitudeLongitudeFromCities
+down	./db/migrate/20130603144445_fix_column_name_from_country_locations.rb	/^  def down$/;"	f	class:FixColumnNameFromCountryLocations
+edit	./app/controllers/short_urls_controller.rb	/^  def edit$/;"	f	class:ShortUrlsController
+email	./config/initializers/ldap_authenticatable.rb	/^      def email$/;"	f	class:Devise.Strategies.LdapAuthenticatable
+ensure_http_prepend	./app/models/short_url.rb	/^  def ensure_http_prepend$/;"	f	class:ShortUrl
+failure	./app/controllers/registrations_controller.rb	/^  def failure$/;"	f	class:RegistrationsController
+failure	./app/controllers/sessions_controller.rb	/^  def failure$/;"	f	class:SessionsController
+find_or_create_by_max_mind_attributes	./app/models/city.rb	/^  def self.find_or_create_by_max_mind_attributes attributes$/;"	F	class:City
+find_or_create_by_max_mind_attributes	./app/models/organization.rb	/^  def self.find_or_create_by_max_mind_attributes attributes$/;"	F	class:Organization
+first_name	./app/models/user.rb	/^  def first_name$/;"	f	class:User
+full_name	./app/models/user.rb	/^  def full_name$/;"	f	class:User
+generate_short_name	./app/models/short_url.rb	/^  def self.generate_short_name$/;"	F	class:ShortUrl
+geo_locate	./app/models/visit.rb	/^  def geo_locate (cdb, orgdb)$/;"	f	class:Visit
+geolocated?	./app/models/visit.rb	/^  def geolocated?$/;"	f	class:Visit
+get_coordinates_using_geocoder	./app/models/location.rb	/^  def self.get_coordinates_using_geocoder global_attributes$/;"	F	class:Location
+get_coordinates_using_geoip	./app/models/location.rb	/^  def self.get_coordinates_using_geoip city_attributes$/;"	F	class:Location
+index	./app/controllers/admin/dashboard_controller.rb	/^  def index$/;"	f	class:Admin.DashboardController
+index	./app/controllers/map_controller.rb	/^  def index$/;"	f	class:MapController
+index	./app/controllers/short_urls_controller.rb	/^  def index$/;"	f	class:ShortUrlsController
+index	./app/controllers/static_pages_controller.rb	/^  def index$/;"	f	class:StaticPagesController
+is_beta?	./app/models/user.rb	/^  def is_beta?$/;"	f	class:User
+is_owner?	./app/models/user.rb	/^  def is_owner? short_url$/;"	f	class:User
+last_name	./app/models/user.rb	/^  def last_name$/;"	f	class:User
+ldap	./config/initializers/ldap_authenticatable.rb	/^      def ldap$/;"	f	class:Devise.Strategies.LdapAuthenticatable
+list	./app/controllers/short_urls_controller.rb	/^  def list$/;"	f	class:ShortUrlsController
+location	./app/models/visit.rb	/^  belongs_to :location$/;"	F	class:Visit
+location=	./app/models/visit.rb	/^  belongs_to :location$/;"	F	class:Visit
+location_ids	./app/models/short_url.rb	/^  has_many :locations, :through => :visits$/;"	F	class:ShortUrl
+location_ids=	./app/models/short_url.rb	/^  has_many :locations, :through => :visits$/;"	F	class:ShortUrl
+location_list	./app/controllers/map_controller.rb	/^  def location_list$/;"	f	class:MapController
+location_urls	./app/models/location.rb	/^  def location_urls$/;"	f	class:Location
+locations	./app/models/short_url.rb	/^  has_many :locations, :through => :visits$/;"	F	class:ShortUrl
+locations=	./app/models/short_url.rb	/^  has_many :locations, :through => :visits$/;"	F	class:ShortUrl
+nav_link_with_class	./app/helpers/application_helper.rb	/^  def nav_link_with_class title, path$/;"	f	class:ApplicationHelper
+no_urls?	./app/models/user.rb	/^  def no_urls?$/;"	f	class:User
+non_pertinent_organization_query	./app/models/short_url.rb	/^  def non_pertinent_organization_query without: {}$/;"	f	class:ShortUrl
+not_deleted	./app/models/short_url.rb	/^  def self.not_deleted$/;"	F	class:ShortUrl
+notify_slack	./app/controllers/users_controller.rb	/^  def notify_slack$/;"	f	class:UsersController
+ordered_by_visits_desc	./app/models/short_url.rb	/^  scope :ordered_by_visits_desc, -> {$/;"	F	class:ShortUrl
+organization	./app/models/disregard_vote.rb	/^  belongs_to :organization$/;"	F	class:DisregardVote
+organization	./app/models/location.rb	/^  def organization$/;"	f	class:Location
+organization	./app/models/visit.rb	/^  belongs_to :organization$/;"	F	class:Visit
+organization=	./app/models/disregard_vote.rb	/^  belongs_to :organization$/;"	F	class:DisregardVote
+organization=	./app/models/visit.rb	/^  belongs_to :organization$/;"	F	class:Visit
+organizations_table	./app/controllers/short_urls_controller.rb	/^  def organizations_table$/;"	f	class:ShortUrlsController
+owned_by?	./app/models/short_url.rb	/^  def owned_by? current_user_or_team$/;"	f	class:ShortUrl
+password	./config/initializers/ldap_authenticatable.rb	/^      def password$/;"	f	class:Devise.Strategies.LdapAuthenticatable
+perform	./app/workers/geo_locator.rb	/^  def perform(visit_id)$/;"	f	class:GeoLocator
+pertinent_organization_query	./app/models/short_url.rb	/^  def pertinent_organization_query threshold = 5$/;"	f	class:ShortUrl
+pick_team	./app/controllers/users_controller.rb	/^  def pick_team$/;"	f	class:UsersController
+pretty_url	./app/helpers/short_urls_helper.rb	/^  def pretty_url ugly_url$/;"	f	class:ShortUrlsHelper
+query	./lib/modules/cartodb_party.rb	/^  def self.query query$/;"	F	class:CartodbParty
+recently_added	./app/helpers/short_urls_helper.rb	/^  def recently_added short_url$/;"	f	class:ShortUrlsHelper
+redirect_url	./config/initializers/devise.rb	/^  def redirect_url$/;"	f	class:CustomFailureApp
+resource	./app/helpers/application_helper.rb	/^  def resource$/;"	f	class:ApplicationHelper
+resource_name	./app/helpers/application_helper.rb	/^  def resource_name$/;"	f	class:ApplicationHelper
+respond	./config/initializers/devise.rb	/^  def respond$/;"	f	class:CustomFailureApp
+sanitise_short_name	./app/models/short_url.rb	/^  def sanitise_short_name$/;"	f	class:ShortUrl
+setup	./test/functional/organizations_controller_test.rb	/^  def setup$/;"	f	class:OrganizationsControllerTest
+setup	./test/models/short_url_test.rb	/^  def setup$/;"	f	class:ShortUrlTest
+setup	./test/models/visit_test.rb	/^  def setup$/;"	f	class:VisitTest
+short_url	./app/models/disregard_vote.rb	/^  belongs_to :short_url$/;"	F	class:DisregardVote
+short_url	./app/models/visit.rb	/^  belongs_to :short_url$/;"	F	class:Visit
+short_url=	./app/models/disregard_vote.rb	/^  belongs_to :short_url$/;"	F	class:DisregardVote
+short_url=	./app/models/visit.rb	/^  belongs_to :short_url$/;"	F	class:Visit
+short_url_ids	./app/models/city.rb	/^  has_many :short_urls, :through => :visits$/;"	F	class:City
+short_url_ids	./app/models/country_location.rb	/^  has_many :short_urls, :through => :city$/;"	F	class:CountryLocation
+short_url_ids	./app/models/location.rb	/^  has_many :short_urls, :through => :visits$/;"	F	class:Location
+short_url_ids	./app/models/team.rb	/^  has_many :short_urls, through: :users$/;"	F	class:Team
+short_url_ids	./app/models/user.rb	/^  has_many :short_urls$/;"	F	class:User
+short_url_ids=	./app/models/city.rb	/^  has_many :short_urls, :through => :visits$/;"	F	class:City
+short_url_ids=	./app/models/country_location.rb	/^  has_many :short_urls, :through => :city$/;"	F	class:CountryLocation
+short_url_ids=	./app/models/location.rb	/^  has_many :short_urls, :through => :visits$/;"	F	class:Location
+short_url_ids=	./app/models/team.rb	/^  has_many :short_urls, through: :users$/;"	F	class:Team
+short_url_ids=	./app/models/user.rb	/^  has_many :short_urls$/;"	F	class:User
+short_url_params	./app/controllers/short_urls_controller.rb	/^  def short_url_params$/;"	f	class:ShortUrlsController
+short_urls	./app/models/city.rb	/^  has_many :short_urls, :through => :visits$/;"	F	class:City
+short_urls	./app/models/country_location.rb	/^  has_many :short_urls, :through => :city$/;"	F	class:CountryLocation
+short_urls	./app/models/location.rb	/^  has_many :short_urls, :through => :visits$/;"	F	class:Location
+short_urls	./app/models/team.rb	/^  has_many :short_urls, through: :users$/;"	F	class:Team
+short_urls	./app/models/user.rb	/^  has_many :short_urls$/;"	F	class:User
+short_urls=	./app/models/city.rb	/^  has_many :short_urls, :through => :visits$/;"	F	class:City
+short_urls=	./app/models/country_location.rb	/^  has_many :short_urls, :through => :city$/;"	F	class:CountryLocation
+short_urls=	./app/models/location.rb	/^  has_many :short_urls, :through => :visits$/;"	F	class:Location
+short_urls=	./app/models/team.rb	/^  has_many :short_urls, through: :users$/;"	F	class:Team
+short_urls=	./app/models/user.rb	/^  has_many :short_urls$/;"	F	class:User
+should_generate_new_friendly_id?	./app/models/team.rb	/^  def should_generate_new_friendly_id?$/;"	f	class:Team
+show	./app/controllers/short_urls_controller.rb	/^  def show$/;"	f	class:ShortUrlsController
+show	./app/controllers/teams_controller.rb	/^  def show$/;"	f	class:TeamsController
+show	./app/controllers/users_controller.rb	/^  def show$/;"	f	class:UsersController
+sign_in_and_redirect	./app/controllers/sessions_controller.rb	/^  def sign_in_and_redirect(resource_or_scope, resource=nil)$/;"	f	class:SessionsController
+team	./app/models/user.rb	/^  belongs_to :team$/;"	F	class:User
+team=	./app/models/user.rb	/^  belongs_to :team$/;"	F	class:User
+title	./app/helpers/application_helper.rb	/^  def title page_title=nil, &block$/;"	f	class:ApplicationHelper
+total_urls	./app/models/team.rb	/^  def total_urls$/;"	f	class:Team
+total_visits	./app/models/team.rb	/^  def total_visits$/;"	f	class:Team
+un_geolocated	./app/models/visit.rb	/^  def self.un_geolocated$/;"	F	class:Visit
+up	./db/migrate/20130529104310_remove_latitude_longitude_locationsource_from_visits.rb	/^  def up$/;"	f	class:RemoveLatitudeLongitudeLocationsourceFromVisits
+up	./db/migrate/20130530092507_fix_column_latitude_longitude_from_cities.rb	/^  def up$/;"	f	class:FixColumnLatitudeLongitudeFromCities
+up	./db/migrate/20130603144445_fix_column_name_from_country_locations.rb	/^  def up$/;"	f	class:FixColumnNameFromCountryLocations
+update	./app/controllers/short_urls_controller.rb	/^  def update$/;"	f	class:ShortUrlsController
+update	./app/controllers/users_controller.rb	/^  def update$/;"	f	class:UsersController
+update_orgs	./app/workers/geo_locator.rb	/^  def update_orgs visit$/;"	f	class:GeoLocator
+update_orgs_by_short_url	./app/workers/geo_locator.rb	/^  def update_orgs_by_short_url visit$/;"	f	class:GeoLocator
+update_orgs_by_user	./app/workers/geo_locator.rb	/^  def update_orgs_by_user visit$/;"	f	class:GeoLocator
+user	./app/models/short_url.rb	/^  belongs_to :user$/;"	F	class:ShortUrl
+user=	./app/models/short_url.rb	/^  belongs_to :user$/;"	F	class:ShortUrl
+user_data	./config/initializers/ldap_authenticatable.rb	/^      def user_data$/;"	f	class:Devise.Strategies.LdapAuthenticatable
+user_for_paper_trail	./app/controllers/application_controller.rb	/^  def user_for_paper_trail$/;"	f	class:ApplicationController
+user_ids	./app/models/team.rb	/^  has_many :users, dependent: :nullify$/;"	F	class:Team
+user_ids=	./app/models/team.rb	/^  has_many :users, dependent: :nullify$/;"	F	class:Team
+user_input_has_error?	./app/helpers/application_helper.rb	/^  def user_input_has_error? field_name$/;"	f	class:ApplicationHelper
+user_params	./app/controllers/users_controller.rb	/^  def user_params$/;"	f	class:UsersController
+users	./app/models/team.rb	/^  has_many :users, dependent: :nullify$/;"	F	class:Team
+users=	./app/models/team.rb	/^  has_many :users, dependent: :nullify$/;"	F	class:Team
+validate_url	./app/models/short_url.rb	/^  def validate_url$/;"	f	class:ShortUrl
+visit	./app/controllers/short_urls_controller.rb	/^  def visit$/;"	f	class:ShortUrlsController
+visit_count	./app/models/short_url.rb	/^  def visit_count$/;"	f	class:ShortUrl
+visit_ids	./app/models/city.rb	/^  has_many :visits$/;"	F	class:City
+visit_ids	./app/models/location.rb	/^  has_many :visits$/;"	F	class:Location
+visit_ids	./app/models/organization.rb	/^  has_many :visits$/;"	F	class:Organization
+visit_ids	./app/models/short_url.rb	/^  has_many :visits, :dependent => :destroy$/;"	F	class:ShortUrl
+visit_ids=	./app/models/city.rb	/^  has_many :visits$/;"	F	class:City
+visit_ids=	./app/models/location.rb	/^  has_many :visits$/;"	F	class:Location
+visit_ids=	./app/models/organization.rb	/^  has_many :visits$/;"	F	class:Organization
+visit_ids=	./app/models/short_url.rb	/^  has_many :visits, :dependent => :destroy$/;"	F	class:ShortUrl
+visits	./app/models/city.rb	/^  has_many :visits$/;"	F	class:City
+visits	./app/models/location.rb	/^  has_many :visits$/;"	F	class:Location
+visits	./app/models/organization.rb	/^  has_many :visits$/;"	F	class:Organization
+visits	./app/models/short_url.rb	/^  has_many :visits, :dependent => :destroy$/;"	F	class:ShortUrl
+visits	./app/models/user.rb	/^  def visits$/;"	f	class:User
+visits=	./app/models/city.rb	/^  has_many :visits$/;"	F	class:City
+visits=	./app/models/location.rb	/^  has_many :visits$/;"	F	class:Location
+visits=	./app/models/organization.rb	/^  has_many :visits$/;"	F	class:Organization
+visits=	./app/models/short_url.rb	/^  has_many :visits, :dependent => :destroy$/;"	F	class:ShortUrl
+visits_by_city	./app/models/short_url.rb	/^  def visits_by_city$/;"	f	class:ShortUrl
+visits_by_country	./app/models/short_url.rb	/^  def visits_by_country$/;"	f	class:ShortUrl
+visits_by_country	./app/models/team.rb	/^  def visits_by_country$/;"	f	class:Team
+visits_by_country	./app/models/user.rb	/^  def visits_by_country$/;"	f	class:User
+visits_by_organization	./app/models/short_url.rb	/^  def visits_by_organization group_by_disregarded: true, disregard_threshold: 5$/;"	f	class:ShortUrl
+visits_by_organization	./app/models/user.rb	/^  def visits_by_organization$/;"	f	class:User
+visits_by_organization_query	./app/models/short_url.rb	/^  def visits_by_organization_query$/;"	f	class:ShortUrl
+visits_by_team	./app/models/team.rb	/^  def self.visits_by_team$/;"	F	class:Team
+visits_by_team_query	./app/models/team.rb	/^  def self.visits_by_team_query$/;"	F	class:Team
+visits_location	./app/models/short_url.rb	/^  def visits_location$/;"	f	class:ShortUrl
+visits_per_day	./app/models/user.rb	/^  def visits_per_day$/;"	f	class:User
+visits_this_month	./app/models/short_url.rb	/^  def visits_this_month$/;"	f	class:ShortUrl
+visits_this_week	./app/models/short_url.rb	/^  def visits_this_week$/;"	f	class:ShortUrl
+visits_today	./app/models/short_url.rb	/^  def visits_today$/;"	f	class:ShortUrl
+with_visits	./app/models/short_url.rb	/^  scope :with_visits, -> {$/;"	F	class:ShortUrl
