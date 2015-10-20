@@ -21,3 +21,4 @@
 //= require cartodb.js
 //= require Chart.min.js
 //= require scripts
+//= require short_urls
