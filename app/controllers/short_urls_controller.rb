@@ -55,7 +55,8 @@ class ShortUrlsController < ApplicationController
       visit = Visit.create(
         short_url_id: short_url.id,
         ip_address: request.remote_ip,
-        domain: request.domain
+        domain: request.domain,
+        referrer: request.referrer
       )
       GeoLocator.perform_async(visit.id)
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151017161414) do
+ActiveRecord::Schema.define(version: 20151020143657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(version: 20151017161414) do
     t.integer  "city_id"
     t.integer  "location_id"
     t.string   "domain"
+    t.string   "referrer"
   end
 
   add_foreign_key "users", "teams", name: "users_team_id_fk"

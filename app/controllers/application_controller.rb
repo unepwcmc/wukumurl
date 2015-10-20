@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :set_paper_trail_whodunnit
+
+  def user_for_paper_trail
+    user_signed_in? ? current_user.email : "Admin"
+  end
+
   private
 
   def authenticate_admin

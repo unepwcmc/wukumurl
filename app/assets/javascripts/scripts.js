@@ -11,6 +11,10 @@ $(document).ready(function() {
     show: { effect: "slide", direction: "up" },
   });
 
+  $(".history-modal").dialog({
+    width: "600px"
+  });
+
   $("#sign-in-link").click(function() {
     $("#sign-in-modal").dialog('open');
   });
@@ -30,6 +34,7 @@ $(document).ready(function() {
 
   $(".history-link").click(function(){
     var short_url_id = $(this).data("id");
+    //alert(short_url_id);
     $("#change-history-modal-" + short_url_id).dialog('open');
   });
 

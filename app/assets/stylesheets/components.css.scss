@@ -228,6 +228,16 @@ select {
 
 table {
   color: $grey-66;
+  border: 1px solid $grey-cb;
+  &.history {
+    width: 100%;
+    border-collapse: collapse;
+    th, td {
+      border: 1px solid $grey-cb;
+      padding: 0.5em;
+    }
+  }
+
   thead {
     text-align: left;
   }
