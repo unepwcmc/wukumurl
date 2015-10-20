@@ -1,31 +1,24 @@
-<section class="organizations_table_container">
-  <header>
-    <h4><%= title %></h4>
-  </header>
-
-  <div id="organizations_table" class="expandable-table">
-
-      <% if @visits_by_organization_count > 0 %>
-        <table>
-          <tbody>
-          <% @visits_by_organization.each_with_index do |organization, index| %>
-            <tr class="<% if index > 7 %>all hidden<% end -%>">
-              <td>
-                <%= organization.name %>
-              </td>
-              <td>
-                <%= organization.visit_count %>
-              </td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
-
-        <% if @visits_by_organization.length > 8 %>
-          <button class="view-all">View All</button>
-        <% end %>
-      <% else %>
-        <big>No visits yet</big>
+<div id="organizations_table" class="expandable-table">
+<% if @visits_by_organization_count > 0 %>
+  <table>
+    <tbody>
+      <% @visits_by_organization.each_with_index do |organization, index| %>
+        <tr class="<% if index > 7 %>all hidden<% end -%>">
+          <td>
+            <%= organization.name %>
+          </td>
+          <td>
+            <%= organization.visit_count %>
+          </td>
+        </tr>
       <% end %>
-  </div>
-</section>
+    </tbody>
+  </table>
+
+  <% if @visits_by_organization.length > 8 %>
+    <button class="view-all">View All</button>
+  <% end %>
+<% else %>
+  <p>No visits yet</p>
+<% end %>
+</div>

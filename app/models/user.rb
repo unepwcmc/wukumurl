@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
 
+  def team_mates
+    User.where(team_id: self.team_id)
+  end
+
   def visits
     Visit.find_by_sql("
       SELECT visits.*, COUNT(visits.id) as count

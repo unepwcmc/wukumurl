@@ -47,9 +47,11 @@ $(document).ready(function() {
 
   // Dropbox
   $('.dropbox-button').click(function(){
+    var dropboxButton = this;
+
     var options = {
       success: function(files) {
-        alert("Here's the file link: " + files[0].link)
+        $(dropboxButton).parent().find('#short_url_url').val(files[0].link);
       },
       cancel: function() {
       },
