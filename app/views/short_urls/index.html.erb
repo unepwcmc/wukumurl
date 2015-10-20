@@ -1,6 +1,4 @@
 
-<% title "Shared documents by WCMC" %>
-
 <div class="left">
   <%= render partial: "headline_number", locals: {
     title: "Total number of visits",
@@ -18,7 +16,7 @@
     </header>
 
     <div id="short_urls_table" class="expandable-table datatable">
-      <%= render partial: "short_urls_table" %>
+      <%= render partial: "short_urls_table", locals: { short_urls: @short_urls } %>
     </div>
   </section>
 </div>

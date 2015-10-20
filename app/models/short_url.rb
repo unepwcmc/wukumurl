@@ -64,6 +64,12 @@ class ShortUrl < ActiveRecord::Base
     self.visits.where(['created_at > ?', 1.month.ago])
   end
 
+
+  def visits_per_day
+    array = self.visits.group_by &:created_at
+    array.map {|k,v| [k, v = v.length]}.to_h
+  end
+
   # Returns a list of countries with a 'visit_count' attribute
   def visits_by_country
     City.joins(:visits)

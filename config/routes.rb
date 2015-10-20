@@ -43,12 +43,14 @@ Wukumurl::Application.routes.draw do
   resources :teams, only: [:show]
 
   authenticate :user do
+    get '/wcmc_overview', to: 'short_urls#index', as: 'wcmc_overview_path'
     get '/users/my_links', to: 'users#show', as: 'user_links'
     get '/users/pick_team', to: 'users#pick_team', as: 'pick_team'
   end
 
   authenticated :user do
     root to: 'short_urls#index', as: :authenticated_root
+    #root to: redirect('/users/my_links'), as: :authenticated_root
   end
 
   root to: 'static_pages#index', as: :root

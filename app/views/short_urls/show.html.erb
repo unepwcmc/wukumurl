@@ -1,54 +1,64 @@
-<% title do %>
- wcmc.io/<%= @short_url.short_name %>
- <small id="short_link_url"><%= @short_url.private? ? 'Private' : (link_to @short_url.url, @short_url.url) %></small>
-<% end %>
+<%= render 'shared/create_short_link_modal' %>
 
-<% if user_signed_in? && @short_url.owned_by?(current_user.team) %>
-  <% content_for :page_actions do %>
-
-    <%= link_to @short_url, :method => :delete,
-      :data => {:confirm => "Are you sure?"}, :class => 'button' do %>
-      <i class="fa fa-trash-o"></i> Delete link
-    <% end %>
-
-    <button class="edit-link" data-beta="<%= current_user.is_beta? %>" data-toggle="popover"><i class="fa fa-pencil-square-o"></i> Edit link</button>
-
-  <% end %>
-<% end %>
-
-<div class="left">
-  <%= render partial: "short_urls/headline_number", locals: {
-    title: "Total number of visits",
-    value: @total_visits
-  } %>
-
-  <%= render partial: "short_urls/chart_block" %>
+<div class="page-header">
+  <h4>
+    <%= @short_url.short_name %>
+    <%= fa_icon "cog" %>
+    <%= fa_icon "history" %>
+    <%= fa_icon "trash" %>
+  </h4>
 </div>
 
-<div class="right">
-  <% if !@short_url.private? || (!current_user.nil? && current_user.is_beta? && current_user.is_owner?(@short_url))%>
-    <%= render partial: "short_urls/organizations_table", locals: {
-      title: "Top organisations by number of visits"
-    } %>
-  <% else %>
-    <section class="organizations_table_container">
-      <header>
-        <h4>Top organisations by number of visits</h4>
-      </header>
-
-      <div id="organizations_table" class="expandable-table">
-        <big>Organisations are not shown for private links,<br>
-        Only the owner of this link can view this information</big>
-      </div>
-    </section>
-  <% end %>
+<div class="row group">
+  <div class="col col-3">
+    <div class="page-header"><p class="headline">Number of Visits</p></div>
+    <h1 class="text-primary"><%= @total_visits %></h1>
+  </div>
+  <div class="col col-3">
+    <div class="page-header"><p class="headline">Unique Visits</p></div>
+    <h1 class="text-primary"><%= @unique_visits %></h1>
+  </div>
+  <div class="col col-3">
+    <div class="page-header"><p class="headline">Countries Reached</p></div>
+    <h1 class="text-primary"><%= @visits_by_country_count %></h1>
+  </div>
+  <div class="col col-3">
+    <div class="page-header"><p class="headline">Date Created</p></div>
+    <h1 class="text-primary"><%= @short_url.created_at.strftime("%d.%m.%y") %></h1>
+  </div>
 </div>
 
-<div class="edit-link-form popover"></div>
+<div class="row">
+  <div class="page-header">
+    <h5>Overview</h5>
+    <%= line_chart @short_url.visits_per_day %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="page-header">
+    <h5>Geographical origin</h5>
+  </div>
+  <div id="map" class="leaflet-container leaflet-fade-anim"></div>
+</div>
+
+<div class="row group">
+  <div class="col col-6">
+    <div class="page-header">
+      <h5>Top organisations</h5>
+    </div>
+    <%= render partial: "short_urls/organizations_table" %>
+  </div>
+
+  <div class="col col-6">
+    <div class="page-header">
+      <h5>Top referrals</h5>
+    </div>
+    <%= bar_chart User.group(:created_at).count %>
+  </div>
+</div>
 
 <script>
-  <%= render('short_urls/edit_link').html_safe %>
-
   $(document).ready(function() {
     var carto_table = "<%= CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_short_url'] %>";
     cartodb.createLayer(map, {

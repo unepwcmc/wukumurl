@@ -70,6 +70,7 @@ class ShortUrlsController < ApplicationController
 
     @url_belongs_to_user = @short_url.owned_by? current_user
     @total_visits = @short_url.visit_count
+    @unique_visits = @short_url.visits.uniq { |v| v.ip_address }.count
     @visits_by_country = @short_url.visits_by_country
     @visits_by_country_count = @visits_by_country.length
     @visits_by_organization = @short_url.visits_by_organization group_by_disregarded: false
