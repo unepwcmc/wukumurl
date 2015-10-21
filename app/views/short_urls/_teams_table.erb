@@ -1,11 +1,10 @@
-<section>
-  <header>
-    <h4><%= title %></h4>
-  </header>
-
   <div id="teams_table" class="expandable-table">
     <% if @visits_by_team_count > 0 %>
-      <table>
+      <table class="table stripe datatable">
+        <thead>
+          <th>Team</th>
+          <th>Visits</th>
+        </thead>
         <tbody>
         <% @visits_by_team.each_with_index do |team, index| %>
           <tr class="<% if index > 7 %>all hidden<% end -%>">
@@ -27,4 +26,3 @@
       <big>No visits yet</big>
     <% end %>
   </div>
-</section>

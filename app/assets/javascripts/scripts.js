@@ -1,6 +1,6 @@
 $(document).ready(function() {
   // Datatables
-  $('#datatable').DataTable();
+  $('table.datatable').DataTable();
 
   // Modal windows
   $(".modal").dialog({

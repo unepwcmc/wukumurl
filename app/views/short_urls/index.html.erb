@@ -1,34 +1,48 @@
+<%= render 'shared/create_short_link_modal' %>
+<%= render partial: "shared/summary_stats", locals: { number_of_visits: @number_of_visits, unique_visits: @unique_visits, number_of_links_shared: @number_of_links_shared, countries_reached: @visits_by_country_count } %>
 
-<div class="left">
-  <%= render partial: "headline_number", locals: {
-    title: "Total number of visits",
-    value: @total_visits
-  } %>
-
-  <%= render partial: "headline_number", locals: {
-    title: "Number of links shared",
-    value: @total_urls
-  } %>
-
-  <section>
-    <header>
-      <h4>Top links by number of visits</h4>
-    </header>
-
-    <div id="short_urls_table" class="expandable-table datatable">
-      <%= render partial: "short_urls_table", locals: { short_urls: @short_urls } %>
-    </div>
-  </section>
+<div class="row">
+  <div class="page-header">
+    <h5>Geographical origin</h5>
+  </div>
+  <div id="map" class="leaflet-container leaflet-fade-anim"></div>
 </div>
 
-<div class="right">
-  <%= render partial: "chart_block" %>
-    <%= render partial: "teams_table", locals: {
-    title: "Top teams by number of visits"
-  } %>
-  <%= render partial: "organizations_table", locals: {
-    title: "Top organisations by number of visits"
-  } %>
+<div class="row">
+  <div class="page-header">
+    <h5>Team stats</h5>
+  </div>
+  <%= render partial: "teams_table" %>
+</div>
+
+<div class="row">
+  <div class="page-header">
+    <h5>Overview</h5>
+  </div>
+  Implement a multiline graph for teams...
+</div>
+
+<div class="row group">
+  <div class="col col-6">
+    <div class="page-header">
+      <h5>Top organisations</h5>
+    </div>
+    <%= render partial: "organizations_table", locals: { title: "Top organisations by number of visits" } %>
+  </div>
+
+  <div class="col col-6">
+    <div class="page-header">
+      <h5>Top referrals</h5>
+    </div>
+    <%= bar_chart User.group(:created_at).count %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="page-header">
+    <h5>Links list</h5>
+  </div>
+  <%= render partial: "short_urls_table", locals: { short_urls: @short_urls } %>
 </div>
 
 <script>

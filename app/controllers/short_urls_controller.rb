@@ -10,8 +10,9 @@ class ShortUrlsController < ApplicationController
     @visits_by_team = Team.visits_by_team
     @visits_by_team_count = @visits_by_team.length
 
-    @total_visits = Visit.count
-    @total_urls   = ShortUrl.not_deleted.count
+    @number_of_visits = Visit.count
+    @unique_visits = Visit.uniq { |a| a.ip_address }.count
+    @number_of_links_shared = ShortUrl.not_deleted.count
 
     @short_urls = ShortUrl.
       ordered_by_visits_desc.
