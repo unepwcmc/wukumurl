@@ -1,5 +1,5 @@
 set :rails_env, "staging"
-set :branch, "private_links"
+set :branch, "redesign"
 
 set :domain, "unepwcmc-011.vm.brightbox.net"
 server "unepwcmc-011.vm.brightbox.net", :app, :web, :db, :primary => true
