@@ -8,9 +8,27 @@ title: Table
 name: table
 category: tables
 ---
+Tables are cool
+If you want to make the table a Datatable using the `jquery-datatable-rails` gem, then just add the class `datatable` to the table itself
+
 ```html_example
-    <table></table>
-    ```
+<table>
+  <thead>
+    <tr>
+      <th>Name<th>
+      <th>Email<th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Joe Bloggs</td>
+      <td>joe.bloggs@example.com</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+
 */
 
 table {
