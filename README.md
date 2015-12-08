@@ -96,27 +96,12 @@ the server:
 
     cap rake_invoke task=geo_locate:visits
 
-## DasBoard Metrics
+## Styleguide and Conventions
 
-Wukumurl has beta integration with [Dasboard](unepwcmc/DasBoard). Visit
-counts for specified `ShortUrl`s will be automatically posted to
-DasBoard every hour.
+Front end is written following [B.E.M](https://css-tricks.com/bem-101/) conventions.
+This helps keep everything modular and easy to work with.
 
-### Configuring a ShortUrl to post automatically
-
-`ShortUrl` models have a `dasboard_metric_name` attribute, which should
-match to a configuration option in `config/dasboard.yml`:
-
-    production:
-      metrics:
-        wdpa_release_downloads: 3
-
-The corresponding number is the metric ID from your DasBoard instance.
-
-Add your metric name and ID to this config file, and set the
-`dasboard_metric_name` on your `ShortUrl` to the matching name in the
-config.
-
+[Hologram](https://github.com/trulia/hologram) is used to generate a styleguide available at `/styleguide` that can be referenced for future work.
 
 ## Useful to know
 

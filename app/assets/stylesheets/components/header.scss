@@ -1,0 +1,51 @@
+@import 'utilities/colors';
+
+div.header {
+  background: linear-gradient(to right, $blue 40%, $blue-dark-24  40%, $blue-dark-24 100%);
+  overflow: hidden;
+  color: $white;
+  div.container {
+    div {
+      display: inline-block;
+      line-height: 65px;
+      img {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin: -7px 14px 0 14px;
+      }
+      &.left {
+        float: left;
+        background-postition: right center;
+      }
+      &.triangle {
+        margin-right:-6px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent $blue-dark-24 transparent transparent;
+      }
+      &.right {
+        float:right;
+      }
+      &.strapline {
+        background: $blue-dark-24;
+        span {
+          font-size: 1.5em;
+        }
+      }
+      &.vertical-divider {
+        display: inline-block;
+        content: "";
+        border-left:1px solid $white;
+        height: 30px;
+        position: relative;
+        top: 10px;
+        margin: 0 0.5em;
+      }
+
+      a { color: $white; }
+    }
+  }
+}

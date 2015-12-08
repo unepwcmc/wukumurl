@@ -15,11 +15,11 @@ $(document).ready(function() {
     width: "600px"
   });
 
-  $("#sign-in-link").click(function() {
+  $(".sign-in-link").click(function() {
     $("#sign-in-modal").dialog('open');
   });
 
-  $("#sign-up-link").click(function(){
+  $(".sign-up-link").click(function(){
     $("#sign-up-modal").dialog('open');
   });
 

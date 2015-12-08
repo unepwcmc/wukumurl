@@ -1,0 +1,44 @@
+@import 'utilities/colors';
+
+// Datatables
+
+/*doc
+---
+title: Table
+name: table
+category: tables
+---
+```html_example
+    <table></table>
+    ```
+*/
+
+table {
+  color: $grey-66;
+  border: 1px solid $grey-cb;
+  &.history {
+    width: 100%;
+    border-collapse: collapse;
+    th, td {
+      border: 1px solid $grey-cb;
+      padding: 0.5em;
+    }
+  }
+
+  thead {
+    text-align: left;
+  }
+}
+
+#datatable_length, #datatable_filter, #datatable_info, #datatable_paginate {
+  color: $grey-66;
+}
+
+table.dataTable thead th, table.dataTable thead td, table.dataTable.no-footer {
+  border-bottom: 1px solid $grey-cb;
+}
+
+.paginate-button {
+  border: 1px solid $blue-dark-24 !important;
+  background-color: none;
+}

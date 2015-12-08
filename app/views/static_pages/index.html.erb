@@ -1,2 +1,86 @@
-<h1>About WCMC.io</h1>
-<p>Find me in app/views/static_pages/index.html.erb</p>
+<div class="row row-margin group hero">
+  <div class="col col-6">
+    <div class="page-header">
+      <h1 class="text-blue">WCMC.io</h1>
+    </div>
+    <h3>Measure the impact of the digital documents you care about</h3>
+    <%= link_to 'Sign Up', '#', class: 'btn btn-primary sign-up-link' %>
+    <%= link_to 'Sign In', '#', class: 'btn btn-primary sign-in-link' %>
+  </div>
+  <div class="col col-6">
+    <div id="map" class="leaflet-container leaflet-fade-anim"></div>
+  </div>
+</div>
+
+
+<div class="row row-margin group">
+  <%= render partial: "shared/summary_stats", locals: { number_of_visits: @number_of_visits, unique_visits: @unique_visits, number_of_links_shared: @number_of_links_shared, countries_reached: @visits_by_country_count } %>
+</div>
+
+
+<div class="row row-margin group">
+  <div class="col col-6">
+    <div class="page-header">
+      <h3 class="text-blue">Share links</h3>
+    </div>
+    <h5>Share important links and documents from a URL or from your own Dropbox accounts</h5>
+  </div>
+  <div class="col col-6">
+    <%= image_tag 'share.png', class: 'promo-image' %>
+  </div>
+</div>
+
+
+<div class="row row-margin group">
+  <div class="col col-6">
+    <%= image_tag 'share.png', class: 'promo-image' %>
+  </div>
+  <div class="col col-6">
+    <div class="page-header">
+      <h3 class="text-blue">Track their spread</h3>
+    </div>
+    <h5>Track how your links spread and who sees them.<h5>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    cartodb.createLayer(map, "<%= CARTODB_LAYERS_CONFIG['visualizations'][Rails.env]['visits_by_organization'] %>")
+      .addTo(map)
+      .on('done', function(layer) {
+        layer.setInteraction(true);
+    }).on('error', function() {
+      cartodb.log.log("some error occurred");
+    });
+  });
+
+  function updateLinksTable(data) {
+    var content = data.get('content'),
+        sql,
+        org_name;
+    org_name = content.data.org_name;
+
+    sql = "SELECT u.short_url_id FROM <%= CARTODB_LAYERS_CONFIG['tables'][Rails.env]['visits_by_organization'] %> o " +
+          "inner join <%= CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_short_url'] %> u " +
+          "on o.org_id = u.org_id " +
+          "and o.org_name = '" +
+          org_name + "' group by u.short_url_id";
+    $(".short-urls").addClass('open-popup');
+    $.getJSON('http://'+"<%=CARTODB_CONFIG['username']%>"+'.cartodb.com/api/v2/sql/?q='+sql, function(data) {
+      $.each(data.rows, function(key, val) {
+        $(".short-urls").find('[data-short-url-id='+val.short_url_id+']')
+          .addClass('active');
+      });
+    });
+  }
+
+  PubSub.subscribe('ON_POPUP_OPEN', function( msg, data ){
+    data.on("change:content", updateLinksTable);
+  });
+
+  PubSub.subscribe('ON_POPUP_CLOSE', function( msg, data ){
+    data.off("change:content", updateLinksTable);
+    $(".short-urls").removeClass('open-popup')
+      .find('tr').removeClass('active');
+  });
+</script>

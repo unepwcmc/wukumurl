@@ -102,4 +102,12 @@ class Team < ActiveRecord::Base
       GROUP BY teams.name, teams.slug
     """.squish
   end
+
+  def self.multiline_visits_graph
+    array = []
+    self.all.each do |team|
+      array << {name: team.name, data: team.visits_per_day} unless team.visits_per_day.empty?
+    end
+    array
+  end
 end

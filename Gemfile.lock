@@ -120,6 +120,9 @@ GEM
     highline (1.7.1)
     hike (1.2.3)
     hitimes (1.2.2)
+    hologram (1.4.0)
+      redcarpet (>= 2.2, < 4.0)
+      rouge (>= 1.5)
     httparty (0.13.3)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -196,6 +199,7 @@ GEM
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
+    redcarpet (3.3.3)
     redis (3.2.1)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
@@ -203,6 +207,7 @@ GEM
     request_store (1.2.0)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
+    rouge (1.10.1)
     rvm-capistrano (1.5.6)
       capistrano (~> 2.15.4)
     sass (3.2.19)
@@ -276,6 +281,7 @@ DEPENDENCIES
   groupdate
   guard
   guard-minitest
+  hologram
   httparty
   jquery-datatables-rails (~> 3.3.0)
   jquery-rails

@@ -1,22 +1,22 @@
 // Typography
 
-@import 'colors';
+@import 'utilities/colors';
 @import url(https://fonts.googleapis.com/css?family=Cabin:400,500|Open+Sans);
 
 h1,h2,h3,h4,h5,p { color: $grey-66; }
 h1 {
-  font: 400 4.714em/0.714em 'Cabin', san-serif;
+  font: 400 4.714em/1.714em 'Cabin', san-serif;
   margin: 0.4em 0 0.2em 0;
 }
 
 h2 {
-  font: 400 3.571em/4.714em 'Cabin', san-serif;
+  font: 400 3.571em/1.571 'Cabin', san-serif;
   margin: 0.4em 0 0.2em 0;
 }
 
 h3 {
-  font: 400 2.714em/3.929em 'Cabin', san-serif;
-  margin: 0.4em 0 0.2em 0;
+  font: 400 2.714em/1.73em 'Cabin', san-serif;
+  margin: 0.4em 0 0.4em 0;
 }
 
 h4 {
@@ -51,10 +51,10 @@ a:hover {
   text-decoration: underline;
 }
 
-a.external {
-  //Add external icon here
-}
-
 .text-primary {
   color: $blue-dark-12
+}
+
+.text-blue {
+  color: $blue;
 }

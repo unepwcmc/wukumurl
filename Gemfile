@@ -21,6 +21,7 @@ gem 'capistrano-sidekiq'
 gem 'chartkick'
 gem 'groupdate'
 gem 'paper_trail', '~> 4.0.0'
+gem 'hologram'
 
 group :development do
   gem 'capistrano', '~> 2.15.5'

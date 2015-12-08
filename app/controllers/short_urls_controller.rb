@@ -17,6 +17,8 @@ class ShortUrlsController < ApplicationController
     @short_urls = ShortUrl.
       ordered_by_visits_desc.
       not_deleted
+
+    @line_graph_hash = Team.multiline_visits_graph
   end
 
   def list

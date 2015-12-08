@@ -14,9 +14,8 @@
  *= require cartodb
  *= require jquery-ui
  *= require dataTables/jquery.dataTables
- *= require colors
- *= require grid
- *= require typography
+ *= require_tree ./utilities
+ *= require_tree ./components
  *= require layout
  *= require components
  */
