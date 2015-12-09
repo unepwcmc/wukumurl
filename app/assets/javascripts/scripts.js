@@ -39,10 +39,12 @@ $(document).ready(function() {
   });
 
   // Tooltips
-  $('.tooltip').hover(function() {
+  $('.tooltip').click(function() {
     $(this).find('.tooltip-panel').fadeToggle(200);
+    $(this).find('.tooltip-trigger').toggleClass('tooltip-trigger--active');
   }, function() {
     $(this).find('.tooltip-panel').fadeToggle(200);
+    $(this).find('.tooltip-trigger').toggleClass('tooltip-trigger--active');
   });
 
   // Dropbox
