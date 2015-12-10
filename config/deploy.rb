@@ -12,7 +12,7 @@ set :generate_webserver_config, false
 
 ssh_options[:forward_agent] = true
 
-set :rvm_ruby_string, '2.0.0'
+set :rvm_ruby_string, '2.2.3'
 
 # Load RVM's capistrano plugin.
 require 'rvm/capistrano'
