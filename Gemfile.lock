@@ -154,7 +154,7 @@ GEM
     method_source (0.8.2)
     mime-types (2.4.3)
     minitest (4.7.5)
-    multi_json (1.11.0)
+    multi_json (1.11.2)
     multi_xml (0.5.5)
     nenv (0.2.0)
     net-ldap (0.11)
@@ -239,14 +239,13 @@ GEM
     tilt (1.4.1)
     timers (4.0.1)
       hitimes
-    tzinfo (0.3.43)
+    tzinfo (0.3.46)
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
-    whenever (0.8.4)
-      activesupport (>= 2.3.4)
+    whenever (0.9.4)
       chronic (>= 0.6.3)
 
 PLATFORMS
@@ -297,7 +296,7 @@ DEPENDENCIES
   susy
   therubyracer
   uglifier (>= 1.0.3)
-  whenever (~> 0.8.2)
+  whenever
 
 BUNDLED WITH
    1.10.6

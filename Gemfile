@@ -13,7 +13,9 @@ gem 'geoip-c', '0.9.1'
 gem 'geocoder'
 gem 'httparty'
 
-gem 'whenever', '~> 0.8.2'
+gem 'whenever', :require => false
+
+#gem 'whenever', '~> 0.8.2'
 gem 'sidekiq', '~> 2.17.4'
 gem 'friendly_id', '~> 5.1.0'
 gem 'chartkick'
