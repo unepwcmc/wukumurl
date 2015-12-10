@@ -13,19 +13,23 @@ gem 'geoip-c', '0.9.1'
 gem 'geocoder'
 gem 'httparty'
 
-gem 'rvm-capistrano'
 gem 'whenever', '~> 0.8.2'
 gem 'sidekiq', '~> 2.17.4'
 gem 'friendly_id', '~> 5.1.0'
-gem 'capistrano-sidekiq'
 gem 'chartkick'
 gem 'groupdate'
 gem 'paper_trail', '~> 4.0.0'
 
 group :development do
-  gem 'capistrano', '~> 2.15.5'
-  gem 'capistrano-ext'
-  gem 'brightbox'
+  gem 'capistrano', '~> 3.4', require: false
+  gem 'capistrano-rails',   '~> 1.1', require: false
+  gem 'capistrano-bundler', '~> 1.1', require: false
+  gem 'capistrano-rvm',   '~> 0.1', require: false
+  gem 'capistrano-sidekiq'
+#  gem 'capistrano-maintenance', '~> 1.0', require: false
+  gem 'capistrano-passenger', '~> 0.1.1', require: false
+
+
 
   gem 'guard'
   gem 'guard-minitest'
