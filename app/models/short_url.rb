@@ -66,7 +66,7 @@ class ShortUrl < ActiveRecord::Base
 
 
   def visits_per_day
-    array = self.visits.group_by &:created_at
+    array = visits_this_month.group_by {|x| x.created_at.strftime("%Y-%m-%d")}
     array.map {|k,v| [k, v = v.length]}.to_h
   end
 
