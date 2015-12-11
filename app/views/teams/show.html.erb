@@ -12,7 +12,7 @@
   <div class="page-header">
     <h5><%= @team.name %> overview</h5>
   </div>
-  <%= line_chart current_user.team.visits_per_day %>
+  <%= line_chart @team.visits_per_day %>
 </div>
 
 <div class="row">
