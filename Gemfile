@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-source 'http://gems.github.com'
 
 gem 'rails', '~> 4.0.0'
 gem 'rake', '~> 10.1.0'
@@ -40,8 +39,6 @@ gem 'compass-rails', '~> 2.0.alpha.0'
 gem 'susy'
 gem 'font-awesome-sass'
 
-gem 'libv8'#, '3.11.8.13'
-gem 'therubyracer'
 gem 'ejs', '~> 1.1.1'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
