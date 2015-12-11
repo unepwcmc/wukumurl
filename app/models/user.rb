@@ -42,8 +42,25 @@ class User < ActiveRecord::Base
     ")
   end
 
+  def visits_this_month
+    Visit.find_by_sql("
+      SELECT visits.*, COUNT(visits.id) as count
+      FROM visits
+      INNER JOIN
+        (
+          SELECT id
+          FROM short_urls
+          WHERE user_id = #{self.id}
+          GROUP BY id
+        ) AS short_urls_for_visits
+        ON visits.short_url_id = short_urls_for_visits.id
+        WHERE visits.created_at > '#{1.month.ago}'
+      GROUP BY visits.id
+    ")
+  end
+
   def visits_per_day
-    array = self.visits.group_by &:created_at
+    array = visits_this_month.group_by {|x| x.created_at.strftime("%Y-%m-%d")}
     array.map {|k,v| [k, v = v.length]}.to_h
   end
 
@@ -101,9 +118,13 @@ class User < ActiveRecord::Base
     # - it is private and they own it
     # - it is not private but they are in the same team
 
-    same_team = (team.present? && team == short_url.user.team)
-    (short_url.private? && short_url.user == self) ||
-    (!short_url.private? && (short_url.user == self || same_team))
+    if short_url.user
+      same_team = (self.team.present? && team == short_url.user.team)
+      (short_url.private? && short_url.user == self) ||
+      (!short_url.private? && (short_url.user == self || same_team))
+    else
+      false
+    end
   end
 
   def is_beta?

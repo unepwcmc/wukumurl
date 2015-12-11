@@ -1,9 +1,15 @@
 <div id="organizations_table" class="expandable-table">
-<% if @visits_by_organization_count > 0 %>
+<% if @visits_by_organization %>
   <table>
+    <thead>
+      <tr>
+        <th>Organisation</th>
+        <th>Visit Count</th>
+      </tr>
+    </thead>
     <tbody>
       <% @visits_by_organization.each_with_index do |organization, index| %>
-        <tr class="<% if index > 7 %>all hidden<% end -%>">
+        <tr>
           <td>
             <%= organization.name %>
           </td>
@@ -14,10 +20,6 @@
       <% end %>
     </tbody>
   </table>
-
-  <% if @visits_by_organization.length > 8 %>
-    <button class="view-all">View All</button>
-  <% end %>
 <% else %>
   <p>No visits with organisational data have been recorded yet</p>
 <% end %>
