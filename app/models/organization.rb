@@ -6,7 +6,7 @@ class Organization < ActiveRecord::Base
     Organization.where(attributes).first || Organization.create(attributes)
   end
 
-  def self.all_visits_by_organization
+  def self.all_visits_by_organization limit=nil
     select("name, count(*) as visit_count").
       joins(:visits).
       group(:name).

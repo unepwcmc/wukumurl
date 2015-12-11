@@ -77,6 +77,8 @@ class Team < ActiveRecord::Base
           GROUP BY id
         ) AS short_urls_for_visits
       ON visits_for_orgs.short_url_id = short_urls_for_visits.id
+      ORDER BY visit_count DESC
+      LIMIT 25
     ")
   end
 

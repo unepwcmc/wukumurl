@@ -1,26 +1,20 @@
 <div id="organizations_table" class="expandable-table">
-<% if @visits_by_organization %>
-  <table>
-    <thead>
-      <tr>
-        <th>Organisation</th>
-        <th>Visit Count</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @visits_by_organization.each_with_index do |organization, index| %>
+  <% if @visits_by_organization %>
+    <table>
+      <thead>
         <tr>
-          <td>
-            <%= organization.name %>
-          </td>
-          <td>
-            <%= organization.visit_count %>
-          </td>
+          <th>Organisation</th> <th>Visit Count</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>No visits with organisational data have been recorded yet</p>
-<% end %>
+      </thead>
+      <tbody>
+        <% @visits_by_organization.each_with_index do |organization, index| %>
+          <tr>
+            <td> <%= organization.name %> </td> <td> <%= organization.visit_count %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No visits with organisational data have been recorded yet</p>
+  <% end %>
 </div>
