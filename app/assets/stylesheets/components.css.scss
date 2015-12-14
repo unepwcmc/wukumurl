@@ -65,8 +65,15 @@ hr {
 .short_url_icons {
   margin-left: 20px;
   color: $blue-dark-12;
+  a {
+    color: $blue-dark-12;
+    &:hover {
+      color: $blue-dark-36;
+      text-decoration: none;
+    }
+  }
 
-  .disabled { color: $grey-cb }
+  .disabled { color: $grey-cb; }
 }
 
 

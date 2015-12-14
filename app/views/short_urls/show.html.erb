@@ -3,15 +3,22 @@
 <div class="page-header">
   <h4>
     <%= @short_url.short_name %>
-    <span class="short_url_icons">
-      <%= fa_icon "cog", class: 'disabled' %>
+    <% if current_user.can_manage? @short_url %>
+      <span class="short_url_icons">
+        <%= fa_icon "cog", class: 'disabled' %>
 
-      <%= link_to '#', class: 'history-link', data: { id: @short_url.id } do %>
-        <%= fa_icon "history" %>
-      <% end %>
+        <%= link_to '#', class: 'history-link', data: { id: @short_url.id } do %>
+          <%= fa_icon "history" %>
+        <% end %>
 
-      <%= fa_icon "trash", class: 'disabled' %>
-    </span>
+        <%= link_to short_url_path(@short_url), method: :delete, data: { confirm: 'Are you sure? You will not be able to recover this link or its data' } do %>
+          <%= fa_icon "trash" %>
+        <% end %>
+
+        <!-- Render partials if allowed -->
+        <%= render partial: 'shared/short_link_history_modal', locals: { short_url: @short_url } %>
+      </span>
+    <% end %>
   </h4>
 </div>
 
@@ -64,7 +71,6 @@
   </div>
 </div>
 
-<%= render partial: 'shared/short_link_history_modal', locals: { short_url: @short_url } %>
 
 <script>
   $(document).ready(function() {
