@@ -163,7 +163,8 @@ class ShortUrl < ActiveRecord::Base
     else
       orgs = Organization.find_by_sql([
         organizations_query,
-        "ORDER BY visit_count DESC"
+        "ORDER BY visit_count DESC
+        LIMIT 10 "
       ].join(" "))
     end
 

@@ -10,6 +10,7 @@ class Organization < ActiveRecord::Base
     select("name, count(*) as visit_count").
       joins(:visits).
       group(:name).
-      order('visit_count desc')
+      order('visit_count desc').
+      limit(limit)
   end
 end

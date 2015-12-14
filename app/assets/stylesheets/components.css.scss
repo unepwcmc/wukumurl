@@ -62,6 +62,13 @@ hr {
   }
 }
 
+.short_url_icons {
+  margin-left: 20px;
+  color: $blue-dark-12;
+
+  .disabled { color: $grey-cb }
+}
+
 
 .divider {
   display: block;
