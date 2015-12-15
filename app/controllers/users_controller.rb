@@ -32,6 +32,8 @@ class UsersController < ApplicationController
       with_visits.
       order('created_at DESC').
       not_deleted
+    @visits_per_day = current_user.visits_per_day
+    @top_referrals = current_user.top_referrals
   end
 
   private

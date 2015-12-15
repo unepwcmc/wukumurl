@@ -78,7 +78,7 @@ class Team < ActiveRecord::Base
         ) AS short_urls_for_visits
       ON visits_for_orgs.short_url_id = short_urls_for_visits.id
       ORDER BY visit_count DESC
-      LIMIT 25
+      LIMIT 10
     ")
   end
 
@@ -107,6 +107,11 @@ class Team < ActiveRecord::Base
     Team.find_by_sql(
       "#{visits_by_team_query} ORDER BY visit_count DESC"
     )
+  end
+
+  def top_referrals
+    array = self.total_visits.group_by(&:referrer)
+    array.map {|k,v| [k ||= "No Domain", v = v.length]}.to_h
   end
 
   def self.visits_by_team_query

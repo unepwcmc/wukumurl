@@ -29,4 +29,8 @@ class Visit < ActiveRecord::Base
   def self.un_geolocated
     self.where(city_id: nil)
   end
+
+  def self.top_referrals
+    hash = Visit.group(:referrer).count
+  end
 end

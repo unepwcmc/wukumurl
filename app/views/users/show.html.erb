@@ -13,7 +13,7 @@
   <div class="page-header">
     <h5>Overview (Last 30 Days)</h5>
   </div>
-  <%= line_chart current_user.visits_per_day %>
+  <%= line_chart @visits_per_day %>
 </div>
 
 <div class="row">
@@ -35,7 +35,7 @@
     <div class="page-header">
       <h5>Top referrals</h5>
     </div>
-    <%= bar_chart current_user.top_referrals %>
+    <%= bar_chart @top_referrals %>
   </div>
 </div>
 

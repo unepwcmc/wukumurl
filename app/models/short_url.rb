@@ -171,6 +171,11 @@ class ShortUrl < ActiveRecord::Base
     orgs
   end
 
+  def top_referrals limit
+    array = Visit.where(short_url_id: self.id).limit(limit).group_by(&:referrer)
+    array.map {|k,v| [k ||= "No Domain", v = v.length]}.to_h
+  end
+
   private
 
   def create_short_name_if_blank
