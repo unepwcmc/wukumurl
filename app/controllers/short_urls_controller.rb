@@ -59,7 +59,7 @@ class ShortUrlsController < ApplicationController
         short_url_id: short_url.id,
         ip_address: request.remote_ip,
         domain: request.domain,
-        referrer: request.referrer
+        referrer: URI(request.referrer).host
       )
       GeoLocator.perform_async(visit.id)
     end

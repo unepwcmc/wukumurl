@@ -109,6 +109,11 @@ class User < ActiveRecord::Base
     ").group("cities.country").count
   end
 
+  def top_referrals
+    array = self.visits.group_by(&:referrer)
+    array.map {|k,v| [k ||= "No Domain", v = v.length]}.to_h
+  end
+
   def no_urls?
     self.short_urls.count == 0
   end

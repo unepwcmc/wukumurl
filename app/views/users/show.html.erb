@@ -35,7 +35,7 @@
     <div class="page-header">
       <h5>Top referrals</h5>
     </div>
-    <%= bar_chart User.group(:created_at).count %>
+    <%= bar_chart current_user.top_referrals %>
   </div>
 </div>
 
