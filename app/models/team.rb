@@ -30,7 +30,7 @@ class Team < ActiveRecord::Base
 
   def visits_per_day
     array = visits_this_month.group_by {|x| x.created_at.strftime("%Y-%m-%d")}
-    array.each_with_object({}) { |(k,v), hash| hash[k] = v }
+    array.each_with_object({}) { |(k,v), hash| hash[k] = v.length }
   end
 
   def visits_by_country

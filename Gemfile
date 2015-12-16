@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.1.9'
+gem 'rails', '~> 4.2.4'
 gem 'rake', '~> 10.1.0'
 
 gem 'pg'
@@ -36,14 +36,14 @@ end
 
 gem 'factory_girl_rails', '4.2.1'
 
-gem 'sass-rails', '~> 4.0.0.rc1'
-gem 'compass-rails', '~> 2.0.alpha.0'
+gem 'sass-rails'#, '~> 4.0.0.rc1'
+gem 'compass-rails'#, '~> 2.0.alpha.0'
 gem 'susy'
 gem 'font-awesome-sass'
 
 gem 'ejs', '~> 1.1.1'
 gem 'coffee-rails', '~> 4.0.0'
-gem 'jquery-rails'
+gem 'jquery-rails', '4.0.4'
 gem 'jquery-ui-rails'
 gem 'leaflet-rails'
 gem 'uglifier', '>= 1.0.3'
