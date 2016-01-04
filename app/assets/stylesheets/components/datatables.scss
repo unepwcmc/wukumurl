@@ -24,9 +24,18 @@ table {
 
 table.dataTable thead th, table.dataTable thead td, table.dataTable.no-footer {
   border-bottom: 1px solid $grey-cb;
+  border-top: 1px solid $grey-cb;
+}
+
+table.dataTable, table.dataTable td, table.dataTable th {
+  border: none;
 }
 
 .paginate-button {
   border: 1px solid $blue-dark-24 !important;
   background-color: none;
+}
+
+.dataTables_info, .dataTables_paginate {
+  margin: 10px 0;
 }
