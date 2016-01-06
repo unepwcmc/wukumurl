@@ -163,5 +163,17 @@ select {
 }
 
 .hero {
-  padding: 2em 0;
+  min-height: 600px;
+
+  #map {
+    position:absolute;
+    left: 0;
+    right: 0;
+    height: 600px;
+  }
+}
+
+.hero--content {
+  position:relative;
+  text-align:center;
 }

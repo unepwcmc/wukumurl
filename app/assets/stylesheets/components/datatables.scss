@@ -36,6 +36,7 @@ table.dataTable, table.dataTable td, table.dataTable th {
   background-color: none;
 }
 
-.dataTables_info, .dataTables_paginate {
+.dataTables_info, .dataTables_paginate, .dataTables_wrapper, .dataTables_filter, .dataTables_length, .paginate_button {
   margin: 10px 0;
+  color: $grey-cb;
 }
