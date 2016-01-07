@@ -12,20 +12,20 @@ class Team < ActiveRecord::Base
 
   def visits_this_month
     return [] if users.count.zero?
-    Visit.find_by_sql("
+    Visit.find_by_sql(["
       SELECT visits.*, COUNT(visits.id) as count
       FROM visits
       INNER JOIN
         (
           SELECT id
           FROM short_urls
-          WHERE user_id IN (#{users.pluck(:id).join(',')})
+          WHERE user_id IN (?)
           GROUP BY id
         ) AS short_urls_for_visits
         ON visits.short_url_id = short_urls_for_visits.id
-        WHERE visits.created_at > '#{1.month.ago}'
+        WHERE visits.created_at > (?)
       GROUP BY visits.id
-    ")
+    ", users.pluck(:id).map(&:to_i), 1.month.ago])
   end
 
   def visits_per_day
@@ -35,7 +35,9 @@ class Team < ActiveRecord::Base
 
   def visits_by_country
     return [] if users.count.zero?
-    City.joins("
+    City.find_by_sql(["
+      SELECT cities.country
+      FROM cities
       INNER JOIN
         (
           SELECT
@@ -44,21 +46,21 @@ class Team < ActiveRecord::Base
           GROUP BY city_id, short_url_id
         ) AS visits_for_orgs
       ON visits_for_orgs.city_id = cities.id
-    ").joins("
       INNER JOIN
         (
           SELECT short_urls.id
           FROM short_urls
-          WHERE user_id IN (#{users.pluck(:id).join(',')})
+          WHERE user_id IN (?)
           GROUP BY id
         ) AS short_urls_for_visits
       ON visits_for_orgs.short_url_id = short_urls_for_visits.id
-    ").group("cities.country").count
+      GROUP BY cities.country
+    ", users.pluck(:id).map(&:to_i)])
   end
 
   def all_visits_by_organization
     return [] if users.count.zero?
-    Organization.find_by_sql("
+    Organization.find_by_sql(["
       SELECT organizations.*, visit_count
       FROM organizations
       INNER JOIN
@@ -73,30 +75,30 @@ class Team < ActiveRecord::Base
         (
           SELECT short_urls.id
           FROM short_urls
-          WHERE user_id IN (#{users.pluck(:id).join(',')})
+          WHERE user_id IN (?)
           GROUP BY id
         ) AS short_urls_for_visits
       ON visits_for_orgs.short_url_id = short_urls_for_visits.id
       ORDER BY visit_count DESC
       LIMIT 10
-    ")
+    ", users.pluck(:id).map(&:to_i)])
   end
 
   def total_visits
     return [] if users.count.zero?
-    Visit.find_by_sql("
+    Visit.find_by_sql(["
       SELECT visits.*, COUNT(visits.id) as count
       FROM visits
       INNER JOIN
         (
           SELECT id
           FROM short_urls
-          WHERE user_id IN (#{users.pluck(:id).join(',')})
+          WHERE user_id IN (?)
           GROUP BY id
         ) AS short_urls_for_visits
         ON visits.short_url_id = short_urls_for_visits.id
       GROUP BY visits.id
-    ")
+    ", users.pluck(:id).map(&:to_i)])
   end
 
   def total_urls
@@ -105,18 +107,7 @@ class Team < ActiveRecord::Base
 
   def self.visits_by_team
     Team.find_by_sql(
-      "#{visits_by_team_query} ORDER BY visit_count DESC"
-    )
-  end
-
-  def top_referrals
-    array = self.total_visits.group_by(&:referrer)
-    array.map {|k,v| [k ||= "No Domain", v = v.length]}.to_h
-  end
-
-  def self.visits_by_team_query
-    """
-      SELECT teams.name, teams.slug, count(*) as visit_count
+      "SELECT teams.name, teams.slug, count(*) as visit_count
         FROM short_urls
         INNER JOIN users ON
         users.id = user_id
@@ -125,7 +116,12 @@ class Team < ActiveRecord::Base
         INNER JOIN visits ON
         short_urls.id = short_url_id
       GROUP BY teams.name, teams.slug
-    """.squish
+      ORDER BY visit_count DESC")
+  end
+
+  def top_referrals
+    array = self.total_visits.group_by(&:referrer)
+    array.map {|k,v| [k ||= "No Domain", v = v.length]}.to_h
   end
 
   def self.multiline_visits_graph

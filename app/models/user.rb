@@ -43,20 +43,19 @@ class User < ActiveRecord::Base
   end
 
   def visits_this_month
-    Visit.find_by_sql("
+    Visit.find_by_sql(["
       SELECT visits.*, COUNT(visits.id) as count
       FROM visits
       INNER JOIN
         (
           SELECT id
           FROM short_urls
-          WHERE user_id = #{self.id}
+          WHERE user_id = (?)
           GROUP BY id
         ) AS short_urls_for_visits
         ON visits.short_url_id = short_urls_for_visits.id
-        WHERE visits.created_at > '#{1.month.ago}'
-      GROUP BY visits.id
-    ")
+        WHERE visits.created_at > (?)
+      GROUP BY visits.id", self.id, 1.month.ago])
   end
 
   def visits_per_day

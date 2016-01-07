@@ -32,6 +32,7 @@ gem 'dotenv-rails', '~> 2.0.2'
 gem 'font-awesome-rails', '~> 4.5.0.0'
 
 group :development do
+  gem 'brakeman', require: false
   gem 'capistrano', '~> 2.15.5'
   gem 'capistrano-ext', '~> 1.2.1'
   gem 'brightbox', '~> 2.4.6'
