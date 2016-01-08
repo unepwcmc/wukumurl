@@ -163,17 +163,26 @@ select {
 }
 
 .hero {
-  min-height: 600px;
+  min-height: 500px;
 
   #map {
     position:absolute;
     left: 0;
     right: 0;
-    height: 600px;
+    height: 500px;
   }
 }
 
 .hero--content {
   position:relative;
-  text-align:center;
+  text-align:left;
+  padding-top: 60px;
+
+  h2 { color: $blue-dark-24; }
+  .btn {
+    margin: 20px 20px 0px 0px;
+    &:last-child {
+      margin-right: 0px;
+    }
+  }
 }

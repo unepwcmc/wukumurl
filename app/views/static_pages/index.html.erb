@@ -1,9 +1,17 @@
 <div class="hero">
   <div id="map" class="leaflet-container leaflet-fade-anim hero"></div>
   <div class="hero--content">
-    <h1>Content</h1>
-    <%= link_to 'Sign Up', '#', class: 'btn btn-primary sign-up-link' %>
-    <%= link_to 'Sign In', '#', class: 'btn btn-primary sign-in-link' %>
+    <h2>Welcome to WCMC.io</h2>
+    <h4>Measure the impact of the digital documents you care about, <br>
+    Share links and track their spread across the web</h4>
+
+    <%= link_to '#', class: "btn btn-primary sign-up-link" do %>
+      <%= fa_icon 'user' %> Sign Up
+    <% end %>
+
+    <%= link_to '#', class: "btn btn-primary sign-in-link" do %>
+      <%= fa_icon 'sign-in' %> Sign In
+    <% end %>
   </div>
 </div>
 
