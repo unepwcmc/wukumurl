@@ -15,11 +15,11 @@
   </head>
   <body>
     <div class="wrapper">
+      <%= growlyflash_static_notices %>
       <%= render 'shared/header' %>
       <%= render 'shared/navbar' %>
 
       <div class="container content">
-        <%= render 'flash_messages' %>
         <%= yield =%>
       </div>
 

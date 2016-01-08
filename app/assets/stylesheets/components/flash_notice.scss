@@ -1,0 +1,20 @@
+@import 'utilities/colors';
+
+.alert {
+  padding: 1em;
+  position: absolute;
+  top: 90px;
+  right: 20px;
+  color: $white;
+  background-color: $blue-dark-36;
+
+  button {
+    margin-right: 20px;
+    border:none;
+    width: 25px;
+    height: 25px;
+    border-radius: 20px;
+    background-color: $turquoise;
+    color: $white;
+  }
+}

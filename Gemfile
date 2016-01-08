@@ -30,6 +30,7 @@ gem 'jquery-datatables-rails', '~> 3.3.0'
 gem 'devise', '~> 3.5.3'
 gem 'dotenv-rails', '~> 2.0.2'
 gem 'font-awesome-rails', '~> 4.5.0.0'
+gem 'growlyflash', '~> 0.8.4.1'
 
 group :development do
   gem 'brakeman', require: false
