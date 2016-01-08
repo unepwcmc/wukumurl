@@ -1,8 +1,6 @@
 $(($)->
-  window.map = L.map('map', scrollWheelZoom: false).setView([55, 0], 3)
-  L.tileLayer('https://dnv9my2eseobd.cloudfront.net/v3/cartodb.map-4xtxp73f/{z}/{x}/{y}.png', {
-    attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms & Feedback</a>'
-  }).addTo(map)
+
+  cartodb.createVis('map', 'https://carbon-tool.cartodb.com/api/v2/viz/f17c0670-9fa0-11e3-892d-0e625a1c94a6/viz.json')
 
   # Show/Hide full length table in dashboard
   $('.expandable-table').on('click', '.view-all', ->
