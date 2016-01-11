@@ -19,6 +19,7 @@
 //= require lodash.min.js
 //= require ZeroClipboard.min
 //= require cartodb.js
+//= require mapbox
 //= require Chart.min.js
 //= require scripts
 //= require short_urls

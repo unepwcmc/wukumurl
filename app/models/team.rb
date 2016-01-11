@@ -121,7 +121,8 @@ class Team < ActiveRecord::Base
 
   def top_referrals
     array = self.total_visits.group_by(&:referrer)
-    array.map {|k,v| [k ||= "No Domain", v = v.length]}.to_h
+    h = array.map {|k,v| [k ||= "No Domain", v = v.length]}.to_h
+    h.sort_by{|k,v| v}.reverse.first(10)
   end
 
   def self.multiline_visits_graph

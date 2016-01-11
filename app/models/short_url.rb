@@ -171,9 +171,10 @@ class ShortUrl < ActiveRecord::Base
     orgs
   end
 
-  def top_referrals limit
-    array = Visit.where(short_url_id: self.id).limit(limit).group_by(&:referrer)
-    array.map {|k,v| [k ||= "No Domain", v = v.length]}.to_h
+  def top_referrals
+    array = Visit.where(short_url_id: self.id).group_by(&:referrer)
+    h = array.map {|k,v| [k ||= "No Domain", v = v.length]}.to_h
+    h.sort_by{|k,v| v}.reverse.first(10)
   end
 
   private

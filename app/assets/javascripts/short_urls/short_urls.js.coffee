@@ -1,6 +1,13 @@
 $(($)->
+  CONFIG =
+    minZoom: 2
+    zoomControl: false
+    attributionControl: false
 
-  cartodb.createVis('map', 'https://carbon-tool.cartodb.com/api/v2/viz/f17c0670-9fa0-11e3-892d-0e625a1c94a6/viz.json')
+  L.mapbox.accessToken = 'pk.eyJ1IjoidW5lcHdjbWMiLCJhIjoiRXg1RERWRSJ9.taTsSWwtAfFX_HMVGo2Cug'
+  window.map = L.mapbox.map(
+    'map', 'unepwcmc.8ac2cdd1', CONFIG
+  ).addControl(L.control.zoom(position: 'topleft'))
 
   # Show/Hide full length table in dashboard
   $('.expandable-table').on('click', '.view-all', ->
