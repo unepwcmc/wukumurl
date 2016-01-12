@@ -1,5 +1,7 @@
 <div class="hero">
-  <div id="map" class="leaflet-container leaflet-fade-anim hero"></div>
+  <div class="map-container">
+    <div id="map" class="leaflet-container leaflet-fade-anim hero"></div>
+  </div>
   <div class="hero--content">
     <h2>Welcome to WCMC.io</h2>
     <h4>Measure the impact of the digital documents you care about, <br>
@@ -46,48 +48,39 @@
     <div class="page-header">
       <h3 class="text-blue">Track their spread</h3>
     </div>
-    <h5>Track how your links spread across the world and who sees and interacts with them<h5>
+    <h5>Track how your links spread across the world and who sees them.<h5>
   </div>
 </div>
 
 <script>
-  $(document).ready(function() {
-    cartodb.createLayer(map, "<%= CARTODB_LAYERS_CONFIG['visualizations'][Rails.env]['visits_by_organization'] %>")
-      .addTo(map)
-      .on('done', function(layer) {
-        layer.setInteraction(true);
-    }).on('error', function() {
-      cartodb.log.log("some error occurred");
-    });
-  });
+    $(document).ready(function() {
+      var $mapEl = $('#map');
+      $('#map').css('filter', 'blur(3px)');
+      $('#map').css('margin', '4px 0');
 
-  function updateLinksTable(data) {
-    var content = data.get('content'),
-        sql,
-        org_name;
-    org_name = content.data.org_name;
+      map.setView({lat: 66.72254132270653, lng: -761.484375});
 
-    sql = "SELECT u.short_url_id FROM <%= CARTODB_LAYERS_CONFIG['tables'][Rails.env]['visits_by_organization'] %> o " +
-          "inner join <%= CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_short_url'] %> u " +
-          "on o.org_id = u.org_id " +
-          "and o.org_name = '" +
-          org_name + "' group by u.short_url_id";
-    $(".short-urls").addClass('open-popup');
-    $.getJSON('http://'+"<%=CARTODB_CONFIG['username']%>"+'.cartodb.com/api/v2/sql/?q='+sql, function(data) {
-      $.each(data.rows, function(key, val) {
-        $(".short-urls").find('[data-short-url-id='+val.short_url_id+']')
-          .addClass('active');
+      map.on('dragstart', function() {
+        $mapEl.css('filter', 'none');
+      });
+      map.on('dragend', function() {
+        $mapEl.css('filter', 'blur(4px)');
+      });
+
+      var carto_table = "<%= CARTODB_LAYERS_CONFIG['tables']['production']['organizations_by_user'] %>";
+      var carto_tiles = new cartodb.Tiles({
+        user_name: '<%= CARTODB_CONFIG['username'] %>',
+        sublayers: [{
+          sql: "SELECT * FROM " + carto_table,
+          cartocss: "#" + carto_table + "<%= raw CARTODB_LAYERS_CONFIG['css'] %>"
+        }]
+      });
+
+      var cartoOverlay = null;
+
+      map.on('baselayerchange', function() { cartoOverlay.bringToFront() });
+      carto_tiles.getTiles(function(o) {
+        cartoOverlay = L.tileLayer(o.tiles[0]).addTo(map)
       });
     });
-  }
-
-  PubSub.subscribe('ON_POPUP_OPEN', function( msg, data ){
-    data.on("change:content", updateLinksTable);
-  });
-
-  PubSub.subscribe('ON_POPUP_CLOSE', function( msg, data ){
-    data.off("change:content", updateLinksTable);
-    $(".short-urls").removeClass('open-popup')
-      .find('tr').removeClass('active');
-  });
 </script>

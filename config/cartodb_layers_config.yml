@@ -22,4 +22,4 @@ tables:
     organizations_by_user: 'wcmc_io_organizations_by_user'
     organizations_by_short_url: 'wcmc_io_organizations_by_short_url'
     visits_by_organization: 'wcmc_io_visits_by_organizations'
-css: '{marker-fill:#75B036;marker-opacity:0.7;marker-allow-overlap:true;marker-placement:point;marker-type:ellipse;marker-line-width:0;marker-line-opacity:1;polygon-comp-op:lighten;[zoom=1]{marker-width:2;}[zoom=2]{marker-width:4;}[zoom>=3]{marker-width:6;}[zoom>=4][zoom<=5]{marker-width:8;}[zoom>=6][zoom<=8]{marker-width:10;}[zoom>=9][zoom<=10]{marker-width:12;}[zoom >= 11]{marker-width: 14;}}'
+css: '{marker-fill:#3BE2D1;marker-opacity:0.7;marker-allow-overlap:true;marker-placement:point;marker-type:ellipse;marker-line-width:0;marker-line-opacity:1;polygon-comp-op:lighten;[zoom=1]{marker-width:2;}[zoom=2]{marker-width:4;}[zoom>=3]{marker-width:6;}[zoom>=4][zoom<=5]{marker-width:8;}[zoom>=6][zoom<=8]{marker-width:10;}[zoom>=9][zoom<=10]{marker-width:12;}[zoom >= 11]{marker-width: 14;}}'

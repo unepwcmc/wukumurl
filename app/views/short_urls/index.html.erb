@@ -47,12 +47,20 @@
 
 <script>
   $(document).ready(function() {
-    cartodb.createLayer(map, "<%= CARTODB_LAYERS_CONFIG['visualizations'][Rails.env]['visits_by_organization'] %>")
-      .addTo(map)
-      .on('done', function(layer) {
-        layer.setInteraction(true);
-    }).on('error', function() {
-      cartodb.log.log("some error occurred");
+    var carto_table = "<%= CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_user'] %>";
+    var carto_tiles = new cartodb.Tiles({
+      user_name: '<%= CARTODB_CONFIG['username'] %>',
+      sublayers: [{
+        sql: "SELECT * FROM " + carto_table + ";",
+        cartocss: "#" + carto_table + "<%= raw CARTODB_LAYERS_CONFIG['css'] %>"
+      }]
+    });
+
+    var cartoOverlay = null;
+
+    map.on('baselayerchange', function() { cartoOverlay.bringToFront() });
+    carto_tiles.getTiles(function(o) {
+      cartoOverlay = L.tileLayer(o.tiles[0]).addTo(map)
     });
   });
 

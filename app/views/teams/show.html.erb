@@ -38,3 +38,23 @@
   </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+      var carto_table = "<%= CARTODB_LAYERS_CONFIG['tables'][Rails.env]['organizations_by_user'] %>";
+      var carto_tiles = new cartodb.Tiles({
+        user_name: '<%= CARTODB_CONFIG['username'] %>',
+        sublayers: [{
+          sql: "SELECT * FROM " + carto_table + " WHERE user_id IN (<%= @team.users.map(&:id).join(',') %>);",
+          cartocss: "#" + carto_table + "<%= raw CARTODB_LAYERS_CONFIG['css'] %>"
+        }]
+      });
+
+      var cartoOverlay = null;
+
+      map.on('baselayerchange', function() { cartoOverlay.bringToFront() });
+      carto_tiles.getTiles(function(o) {
+        cartoOverlay = L.tileLayer(o.tiles[0]).addTo(map)
+      });
+    });
+</script>
+

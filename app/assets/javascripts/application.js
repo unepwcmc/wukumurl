@@ -16,9 +16,9 @@
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
 //= require jquery-ui
+//= require cartodb.core.js
 //= require lodash.min.js
 //= require ZeroClipboard.min
-//= require cartodb.js
 //= require mapbox
 //= require Chart.min.js
 //= require scripts

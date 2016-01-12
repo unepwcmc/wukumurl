@@ -1,13 +1,18 @@
 $(($)->
-  CONFIG =
-    minZoom: 2
-    zoomControl: false
-    attributionControl: false
+  southWest = L.latLng(-90, -180)
+  northEast = L.latLng(90, 180)
+  maxBounds = L.latLngBounds(southWest, northEast)
 
   L.mapbox.accessToken = 'pk.eyJ1IjoidW5lcHdjbWMiLCJhIjoiRXg1RERWRSJ9.taTsSWwtAfFX_HMVGo2Cug'
   window.map = L.mapbox.map(
-    'map', 'unepwcmc.8ac2cdd1', CONFIG
-  ).addControl(L.control.zoom(position: 'topleft'))
+    'map', 'unepwcmc.8ac2cdd1', {
+      zoomControl: true,
+      center: [43, 0],
+      maxBounds: maxBounds
+      zoom: 3
+      minZoom: 2
+    }
+  )
 
   # Show/Hide full length table in dashboard
   $('.expandable-table').on('click', '.view-all', ->
@@ -15,6 +20,11 @@ $(($)->
     $(@).text( if text == "View All" then "Hide" else "View All")
     $(@).closest('div').find('tr.all').toggleClass('hidden')
   )
+
+  L.mapbox.accessToken = 'pk.eyJ1IjoidW5lcHdjbWMiLCJhIjoiRXg1RERWRSJ9.taTsSWwtAfFX_HMVGo2Cug'
+
+
+
 
   # modal section
   modalOverlay = $('.modal-overlay')
