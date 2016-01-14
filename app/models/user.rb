@@ -19,11 +19,22 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    "#{self.first_name} #{self.last_name}"
+    if !!(self.email =~ /legacylinks/i)
+      "Legacy Links"
+    else
+      "#{self.first_name} #{self.last_name}"
+    end
   end
 
   def team_mates
     User.where(team_id: self.team_id)
+  end
+
+  def reassign_links_to(takeover_user)
+    self.short_urls.each do |url|
+      url.user_id = takeover_user.id
+      url.save
+    end
   end
 
   def visits
