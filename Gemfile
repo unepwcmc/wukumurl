@@ -8,7 +8,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'geoip-c', '0.9.1'
 gem 'geocoder', '~> 1.2.14'
 gem 'httparty', '~> 0.13.7'
-gem 'whenever', '~> 0.8.2'
+gem 'whenever', :require => false
 gem 'sidekiq', '~> 3.4'
 gem 'friendly_id', '~> 5.1.0'
 gem 'chartkick', '~> 1.4.1'

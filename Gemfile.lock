@@ -319,8 +319,7 @@ GEM
       json (>= 1.8.0)
     warden (1.2.4)
       rack (>= 1.0)
-    whenever (0.8.4)
-      activesupport (>= 2.3.4)
+    whenever (0.9.4)
       chronic (>= 0.6.3)
 
 PLATFORMS
@@ -368,7 +367,7 @@ DEPENDENCIES
   sidekiq (~> 3.4)
   slack-notifier (~> 1.5.1)
   uglifier (~> 2.7.2)
-  whenever (~> 0.8.2)
+  whenever
 
 BUNDLED WITH
    1.10.6
