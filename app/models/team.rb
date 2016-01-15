@@ -102,7 +102,10 @@ class Team < ActiveRecord::Base
   end
 
   def total_urls
-    users.each_with_object(0) {|user, sum| sum += user.short_urls.count}
+    users.inject(0) {|sum, user|
+      sum = sum + user.short_urls.count
+      sum
+    }
   end
 
   def self.visits_by_team
