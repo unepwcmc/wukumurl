@@ -7,11 +7,9 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'geoip-c', '0.9.1'
 gem 'geocoder', '~> 1.2.14'
 gem 'httparty', '~> 0.13.7'
-gem 'rvm-capistrano', '~> 1.5.6'
-gem 'whenever', '~> 0.8.2'
+gem 'whenever', :require => false
 gem 'sidekiq', '~> 3.4'
 gem 'friendly_id', '~> 5.1.0'
-gem 'capistrano-sidekiq', '~> 0.5.4'
 gem 'chartkick', '~> 1.4.1'
 gem 'groupdate', '~> 2.5.0'
 gem 'paper_trail', '~> 4.0.1'
@@ -32,10 +30,13 @@ gem 'font-awesome-rails', '~> 4.5.0.0'
 gem 'growlyflash', '~> 0.8.4.1'
 
 group :development do
+  gem 'capistrano', '~> 3.4', require: false
+  gem 'capistrano-rails',   '~> 1.1', require: false
+  gem 'capistrano-bundler', '~> 1.1', require: false
+  gem 'capistrano-rvm',   '~> 0.1', require: false
+  gem 'capistrano-sidekiq'
+  gem 'capistrano-passenger', '~> 0.1.1', require: false
   gem 'brakeman', require: false
-  gem 'capistrano', '~> 2.15.5'
-  gem 'capistrano-ext', '~> 1.2.1'
-  gem 'brightbox', '~> 2.4.6'
   gem 'guard', '~> 2.13.0'
   gem 'guard-minitest', '~> 2.4.4'
   gem 'rb-fsevent', '0.9.6'
