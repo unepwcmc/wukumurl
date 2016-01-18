@@ -61,7 +61,7 @@ class Team < ActiveRecord::Base
   def all_visits_by_organization
     return [] if users.count.zero?
     Organization.find_by_sql(["
-      SELECT organizations.*, visit_count
+      SELECT organizations.name, SUM(visit_count)::Integer as visit_count
       FROM organizations
       INNER JOIN
         (
@@ -79,6 +79,7 @@ class Team < ActiveRecord::Base
           GROUP BY id
         ) AS short_urls_for_visits
       ON visits_for_orgs.short_url_id = short_urls_for_visits.id
+      GROUP BY organizations.name
       ORDER BY visit_count DESC
       LIMIT 10
     ", users.pluck(:id).map(&:to_i)])

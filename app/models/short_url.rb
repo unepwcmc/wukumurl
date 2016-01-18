@@ -86,7 +86,7 @@ class ShortUrl < ActiveRecord::Base
 
   def visits_by_organization_query
     "
-      SELECT organizations.*, visit_count
+      SELECT organizations.name, SUM(visit_count)::Integer as visit_count
       FROM organizations
       INNER JOIN
         (
@@ -163,7 +163,8 @@ class ShortUrl < ActiveRecord::Base
     else
       orgs = Organization.find_by_sql([
         organizations_query,
-        "ORDER BY visit_count DESC
+        "GROUP BY organizations.name
+        ORDER BY visit_count DESC
         LIMIT 10 "
       ].join(" "))
     end

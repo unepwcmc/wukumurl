@@ -8,6 +8,7 @@ class Organization < ActiveRecord::Base
 
   def self.all_visits_by_organization limit=nil
     select("name, count(*) as visit_count").
+      distinct.
       joins(:visits).
       group(:name).
       order('visit_count desc').
