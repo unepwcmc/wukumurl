@@ -62,7 +62,6 @@ $(document).ready(function() {
       },
       linkType: "direct",
       multiselect: false,
-      extensions: ['.pdf', '.doc', '.docx'],
     };
 
     Dropbox.choose(options);
