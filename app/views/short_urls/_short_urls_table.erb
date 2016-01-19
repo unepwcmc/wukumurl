@@ -17,7 +17,7 @@
             <%= link_to short_url.url, short_url.url %>
           <% end %>
         </td>
-        <td><%= short_url.visits_count %></td>
+        <td><%= number_with_delimiter(short_url.visits_count) %></td>
         <td><%= short_url.created_at.strftime("%d/%m/%Y") %></td>
         <td>
           <span class="tooltip">

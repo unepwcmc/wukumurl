@@ -12,16 +12,13 @@
               <%= link_to team.name, team_path(team.slug) %>
             </td>
             <td>
-              <%= team.visit_count %>
+              <%= number_with_delimiter(team.visit_count) %>
             </td>
           </tr>
         <% end %>
         </tbody>
       </table>
 
-      <% if @visits_by_team.length > 8 %>
-        <button class="view-all">View All</button>
-      <% end %>
     <% else %>
       <big>No visits yet</big>
     <% end %>

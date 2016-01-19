@@ -55,17 +55,7 @@
 <script>
     $(document).ready(function() {
       var $mapEl = $('#map');
-      $('#map').css('filter', 'blur(3px)');
-      $('#map').css('margin', '4px 0');
-
       map.setView({lat: 66.72254132270653, lng: -761.484375});
-
-      map.on('dragstart', function() {
-        $mapEl.css('filter', 'none');
-      });
-      map.on('dragend', function() {
-        $mapEl.css('filter', 'blur(4px)');
-      });
 
       var carto_table = "<%= CARTODB_LAYERS_CONFIG['tables']['production']['organizations_by_user'] %>";
       var carto_tiles = new cartodb.Tiles({

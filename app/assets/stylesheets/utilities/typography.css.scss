@@ -52,7 +52,9 @@ a:hover {
 }
 
 .text-primary {
-  color: $blue-dark-12
+  color: $blue-dark-12;
+  line-height: 1.143em;
+  margin: 0 0 0.2em 0;
 }
 
 .text-blue {
