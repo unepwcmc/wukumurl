@@ -8,6 +8,11 @@
   background-color: $blue-dark-24;
   padding: 5px 12px;
   border-radius: 3px;
+
+  &:hover {
+    background-color: $blue-dark-48;
+    cursor: pointer;
+  }
 }
 
 .tooltip-panel {

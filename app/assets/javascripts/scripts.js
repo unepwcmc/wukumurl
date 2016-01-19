@@ -1,6 +1,11 @@
 $(document).ready(function() {
   // Datatables
-  $('table.datatable').DataTable();
+  table = $('table.datatable').DataTable();
+  initTooltips();
+
+  table.on( 'draw.dt', function () {
+    initTooltips();
+  } );
 
   // Modal windows
   $(".modal").dialog({
@@ -39,18 +44,16 @@ $(document).ready(function() {
   });
 
   // Tooltips
-  $('.tooltip').click(function() {
-    $(this).find('.tooltip-panel').fadeToggle(200);
-    $(this).find('.tooltip-trigger').toggleClass('tooltip-trigger--active');
-  }, function() {
-    $(this).find('.tooltip-panel').fadeToggle(200);
-    $(this).find('.tooltip-trigger').toggleClass('tooltip-trigger--active');
-  });
+  function initTooltips(){
+    $('.tooltip').click(function() {
+      $(this).find('.tooltip-panel').fadeToggle(200);
+      $(this).find('.tooltip-trigger').toggleClass('tooltip-trigger--active');
+    });
+  }
 
   // Dropbox
   $('.dropbox-button').click(function(){
     var dropboxButton = this;
-
     var options = {
       success: function(files) {
         $(dropboxButton).parent().find('#short_url_url').val(files[0].link);
