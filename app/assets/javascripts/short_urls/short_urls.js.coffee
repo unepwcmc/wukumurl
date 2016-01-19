@@ -7,6 +7,8 @@ $(($)->
   window.map = L.mapbox.map(
     'map', 'unepwcmc.8ac2cdd1', {
       zoomControl: true,
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
       center: [43, 0],
       maxBounds: maxBounds
       zoom: 3

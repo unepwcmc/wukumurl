@@ -40,3 +40,7 @@ table.dataTable, table.dataTable td, table.dataTable th {
   margin: 10px 0;
   color: $grey-cb;
 }
+
+table.dataTable td {
+  word-break: break-all;
+}
