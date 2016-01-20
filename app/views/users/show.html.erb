@@ -45,6 +45,13 @@
   </div>
 </div>
 
+<% if params[:short_name] %>
+  <div id="copy-link-modal" class="modal copy-link-modal" title="Link created successfully!">
+    <%= fa_stacked_icon 'check inverse', base: 'circle', class: 'fa-5x' %>
+    <input id="copy-link" name="copy-link" value="http://wcmc.io/<%= params[:short_name] %>" readonly>
+    <a href="#" id="copy-link-button" class="btn btn-primary" data-clipboard-target="#copy-link">Copy this link to my clipboard</a>
+  </div>
+<% end %>
 
 <script>
   $(document).ready(function() {

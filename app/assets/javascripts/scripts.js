@@ -20,6 +20,11 @@ $(document).ready(function() {
     width: "600px"
   });
 
+  $(".copy-link-modal").dialog({
+    autoOpen: true,
+    width: "400px"
+  });
+
   $(".sign-in-link").click(function() {
     $("#sign-in-modal").dialog('open');
   });
@@ -75,5 +80,14 @@ $(document).ready(function() {
     $('.visits-by-country-table').toggle();
     var text = $(this).text();
     $(this).text(text == "Switch to List view" ? "Switch to Map view" : "Switch to List view");
-  })
-})
+  });
+
+  // Copy to clipboard
+  var clipboard = new Clipboard('#copy-link-button');
+
+  clipboard.on('success', function(e) {
+    $('#copy-link-modal').dialog('close');
+  });
+});
+
+

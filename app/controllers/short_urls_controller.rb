@@ -40,7 +40,7 @@ class ShortUrlsController < ApplicationController
       short_url.user = current_user
 
       if short_url.save
-        redirect_to user_links_path, notice: "Link created successfully!"
+        redirect_to user_links_path(short_name: short_url.short_name), notice: "Link created successfully!"
       else
         redirect_to user_links_path, alert: "There was a problem creating your link, please try again"
       end
