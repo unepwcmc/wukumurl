@@ -11,7 +11,7 @@ class ShortUrlsController < ApplicationController
     @visits_by_team_count = @visits_by_team.length
 
     @number_of_visits = Visit.count
-    @unique_visits = Visit.uniq { |a| a.ip_address }.count
+    @unique_visits = Visit.select("DISTINCT ip_address").count
     @number_of_links_shared = ShortUrl.not_deleted.count
 
     @short_urls = ShortUrl.
