@@ -1,0 +1,20 @@
+<% if visits_by_country.any? %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Country</th>
+      <th>Visits</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% visits_by_country.each do |k, v| %>
+      <tr>
+        <td><%= k %></td>
+        <td><%= number_with_delimiter(v) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+  <p>There is no country data available yet</p>
+<% end %>
