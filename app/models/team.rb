@@ -36,7 +36,7 @@ class Team < ActiveRecord::Base
   def visits_by_country
     return [] if users.count.zero?
     City.find_by_sql(["
-      SELECT cities.country
+      SELECT count(*) as visit_count, cities.country
       FROM cities
       INNER JOIN
         (
@@ -55,7 +55,7 @@ class Team < ActiveRecord::Base
         ) AS short_urls_for_visits
       ON visits_for_orgs.short_url_id = short_urls_for_visits.id
       GROUP BY cities.country
-    ", users.pluck(:id).map(&:to_i)])
+    ", users.pluck(:id).map(&:to_i)]).map{|city| {"#{city.country}"=> city.visit_count} }.reduce(Hash.new, :merge)
   end
 
   def all_visits_by_organization

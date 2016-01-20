@@ -5,4 +5,7 @@ class CountryLocation < ActiveRecord::Base
   def country_urls
     CountryLocation.where(iso2: self.iso2).joins(:short_urls).select([:short_name, :url, :country]).where("cities.iso2 IS NOT NULL")
   end
+
+  def self.most_visits
+  end
 end

@@ -18,5 +18,7 @@ class TeamsController < ApplicationController
     @total_urls   = @team.total_urls
 
     @short_urls = @team.short_urls.ordered_by_visits_desc.not_deleted
+
+    @top_10_visits_by_country = @team.visits_by_country.sort_by{|k,v| v}.reverse.first(10)
   end
 end

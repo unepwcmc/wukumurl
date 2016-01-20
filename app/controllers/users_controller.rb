@@ -21,9 +21,9 @@ class UsersController < ApplicationController
 
     @number_of_links_shared = current_user.short_urls.count
     @number_of_visits = visits.length
+    @top_10_visits_by_country = current_user.visits_by_country.sort_by{|k,v| v}.reverse.first(10)
     @countries_reached = current_user.visits_by_country.count
     @unique_visits = visits.uniq { |a| a.ip_address }.count
-
     @visits_by_organization = current_user.visits_by_organization
     @visits_by_organization_count = @visits_by_organization.count
 

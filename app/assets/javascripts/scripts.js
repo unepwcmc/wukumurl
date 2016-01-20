@@ -66,4 +66,14 @@ $(document).ready(function() {
 
     Dropbox.choose(options);
   });
+
+  // Map switching
+  //
+  $('.toggle-map-button').click(function(e){
+    e.preventDefault();
+    $('#map').toggle();
+    $('.visits-by-country-table').toggle();
+    var text = $(this).text();
+    $(this).text(text == "Switch to List view" ? "Switch to Map view" : "Switch to List view");
+  })
 })

@@ -20,6 +20,7 @@ class ShortUrlsController < ApplicationController
 
     @line_graph_hash = Team.multiline_visits_graph
     @top_referrals = Visit.top_referrals
+    @top_10_visits_by_country = @visits_by_country.sort_by{|k,v| v}.reverse.first(10)
   end
 
   def list
@@ -80,6 +81,7 @@ class ShortUrlsController < ApplicationController
     @visits_by_organization = @short_url.visits_by_organization group_by_disregarded: false
     @visits_by_organization_count = @visits_by_organization.length
     @top_referrals = @short_url.top_referrals
+    @top_10_visits_by_country = @visits_by_country.sort_by{|k,v| v}.reverse.first(10)
   end
 
   def destroy
