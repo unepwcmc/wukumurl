@@ -61,7 +61,7 @@ class ShortUrlsController < ApplicationController
         short_url_id: short_url.id,
         ip_address: request.remote_ip,
         domain: request.domain,
-        referrer: if request.referrer.blank? ? nil : URI(request.referrer).host
+        referrer: (request.referrer.blank? ? nil : URI(request.referrer).host)
       )
       GeoLocator.perform_async(visit.id)
     end
