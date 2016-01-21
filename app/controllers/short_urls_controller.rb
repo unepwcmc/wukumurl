@@ -55,9 +55,12 @@ class ShortUrlsController < ApplicationController
     short_url = ShortUrl.find_by(short_name: params[:short_name])
     return redirect_to :root unless short_url
 
+    Rails.logger.debug "TESTING LOG"
+
+    Rails.logger.debug request.inspect
     # Don't record stats for clicks via the link list on wcmc.io
     unless request.referrer =~ /#{root_url}(.*)/
-      puts "Request: #{request.referrer}"
+      Rails.logger.debug "Request: #{request.referrer}"
       visit = Visit.create(
         short_url_id: short_url.id,
         ip_address: request.remote_ip,
