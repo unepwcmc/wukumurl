@@ -37,22 +37,25 @@ $(document).ready(function() {
     $("#create-link-modal").dialog('open');
   });
 
-  $(".edit-link").click(function(){
-    var short_url_id = $(this).data("id");
-    $("#edit-link-modal-" + short_url_id).dialog('open');
-  });
-
-  $(".history-link").click(function(){
-    var short_url_id = $(this).data("id");
-    //alert(short_url_id);
-    $("#change-history-modal-" + short_url_id).dialog('open');
-  });
-
   // Tooltips
   function initTooltips(){
+    // The tooltips themselves
     $('.tooltip').click(function() {
       $(this).find('.tooltip-panel').fadeToggle(200);
       $(this).find('.tooltip-trigger').toggleClass('tooltip-trigger--active');
+    });
+
+    // Individual link history modal
+    $(".history-link").click(function(){
+      var short_url_id = $(this).data("id");
+      $("#change-history-modal-" + short_url_id).dialog('open');
+
+    });
+
+    // Individual edit link modal
+    $(".edit-link").click(function(){
+      var short_url_id = $(this).data("id");
+      $("#edit-link-modal-" + short_url_id).dialog('open');
     });
   }
 

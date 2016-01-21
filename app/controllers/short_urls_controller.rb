@@ -1,6 +1,6 @@
 class ShortUrlsController < ApplicationController
-  before_filter :authenticate_user!, :only => [:create, :update, :destroy]
-  before_filter :authenticate_admin, :only => [:edit]
+  before_filter :authenticate_user!, :only => [:create, :edit, :update, :destroy]
+  #before_filter :authenticate_admin, :only => [:edit]
 
   def index
     @visits_by_country = City.all_visits_by_country
@@ -57,6 +57,7 @@ class ShortUrlsController < ApplicationController
 
     # Don't record stats for clicks via the link list on wcmc.io
     unless request.referrer =~ /#{root_url}(.*)/
+      puts "Request: #{request.referrer}"
       visit = Visit.create(
         short_url_id: short_url.id,
         ip_address: request.remote_ip,
@@ -99,13 +100,13 @@ class ShortUrlsController < ApplicationController
     short_url = ShortUrl.find(params[:id])
 
     unless current_user.can_manage?(short_url)
-      return redirect_to :root
+      return redirect_to :root, notice: "You do not have permission to manage that link"
     end
 
     if short_url.update_attributes(short_url_params)
-      render json: short_url
+      redirect_to short_url, notice: "Link updated successfully"
     else
-      render json: short_url.errors, status: :unprocessable_entity
+      redirect_to short_url, notice: "There was a problem updating your link"
     end
   end
 
@@ -120,6 +121,6 @@ class ShortUrlsController < ApplicationController
   private
 
   def short_url_params
-    params.require(:short_url).permit(:url, :short_name, :private)
+    params.require(:short_url).permit(:url, :short_name, :private, :description, :user_id)
   end
 end
