@@ -2,28 +2,12 @@ $(document).ready(function() {
   // Datatables
   table = $('table.datatable').DataTable();
   initTooltips();
+  initModals();
 
   table.on( 'draw.dt', function () {
     initTooltips();
+    initModals();
   } );
-
-  // Modal windows
-  $(".modal").dialog({
-    autoOpen: false,
-    resizeable: false,
-    draggable: false,
-    modal: true,
-    show: { effect: "slide", direction: "up" },
-  });
-
-  $(".history-modal").dialog({
-    width: "600px"
-  });
-
-  $(".copy-link-modal").dialog({
-    autoOpen: true,
-    width: "400px"
-  });
 
   $(".sign-in-link").click(function() {
     $("#sign-in-modal").dialog('open');
@@ -37,23 +21,44 @@ $(document).ready(function() {
     $("#create-link-modal").dialog('open');
   });
 
+  // Modals
+  function initModals() {
+    // Modal windows
+    $(".modal").dialog({
+      autoOpen: false,
+      resizeable: false,
+      draggable: false,
+      modal: true,
+      show: { effect: "slide", direction: "up" },
+    });
+
+    $(".history-modal").dialog({
+      width: "600px"
+    });
+
+    $(".copy-link-modal").dialog({
+      autoOpen: true,
+      width: "400px"
+    });
+  }
+
   // Tooltips
   function initTooltips(){
     // The tooltips themselves
-    $('.tooltip').click(function() {
+    $('.tooltip').unbind('click').click(function() {
       $(this).find('.tooltip-panel').fadeToggle(200);
       $(this).find('.tooltip-trigger').toggleClass('tooltip-trigger--active');
     });
 
     // Individual link history modal
-    $(".history-link").click(function(){
+    $(".history-link").unbind('click').click(function(){
       var short_url_id = $(this).data("id");
       $("#change-history-modal-" + short_url_id).dialog('open');
 
     });
 
     // Individual edit link modal
-    $(".edit-link").click(function(){
+    $(".edit-link").unbind('click').click(function(){
       var short_url_id = $(this).data("id");
       $("#edit-link-modal-" + short_url_id).dialog('open');
     });
