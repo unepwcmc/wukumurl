@@ -13,6 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
         redirect_to :back
       end
     else
+      logger.warn "Couldn't save user. Reason: #{resource.errors.messages.inspect}"
       failure
     end
   end
@@ -20,7 +21,11 @@ class RegistrationsController < Devise::RegistrationsController
   def failure
     clean_up_passwords resource
 
-    flash[:error] = resource.errors.messages.first
+    flash[:error] = "Registration failed!"
+    flash[:notice] = resource.errors.messages.map { |(k,v)|
+      "#{k.to_s.humanize} #{v.first}"
+    }.join(", ")
+
     return redirect_to :back
   end
 end
