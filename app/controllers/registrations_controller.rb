@@ -20,11 +20,7 @@ class RegistrationsController < Devise::RegistrationsController
   def failure
     clean_up_passwords resource
 
-    flash[:errors] ||= {}
-    flash[:errors][:registration] = "Some errors occurred while trying to sign you up"
-
-    flash[:errors][:user] = resource.errors.messages
-
+    flash[:error] = resource.errors.messages.first
     return redirect_to :back
   end
 end
