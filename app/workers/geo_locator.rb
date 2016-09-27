@@ -2,6 +2,9 @@ require 'geoip'
 require 'geocoder'
 
 class GeoLocator
+  @@cdb = GeoIP::City.new(GEO_IP_CONFIG['city_db'])
+  @@orgdb = GeoIP::Organization.new(GEO_IP_CONFIG['org_db'])
+
   include Sidekiq::Worker
 
   def perform(visit_id)
@@ -9,10 +12,7 @@ class GeoLocator
 
     return if visit.geolocated?
 
-    cdb = GeoIP::City.new(GEO_IP_CONFIG['city_db'])
-    orgdb = GeoIP::Organization.new(GEO_IP_CONFIG['org_db'])
-
-    visit.geo_locate cdb,orgdb
+    visit.geo_locate @@cdb, @@orgdb
 
     if visit.save! && visit.geolocated?
       update_orgs_by_short_url visit
