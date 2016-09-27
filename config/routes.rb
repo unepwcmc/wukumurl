@@ -1,3 +1,5 @@
+require "sidekiq/web"
+
 Wukumurl::Application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'sessions',
@@ -5,6 +7,12 @@ Wukumurl::Application.routes.draw do
     confirmations: 'confirmations',
     passwords: 'passwords'
   }
+
+  Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+    username == ENV["SIDEKIQ_USERNAME"] && password == ENV["SIDEKIQ_PASSWORD"]
+  end
+  mount Sidekiq::Web, at: "/sidekiq"
+
 
   devise_scope :user do
     get "login", to: "devise/sessions#new"
