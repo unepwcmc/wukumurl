@@ -25,6 +25,7 @@ div.header {
         border-style: solid;
         border-width: 10px 10px 10px 0;
         border-color: transparent $blue-dark-24 transparent transparent;
+        margin-left: 20px;
       }
       &.right {
         float:right;
@@ -49,3 +50,14 @@ div.header {
     }
   }
 }
+
+.unepwcmc-logo {
+  display: block;
+  text-indent: -9999px;
+  width: 115px;
+  height: 38px;
+  background: url(https://s3.amazonaws.com/wcmc.logo/UN-Environment-WCMC+logo+2017+white.svg);
+  background-size: 115px 38px;
+  margin-top: 10px;
+}
+
