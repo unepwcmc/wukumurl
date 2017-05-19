@@ -10,6 +10,13 @@
     <%= fa_icon "dropbox" %> Choose from Dropbox
   <% end %>
 
+  <div class="divider"><span>Or</span></div>
+
+  <%= f.label "Select a file from your OneDrive" %>
+  <%= link_to "#", class: "btn btn-secondary stretch onedrive-button", data: { 'ms-app-id': Rails.application.secrets.onedrive["app_id"] } do %>
+    <%= fa_icon "cloud" %> Choose from OneDrive
+  <% end %>
+
   <hr>
 
   <%= f.label :user_id, "Owner" %>

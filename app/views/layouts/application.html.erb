@@ -100,6 +100,7 @@
     <% if Rails.env == 'production' %>
       <%= render "google_analytics" %>
     <% end %>
+    <script type="text/javascript" src="https://js.live.net/v7.0/OneDrive.js"></script>
     <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="<%= ENV["DROPBOX_API_KEY"] %>"></script>
   </body>
 </html>
