@@ -80,6 +80,27 @@ $(document).ready(function() {
     Dropbox.choose(options);
   });
 
+  // OneDrive
+  $('.onedrive-button').click(function(){
+    var oneDriveButton = this;
+    var msAppId = $(this).data("ms-app-id");
+    var odOptions = {
+      clientId: msAppId,
+      action: "share",
+      multiSelect: false,
+      openInNewWindow: true,
+      advanced: {},
+      success: function(files) {
+        var sharingUrl = files.value[0].webUrl;
+        $(oneDriveButton).parent().find('#short_url_url').val(sharingUrl);
+      },
+      cancel: function() { /* cancel handler */ },
+      error: function(e) { console.log(e); }
+    }
+
+    OneDrive.open(odOptions);
+  });
+
   // Map switching
   //
   $('.toggle-map-button').click(function(e){

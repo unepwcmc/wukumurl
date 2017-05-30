@@ -103,6 +103,11 @@ This helps keep everything modular and easy to work with.
 
 [Hologram](https://github.com/trulia/hologram) is used to generate a styleguide available at `/styleguide` that can be referenced for future work.
 
+## OneDrive integration
+
+Three applications exist for OneDrive integration, one for each environment (production, staging and development), ensuring you can test on all environments.
+For local development you will need to use [localtunnel.me](http://localtunnel.me) and fire it up using the following command `lt --port 3000 --subdomain wukumurl`. This will expose an endpoint for OneDrive to authenticate against.
+
 ## Useful to know
 
 If needed, directly on cartodb:
