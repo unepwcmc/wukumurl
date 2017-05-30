@@ -85,16 +85,17 @@ $(document).ready(function() {
     var oneDriveButton = this;
     var msAppId = $(this).data("ms-app-id");
     var odOptions = {
-      clientId: "INSERT-APP-ID-HERE",
+      clientId: msAppId,
       action: "share",
       multiSelect: false,
       openInNewWindow: true,
       advanced: {},
       success: function(files) {
-        $(oneDriveButton).parent().find('#short_url_url').val(value[0].webUrl);
+        var sharingUrl = files.value[0].webUrl;
+        $(oneDriveButton).parent().find('#short_url_url').val(sharingUrl);
       },
       cancel: function() { /* cancel handler */ },
-      error: function(e) { /* error handler */ }
+      error: function(e) { console.log(e); }
     }
 
     OneDrive.open(odOptions);
