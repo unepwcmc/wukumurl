@@ -50,7 +50,7 @@ set :pty, true
 set :linked_files, %w{config/database.yml config/max_mind.yml config/cartodb_config.yml .env config/environments/production.rb config/environments/staging.rb} 
 
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system','public/.well-known')
 
 
 # Default value for default_env is {}
