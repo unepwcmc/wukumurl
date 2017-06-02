@@ -2,16 +2,15 @@
 <html>
   <head>
     <title>wcmc.io shorten // share // track</title>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
 
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
-    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="<%= ENV["DROPBOX_API_KEY"]%>"></script>
     <%= csrf_meta_tags %>
     <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <%= favicon_link_tag 'favicon.ico' %>
   </head>
