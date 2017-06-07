@@ -2,9 +2,10 @@
 
 // Modal
 
+
 div.ui-dialog {
-  position:fixed;
-} // Fix modal to window
+  position:absolute;
+}
 
 .ui-dialog-titlebar {
   padding: 0;
