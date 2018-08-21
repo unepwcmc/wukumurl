@@ -117,3 +117,17 @@ SET the_geom_webmercator = ST_Transform(the_geom, 3857)
 WHERE
 the_geom_webmercator is null;
 ```
+
+
+# Docker
+
+
+Clone repo
+
+* Rename .env-docker to .env and configure with correct info
+* docker-compose build
+* docker-compose run web rake db:create
+* docker-compose run web rake db:migrate
+* docker-compose run web rake db:seed
+* docker-compose run web rake assets:precompile
+* docker-compose up
