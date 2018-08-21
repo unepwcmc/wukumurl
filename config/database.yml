@@ -1,17 +1,6 @@
 development:
   adapter: postgresql
-  encoding: unicode
-  database: wukumurl_development
-  pool: 5
-  username: postgres
-  password:
-  host: localhost
-
-test:
-  adapter: postgresql
-  encoding: unicode
-  database: wukumurl_test
-  pool: 5
-  username: postgres
-  password:
-  host: localhost
+  database: <%= ENV['POSTGRES_DB'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  host: <%= ENV['POSTGRES_HOST'] %>
