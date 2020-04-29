@@ -2,10 +2,10 @@ set :stage, :production
 set :branch, "migration_deploy"
 
 
-server "temp.unep-wcmc-production.linode.unep-wcmc.org", user: 'wcmc', roles: %w{app web db}
+server "unep-wcmc-production.linode.unep-wcmc.org", user: 'wcmc', roles: %w{app web db}
 
 set :application, "wukumurl"
-set :server_name, "wukumurl.temp.unep-wcmc-production.linode.unep-wcmc.org"
+set :server_name, "wukumurl.unep-wcmc-production.linode.unep-wcmc.org"
 set :sudo_user, "wcmc"
 set :app_port, "80"
 
