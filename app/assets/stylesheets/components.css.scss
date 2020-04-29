@@ -1,0 +1,184 @@
+@import 'utilities/colors';
+
+// Buttons
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  text-align: center;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  white-space: nowrap;
+  padding: 15px 40px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: none;
+
+  &:hover { text-decoration: none; }
+}
+
+.btn-primary {
+  background-color: $blue-dark-24;
+  color: $white;
+}
+
+.btn-primary:hover {
+  background-color: $blue-dark-12;
+}
+
+.btn-secondary {
+  background-color: $white;
+  border: 2px solid $blue-dark-24;
+}
+
+a.btn-primary { color: $white;}
+
+footer {
+  background-color: $blue-dark-24;
+  padding: 10px;
+}
+
+
+// Bits
+
+hr {
+  display: block;
+  height: 1px;
+  background-color: $grey-cb;
+  margin-top: 1.143em;
+  margin-bottom: 1.143em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border: none;
+
+  &.blue {
+    background-color: $blue;
+  }
+}
+
+.short_url_icons {
+  margin-left: 20px;
+  color: $blue-dark-12;
+  a {
+    color: $blue-dark-12;
+    margin: 0 2px;
+    &:hover {
+      color: $blue-dark-36;
+      text-decoration: none;
+    }
+  }
+
+  .disabled { color: $grey-cb; }
+}
+
+
+.divider {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.divider > span {
+  position: relative;
+  display: inline-block;
+  font-style: italic;
+}
+
+.divider > span:before,
+.divider > span:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+  height: 1px;
+  background: $grey-cb;
+}
+
+.divider > span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+
+.divider > span:after {
+  left: 100%;
+  margin-left: 15px;
+}
+
+.page-header {
+  width: 100%;
+  border-bottom: 1px solid $grey-cb;
+  margin: 1em 0 2em 0;
+}
+
+
+#error_explanation {
+  background-color: $blue;
+  border-radius: 2px;
+  padding: 1em;
+  margin: 1em 0;
+  color: $white;
+  p.headline { color: $white; margin: 0; }
+}
+
+// Form Elements
+
+input:not([type=submit]):not([type=file]):not([type=checkbox]), select, textarea {
+  border: 1px solid $grey-cb;
+  padding: 0.55em;
+}
+
+input:not([type=submit]), select, textarea {
+  margin: 0.571em 0 0.571em 0;
+}
+
+select {
+  //display: block;
+}
+
+
+// Map
+
+#map {
+  height: 500px;
+}
+
+// Promo images
+
+.promo-image--box-shadow {
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+}
+
+.hero {
+  min-height: 500px;
+
+  #map {
+    position:absolute;
+    left: 0;
+    right: 0;
+    height: 500px;
+  }
+}
+
+.hero--content {
+  position:relative;
+  text-align:left;
+  padding-top: 60px;
+  height:440px;
+
+  h2 { color: $blue-dark-24; }
+  .btn {
+    margin: 20px 20px 0px 0px;
+    &:last-child {
+      margin-right: 0px;
+    }
+  }
+}

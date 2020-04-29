@@ -1,0 +1,39 @@
+<div class="header">
+  <div class="container">
+    <div class="left">
+      <a href="http://unep-wcmc.org" target="_blank" class="unepwcmc-logo"></a>
+    </div>
+    <div class="triangle"></div>
+    <div class="strapline">
+      <%= image_tag 'wcmcio-logo.png', size: '30' %>
+      <span>WCMC.io</span><div class="vertical-divider"></div>  Measure the impact of digital documents you care about
+    </div>
+    <div class="right">
+      <% if current_user %>
+        <div>
+          <%= link_to edit_user_registration_path do %>
+            <%= fa_icon 'user' %> Edit My Account
+          <% end %>
+        </div>
+        <div class="vertical-divider"></div>
+        <div>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+            <%= fa_icon 'sign-out' %> Log Out
+          <% end %>
+        </div>
+      <% else %>
+        <div>
+          <%= link_to '#', class: "sign-up-link" do %>
+            <%= fa_icon 'user' %> Sign Up
+          <% end %>
+        </div>
+        <div class="vertical-divider"></div>
+        <div>
+          <%= link_to '#', class: "sign-in-link" do %>
+            <%= fa_icon 'sign-in' %> Sign In
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

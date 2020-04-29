@@ -1,0 +1,66 @@
+// Typography
+
+@import 'utilities/colors';
+@import url(https://fonts.googleapis.com/css?family=Cabin:400,500|Open+Sans);
+
+h1,h2,h3,h4,h5,p { color: $grey-66; }
+h1 {
+  font: 400 4.714em/1.714em 'Cabin', san-serif;
+  margin: 0.4em 0 0.2em 0;
+}
+
+h2 {
+  font: 400 3.571em/1.571 'Cabin', san-serif;
+  margin: 0.4em 0 0.2em 0;
+}
+
+h3 {
+  font: 400 2.714em/1.73em 'Cabin', san-serif;
+  margin: 0.4em 0 0.4em 0;
+}
+
+h4 {
+  font: 400 2em/1.93em 'Cabin', san-serif;
+  margin: 0.4em 0 0.2em 0;
+}
+
+h5 {
+  font: 500 1.5em/1.571em 'Cabin', san-serif;
+  margin: 0.4em 0 0.2em 0;
+}
+
+p {
+  font: 400 1em/1.071em 'Open Sans', san-serif;
+}
+
+p.headline {
+  font-size: 1.143em;
+  margin: 1.571em 0 1.571em 0;
+}
+
+// Links
+
+a { text-decoration: none; }
+
+a:link { color: $blue-dark-24; }
+
+a:visited { color: $blue-dark-48; }
+
+a:hover {
+  color: $blue-dark-12;
+  text-decoration: underline;
+}
+
+.text-primary {
+  color: $blue-dark-12;
+  line-height: 1.143em;
+  margin: 0 0 0.2em 0;
+}
+
+.text-blue {
+  color: $blue;
+}
+
+.fa-circle {
+  color: $turquoise;
+}

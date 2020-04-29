@@ -1,0 +1,39 @@
+<div id="create-link-modal" class="modal" title="Share a link" style="display:none;">
+<%= form_for ShortUrl.new, url: { controller: "short_urls", action: "create" } do |f| %>
+  <%= f.label :url, "Paste your link" %>
+  <%= f.text_field :url %>
+
+  <div class="divider"><span>Or</span></div>
+
+  <%= f.label "Select a file from your Dropbox" %>
+  <%= link_to "#", class: "btn btn-secondary stretch dropbox-button" do %>
+    <%= fa_icon "dropbox" %> Choose from Dropbox
+  <% end %>
+
+  <div class="divider"><span>Or</span></div>
+
+  <%= f.label "Select a file from your OneDrive" %>
+  <%= link_to "#", class: "btn btn-secondary stretch onedrive-button", data: { 'ms-app-id': Rails.application.secrets.onedrive["app_id"] } do %>
+    <%= fa_icon "cloud" %> Choose from OneDrive
+  <% end %>
+
+  <hr>
+
+  <%= f.label :user_id, "Owner" %>
+  <%= f.collection_select :user_id, current_user.team_mates, :id, :full_name, { prompt: "Select a user",  selected: current_user.id } %>
+
+  <%= f.label :description, "Add a description" %>
+  <% # Toggle Switch %>
+  <%= f.text_area :description %>
+
+  <%= f.label :short_name, "Edit the URL name before sharing" %>
+  <%= f.text_field :short_name %>
+
+  <%= f.label :private, "Make this link private" %>
+  <%= f.check_box :private %>
+
+  <br>
+
+  <%= f.submit class: "btn btn-primary" %>
+  <% end %>
+</div>

@@ -1,0 +1,57 @@
+@import 'utilities/colors';
+
+// Modal
+
+
+div.ui-dialog {
+  position:absolute;
+}
+
+.ui-dialog-titlebar {
+  padding: 0;
+  margin-bottom: 1em;
+}
+
+.ui-dialog {
+  padding: 1.25em;
+
+  .ui-dialog-titlebar-close {
+    border:none;
+    background: none;
+  }
+
+  .ui-dialog-titlebar, .ui-dialog-content {
+    padding: 0 0 0.5em 0;
+    color: $grey-66;
+
+    input:not([type=submit]):not([type=file]):not([type=checkbox]), select, textarea, .stretch {
+      box-sizing: border-box;
+      width: 100%;
+    }
+  }
+}
+
+
+.ui-widget-overlay {
+  background-color: $grey-66;
+  background-image: none;
+  opacity: 0.8;
+  z-index: 1040;
+}
+
+.ui-corner-all { border-radius: 0; }
+.ui-widget-content {
+  border: none;
+  font: 400 1em/1.571em 'Open Sans', san-serif;
+}
+
+.ui-widget-header {
+  background: none;
+  border: none;
+  border-bottom: 1px solid $grey-cb;
+  font: 400 1.143em/1.571em 'Open Sans', san-serif;
+}
+
+.copy-link-modal {
+  text-align: center;
+}

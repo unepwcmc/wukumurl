@@ -1,0 +1,18 @@
+<div class="row group">
+  <div class="col col-3">
+    <div class="page-header"><p class="headline">Number of Visits</p></div>
+    <h2 class="text-primary"><%= number_with_delimiter(number_of_visits) %></h2>
+  </div>
+  <div class="col col-3">
+    <div class="page-header"><p class="headline">Unique Visits</p></div>
+    <h2 class="text-primary"><%= number_with_delimiter(unique_visits) %></h2>
+  </div>
+  <div class="col col-3">
+    <div class="page-header"><p class="headline">Number of Links Shared</p></div>
+    <h2 class="text-primary"><%= number_with_delimiter(number_of_links_shared) %></h2>
+  </div>
+  <div class="col col-3">
+    <div class="page-header"><p class="headline">Countries Reached</p></div>
+    <h2 class="text-primary"><%= number_with_delimiter(countries_reached) %></h2>
+  </div>
+</div>

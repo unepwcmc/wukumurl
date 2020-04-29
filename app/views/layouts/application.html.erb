@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>wcmc.io shorten // share // track</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
+
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+    <%= csrf_meta_tags %>
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <%= favicon_link_tag 'favicon.ico' %>
+  </head>
+  <body>
+    <div class="wrapper">
+      <%= growlyflash_static_notices %>
+      <%= render 'shared/header' %>
+      <%= render 'shared/navbar' %>
+
+      <div class="container content">
+        <%= yield =%>
+      </div>
+      <% #= render 'shared/footer' %>
+
+
+      <div id="sign-in-modal" class="modal" title="Sign In" style="display:none;">
+        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+          <div>
+            <%= f.label :email %>
+            <%= f.email_field :email, :autofocus => true %>
+          </div>
+
+          <div>
+            <%= f.label :password %>
+            <%= f.password_field :password %>
+          </div>
+
+          <hr>
+
+          <div class="row group">
+            <div class="col col-6">
+              <% if devise_mapping.rememberable? %>
+                <div>
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="col col-6">
+              <%= f.submit "Sign in", class: 'btn btn-primary' %>
+            </div>
+          </div>
+          <div class="row group">
+            <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+              <%= link_to "Forgot password?", new_password_path(resource_name) %><br />
+            <% end -%>
+          </div>
+        <% end %>
+
+      </div>
+
+
+      <div id="sign-up-modal" class="modal" title="Sign Up" style="display:none">
+        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+
+          <div>
+            <%= f.label :email %>
+            <%= f.email_field :email, :autofocus => true %>
+          </div>
+
+          <div>
+            <%= f.label :password %>
+            <%= f.password_field :password %>
+          </div>
+
+          <div>
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation %>
+          </div>
+
+          <div class="row group">
+            <div class="col col-6"><%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+              <%= link_to "Resend confirmation", new_confirmation_path(resource_name) %><br />
+            <% end -%></div>
+            <div class="col col-6"><%= f.submit "Sign up", class: 'btn btn-primary' %></div>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+
+
+    <!-- Additional Scripts -->
+    <% if Rails.env == 'production' %>
+      <%= render "google_analytics" %>
+    <% end %>
+    <script type="text/javascript" src="https://js.live.net/v7.0/OneDrive.js"></script>
+    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="<%= ENV["DROPBOX_API_KEY"] %>"></script>
+  </body>
+</html>

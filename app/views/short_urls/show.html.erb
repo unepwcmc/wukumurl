@@ -1,0 +1,85 @@
+<%= render 'shared/create_short_link_modal' %>
+
+<div class="page-header">
+  <h4>
+    <%= @short_url.short_name %>
+    <% if current_user.can_manage? @short_url %>
+      <span class="short_url_icons">
+        <%= link_to '#', class: 'edit-link', data: { id: @short_url.id } do %>
+          <%= fa_icon "cog" %>
+        <% end %>
+
+        <%= link_to '#', class: 'history-link', data: { id: @short_url.id } do %>
+          <%= fa_icon "history" %>
+        <% end %>
+
+        <%= link_to short_url_path(@short_url), method: :delete, data: { confirm: 'Are you sure you want to delete this link? You will not be able to recover this link or its data' } do %>
+          <%= fa_icon "trash" %>
+        <% end %>
+
+        <!-- Render partials if allowed -->
+        <%= render partial: 'shared/edit_short_link_modal', locals: { short_url: @short_url } %>
+        <%= render partial: 'shared/short_link_history_modal', locals: { short_url: @short_url } %>
+      </span>
+    <% end %>
+  </h4>
+</div>
+
+<div class="row group">
+  <div class="col col-3">
+    <div class="page-header"><p class="headline">Number of Visits</p></div>
+    <h1 class="text-primary"><%= @total_visits %></h1>
+  </div>
+  <div class="col col-3">
+    <div class="page-header"><p class="headline">Unique Visits</p></div>
+    <h1 class="text-primary"><%= @unique_visits %></h1>
+  </div>
+  <div class="col col-3">
+    <div class="page-header"><p class="headline">Countries Reached</p></div>
+    <h1 class="text-primary"><%= @visits_by_country_count %></h1>
+  </div>
+  <div class="col col-3">
+    <div class="page-header"><p class="headline">Date Created</p></div>
+    <h1 class="text-primary"><%= @short_url.created_at.strftime("%d.%m.%y") %></h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="page-header">
+    <h5>Overview (Last 30 Days)</h5>
+  </div>
+  <%= line_chart @short_url.visits_per_day %>
+</div>
+
+<div class="row">
+  <div class="page-header">
+    <h5>Geographical origin</h5>
+  </div>
+  <div class="map-buttons">
+    <a href="" class="btn btn-primary toggle-map-button">Switch to List view</a>
+  </div>
+  <div id="map" class="leaflet-container leaflet-fade-anim"></div>
+  <div class="visits-by-country-table" style="display:none">
+    <%= render partial: "visits_by_country_table", locals: { visits_by_country: @top_10_visits_by_country } %>
+  </div>
+</div>
+
+<div class="row group">
+  <div class="col col-6">
+    <div class="page-header">
+      <h5>Top organisations</h5>
+    </div>
+    <%= render partial: "short_urls/organizations_table" %>
+  </div>
+
+  <div class="col col-6">
+    <div class="page-header">
+      <h5>Top referrals</h5>
+    </div>
+    <%= bar_chart @top_referrals %>
+  </div>
+</div>
+
+
+<script>
+</script>

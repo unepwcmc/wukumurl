@@ -1,0 +1,76 @@
+<div class="hero">
+  <div class="map-container">
+    <div id="map" class="leaflet-container leaflet-fade-anim hero"></div>
+  </div>
+  <div class="hero--content">
+    <h2>Welcome to WCMC.io</h2>
+    <h4>Measure the impact of the digital documents you care about, <br>
+    Share links and track their spread across the web</h4>
+
+    <%= link_to '#', class: "btn btn-primary sign-up-link" do %>
+      <%= fa_icon 'user' %> Sign Up
+    <% end %>
+
+    <%= link_to '#', class: "btn btn-primary sign-in-link" do %>
+      <%= fa_icon 'sign-in' %> Sign In
+    <% end %>
+  </div>
+</div>
+
+
+<div class="row row-margin group">
+  <%= render partial: "shared/summary_stats", locals: { number_of_visits: @number_of_visits, unique_visits: @unique_visits, number_of_links_shared: @number_of_links_shared, countries_reached: @visits_by_country_count } %>
+</div>
+
+
+<div class="row row-margin group">
+  <div class="col col-6">
+    <div class="page-header">
+      <h3 class="text-blue">Share links</h3>
+    </div>
+    <h5>Share and shorten your important links and documents from a URL or from your own Dropbox account</h5>
+  </div>
+  <div class="col col-6">
+    <%= image_tag 'share.png', class: 'promo-image--box-shadow' %>
+  </div>
+</div>
+
+<div class="row row-margin">
+  <hr>
+</div>
+
+
+<div class="row row-margin group">
+  <div class="col col-6">
+    <%= image_tag 'track.png' %>
+  </div>
+  <div class="col col-6">
+    <div class="page-header">
+      <h3 class="text-blue">Track their spread</h3>
+    </div>
+    <h5>Track how your links spread across the world and who sees them.<h5>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+      var $mapEl = $('#map');
+      map.setView({lat: 66.72254132270653, lng: -761.484375});
+
+      var carto_table = "<%= CARTODB_LAYERS_CONFIG['tables']['production']['organizations_by_user'] %>";
+      var carto_tiles = new cartodb.Tiles({
+        user_name: '<%= CARTODB_CONFIG['username'] %>',
+        sublayers: [{
+          sql: "SELECT * FROM " + carto_table,
+          cartocss: "#" + carto_table + "<%= raw CARTODB_LAYERS_CONFIG['css'] %>"
+        }]
+      });
+
+      var cartoOverlay = null;
+
+      map.on('baselayerchange', function() { cartoOverlay.bringToFront() });
+      carto_tiles.getTiles(function(o) {
+        cartoOverlay = L.tileLayer(o.tiles[0]).addTo(map)
+      });
+    });
+</script>

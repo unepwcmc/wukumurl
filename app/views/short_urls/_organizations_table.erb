@@ -1,0 +1,20 @@
+<div id="organizations_table">
+  <% if @visits_by_organization %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Organisation</th> <th>Visit Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @visits_by_organization.each_with_index do |organization, index| %>
+          <tr>
+            <td> <%= organization.name %> </td> <td> <%= number_with_delimiter(organization.visit_count) %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No visits with organisational data have been recorded yet</p>
+  <% end %>
+</div>

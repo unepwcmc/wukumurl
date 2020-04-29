@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: IcoMoon.io -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="48px"
+   height="48px"
+   viewBox="0 0 48 48"
+   enable-background="new 0 0 16 16"
+   xml:space="preserve"
+   fill="#000000"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="watch.svg"><metadata
+     id="metadata9"><rdf:RDF><cc:Work
+         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+     id="defs7" /><sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1855"
+     inkscape:window-height="1056"
+     id="namedview5"
+     showgrid="false"
+     inkscape:zoom="4.9166667"
+     inkscape:cx="-11.79661"
+     inkscape:cy="24"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_1" /><path
+     d="M 24.00,42.00c-18.00,0.00-24.00-18.00-24.00-18.00s 6.00-18.00, 24.00-18.00s 24.00,18.00, 24.00,18.00S 42.00,42.00, 24.00,42.00z M 24.00,12.00C 17.373,12.00, 12.00,17.373, 12.00,24.00 s 5.373,12.00, 12.00,12.00s 12.00-5.373, 12.00-12.00S 30.627,12.00, 24.00,12.00z M 24.00,30.00c-3.312,0.00-6.00-2.688-6.00-6.00c0.00-0.102, 0.024-0.195, 0.03-0.297C 18.495,23.865, 18.978,24.00, 19.50,24.00 C 21.984,24.00, 24.00,21.984, 24.00,19.50c0.00-0.522-0.135-1.005-0.297-1.47C 23.805,18.024, 23.898,18.00, 24.00,18.00c 3.312,0.00, 6.00,2.688, 6.00,6.00S 27.312,30.00, 24.00,30.00z"
+     id="path3"
+     style="fill:#87b94f;fill-opacity:0.94117647" /></svg>

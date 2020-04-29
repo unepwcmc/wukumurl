@@ -1,0 +1,14 @@
+<section class="pie-chart">
+  <header>
+    <h4>Countries with most visits</h4>
+  </header>
+
+  <% if @visits_by_country_count > 0 %>
+    <canvas width="170" height="170"></canvas>
+  <% else %>
+    <big>No visits yet</big>
+  <% end %>
+
+  <ul class="legend">
+  </ul>
+</section>

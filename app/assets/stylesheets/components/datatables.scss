@@ -1,0 +1,46 @@
+@import 'utilities/colors';
+
+table {
+  color: $grey-66;
+  border: 1px solid $grey-cb;
+
+  &.table {
+    width: 100%;
+    border-collapse: collapse;
+    th, td {
+      border: 1px solid $grey-cb;
+      padding: 0.5em;
+    }
+  }
+
+  thead {
+    text-align: left;
+  }
+}
+
+#datatable_length, #datatable_filter, #datatable_info, #datatable_paginate {
+  color: $grey-66;
+}
+
+table.dataTable thead th, table.dataTable thead td, table.dataTable.no-footer {
+  border-bottom: 1px solid $grey-cb;
+  border-top: 1px solid $grey-cb;
+}
+
+table.dataTable, table.dataTable td, table.dataTable th {
+  border: none;
+}
+
+.paginate-button {
+  border: 1px solid $blue-dark-24 !important;
+  background-color: none;
+}
+
+.dataTables_info, .dataTables_paginate, .dataTables_wrapper, .dataTables_filter, .dataTables_length, .paginate_button {
+  margin: 10px 0;
+  color: $grey-cb;
+}
+
+table.dataTable td {
+  word-break: break-all;
+}

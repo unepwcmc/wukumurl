@@ -1,0 +1,47 @@
+@import 'utilities/colors';
+
+$breakpoint: 600px;
+
+nav {
+  border-bottom: 1px solid $grey-cb;
+  @media screen and (max-width: $breakpoint) {
+    border-bottom: none;
+  }
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+
+    @media screen and (max-width: $breakpoint) {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    a.text {
+      color: $grey-66;
+      padding: 30px 20px;
+
+      &:hover, &.current {
+        padding-bottom: 26px;
+        color: $grey-44;
+        text-decoration: none;
+        border-bottom: 4px solid $turquoise;
+        @media screen and (max-width: $breakpoint){
+          padding: 1em;
+          border-bottom: none;
+        }
+      }
+      @media screen and (max-width: $breakpoint) {
+        padding: 1em;
+      }
+    }
+    a.btn {
+      align-self:center;
+      @media screen and (max-width: $breakpoint) {
+        align-self:stretch;
+      }
+    }
+
+  }
+}
