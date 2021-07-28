@@ -151,3 +151,14 @@ sudo mv GeoIP /usr/share/
 * docker-compose run web rake db:seed
 * docker-compose run web rake assets:precompile
 * docker-compose up
+
+If you register, you can manually confirm yourself via console:
+```
+docker-compose run web rails console
+```
+
+In console:
+```
+user = User.find_by_email("your.email@unep-wcmc.org")
+user.confirm!
+```
