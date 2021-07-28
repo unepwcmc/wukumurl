@@ -31,3 +31,5 @@ vendor/ruby
 
 # Ignore because of sensitive password!
 config/environments/production.rb
+
+/public/assets

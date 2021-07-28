@@ -1,12 +1,12 @@
 production:
-  instance: http://dasboard.unepwcmc-014.vm.brightbox.net
+  instance: https://dasboard.unepwcmc-014.vm.brightbox.net
   metrics:
     wdpa_release_downloads: 3
 staging:
-  instance: http://dasboard.unepwcmc-011.vm.brightbox.net
+  instance: https://dasboard.unepwcmc-011.vm.brightbox.net
   metrics:
     wdpa_release_downloads: 3
 development:
-  instance: http://dasboard.unepwcmc-014.vm.brightbox.net
+  instance: https://dasboard.unepwcmc-014.vm.brightbox.net
   metrics:
     wdpa_release_downloads: 3

@@ -1,12 +1,12 @@
 visualizations:
   development: &development_viz
-    visits_by_organization: 'http://carbon-tool.cartodb.com/api/v2/viz/34dd3c30-9ed0-11e3-808f-0ed66c7bc7f3/viz.json'
+    visits_by_organization: 'https://carbon-tool.cartodb.com/api/v2/viz/34dd3c30-9ed0-11e3-808f-0ed66c7bc7f3/viz.json'
   test:
     <<: *development_viz
   staging:
-    visits_by_organization: 'http://carbon-tool.cartodb.com/api/v2/viz/d35dafa6-9fcb-11e3-b8c7-0e49973114de/viz.json'
+    visits_by_organization: 'https://carbon-tool.cartodb.com/api/v2/viz/d35dafa6-9fcb-11e3-b8c7-0e49973114de/viz.json'
   production:
-    visits_by_organization: 'http://carbon-tool.cartodb.com/api/v2/viz/34dd3c30-9ed0-11e3-808f-0ed66c7bc7f3/viz.json'
+    visits_by_organization: 'https://carbon-tool.cartodb.com/api/v2/viz/34dd3c30-9ed0-11e3-808f-0ed66c7bc7f3/viz.json'
 tables:
   development: &development_tables
     organizations_by_user: 'wcmc_io_organizations_by_user_development'

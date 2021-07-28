@@ -82,7 +82,7 @@
           "and o.org_name = '" +
           org_name + "' group by u.short_url_id";
     $(".short-urls").addClass('open-popup');
-    $.getJSON('http://'+"<%=CARTODB_CONFIG['username']%>"+'.cartodb.com/api/v2/sql/?q='+sql, function(data) {
+    $.getJSON('https://'+"<%=CARTODB_CONFIG['username']%>"+'.cartodb.com/api/v2/sql/?q='+sql, function(data) {
       $.each(data.rows, function(key, val) {
         $(".short-urls").find('[data-short-url-id='+val.short_url_id+']')
           .addClass('active');

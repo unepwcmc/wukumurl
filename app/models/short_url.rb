@@ -192,7 +192,7 @@ class ShortUrl < ActiveRecord::Base
 
   def ensure_http_prepend
     unless /https{0,1}:\/\/.*/.match self.url
-      self.url = "http://#{self.url}"
+      self.url = "https://#{self.url}"
     end
   end
 

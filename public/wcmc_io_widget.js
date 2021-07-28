@@ -15,7 +15,7 @@ window.WcmcIoWidget = (function() {
       url = _this.domElement.find('#url-to-shorten').val();
 
       $.ajax({
-        url: 'http://wcmc.io/',
+        url: 'https://wcmc.io/',
         type: 'POST',
         data: {
           url: url
@@ -30,7 +30,7 @@ window.WcmcIoWidget = (function() {
   };
 
   WcmcIoWidget.prototype.showNew = function(shortUrl) {
-    this.domElement.prepend("<span class='new-link-notice'>\n  Your shortened link is:\n  <a href=\"http://wcmc.io/" + shortUrl.short_name + "\">wcmc.io/" + shortUrl.short_name + "</a>\n</span>");
+    this.domElement.prepend("<span class='new-link-notice'>\n  Your shortened link is:\n  <a href=\"https://wcmc.io/" + shortUrl.short_name + "\">wcmc.io/" + shortUrl.short_name + "</a>\n</span>");
   };
 
   WcmcIoWidget.prototype.failure = function(response) {
