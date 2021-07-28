@@ -124,7 +124,27 @@ the_geom_webmercator is null;
 
 Clone repo
 
-* Rename .env-docker to .env and configure with correct info
+* Copy `.env-docker` to `.env` and configure
+
+E.g.
+```
+POSTGRES_USER=wcmcio
+POSTGRES_PASSWORD=secret
+POSTGRES_HOST=db
+POSTGRES_DATABASE=wcmcio
+REDIS_URL=redis
+```
+
+
+* Copy `cartodb_config.yml.example` to `cartodb_config.yml` and configure
+* Copy `max_mind.yml.example` to `max_mind.yml` and configure
+
+The files for Maxmind are no longer available on their website. You can acquire them from production.
+```
+rsync -av wcmc@unep-wcmc-production.linode.unep-wcmc.org:/usr/share/GeoIP .
+sudo mv GeoIP /usr/share/
+```
+
 * docker-compose build
 * docker-compose run web rake db:create
 * docker-compose run web rake db:migrate
