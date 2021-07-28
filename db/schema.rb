@@ -139,3 +139,5 @@ ActiveRecord::Schema.define(version: 20151020143657) do
     t.string   "referrer"
   end
 
+  add_foreign_key "users", "teams"
+end
